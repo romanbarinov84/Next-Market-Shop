@@ -9,6 +9,7 @@
 
   --font-sans: var(--font-rubik);
   --font-mono: var(--font-geist-mono);
+  --shadow-default: 2px 4px 8px 0px rgba(0,0,0,0.1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,7 +20,7 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #fbf8ec;
+  color: #778;
   font-family: var(--font-sans);
 }
