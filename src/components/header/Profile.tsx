@@ -11,9 +11,9 @@ const Profile = () => {
                 className="object-contain min-w-10 min-h-10"
             />
             <p className='text-base hidden xl:block cursor-pointer gap-2.5'>Avatar</p>
-            <button className='hidden xl:block cursor-pointer p-2.5'>
+            <button className='hidden xl:block cursor-pointer p-2.5 '>
                 <Image
-                src="/лого хедера/HeaderAvatarArrow.svg"
+                src="/лого хедера/HeaderBtnArrow.svg"
                 alt="avatar"
                 width={16}
                 height={16}

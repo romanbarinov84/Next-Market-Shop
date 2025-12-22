@@ -35,11 +35,11 @@ const TopMenu = () => {
             <li className='flex flex-col items-center gap-2  w-11 cursor-pointer'>
                 <Image 
                 src="/лого хедера/HeaderUserBlockCartBox.svg" 
-                alt='Корзина'
+                alt='Кошик'
                 width={24}
                 height={24}
                 className='object-contain w-6 h-6'/>
-                <span>Корзина</span>
+                <span>Кошик</span>
             </li>
           
         </ul>
