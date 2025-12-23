@@ -1,0 +1,82 @@
+{
+    "products": [
+        {
+            "id":1,
+            "img":"/ProductsCategory-Img/Вареники/Linyvi-varenyky-142.webp",
+            "title":"Ліниві вареники",
+            "description":"Ліниві вареники",
+            "basePrice": 160.00 ,
+            "discountPercent":25,
+             "rating": 4.8,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":2,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-kartopleyu-113.jpg",
+            "title":"Вареникі з картоплею",
+            "description":"Вареникі з картоплею",
+            "basePrice": 200.00 ,
+            "discountPercent":25,
+             "rating": 4.8,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":3,
+            "img":"/ProductsCategory-Img/Вареники/varenyky-z-vyshneyu-159.jpg",
+            "title":"Вареникі з вишнею",
+            "description":"Вареникі з вишнею",
+            "basePrice": 190.00 ,
+            "discountPercent":15,
+             "rating": 2.8,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":4,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-zi-shpynatom-ta-solonym-syrom-166.jpg",
+            "title":"Вареникі зі шпинатом",
+            "description":"Вареникі зі шпинатом",
+            "basePrice": 180.00 ,
+            "discountPercent":5,
+             "rating": 4.2,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":5,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-kartopleyu-ta-grybamy-150.jpg",
+            "title":"Вареникі з картоплею",
+            "description":"Вареникі з картоплею",
+            "basePrice": 230.00 ,
+            "discountPercent":25,
+             "rating": 4.0,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":6,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-polunytseyu-161.jpg",
+            "title":"Вареникі з полуницею",
+            "description":"Вареникі з полуницею",
+            "basePrice": 250.00 ,
+            "discountPercent":25,
+             "rating": 5.0,
+             "categories": ["actions", "varenyki"],
+             "weight":"1000"
+        },
+        {
+            "id":7,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-myasom-200.jpg",
+            "title":"Вареникі з мясом",
+            "description":"Вареникі з мясом",
+            "basePrice": 260.00 ,
+            "discountPercent":25,
+             "rating": 5.0,
+             "categories": ["actions", "varenyki"],
+             "weight":"1100"
+        }
+        
+    ]
+}

@@ -12,7 +12,7 @@ const Slider = () => {
     <SlideSecond key="slide2"/>
    ]
   return (
-    <div className="relative h-20 md:h-40 xl:h-50 w-full mb-10 md:mb-15 xl:mb-20">
+    <div className="relative h-20 md:h-40  w-full overflow-hidden mb-10 md:mb-15 xl:h-60">
       {slides.map((slide , index) => (
         <motion.div key={`slide-${index}`}
         initial={{opacity:0}}
