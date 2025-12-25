@@ -10,8 +10,9 @@ const ProductCard = ({
     img,
     description,
     basePrice,
-    discountPercent,
+    discountPercent = 0,
     rating,
+    categories,
 }: ProductCardProps) => {
 
 
@@ -22,12 +23,14 @@ const ProductCard = ({
     const calculatePriceByCard = (price: number, discount: number): number => {
         return calculateFinalPrice(price, discount);
     };
+    
+    const isNewProducts = categories?.includes("new");
 
-    const finalPrice = calculateFinalPrice(basePrice, discountPercent);
+    const finalPrice = isNewProducts ? basePrice : calculateFinalPrice(basePrice, discountPercent);
 
-    const priceByCard = calculatePriceByCard(finalPrice, cardDiscountPercent);
+    const priceByCard = isNewProducts ? basePrice : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
- 
+    
 
     return (
         <div
@@ -79,7 +82,7 @@ const ProductCard = ({
 
                     <div className="flex flex-col gap-x-1">
                         <div className="flex flex-row gap-x-1 text-xs font-bold md:text-lg text-[#333]">
-                            <span>{basePrice}</span>
+                            <span>{basePrice.toFixed(2)}</span>
                             <span>грн</span>
                         </div>
                         <p className="text-[#bfbfbf] text-xs md:text-xs">
@@ -87,7 +90,7 @@ const ProductCard = ({
                         </p>
                     </div>
                 </div>
-                <div className="h-13 text-xs m-2 md:text-base text-[#414141] line-clamp-3 md:line-clamp-2 leading-1.5 pt-2 xl:pt-3">
+                <div className="h-13 text-xs m-2 md:text-base text-[#414141] font-black line-clamp-3 md:line-clamp-2 leading-1.5 pt-2 xl:pt-3">
                     {description}
                 </div>
                 {rating > 0 && <StarRating rating={rating}/>}
