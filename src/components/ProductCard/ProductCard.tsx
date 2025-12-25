@@ -1,6 +1,7 @@
 import { ProductCardProps } from '@/src/types/product';
 import { formatPrice } from '@/UTILS/formatPrice';
 import Image from 'next/image';
+import StarRating from '../RATING/StarRating';
 
 
     const cardDiscountPercent = 6;
@@ -89,7 +90,7 @@ const ProductCard = ({
                 <div className="h-13 text-xs m-2 md:text-base text-[#414141] line-clamp-3 md:line-clamp-2 leading-1.5 pt-2 xl:pt-3">
                     {description}
                 </div>
-                <span className="text-xs md:text-xl xl:text-2xl">{rating}</span>
+                {rating > 0 && <StarRating rating={rating}/>}
                 <button
                     className=" w-full h-10 rounded border border-(--color-primary) text-(--color-primary) hover:bg-[#ff6633] hover:text-white hover:border-transparent
                      active:shadow-(--shadow-button-active)  transition-all duration-300 flex justify-center items-center cursor-pointer select-none "
