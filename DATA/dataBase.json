@@ -74,8 +74,151 @@
             "basePrice": 260.00 ,
             "discountPercent":25,
              "rating": 5.0,
-             "categories": ["actions", "varenyki"],
+             "categories": ["actions", "Golubtsi"],
              "weight":"1100"
+        },
+        {
+            "id":8,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Golubtsi-z-grybamy-184.webp",
+            "title":"Голубці з грибами",
+            "description":"Голубці з грибами",
+            "basePrice": 230.00 ,
+            "discountPercent":5,
+             "rating": 5.0,
+             "categories": ["new", "Golubtsi"],
+             "weight":"1100"
+        },
+        {
+            "id":9,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/varenyky-z-vyshneyu-159.jpg",
+            "title":"Вареники з вишнею",
+            "description":"Вареники з вишнею",
+            "basePrice": 130.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "varenyki"],
+             "weight":"1100"
+        },
+        {
+            "id":10,
+            "img":"/ProductsCategory-Img/Піца/Kvatro-Formadzhy-119.png",
+            "title":"Pizza quatro-formagio",
+            "description":"Pizza quatro-formagio",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":11,
+            "img":"/ProductsCategory-Img/Піца/Leonardo-SHef-117.png",
+            "title":"Pizza Leonardo",
+            "description":"Pizza Leonardo",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":12,
+            "img":"/ProductsCategory-Img/Піца/Mafiya-SHef-120.png",
+            "title":"Pizza Mafia",
+            "description":"Pizza Mafia",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":13,
+            "img":"/ProductsCategory-Img/Піца/picza-verona3-128.jpg",
+            "title":"Pizza Verona",
+            "description":"Pizza Verona",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":14,
+            "img":"/ProductsCategory-Img/Піца/Pitsa-Gavajska-115.webp",
+            "title":"Pizza Hawaii",
+            "description":"Pizza Hawaii",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":15,
+            "img":"/ProductsCategory-Img/Піца/Pitsa-grybna-108.webp",
+            "title":"Pizza Mush",
+            "description":"Pizza Mush(з грибами)",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":16,
+            "img":"/ProductsCategory-Img/Піца/Pitsa-myasna-110.webp",
+            "title":"Pizza Paperoni",
+            "description":"Pizza Paperoni",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":17,
+            "img":"/ProductsCategory-Img/Піца/Pitsa-Myslyvska-120.webp",
+            "title":"Pizza Hunt",
+            "description":"Pizza Hunt",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":18,
+            "img":"/ProductsCategory-Img/Піца/Pitsa-syrna-110.webp",
+            "title":"Pizza Cheeserinio",
+            "description":"Pizza cheeserinio",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":19,
+            "img":"/ProductsCategory-Img/Піца/SHef-126-pizza.png",
+            "title":"Pizza UnoDeLea",
+            "description":"Pizza UnoDeLea",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
+        },
+        {
+            "id":20,
+            "img":"/ProductsCategory-Img/Піца/Verdura-SHef-118.png",
+            "title":"Pizza Verdura",
+            "description":"Pizza Verdura",
+            "basePrice": 150.00 ,
+            "discountPercent":8,
+             "rating": 5.0,
+             "categories": ["new", "pizza"],
+             "weight":"600"
         }
         
     ]

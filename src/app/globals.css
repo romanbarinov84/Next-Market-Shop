@@ -13,7 +13,7 @@
   inset -3px -3px 6px rgba(255, 255, 255, 0.2);
 
     --shadow-default: 2px 4px 8px 0px rgba(0, 0, 0, 0.1);
-
+    --shadow-article: 4px 8px 16px 0px rgba(255,100,50,0.2);
     --font-sans: var(--font-rubik);
     --font-mono: var(--font-geist-mono);
 }
