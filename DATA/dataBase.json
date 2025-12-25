@@ -68,9 +68,9 @@
         },
         {
             "id":7,
-            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-myasom-200.jpg",
-            "title":"Вареникі з мясом",
-            "description":"Вареникі з мясом",
+            "img":"/ProductsCategory-Img/Голубці/Golubtsi-z-myasom-190.webp",
+            "title":"Голубці з мясом",
+            "description":"Голубці з мясом",
             "basePrice": 260.00 ,
             "discountPercent":25,
              "rating": 5.0,

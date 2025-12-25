@@ -8,7 +8,7 @@ const Actions = () => {
     );
     return (
         <section>
-            <div className="flex flex-col justify-center xl:max-w-[1208px]">
+            <div className="flex flex-col justify-center xl:max-w-302">
                 <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
                     <h2 className="text-2xl xl:text-4xl text-left font-bold">
                         Акції
@@ -27,7 +27,7 @@ const Actions = () => {
                     </button>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {actionProducts.map((item, index) => (
+                    {actionProducts.slice(0,4).map((item, index) => (
                         <li
                             key={item.id}
                             className={`${index >= 4 ? 'hidden' : ''} 
