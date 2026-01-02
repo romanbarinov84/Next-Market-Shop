@@ -1,9 +1,23 @@
-import articlesDataBase from '@/DATA/articlesDataBase.json';
+
+import { Article } from '@/src/types/articles';
 import Image from 'next/image';
 
-const Articles = () => {
-    const articles = articlesDataBase;
+const Articles = async() => {
+    
+      let articles: Article[] = [];
+      let error = null;
 
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`);
+        articles = await res.json();
+      } catch (err) {
+        console.error("Ошибка в компоненте Article", err);
+        error = "Ошибка получения статей" 
+      }
+
+      if(error){
+        return <div className='text-red-500'>Ошибка в компоненте Article: {error}</div>
+      }
     return (
         <div>
             <section className="mt-16 sm:mt-20 lg:mt-24 mb-16 sm:mb-20 lg:mb-24">
@@ -23,8 +37,8 @@ const Articles = () => {
 
                     {/* Сетка карточек */}
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                        {articles.map((article) => (
-                            <li key={article.id}>
+                        {articles.slice(3).map((article) => (
+                            <li key={article._id}>
                                 <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-lg h-full flex flex-col">
                                     <div className="relative h-48 w-full">
                                         <Image
