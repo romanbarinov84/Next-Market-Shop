@@ -1,14 +1,15 @@
 
 import Image from 'next/image';
-import database from '@/DATA/dataBase.json';
+import database from '@/migrations/ProductsDataBase.json';
+import users from "@/migrations/users.json"
 import ProductCard from '../ProductCard/ProductCard';
 
 
 const Purchases= () => {
   
-     const userPurchases = database.users[0].purchases.map((purchase) =>
+     const userPurchases = users[0].purchases.map((purchase) =>
      {
-        const product = database.products.find(
+        const product = database.find(
             (product) => product.id === purchase.id
         );
         if(!product) return undefined;
