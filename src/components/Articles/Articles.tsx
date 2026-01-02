@@ -1,5 +1,6 @@
 
 import { Article } from '@/src/types/articles';
+import { shuffleArray } from '@/UTILS/shuffleArray';
 import Image from 'next/image';
 
 const Articles = async() => {
@@ -10,6 +11,7 @@ const Articles = async() => {
       try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`);
         articles = await res.json();
+        articles = shuffleArray(articles)
       } catch (err) {
         console.error("Ошибка в компоненте Article", err);
         error = "Ошибка получения статей" 

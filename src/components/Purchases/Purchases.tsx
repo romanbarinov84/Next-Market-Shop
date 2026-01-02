@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ProductCard from '../ProductCard/ProductCard';
 import { ProductCardProps } from '@/src/types/product';
+import ViewAllButton from '../allButton/ViewAllButton';
 
 const Purchases = async() => {
     let purchases: ProductCardProps[] = [];
@@ -26,19 +27,7 @@ const Purchases = async() => {
                     <h2 className="text-2xl xl:text-4xl text-left font-bold">
                         Покупки
                     </h2>
-                    <button className="flex flex-row items-center gap-x-2 cursor-pointer">
-                        <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf]">
-                            Купляли раніше
-                        </p>
-                        <div className="w-6 h-6">
-                            <Image
-                                src="/ProductCard/arrow-Right.svg"
-                                alt="Arrow"
-                                width={14}
-                                height={14}
-                            />
-                        </div>
-                    </button>
+                    <ViewAllButton text="Усі покупки" href="purchase"/>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
                     {purchases.slice(0, 4).map((item, index) => (

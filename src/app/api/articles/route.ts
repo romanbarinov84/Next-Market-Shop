@@ -1,5 +1,7 @@
 import { getDB } from '@/UTILS/api-routes';
 import { NextResponse } from 'next/server';
+export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export async function GET() {
     try {

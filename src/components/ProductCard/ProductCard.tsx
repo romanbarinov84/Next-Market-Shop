@@ -55,6 +55,7 @@ const ProductCard = ({
                             alt="Обранне"
                             width={24}
                             height={24}
+                            className="w-6 h-auto"
                         />
                     </div>
                 </button>
