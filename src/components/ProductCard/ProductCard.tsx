@@ -3,8 +3,7 @@ import { formatPrice } from '@/UTILS/formatPrice';
 import Image from 'next/image';
 import StarRating from '../RATING/StarRating';
 
-
-    const cardDiscountPercent = 6;
+const cardDiscountPercent = 6;
 
 const ProductCard = ({
     img,
@@ -14,8 +13,6 @@ const ProductCard = ({
     rating,
     categories,
 }: ProductCardProps) => {
-
-
     const calculateFinalPrice = (price: number, discount: number): number => {
         return discount > 0 ? price * (1 - discount / 100) : price;
     };
@@ -23,14 +20,16 @@ const ProductCard = ({
     const calculatePriceByCard = (price: number, discount: number): number => {
         return calculateFinalPrice(price, discount);
     };
-    
-    const isNewProducts = categories?.includes("new");
 
-    const finalPrice = isNewProducts ? basePrice : calculateFinalPrice(basePrice, discountPercent);
+    const isNewProducts = categories?.includes('new');
 
-    const priceByCard = isNewProducts ? basePrice : calculatePriceByCard(finalPrice, cardDiscountPercent);
+    const finalPrice = isNewProducts
+        ? basePrice
+        : calculateFinalPrice(basePrice, discountPercent);
 
-    
+    const priceByCard = isNewProducts
+        ? basePrice
+        : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
     return (
         <div
@@ -50,13 +49,14 @@ const ProductCard = ({
                     sizes="(max-width: 768) 160px, (max-width: 1200px) 224px , 272px"
                 />
                 <button className="w-8 h-8 justify-center items-center bg-[#f3f2f1] hover:bg-[#fcd5ba] p-1 absolute top-5 right-2 opacity-50 rounded cursor-pointer duration-300">
-                    <Image
-                        src="/ProductCard/Shape (Stroke).svg"
-                        alt="Обранне"
-                        width={24}
-                        height={24}
-                        sizes="24px"
-                    />
+                    <div className="w-6 h-6 shrink-0">
+                        <Image
+                            src="/ProductCard/Shape (Stroke).svg"
+                            alt="Обранне"
+                            width={24}
+                            height={24}
+                        />
+                    </div>
                 </button>
                 {discountPercent && (
                     <div className="absolute bg-[#ff6633] py-1 px-3 rounded text-white bottom-2.5 left-2.5">
@@ -93,7 +93,7 @@ const ProductCard = ({
                 <div className="h-13 text-xs m-2 md:text-base text-[#414141] font-black line-clamp-3 md:line-clamp-2 leading-1.5 pt-2 xl:pt-3">
                     {description}
                 </div>
-                {rating > 0 && <StarRating rating={rating}/>}
+                {rating > 0 && <StarRating rating={rating} />}
                 <button
                     className=" w-full h-10 rounded border border-(--color-primary) text-(--color-primary) hover:bg-[#ff6633] hover:text-white hover:border-transparent
                      active:shadow-(--shadow-button-active)  transition-all duration-300 flex justify-center items-center cursor-pointer select-none "

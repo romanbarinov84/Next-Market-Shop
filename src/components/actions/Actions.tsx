@@ -17,17 +17,18 @@ const Actions = () => {
                         <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf]">
                             Усі акції
                         </p>
-                        <Image
-                            src="/ProductCard/arrow-Right.svg"
-                            alt="усі акції"
-                            width={24}
-                            height={24}
-                            sizes="24px"
-                        />
+                        <div className="w-6 h-6">
+                            <Image
+                                src="/ProductCard/arrow-Right.svg"
+                                alt="Arrow"
+                                width={14}
+                                height={14}
+                            />
+                        </div>
                     </button>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {actionProducts.slice(0,4).map((item, index) => (
+                    {actionProducts.slice(0, 4).map((item, index) => (
                         <li
                             key={item.id}
                             className={`${index >= 4 ? 'hidden' : ''} 
