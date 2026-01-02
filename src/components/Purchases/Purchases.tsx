@@ -1,20 +1,24 @@
 import Image from 'next/image';
-import database from '@/migrations/ProductsDataBase.json';
-import users from '@/migrations/users.json';
 import ProductCard from '../ProductCard/ProductCard';
+import { ProductCardProps } from '@/src/types/product';
 
-const Purchases = () => {
-    const userPurchases = users[0].purchases
-        .map((purchase) => {
-            const product = database.find(
-                (product) => product.id === purchase.id
-            );
-            if (!product) return undefined;
-            const { discountPercent, ...rest } = product;
-            void discountPercent;
-            return rest;
-        })
-        .filter((item) => item !== undefined);
+const Purchases = async() => {
+    let purchases: ProductCardProps[] = [];
+  let error = null;
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL!}/api/users/purchases`
+    );
+    purchases = await res.json();
+  } catch (err) {
+    error = "Ошибка получения купленных продуктов";
+    console.error("Ошибка в компоненте Purchases:", err);
+  }
+
+  if (error) {
+    return <div className="text-red-500">Ошибка: {error}</div>;
+  }
     return (
         <section>
             <div className="flex flex-col justify-center xl:max-w-302">
@@ -37,9 +41,9 @@ const Purchases = () => {
                     </button>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {userPurchases.slice(0, 4).map((item, index) => (
+                    {purchases.slice(0, 4).map((item, index) => (
                         <li
-                            key={item.id}
+                            key={item._id}
                             className={`${index >= 4 ? 'hidden' : ''} 
                     ${index >= 3 ? 'md:hidden xl:block' : ''}
                     `}
