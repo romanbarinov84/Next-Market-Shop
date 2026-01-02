@@ -8,9 +8,13 @@
             "description":"Ліниві вареники",
             "basePrice": 160.00 ,
             "discountPercent":25,
-             "rating": 4.8,
+            "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":2,
@@ -19,9 +23,13 @@
             "description":"Вареникі з картоплею",
             "basePrice": 200.00 ,
             "discountPercent":25,
-             "rating": 4.8,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":3,
@@ -30,9 +38,13 @@
             "description":"Вареникі з вишнею",
             "basePrice": 190.00 ,
             "discountPercent":15,
-             "rating": 2.8,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":4,
@@ -41,9 +53,13 @@
             "description":"Вареникі зі шпинатом",
             "basePrice": 180.00 ,
             "discountPercent":5,
-             "rating": 4.2,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":5,
@@ -52,9 +68,13 @@
             "description":"Вареникі з картоплею",
             "basePrice": 230.00 ,
             "discountPercent":25,
-             "rating": 4.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":6,
@@ -63,9 +83,13 @@
             "description":"Вареникі з полуницею",
             "basePrice": 250.00 ,
             "discountPercent":25,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "varenyki"],
-             "weight":"1000"
+             "weight":"1000",
+             "quantity": 34
         },
         {
             "id":7,
@@ -74,9 +98,13 @@
             "description":"Голубці з мясом",
             "basePrice": 260.00 ,
             "discountPercent":25,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["actions", "Golubtsi"],
-             "weight":"1100"
+             "weight":"1100",
+             "quantity": 34
         },
         {
             "id":8,
@@ -85,9 +113,13 @@
             "description":"Голубці з грибами",
             "basePrice": 230.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "Golubtsi"],
-             "weight":"1100"
+             "weight":"1100",
+             "quantity": 34
         },
         {
             "id":9,
@@ -96,9 +128,13 @@
             "description":"Вареники з вишнею",
             "basePrice": 130.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+            "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "varenyki"],
-             "weight":"1100"
+             "weight":"1100",
+             "quantity": 34
         },
         {
             "id":10,
@@ -107,9 +143,13 @@
             "description":"Pizza quatro-formagio",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":11,
@@ -118,9 +158,13 @@
             "description":"Pizza Leonardo",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":12,
@@ -129,9 +173,13 @@
             "description":"Pizza Mafia",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":13,
@@ -140,9 +188,13 @@
             "description":"Pizza Verona",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":14,
@@ -151,9 +203,13 @@
             "description":"Pizza Hawaii",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":15,
@@ -162,9 +218,13 @@
             "description":"Pizza Mush(з грибами)",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":16,
@@ -173,9 +233,13 @@
             "description":"Pizza Paperoni",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":17,
@@ -184,9 +248,13 @@
             "description":"Pizza Hunt",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":18,
@@ -195,9 +263,13 @@
             "description":"Pizza cheeserinio",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":19,
@@ -206,9 +278,13 @@
             "description":"Pizza UnoDeLea",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
         },
         {
             "id":20,
@@ -217,9 +293,389 @@
             "description":"Pizza Verdura",
             "basePrice": 150.00 ,
             "discountPercent":0,
-             "rating": 5.0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
              "categories": ["new", "pizza"],
-             "weight":"600"
+             "weight":"600",
+             "quantity": 34
+        },
+        
+        {
+            "id":21,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Golubtsi-z-grybamy-184.webp",
+            "title":"Голубці з грибами",
+            "description":"Голубці з грибами",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":22,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Perets-farshyrovanyj-z-grybamy-178.webp",
+            "title":"Перець з грибами",
+            "description":"Перець з грибами",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 8
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":23,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Varenyky-z-kartopleyu-160.jpg",
+            "title":"Вареники з картоплею",
+            "description":"Вареники з картоплею",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.4,
+                "count": 14
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":24,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Varenyky-z-polunytseyu-166.jpg",
+            "title":"Вареники з полуницею",
+            "description":"Вареники з полуницею",
+            "basePrice": 190.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":25,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/Varenyky-z-solodkym-syrom-210.jpg",
+            "title":"Вареники з солодким сиром",
+            "description":"Вареники з солодким сиром",
+            "basePrice": 170.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":26,
+            "img":"/ProductsCategory-Img/Вегетаріанські страви/varenyky-z-vyshneyu-159.jpg",
+            "title":"Вареники з вишнею",
+            "description":"Вареники з вишнею",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["vegan"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":27,
+            "img":"/ProductsCategory-Img/Голубці/Golubtsi-z-myasom-190.webp",
+            "title":"Голубці з мясом",
+            "description":"Голубці з мясом",
+            "basePrice": 230.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "golubzy"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":28,
+            "img":"/ProductsCategory-Img/Голубці/Golubtsi-z-telyatynoyu-ta-yalovychynoyu-208.webp",
+            "title":"Голубці з телятиною",
+            "description":"Голубці з телятиною",
+            "basePrice": 260.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["actions","golubzy"],
+             "weight":"1100",
+             "quantity": 34
+        },
+        {
+            "id":29,
+            "img":"/ProductsCategory-Img/Голубці/golubzi-indyk-198.jpg",
+            "title":"Голубці з індичкою",
+            "description":"Голубці з індичкою",
+            "basePrice": 250.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["actions","golubzy"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":30,
+            "img":"/ProductsCategory-Img/Голубці/Perets-farshyrovanyj-z-myasom-204.webp",
+            "title":"Перець фарширований з мясом",
+            "description":"Перець фарширований з мясом",
+            "basePrice": 250.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "perez"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":31,
+            "img":"/ProductsCategory-Img/Готові страви/bonosh-brynza-160.jpg",
+            "title":"Банош з бринзою",
+            "description":"Банош з бринзою",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 3.9,
+                "count": 8
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 14
+        },
+        {
+            "id":32,
+            "img":"/ProductsCategory-Img/Готові страви/crem-soupWithMushrooms-180.jpg",
+            "title":"Крем суп грибний",
+            "description":"Крем суп грибний",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 14
+        },
+        {
+            "id":33,
+            "img":"/ProductsCategory-Img/Голубці/Perets-farshyrovanyj-z-myasom-204.webp",
+            "title":"Перець фарширований з мясом",
+            "description":"Перець фарширований з мясом",
+            "basePrice": 250.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "perez"],
+             "weight":"1000",
+             "quantity": 34
+        },
+        {
+            "id":34,
+            "img":"/ProductsCategory-Img/Готові страви/krem-sup-syrnyj-190.jpg",
+            "title":"Крем-суп сирний",
+            "description":"Крем-суп сирний",
+            "basePrice": 170.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 14
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 14
+        },
+        {
+            "id":35,
+            "img":"/ProductsCategory-Img/Готові страви/krem-sup-tomatn-250.jpg",
+            "title":"Крем суп томатний",
+            "description":"Крем суп томатний",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 14
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 14
+        },
+        {
+            "id":36,
+            "img":"/ProductsCategory-Img/Готові страви/kulish-kozaczkyj-150.png",
+            "title":"Куліш козацький",
+            "description":"Куліш козацький",
+            "basePrice": 150.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.0,
+                "count": 14
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 34
+        },
+        {
+            "id":37,
+            "img":"/ProductsCategory-Img/Готові страви/lavash-z-kurkoyu-ta-syrom_-130.jpg",
+            "title":"Лаваш з куркою",
+            "description":"Лаваш з куркою",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 24
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":38,
+            "img":"/ProductsCategory-Img/Готові страви/lavash-z-syrom-160.jpg",
+            "title":"Лаваш з сиром",
+            "description":"Лаваш з сиром",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":39,
+            "img":"/ProductsCategory-Img/Готові страви/Pisni-stravi-kopiya-148.jpg",
+            "title":"Крем-суп овочевий",
+            "description":"Крем-суп овочевий",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"300",
+             "quantity": 34
+        },
+        {
+            "id":40,
+            "img":"/ProductsCategory-Img/Готові страви/plov-s-myasom-ready0160.jpg",
+            "title":"Плов з мясом",
+            "description":"Плов з мясом",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":41,
+            "img":"/ProductsCategory-Img/Готові страви/solyanka-190.jpg",
+            "title":"Солянка",
+            "description":"Солянка",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":42,
+            "img":"/ProductsCategory-Img/Готові страви/zobrazhennya_viber_200.jpg",
+            "title":"Котлета по київскі",
+            "description":"Котлета по київскі",
+            "basePrice": 240.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"800",
+             "quantity": 34
+        },
+        {
+            "id":43,
+            "img":"/ProductsCategory-Img/Чебуреки/CHeburek-Krymskyj-132.webp",
+            "title":"Чебурек кримський",
+            "description":"Чебурек кримський",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":44,
+            "img":"/ProductsCategory-Img/Чебуреки/CHeburek-z-myasom-129.webp",
+            "title":"Чебурек з мясом",
+            "description":"Чебурек з мясом",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":45,
+            "img":"/ProductsCategory-Img/Чебуреки/CHeburek-z-syrom-ta-zelennyu-130.jpg",
+            "title":"Чебурек з сиром",
+            "description":"Чебурек з сиром",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "restoFood"],
+             "weight":"360",
+             "quantity": 34
         }
         
     ]
