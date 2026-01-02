@@ -1,11 +1,29 @@
 import Image from 'next/image';
-import database from '@/DATA/dataBase.json';
 import ProductCard from '../ProductCard/ProductCard';
+import { ProductCardProps } from '@/src/types/product';
 
-const Actions = () => {
-    const actionProducts = database.products.filter((p) =>
-        p.categories.includes('actions')
-    );
+const Actions = async () => {
+    let Products: ProductCardProps[] = [];
+    let error = null;
+
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=actions`
+        );
+        Products = await res.json();
+    } catch (err) {
+        console.error('Ошибка в компоненте Actions', err);
+        error = 'Ошибка получения акцій';
+    }
+
+    if (error) {
+        return (
+            <div className="text-red-500">
+                Ошибка в компоненте Actions: {error}
+            </div>
+        );
+    }
+
     return (
         <section>
             <div className="flex flex-col justify-center xl:max-w-302">
@@ -23,14 +41,15 @@ const Actions = () => {
                                 alt="Arrow"
                                 width={14}
                                 height={14}
+                                className="w-auto h-auto"
                             />
                         </div>
                     </button>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {actionProducts.slice(0, 4).map((item, index) => (
+                    {Products.slice(0, 4).map((item, index) => (
                         <li
-                            key={item.id}
+                            key={item._id}
                             className={`${index >= 4 ? 'hidden' : ''} 
                     ${index >= 3 ? 'md:hidden xl:block' : ''}
                     `}

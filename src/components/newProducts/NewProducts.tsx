@@ -1,11 +1,29 @@
 import Image from 'next/image';
-import database from '@/DATA/dataBase.json';
-import ProductCard from '../ProductCard/ProductCard';
 
-const NewProducts = () => {
-    const newProducts = database.products.filter((p) =>
-        p.categories.includes('new')
-    );
+import ProductCard from '../ProductCard/ProductCard';
+import { ProductCardProps } from '@/src/types/product';
+
+const NewProducts = async() => {
+    let Products: ProductCardProps[] = [];
+       let error = null;
+   
+       try {
+           const res = await fetch(
+               `${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=new`
+           );
+           Products = await res.json();
+       } catch (err) {
+           console.error('Ошибка в компоненте newProducts', err);
+           error = 'Ошибка получения новинок';
+       }
+   
+       if (error) {
+           return (
+               <div className="text-red-500">
+                   Ошибка в компоненте NewProducts: {error}
+               </div>
+           );
+       }
     return (
         <section>
             <div className="flex flex-col justify-center xl:max-w-302">
@@ -28,7 +46,7 @@ const NewProducts = () => {
                     </button>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {newProducts.slice(0, 4).map((item, index) => (
+                    {Products.slice(0, 4).map((item, index) => (
                         <li
                             key={item.id}
                             className={`${index >= 4 ? 'hidden' : ''} 
