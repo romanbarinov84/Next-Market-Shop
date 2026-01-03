@@ -1,26 +1,30 @@
-
 import { Article } from '@/src/types/articles';
 import { shuffleArray } from '@/UTILS/shuffleArray';
 import Image from 'next/image';
-import ViewAllButton from '../allButton/ViewAllButton';
+import ViewAllButton from '../../../components/allButton/ViewAllButton';
 
-const Articles = async() => {
-    
-      let articles: Article[] = [];
-      let error = null;
+const Articles = async () => {
+    let articles: Article[] = [];
+    let error = null;
 
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`);
+    try {
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL!}/api/articles`
+        );
         articles = await res.json();
-        articles = shuffleArray(articles)
-      } catch (err) {
-        console.error("Ошибка в компоненте Article", err);
-        error = "Ошибка получения статей" 
-      }
+        articles = shuffleArray(articles);
+    } catch (err) {
+        console.error('Ошибка в компоненте Article', err);
+        error = 'Ошибка получения статей';
+    }
 
-      if(error){
-        return <div className='text-red-500'>Ошибка в компоненте Article: {error}</div>
-      }
+    if (error) {
+        return (
+            <div className="text-red-500">
+                Ошибка в компоненте Article: {error}
+            </div>
+        );
+    }
     return (
         <div>
             <section className="mt-16 sm:mt-20 lg:mt-24 mb-16 sm:mb-20 lg:mb-24">
@@ -29,12 +33,12 @@ const Articles = async() => {
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-zinc-900 mb-8">
                             Наші статті
                         </h2>
-                       <ViewAllButton text="До статей" href="articles" />
+                        <ViewAllButton text="До статей" href="articles" />
                     </div>
 
                     {/* Сетка карточек */}
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                        {articles.slice(3).map((article) => (
+                        {articles.slice(0, 3).map((article) => (
                             <li key={article._id}>
                                 <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-lg h-full flex flex-col">
                                     <div className="relative h-48 w-full">
