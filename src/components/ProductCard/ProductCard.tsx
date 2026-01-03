@@ -31,6 +31,9 @@ const ProductCard = ({
         ? basePrice
         : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
+
+        const ratingValue = rating?.rate || 0;
+
     return (
         <div
             className="flex flex-col justify-between items-center w-40 rounded overflow-hidden bg-white 
@@ -94,7 +97,7 @@ const ProductCard = ({
                 <div className="h-13 text-xs m-2 md:text-base text-[#414141] font-black line-clamp-3 md:line-clamp-3 leading-4 pt-2 xl:pt-3">
                     {description}
                 </div>
-                {rating > 0 && <StarRating rating={rating} />}
+                {ratingValue > 0 && <StarRating rating={ratingValue} />}
                 <button
                     className=" w-full h-10 rounded border border-(--color-primary) text-(--color-primary) hover:bg-[#ff6633] hover:text-white hover:border-transparent
                      active:shadow-(--shadow-button-active)  transition-all duration-300 flex justify-center items-center cursor-pointer select-none "

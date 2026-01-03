@@ -1,10 +1,10 @@
 
+import ViewAllButton from '@/src/components/allButton/ViewAllButton';
 import { Article } from '@/src/types/articles';
 import { shuffleArray } from '@/UTILS/shuffleArray';
 import Image from 'next/image';
-import ViewAllButton from '../allButton/ViewAllButton';
 
-const Articles = async() => {
+const AllArticles = async() => {
     
       let articles: Article[] = [];
       let error = null;
@@ -29,12 +29,13 @@ const Articles = async() => {
                         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-zinc-900 mb-8">
                             Наші статті
                         </h2>
-                       <ViewAllButton text="До статей" href="articles" />
+                        
+                        <ViewAllButton text="На головну" href="/" />
                     </div>
 
                     {/* Сетка карточек */}
                     <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                        {articles.slice(3).map((article) => (
+                        {articles.map((article) => (
                             <li key={article._id}>
                                 <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-lg h-full flex flex-col">
                                     <div className="relative h-48 w-full">
@@ -70,4 +71,4 @@ const Articles = async() => {
     );
 };
 
-export default Articles;
+export default AllArticles;

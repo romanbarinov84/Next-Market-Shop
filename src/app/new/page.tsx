@@ -3,7 +3,7 @@ import ProductCard from '@/src/components/ProductCard/ProductCard';
 import { ProductCardProps } from '@/src/types/product';
 import { shuffleArray } from '@/UTILS/shuffleArray';
 
-const AllActions = async () => {
+const AllNew = async () => {
     let Products: ProductCardProps[] = [];
     let error = null;
 
@@ -61,4 +61,4 @@ const AllActions = async () => {
     );
 };
 
-export default AllActions;
+export default AllNew;

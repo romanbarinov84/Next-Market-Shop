@@ -27,7 +27,7 @@ const Purchases = async() => {
                     <h2 className="text-2xl xl:text-4xl text-left font-bold">
                         Покупки
                     </h2>
-                    <ViewAllButton text="Усі покупки" href="purchase"/>
+                    <ViewAllButton text="Усі покупки" href="purchases"/>
                 </div>
                 <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
                     {purchases.slice(0, 4).map((item, index) => (

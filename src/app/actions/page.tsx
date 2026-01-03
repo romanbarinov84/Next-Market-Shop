@@ -27,7 +27,7 @@ const AllActions = async () => {
     }
 
     return (
-        <section className="flex justify-center px-4 md:px-8">
+        <section className="flex justify-center mb-20 mt-10 px-4 md:px-8">
             {/* КАРТОЧКА-СЕКЦИЯ */}
             <div
                 className="
