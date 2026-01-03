@@ -91,7 +91,7 @@ const ProductCard = ({
                         </p>
                     </div>
                 </div>
-                <div className="h-13 text-xs m-2 md:text-base text-[#414141] font-black line-clamp-3 md:line-clamp-2 leading-1.5 pt-2 xl:pt-3">
+                <div className="h-13 text-xs m-2 md:text-base text-[#414141] font-black line-clamp-3 md:line-clamp-3 leading-4 pt-2 xl:pt-3">
                     {description}
                 </div>
                 {rating > 0 && <StarRating rating={rating} />}

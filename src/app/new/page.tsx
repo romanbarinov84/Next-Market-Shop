@@ -9,7 +9,7 @@ const AllActions = async () => {
 
     try {
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=actions`
+            `${process.env.NEXT_PUBLIC_BASE_URL!}/api/products?category=new`
         );
         Products = await res.json();
         Products = shuffleArray(Products);
@@ -27,7 +27,7 @@ const AllActions = async () => {
     }
 
     return (
-        <section className="flex justify-center px-4 md:px-8">
+        <section className="flex justify-center mb-20 mt-10 px-4 md:px-8">
             {/* КАРТОЧКА-СЕКЦИЯ */}
             <div
                 className="
@@ -43,7 +43,7 @@ const AllActions = async () => {
             >
                 <div className="mb-4 md:mb-8 xl:mb-10 flex justify-between items-center">
                     <h2 className="text-2xl xl:text-4xl font-bold">
-                        Усі акції
+                        Новинки
                     </h2>
 
                     <ViewAllButton text="На головну" href="/" />
