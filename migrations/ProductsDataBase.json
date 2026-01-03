@@ -628,7 +628,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": ["new", "restoFood", "meat"],
              "weight":"800",
              "quantity": 34
         },
@@ -643,7 +643,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": ["new", "restoFood", "meat"],
              "weight":"360",
              "quantity": 34
         },
@@ -658,7 +658,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": ["new", "restoFood", "meat"],
              "weight":"360",
              "quantity": 34
         },
@@ -676,6 +676,1162 @@
              "categories": ["new", "restoFood"],
              "weight":"360",
              "quantity": 34
+        },
+        {
+            "id":46,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Farshyrovani-kuryachi-bedra-177.webp",
+            "title":"Бедро фаршироване",
+            "description":"Бедро фаршироване",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff", "meat"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":47,
+            "img":"/ProductsCategory-Img/ШЕФ меню/file-cheese-souse-439.jpg",
+            "title":"Куряче філе під сиром",
+            "description":"Куряче філе під сиром",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 14
+             },
+             "categories": ["new", "cheff", "meat"],
+             "weight":"360",
+             "quantity": 14
+        },
+        {
+            "id":48,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Kish-lososem-shpynatom-ta-pomidoramy-271.webp",
+            "title":"Кіш з лососем та шпинатом",
+            "description":"Кіш з лососем та шпинатом",
+            "basePrice": 190.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff","fish"],
+             "weight":"360",
+             "quantity": 24
+        },
+        {
+            "id":49,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Kish-z-pechenoyu-kurkoyu-ta-ovochamy-231.webp",
+            "title":"Кіш з печеною куркою",
+            "description":"Кіш з печеною куркою",
+            "basePrice": 170.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "chef", "meat"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":50,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Lazanya-z-kurkoyu-200.webp",
+            "title":"Лазанья з куркою",
+            "description":"Лазанья з куркою",
+            "basePrice": 230.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 3.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff", "meat"],
+             "weight":"760",
+             "quantity": 34
+        },
+        {
+            "id":51,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Lazanya-z-svinina-1-210.webp",
+            "title":"Лазанья з свининою",
+            "description":"Лазанья з свининою",
+            "basePrice": 200.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.0,
+                "count": 4
+             },
+             "categories": ["new", "cheff", "meat"],
+             "weight":"760",
+             "quantity": 34
+        },
+        {
+            "id":52,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Lazanya-z-yalovychynoyu-221.webp",
+            "title":"Лазанья з яловичинною",
+            "description":"Лазанья з яловичинною",
+            "basePrice": 230.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 3.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff" , "meat"],
+             "weight":"760",
+             "quantity": 34
+        },
+        {
+            "id":53,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Nagetsy-kuryachi-220.webp",
+            "title":"Нагетси курячі",
+            "description":"Нагетси курячі",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff" , "meat"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":54,
+            "img":"/ProductsCategory-Img/ШЕФ меню/m_yaso-po-franczuzky-z-kuryatynoyu-159.jpg",
+            "title":"Мясо по французьки",
+            "description":"Мясо по французьки",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff" ,"meat"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":55,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Patelnya-z-kurkoyu-ta-grybamy-205.webp",
+            "title":"Пательня куряча з грибами",
+            "description":"ЧебуПательня куряча з грибами",
+            "basePrice": 260.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "cheff","meat"],
+             "weight":"760",
+             "quantity": 34
+        },
+        {
+            "id":56,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Patelnya-zi-svynynoyu-grybamy-ta-bochkom-220.webp",
+            "title":"Пательня з свининою",
+            "description":"Пательня з свининою",
+            "basePrice": 240.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "cheff"],
+             "weight":"760",
+             "quantity": 34
+        },
+        {
+            "id":57,
+            "img":"/ProductsCategory-Img/ШЕФ меню/skymbria-farsh-138.jpg",
+            "title":"Скумбрія фарширована",
+            "description":"Скумбрія фарширована",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.7,
+                "count": 4
+             },
+             "categories": ["new", "cheff","fish"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":58,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Syrni-palychky-300.webp",
+            "title":"Сирні палички",
+            "description":"Сирні палички",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff"],
+             "weight":"360",
+             "quantity": 34
+        },
+        {
+            "id":59,
+            "img":"/ProductsCategory-Img/ШЕФ меню/syrnik-Kiyivskiy-190.jpeg",
+            "title":"Сирник київський",
+            "description":"Сирник київський",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.9,
+                "count": 4
+             },
+             "categories": ["new", "cheff","sweet"],
+             "weight":"560",
+             "quantity": 34
+        },
+        {
+            "id":60,
+            "img":"/ProductsCategory-Img/ШЕФ меню/Tort-pechinkovyj-190.webp",
+            "title":"Торт печінковий",
+            "description":"Торт печінковий",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "cheff"],
+             "weight":"360",
+             "quantity": 34
+        },
+        
+        {
+            "id":61,
+            "img":"/ProductsCategory-Img/Страви з м’яса/benderyk-kyrka-206.jpeg",
+            "title":"Бендерики з куркою",
+            "description":"Бендерики з куркою",
+            "basePrice": 180.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["actions", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":62,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Benderyky-147.jpg",
+            "title":"Бендерики з мясом",
+            "description":"Бендерики з мясом",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":63,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Borshh-chervonyj-195.jpg",
+            "title":"Борщ червоний",
+            "description":"Борщ червоний",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":64,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Frykadelky-indychi-256.webp",
+            "title":"Фрикадельки індичі",
+            "description":"Фрикадельки індичі",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":65,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Golubtsi-z-myasom-190.webp",
+            "title":"Голубці з мясом",
+            "description":"Голубці з мясом",
+            "basePrice": 230.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["actions", "meat" , "golubzy"],
+             "weight":"1200",
+             "quantity": 14
+        },
+        {
+            "id":66,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Golubtsi-z-telyatynoyu-ta-yalovychynoyu-208.webp",
+            "title":"Голубц з телятиною",
+            "description":"Голубц з телятиною",
+            "basePrice": 180.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["actions", "meat" , "golubzy"],
+             "weight":"1200",
+             "quantity": 14
+        },
+        {
+            "id":67,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Grechanyky-177.webp",
+            "title":"Гречаники",
+            "description":"Гречаники",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":68,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Hinkali-z-yalovychynoyu-156.webp",
+            "title":"Хінкалі з яловичинною",
+            "description":"Хінкалі з яловичинною",
+            "basePrice": 230.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":69,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Hinkali-zi-svynynoyu-153.webp",
+            "title":"Хінкалі зі свининою",
+            "description":"Хінкалі зі свининою",
+            "basePrice": 200.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["actions", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":70,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kartoplyani-zrazy-z-myasom-172.webp",
+            "title":"Картопляні зрази з мясом",
+            "description":"Картопляні зрази з мясом",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":71,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotleta-burgerna-260.webp",
+            "title":"Котлета бургерна",
+            "description":"Котлета бургерна",
+            "basePrice": 170.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":72,
+            "img":"/ProductsCategory-Img/Страви з м’яса/kotleta-domashya-228.jpg",
+            "title":"Котлета домашня",
+            "description":"Котлета домашня",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"800",
+             "quantity": 14
+        },
+        {
+            "id":73,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotleta-po-kyyivsky-265.jpg",
+            "title":"Котлета по київські",
+            "description":"Котлета по київські",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":74,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotleta-po-kyyivsky-265.jpg",
+            "title":"Котлета по київські",
+            "description":"Котлета по київські",
+            "basePrice": 230.00 ,
+            "discountPercent":10,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["actions", "meat"],
+             "weight":"1200",
+             "quantity": 14
+        },
+        {
+            "id":75,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotleta-Sokovyta-230.jpg",
+            "title":"Котлета соковита",
+            "description":"Котлета соковита",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":76,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotlety-indychi-228.jpg",
+            "title":"Котлети індичі",
+            "description":"Котлети індичі",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":77,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotlety-zi-svynyny-196.jpg",
+            "title":"Котлети зі свониною",
+            "description":"Котлети зі свониною",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":78,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotlety-Kordon-Blyu-268.webp",
+            "title":"Кордон блю",
+            "description":"Кордон блю",
+            "basePrice": 200.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"800",
+             "quantity": 14
+        },
+        {
+            "id":79,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kotlety-kuryachi-198.jpg",
+            "title":"Котлети курячі",
+            "description":"Котлети курячі",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":80,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kovbasa-domashnya-276.jpg",
+            "title":"Ковбаса домашня",
+            "description":"Ковбаса домашня",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":81,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Kovbasky-gryl-kuryachi-236.jpg",
+            "title":"Ковбаски гриль курка з сиром",
+            "description":"Ковбаски гриль курка з сиром",
+            "basePrice": 190.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"800",
+             "quantity": 14
+        },
+        {
+            "id":82,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Mlyntsi-z-kurkoyu-ta-grybamy-162.jpg",
+            "title":"Млинці з куркою та грибами",
+            "description":"Млинці з куркою та грибами",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":83,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Mlyntsi-z-liverom-142.jpg",
+            "title":"Млинці з лівером",
+            "description":"Млинці з лівером",
+            "basePrice": 160.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":84,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Mlyntsi-z-myasom-160.webp",
+            "title":"Млинці з мясом",
+            "description":"Млинці з мясом",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.8,
+                "count": 4
+             },
+             "categories": ["new", "meat"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":85,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-dytyachi-Malyatko-188.jpg",
+            "title":"Пельмені дитячі",
+            "description":"Пельмені дитячі",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":86,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-indychi-193.webp",
+            "title":"Пельмені індичі",
+            "description":"Пельмені індичі",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":87,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-Try-myasa-198.webp",
+            "title":"Пельмені три мяса",
+            "description":"Пельмені три мяса",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":88,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-z-kurkoyu-na-kukurudzyanomu-boroshni-204.webp",
+            "title":"Пельмені з куркою ",
+            "description":"Пельмені з куркою ",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":89,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-z-kuryatynoyu-ta-svynynoyu-171.webp",
+            "title":"Пельмені з куркою та свинниною",
+            "description":"Пельмені з куркою та свинниною",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":90,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-z-telyatynoyu-2-209.webp",
+            "title":"Пельмені з телятиною",
+            "description":"Пельмені з телятиною",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":91,
+            "img":"/ProductsCategory-Img/Страви з м’яса/Pelmeni-zi-svynyny-ta-yalovychyny-195.webp",
+            "title":"Пельмені зі свининою та яловичинною",
+            "description":"Пельмені зі свининою та яловичинною",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":91,
+            "img":"/ProductsCategory-Img/Страви з м’яса/pelmeny-svinina-184.jpg",
+            "title":"Пельмені зі свинниною",
+            "description":"Пельмені зі свинниною",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "meat","pelmeni"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":92,
+            "img":"/ProductsCategory-Img/Десерти/Сирок з Полуницею/syrok-z-polunyczeyu_-1-600x400.jpg",
+            "title":"Сирок з полуницею",
+            "description":"Сирок з полуницею",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"400",
+             "quantity": 14
+        },
+        {
+            "id":93,
+            "img":"/ProductsCategory-Img/Десерти/Сирок Ванільний/syrok-vanilnyj_-1-600x900.jpg",
+            "title":"Сирок ванільний",
+            "description":"Сирок ванільний",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"400",
+             "quantity": 14
+        },
+        {
+            "id":94,
+            "img":"/ProductsCategory-Img/Десерти/Пиріг з вишнями та маком/pirog-makVishnya-280.jpg",
+            "title":"Пиріг мак вишня",
+            "description":"Пиріг мак вишня",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"600",
+             "quantity": 14
+        },
+        {
+            "id":95,
+            "img":"/ProductsCategory-Img/Десерти/Моті Гранат/moti-granat--600x600.png",
+            "title":"Мотті гранат",
+            "description":"Мотті гранат",
+            "basePrice": 80.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":96,
+            "img":"/ProductsCategory-Img/Десерти/Моті Банан з Шоколадом/motti-banana-90.png",
+            "title":"Мотті банан",
+            "description":"Мотті банан",
+            "basePrice": 80.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":97,
+            "img":"/ProductsCategory-Img/Десерти/Моті Апельсин/motti-orange-90.png",
+            "title":"Мотті апельсин",
+            "description":"Мотті апельсин",
+            "basePrice": 80.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":98,
+            "img":"/ProductsCategory-Img/Морозиво/Avtorske-snikers-130.jpg",
+            "title":"Морозиво снікерс",
+            "description":"Морозиво снікерс",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":99,
+            "img":"/ProductsCategory-Img/Морозиво/CHornytsya-110.jpg",
+            "title":"Морозиво з чорницею",
+            "description":"Морозиво з чорницею",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":100,
+            "img":"/ProductsCategory-Img/Морозиво/Fistashkove-98.jpg",
+            "title":"Морозиво фісташкове",
+            "description":"Морозиво фісташкове",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":101,
+            "img":"/ProductsCategory-Img/Морозиво/Kava-Bejlis-116.jpg",
+            "title":"Морозиво бейліс",
+            "description":"Морозиво бейліс",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":102,
+            "img":"/ProductsCategory-Img/Морозиво/Lisovi-yagody-111.jpg",
+            "title":"Морозиво лісові ягоди",
+            "description":"Морозиво лісові ягоди",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":103,
+            "img":"/ProductsCategory-Img/Морозиво/moroz-Mango-105.jpg",
+            "title":"Морозиво манго",
+            "description":"Морозиво манго",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":104,
+            "img":"/ProductsCategory-Img/Морозиво/moroz-Polunychne-90.jpg",
+            "title":"Морозиво полуничне",
+            "description":"Морозиво полуничне",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":105,
+            "img":"/ProductsCategory-Img/Морозиво/Plombir-90.webp",
+            "title":"Морозиво пломбір",
+            "description":"Морозиво пломбір",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":106,
+            "img":"/ProductsCategory-Img/Морозиво/SHokoladne-110.webp",
+            "title":"Морозиво шоколадне",
+            "description":"Морозиво шоколадне",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":107,
+            "img":"/ProductsCategory-Img/Морозиво/SHvaldska-vyshnya-100.jpg",
+            "title":"Морозиво швардсвалська вишня",
+            "description":"Морозиво швардсвалська вишня",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":108,
+            "img":"/ProductsCategory-Img/Морозиво/Snikers-dzhelatto-102.jpg",
+            "title":"Морозиво El gelatto",
+            "description":"Морозиво El gelatto",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":109,
+            "img":"/ProductsCategory-Img/Морозиво/Solona-karamel-90.webp",
+            "title":"Морозиво Salt caramel",
+            "description":"Морозиво Salt caramel",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":110,
+            "img":"/ProductsCategory-Img/Морозиво/Strachatella-90.webp",
+            "title":"Морозиво Stratchatella",
+            "description":"Морозиво Stratchatella",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":111,
+            "img":"/ProductsCategory-Img/Вареники/Linyvi-varenyky-142.webp",
+            "title":"Ліниві вареники",
+            "description":"Ліниві вареники",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":112,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-shokoladni-z-syrom-ta-shokoladnymy-drobsamy-192.webp",
+            "title":"Вареники шоколадні з сиром",
+            "description":"Вареники шоколадні з сиром",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":113,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-kartopleyu-113.jpg",
+            "title":"Вареники з картоплею",
+            "description":"Вареники з картоплею",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":114,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-kartopleyu-ta-grybamy-150.jpg",
+            "title":"Вареники з картоплею та грибами",
+            "description":"Вареники з картоплею та грибами",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":115,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-liverom-166.jpg",
+            "title":"Вареники з лівером",
+            "description":"Вареники з лівером",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":116,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-myasom-200.jpg",
+            "title":"Вареники з мясом",
+            "description":"Вареники з мясом",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":117,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-z-polunytseyu-161.jpg",
+            "title":"Вареники з полуницею",
+            "description":"Вареники з полуницею",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":118,
+            "img":"/ProductsCategory-Img/Вареники/varenyky-z-vyshneyu-159.jpg",
+            "title":"Вареники з вишнею",
+            "description":"Вареники з вишнею",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":119,
+            "img":"/ProductsCategory-Img/Вареники/Varenyky-zi-shpynatom-ta-solonym-syrom-166.jpg",
+            "title":"Вареники з сіром та шпинатом",
+            "description":"Вареники з сіром та шпинатом",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "vareniky"],
+             "weight":"1000",
+             "quantity": 14
+        },
+        {
+            "id":120,
+            "img":"/ProductsCategory-Img/Новинки/DubaiChocolatte-571.jpg",
+            "title":"Dubai chokolate",
+            "description":"Dubai chokolate",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"100",
+             "quantity": 14
+        },
+        {
+            "id":121,
+            "img":"/ProductsCategory-Img/Новинки/sinabone-178.jpg",
+            "title":"Цинабони",
+            "description":"Цинабони",
+            "basePrice": 180.00 ,
+            "discountPercent":0,
+             "rating": {
+                "rate": 4.5,
+                "count": 4
+             },
+             "categories": ["new", "sweet"],
+             "weight":"1000",
+             "quantity": 14
         }
         
     ]
