@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const ArticleCard = ({img,title,text}:Article) => {
   return (
-    <div>
+   
            <div className="bg-white rounded-2xl shadow-md overflow-hidden transition hover:-translate-y-1 hover:shadow-lg h-full flex flex-col">
                                             <div className="relative h-48 w-full">
                                                 <Image
@@ -29,7 +29,7 @@ const ArticleCard = ({img,title,text}:Article) => {
                                                 </button>
                                             </div>
                                         </div>
-    </div>
+    
   )
 }
 
