@@ -3,7 +3,7 @@ import ProductsSection from '../../(products)/ProductsSection';
 import fetchPurchases from '../fetchPurchases';
 
 
-const AllActions = async () => {
+const AllPurchases = async () => {
     const purchases = await fetchPurchases("purchases");
 
     if (!purchases || purchases.length === 0) {
@@ -24,4 +24,4 @@ const AllActions = async () => {
     );
 };
 
-export default AllActions;
+export default AllPurchases;

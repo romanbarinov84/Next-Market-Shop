@@ -2,7 +2,7 @@
 import fetchProductsByCategory from '../fetchProducts';
 import ProductsSection from '../ProductsSection';
 
-const Actions = async () => {
+const NewProducts = async () => {
     const products = await fetchProductsByCategory('actions');
 
     if (!products || products.length === 0) {
@@ -23,4 +23,4 @@ const Actions = async () => {
     );
 };
 
-export default Actions;
+export default NewProducts;

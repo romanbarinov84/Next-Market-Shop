@@ -7,7 +7,7 @@ export const metaData = {
     description:'Нові товари магазина "Балувана Галя"',
 }
 
-const AllActions = async () => {
+const AllNew = async () => {
     const products = await fetchProductsByCategory('new');
 
     if (!products || products.length === 0) {
@@ -28,4 +28,4 @@ const AllActions = async () => {
     );
 };
 
-export default AllActions;
+export default AllNew;
