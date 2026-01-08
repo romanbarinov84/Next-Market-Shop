@@ -1,6 +1,6 @@
 
 import { ProductCardProps } from "@/src/types/product";
-import { shuffleArray } from "@/UTILS/shuffleArray";
+
 
 
 const fetchPurchases = async(category:string) => {
