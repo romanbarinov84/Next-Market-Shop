@@ -17,6 +17,7 @@ const AllActions = async () => {
             title="Усі акції"
             viewAllButton={{ text: 'На головну', href: '/' }}
             products={products}
+            
         />
     );
 };
