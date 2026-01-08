@@ -1,6 +1,11 @@
 import fetchProductsByCategory from '../fetchProducts';
 import ProductsSection from '../ProductsSection';
 
+export const metaData = {
+    title: 'Акції магазина "Балувана Галя"',
+    description: 'Акційні товари магазина "Балувана Галя"',
+};
+
 const AllActions = async () => {
     const products = await fetchProductsByCategory('actions');
 
@@ -17,7 +22,6 @@ const AllActions = async () => {
             title="Усі акції"
             viewAllButton={{ text: 'На головну', href: '/' }}
             products={products}
-            
         />
     );
 };

@@ -1,8 +1,12 @@
-import ViewAllButton from '@/src/components/allButton/ViewAllButton';
+
 import { Article } from '@/src/types/articles';
 import { shuffleArray } from '@/UTILS/shuffleArray';
-import ArticleCard from '../Article/ArticleCard';
 import ArticlesSection from '../ArticlesSection';
+
+export const metaData = {
+    title:'Пости магазина "Балувана Галя"',
+    description:'Пости на сайті магазина "Балувана Галя"',
+}
 
 const AllArticles = async () => {
   let articles: Article[] = [];
@@ -24,8 +28,8 @@ const AllArticles = async () => {
 
   return (
      <ArticlesSection
-        title="Все статьи"
-        viewAllButton={{ text: "На главную", href: "/" }}
+        title="Усі пости"
+        viewAllButton={{ text: "На головну", href: "/" }}
         articles={articles}
       />
   );

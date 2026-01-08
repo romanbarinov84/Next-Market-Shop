@@ -1,6 +1,12 @@
 import fetchProductsByCategory from '../fetchProducts';
 import ProductsSection from '../ProductsSection';
 
+
+export const metaData = {
+    title:'Новинки магазина "Балувана Галя"',
+    description:'Нові товари магазина "Балувана Галя"',
+}
+
 const AllActions = async () => {
     const products = await fetchProductsByCategory('new');
 
