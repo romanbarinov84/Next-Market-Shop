@@ -15,7 +15,7 @@ const Actions = async () => {
 
     return (
         <ProductsSection
-            title="Усі новинки"
+            title="Новинки"
             viewAllButton={{ text: 'Усі новинки', href: 'new' }}
             products={products}
             compact

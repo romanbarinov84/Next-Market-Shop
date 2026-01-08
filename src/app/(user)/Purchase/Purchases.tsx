@@ -1,49 +1,32 @@
-import Image from 'next/image';
 import ProductCard from '../../../components/ProductCard/ProductCard';
 import { ProductCardProps } from '@/src/types/product';
 import ViewAllButton from '../../../components/allButton/ViewAllButton';
+import fetchPurchases from '../fetchPurchases';
+import ProductsSection from '../../(products)/ProductsSection';
 
 const Purchases = async () => {
-    let purchases: ProductCardProps[] = [];
-    let error = null;
+  let purchases: ProductCardProps[] = [];
+  let error: string | null = null;
 
-    try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL!}/api/users/purchases`
-        );
-        purchases = await res.json();
-    } catch (err) {
-        error = 'Ошибка получения купленных продуктов';
-        console.error('Ошибка в компоненте Purchases:', err);
-    }
+  try {
+    purchases = await fetchPurchases("purchases");
+  } catch (err) {
+    error = 'Ошибка получения купленных продуктов';
+    console.error('Ошибка в компоненте Purchases:', err);
+  }
 
-    if (error) {
-        return <div className="text-red-500">Ошибка: {error}</div>;
-    }
-    return (
-        <section>
-            <div className="flex flex-col justify-center xl:max-w-302">
-                <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
-                    <h2 className="text-2xl xl:text-4xl text-left font-bold">
-                        Покупки
-                    </h2>
-                    <ViewAllButton text="Усі покупки" href="purchases" />
-                </div>
-                <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
-                    {purchases.slice(0, 4).map((item, index) => (
-                        <li
-                            key={item._id}
-                            className={`${index >= 4 ? 'hidden' : ''} 
-                    ${index >= 3 ? 'md:hidden xl:block' : ''}
-                    `}
-                        >
-                            <ProductCard {...item} />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </section>
-    );
+  if (error) {
+    return <div className="text-red-500">Ошибка: {error}</div>;
+  }
+
+  return (
+    <ProductsSection
+      title="Покупки"
+      viewAllButton={{ text: 'Усі покупки', href: 'purchases' }}
+      products={purchases}
+      compact
+    />
+  );
 };
 
 export default Purchases;
