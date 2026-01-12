@@ -55,7 +55,7 @@ const PaginationWrapper = ({
     return <div>
         <Pagination 
         totalItems={totalItems}
-        currentPerPage={currentPage}
+        currentPage={currentPage}
         basePath={basePath}
         itemsPerPage={itemsPerPage}
         searchQuery={searchParams.toString()}

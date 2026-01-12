@@ -1,7 +1,7 @@
 
 export interface PaginationProps {
     totalItems:number;
-    currentPerPage:number;
+    currentPage:number;
     basePath:string;
     itemsPerPage:number;
     searchQuery:string;
