@@ -21,7 +21,7 @@ const GenericProductListPage = async ({
     try {
         products = await props.fetchData();
     } catch {
-        return <div>{props.errorMessage}</div>;
+        return <div className='text-red-500'>{props.errorMessage}</div>;
     }
 
     const paginatedProducts = products.slice(startIdx, startIdx + perPage);

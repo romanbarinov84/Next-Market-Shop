@@ -16,7 +16,7 @@ const fetchProductsByCategory = async(category:string) => {
 
             const availableProducts = Products.filter(product => product.quantity > 0)
 
-           return shuffleArray(availableProducts);
+           return availableProducts;
 
             
         } catch (err) {
