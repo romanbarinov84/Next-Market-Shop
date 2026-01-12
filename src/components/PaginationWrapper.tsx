@@ -2,9 +2,9 @@
 
 import { CONFIG } from '@/config/config';
 import { debounce } from '@/UTILS/debounce';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useSearchParams, useRouter  } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Pagination from './pagination/Pagination';
 
 function getItemsPerPageByWith() {
     const width = window.innerWidth;
@@ -37,7 +37,7 @@ const PaginationWrapper = ({
             params.set('itemsPerPage', newItemsPerPage.toString());
             params.set("page" , "1");
 
-            router.replace(`${basePath}?${params.toString()}`,undefined,{scroll:false});
+            router.replace(`${basePath}?${params.toString()}`,{scroll:false});
 
         };
 
@@ -52,7 +52,15 @@ const PaginationWrapper = ({
         return () => window.removeEventListener("resize" , handleResize)
     },[itemsPerPage,basePath,searchParams,router]);
 
-    return <div></div>;
+    return <div>
+        <Pagination 
+        totalItems={totalItems}
+        currentPerPage={currentPage}
+        basePath={basePath}
+        itemsPerPage={itemsPerPage}
+        searchQuery={searchParams.toString()}
+        />
+    </div>;
 };
 
 export default PaginationWrapper;

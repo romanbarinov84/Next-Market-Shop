@@ -1,9 +1,17 @@
+"use client"
+
+import { PaginationProps } from "@/src/types/paginationProps";
 
 
-const Pagination = () => {
-  return (
-    <div></div>
-  )
-}
 
-export default Pagination
+const Pagination = ({
+    totalItems,
+    currentPerPage,
+    basePath,
+    itemsPerPage,
+    searchQuery,
+}: PaginationProps) => {
+    return <div></div>;
+};
+
+export default Pagination;
