@@ -1,6 +1,10 @@
 import { GenericListPageProps } from '@/src/types/GenericProductListPage';
 import ProductsSection from './ProductsSection';
 import { CONFIG } from '@/config/config';
+import PaginationWrapper from '@/src/components/PaginationWrapper';
+
+
+
 
 const GenericProductListPage = async ({
     searchParams,
@@ -33,6 +37,11 @@ const GenericProductListPage = async ({
                 viewAllButton={{ text: 'На головну', href: '/' }}
                 products={paginatedProducts}
             />
+
+            {products.length > perPage && <PaginationWrapper totalItems={products.length} 
+             currentPage={currentPage}
+             basePath={props.basePath}
+             />}
         </div>
     );
 };
