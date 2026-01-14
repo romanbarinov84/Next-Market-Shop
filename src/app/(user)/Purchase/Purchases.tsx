@@ -9,7 +9,7 @@ const Purchases = async () => {
   let error: string | null = null;
 
   try {
-    purchases = await fetchPurchases("purchases");
+    purchases = await fetchPurchases();
   } catch (err) {
     error = 'Ошибка получения купленных продуктов';
     console.error('Ошибка в компоненте Purchases:', err);

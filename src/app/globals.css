@@ -29,4 +29,7 @@ body {
     background: #fbf8ec;
     color: #778;
     font-family: var(--font-sans);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

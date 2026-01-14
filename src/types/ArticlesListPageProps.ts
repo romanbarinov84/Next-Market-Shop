@@ -1,5 +1,5 @@
 
-export interface Article{
+export interface ArticlesCardProps{
     _id:string;
     img:string;
     title:string;
