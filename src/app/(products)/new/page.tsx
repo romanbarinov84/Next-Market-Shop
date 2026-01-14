@@ -1,5 +1,6 @@
 import fetchProductsByCategory from '../fetchProducts';
-import ProductsSection from '../ProductsSection';
+import GenericProductListPage from '../GenericProductListPage';
+
 
 
 export const metaData = {
@@ -7,25 +8,26 @@ export const metaData = {
     description:'Нові товари магазина "Балувана Галя"',
 }
 
-const AllNew = async () => {
-    const products = await fetchProductsByCategory('new');
-
-    if (!products || products.length === 0) {
-        return (
-            <div className="text-red-500 text-center">
-                Новые товары не найдены
-            </div>
-        );
-    }
-
-    return (
-        <ProductsSection
-            title="Усі новинки"
-            viewAllButton={{ text: 'На головну', href: '/' }}
-            products={products}
-            
-        />
-    );
+const AllNew = async({
+    searchParams,
+}:{
+    searchParams:Promise<{page?:string;
+        itemsPerPage?:string
+    }>;
+}) => {
+    
+  return (
+    <GenericProductListPage
+    searchParams={searchParams}
+    props={{
+        fetchData: () => 
+            fetchProductsByCategory("new"),
+        pageTitle:"Усі новинки",
+        basePath:"/new",
+        errorMessage:"Помилка невдалося завантажити новинки",
+    }}
+    />
+  )
 };
 
 export default AllNew;

@@ -3,7 +3,7 @@ import { ProductCardProps } from "@/src/types/product";
 
 
 
-const fetchPurchases = async(category:string) => {
+ const fetchPurchases = async() => {
    
     try {
             const res = await fetch(
