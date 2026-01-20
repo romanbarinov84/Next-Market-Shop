@@ -1,12 +1,11 @@
 "use client";
 
+import { PATH_TRANSLATIONS } from "@/UTILS/pathTranslations";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const formatLabel = (segment: string) =>
-    decodeURIComponent(segment)
-        .replace(/-/g, " ")
-        .replace(/\b\w/g, (l) => l.toUpperCase());
+
+
 
 const BreadCrumbs = () => {
     const pathname = usePathname();
@@ -18,7 +17,7 @@ const BreadCrumbs = () => {
     const breadcrumbs = segments.map((segment, index) => {
         const href = "/" + segments.slice(0, index + 1).join("/");
         return {
-            label: formatLabel(segment),
+            label: PATH_TRANSLATIONS[segment] || segment,
             href,
             isLast: index === segments.length - 1,
         };
@@ -39,7 +38,7 @@ const BreadCrumbs = () => {
                             <>
                                 <Link
                                     href={item.href}
-                                    className="hover:text-blue-600 transition-colors duration-200"
+                                    className="hover:text-orange-400 transition-colors duration-200"
                                 >
                                     {item.label}
                                 </Link>
