@@ -3,6 +3,7 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import BreadCrumbs from "../components/breadCrumbs/BreadCrumbs";
 
 
 const rubik = Rubik({
@@ -28,6 +29,7 @@ export default function RootLayout({
         className={`${rubik.variable} font-sans`}
       >
         <Header/>
+        <BreadCrumbs/>
         {children}
         
         <Footer/>
