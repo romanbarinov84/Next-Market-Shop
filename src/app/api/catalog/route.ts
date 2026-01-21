@@ -6,12 +6,12 @@ export const revalidate = 3600;
 export async function GET() {
     try {
         const db = await getDB();
-        const articles = await db.collection('articles').find().toArray();
-        return NextResponse.json(articles);
+        const catalog = await db.collection('catalog').find().toArray();
+        return NextResponse.json(catalog);
     } catch (error) {
-        console.error('Ошибка сервера при загрузке articles', error);
+        console.error('Ошибка сервера', error);
         return NextResponse.json(
-            { message: 'Ошибка сервера' },
+            { message: 'Ошибка при загрузке каталога' },
             { status: 500 }
         );
     }

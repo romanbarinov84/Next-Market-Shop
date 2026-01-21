@@ -13,7 +13,7 @@ const ProductsSection = ({
     ? "flex justify-center mb-20 mt-10 px-4 md:px-8" 
     : "";
 
-  const containerClasses = [
+   const containerClasses = [
     "flex flex-col justify-center xl:max-w-302",
     !compact && "w-full max-w-[1200px] bg-white/70 backdrop-blur-md rounded-2xl shadow-lg shadow-black/10 p-4 md:p-6 xl:p-8"
   ].filter(Boolean).join(" ");

@@ -1,0 +1,121 @@
+[
+    {
+        "id": 1,
+        "order":1,
+        "title": "Пельмені та вареники",
+        "img":"/ProductsCategory-Img/Пельмені та хінкалі/Pelmeni-dytyachi-Malyatko-188.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan" :"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id": 2,
+        "order":2,
+        "title": "Сододкі страви",
+        "img":"/ProductsCategory-Img/Десерти/Пиріг з вишнями та маком/pirog-makVishnya-280.jpg",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 3,
+        "order":3,
+        "title": "Котлети",
+        "img":"/ProductsCategory-Img/Котлети та тефтелі/Kotlety-Kordon-Blyu-288.webp",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 4,
+        "order":4,
+        "title": "Піцца",
+        "img":"/ProductsCategory-Img/Піца/Mafiya-SHef-120.png",
+        "colSpan":"col-span-2",
+        "tabletColSpan" :"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id": 5,
+        "order":5,
+        "title": "Млинці",
+        "img":"/ProductsCategory-Img/Млинці/Mlyntsi-shpynatni-z-krem-syrom-175.jpg",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 6,
+        "order":6,
+        "title": "Страви з мясом",
+        "img":"/ProductsCategory-Img/Страви з м’яса/Kovbasa-domashnya-276.jpg",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 7,
+        "order":7,
+        "title": "Страви без мяса",
+        "img":"/ProductsCategory-Img/Вегетаріанські страви/Varenyky-z-polunytseyu-166.jpg",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 8,
+        "order":8,
+        "title": "Готові страви",
+        "img":"/ProductsCategory-Img/Готові страви/images_cms-image-130.jpg",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 9,
+        "order":9,
+        "title": "Сирники",
+        "img":"/ProductsCategory-Img/Сирники/Syrnyky-z-brynzoyu-ta-zelennyu-198.jpeg",
+        "colSpan":"col-span-2",
+        "tabletColSpan" :"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id": 10,
+        "order":10,
+        "title": "Ковбаси",
+        "img":"/ProductsCategory-Img/Ковбаси/Kovbasa-domashnya-230.jpg",
+        "colSpan":"col-span-2",
+        "tabletColSpan" :"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    },
+    {
+        "id": 11,
+        "order":11,
+        "title": "Котлети",
+        "img":"/ProductsCategory-Img/Котлети та тефтелі/Grechanyky-177.webp",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+    {
+        "id": 12,
+        "order":12,
+        "title": "Молочна продукція",
+        "img":"/ProductsCategory-Img/Молочна продукція/Selyanske-Maslo-sol.vershkove-ekstra-220.png",
+        "colSpan":"",
+        "tabletColSpan" :"md:col-span-1",
+        "mobileColSpan":""
+    },
+   
+    {
+        "id": 13,
+        "order":13,
+        "title": "Шеф меню",
+        "img":"/ProductsCategory-Img/ШЕФ меню/Kish-lososem-shpynatom-ta-pomidoramy-271.webp",
+        "colSpan":"col-span-2",
+        "tabletColSpan" :"md:col-span-2",
+        "mobileColSpan":"col-span-2"
+    }
+   
+]
