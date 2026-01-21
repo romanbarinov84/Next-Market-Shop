@@ -7,6 +7,9 @@ import GridCategoryBlock from '../GridCategoryBlock';
 const CatalogPage = () => {
     const [categories, setCategories] = useState<CatalogProps[]>([]);
     const [isEditing, setIsEditing] = useState(false);
+    const [draggetCategory, setDraggedCategory] = useState<CatalogProps | null>(
+        null,
+    );
     const [err, setErr] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const isAdmin = true;
@@ -58,6 +61,12 @@ const CatalogPage = () => {
 
     const resetLayOut = () => {
         fetchCategories();
+    };
+
+    const handleDragStart = (category: CatalogProps) => {
+        if (isEditing) {
+            setDraggedCategory(category);
+        }
     };
 
     return (
@@ -143,8 +152,11 @@ const CatalogPage = () => {
                             key={category._id}
                             className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full`}
                         >
-                            <div className="h-full w-full"
-                             >
+                            <div
+                                className="h-full w-full"
+                                draggable={isEditing}
+                                onDragStart={() => handleDragStart(category)}
+                            >
                                 <GridCategoryBlock
                                     id={category.id}
                                     title={category.title}
