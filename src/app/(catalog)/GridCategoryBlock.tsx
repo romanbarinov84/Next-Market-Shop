@@ -19,7 +19,7 @@ const GridCategoryBlock = ({id , title , img}:GridCategoryBlockProps) => {
                     />
                     <div
                         className="
-                                      absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-t from-orange-800/20 via-yellow-500/20 to-transparent
+                                      absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-linear-to-t from-orange-800/20 via-red-500/20 to-transparent
                                       "
                     ></div>
                     <div className="absolute left-2.5 bottom-2.5 flex items-center">
