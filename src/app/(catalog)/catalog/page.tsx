@@ -68,6 +68,13 @@ const fetchCategories = async () => {
         }
     };
 
+    const handleDragOver = (e:React.DragEvent , categoryId:string) => {
+        e.preventDefault();
+        if(draggableCategory && draggableCategory._id !== categoryId){
+            
+        }
+    }
+
     return (
         <section className="w-full px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))]  flex flex-col justify-center  py-10">
             {isAdmin && (
@@ -150,7 +157,7 @@ const fetchCategories = async () => {
                         <div
                             key={category._id}
                             className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full   ${isEditing ? "border-3 border-dashed border-gray-300" : ""}`}
-                            
+                            onDragOver={(e) => handleDragOver(e , category._id)}
                         >
                             <div
                                 className={`h-full w-full  ${
