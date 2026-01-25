@@ -7,29 +7,28 @@ import GridCategoryBlock from '../GridCategoryBlock';
 const CatalogPage = () => {
     const [categories, setCategories] = useState<CatalogProps[]>([]);
     const [isEditing, setIsEditing] = useState(false);
-    const [draggetCategory, setDraggedCategory] = useState<CatalogProps | null>(
-        null,
-    );
+    const [draggableCategory, setDraggableCategory] =
+        useState<CatalogProps | null>(null);
     const [err, setErr] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const isAdmin = true;
-
-    const fetchCategories = async () => {
-        try {
-            const response = await fetch('api/catalog');
-            if (!response.ok) {
-                throw new Error(`Ошибка сервера : ${response.status}`);
-            }
-            const data: CatalogProps[] = await response.json();
-
-            setCategories(data.sort((a, b) => a.order - b.order));
-        } catch (error) {
-            console.error(`Неудалось получить категории:`, error);
-            setErr('Неудалось загрузить категории');
-        } finally {
-            setIsLoading(false);
+const fetchCategories = async () => {
+    setIsLoading(true);
+    try {
+        const response = await fetch('api/catalog');
+        if (!response.ok) {
+            throw new Error(`Ошибка сервера : ${response.status}`);
         }
-    };
+        const data: CatalogProps[] = await response.json();
+
+        setCategories(data.sort((a, b) => a.order - b.order));
+    } catch (error) {
+        console.error(`Неудалось получить категории:`, error);
+        setErr('Неудалось загрузить категории');
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     useEffect(() => {
         fetchCategories();
@@ -65,7 +64,7 @@ const CatalogPage = () => {
 
     const handleDragStart = (category: CatalogProps) => {
         if (isEditing) {
-            setDraggedCategory(category);
+            setDraggableCategory(category);
         }
     };
 
@@ -85,8 +84,8 @@ const CatalogPage = () => {
         px-4
         font-medium
 
-        border border-[var(--color-primary)]
-        text-[var(--color-primary)]
+        border border-(--color-primary)
+        text-(--color-primary)
 
         transition-all duration-300
         cursor-pointer select-none
@@ -96,7 +95,7 @@ const CatalogPage = () => {
         hover:border-transparent
 
         active:scale-95
-        active:shadow-[var(--shadow-button-active)]
+        active:shadow-(--shadow-button-active)
       "
                     >
                         {isEditing ? 'Оновити' : 'Змінити'}
@@ -118,7 +117,7 @@ const CatalogPage = () => {
           font-semibold
           text-white
 
-          bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600
+          bg-linear-to-r from-orange-400 via-orange-500 to-orange-600
           shadow-md
 
           transition-all duration-300
@@ -150,10 +149,15 @@ const CatalogPage = () => {
                     {categories.map((category) => (
                         <div
                             key={category._id}
-                            className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full`}
+                            className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full   ${isEditing ? "border-3 border-dashed border-gray-300" : ""}`}
+                            
                         >
                             <div
-                                className="h-full w-full"
+                                className={`h-full w-full  ${
+                                    draggableCategory?._id === category._id
+                                        ? 'opacity-50'
+                                        : ''
+                                }`}
                                 draggable={isEditing}
                                 onDragStart={() => handleDragStart(category)}
                             >
