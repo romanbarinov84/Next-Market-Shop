@@ -38,12 +38,15 @@ export async function GET(request: Request) {
             return NextResponse.json(products);
         }
 
+        const totalCount = await db.collection("products").countDocuments(query);
+
         const products = await db
             .collection('products')
             .find({ categories: category })
             .toArray();
 
-        return NextResponse.json(products);
+        return NextResponse.json({products , totalCount});
+
     } catch (error) {
         console.error('Ошибка сервера', error);
         return NextResponse.json(
