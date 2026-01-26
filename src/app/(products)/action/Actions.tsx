@@ -1,13 +1,16 @@
 
-import { shuffleArray } from '@/UTILS/shuffleArray';
+
 import fetchProductsByCategory from '../fetchProducts';
 import ProductsSection from '../ProductsSection';
+import { CONFIG } from '@/config/config';
 
 const Actions = async () => {
-    let products = await fetchProductsByCategory('actions');
-    products = shuffleArray(products)
 
-    if (!products || products.length === 0) {
+    
+    const items = await fetchProductsByCategory('actions' , {randomLimit:CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS});
+    
+
+    if (!items || items.length === 0) {
         return (
             <div className="text-red-500 text-center">
                 Акционные товары не найдены
@@ -19,7 +22,7 @@ const Actions = async () => {
         <ProductsSection
             title="Акції"
             viewAllButton={{ text: 'Усі акції', href: 'actions' }}
-            products={products}
+            products={items}
             compact
         />
     );
