@@ -11,24 +11,28 @@ const CatalogPage = () => {
         useState<CatalogProps | null>(null);
     const [err, setErr] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
+        null,
+    );
     const isAdmin = true;
-const fetchCategories = async () => {
-    setIsLoading(true);
-    try {
-        const response = await fetch('api/catalog');
-        if (!response.ok) {
-            throw new Error(`Ошибка сервера : ${response.status}`);
-        }
-        const data: CatalogProps[] = await response.json();
 
-        setCategories(data.sort((a, b) => a.order - b.order));
-    } catch (error) {
-        console.error(`Неудалось получить категории:`, error);
-        setErr('Неудалось загрузить категории');
-    } finally {
-        setIsLoading(false);
-    }
-};
+    const fetchCategories = async () => {
+        setIsLoading(true);
+        try {
+            const response = await fetch('api/catalog');
+            if (!response.ok) {
+                throw new Error(`Ошибка сервера : ${response.status}`);
+            }
+            const data: CatalogProps[] = await response.json();
+
+            setCategories(data.sort((a, b) => a.order - b.order));
+        } catch (error) {
+            console.error(`Неудалось получить категории:`, error);
+            setErr('Неудалось загрузить категории');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         fetchCategories();
@@ -68,11 +72,55 @@ const fetchCategories = async () => {
         }
     };
 
-    const handleDragOver = (e:React.DragEvent , categoryId:string) => {
+    const handleDragOver = (e: React.DragEvent, categoryId: string) => {
         e.preventDefault();
-        if(draggableCategory && draggableCategory._id !== categoryId){
-            
+        if (draggableCategory && draggableCategory._id !== categoryId) {
+            setHoveredCategoryId(categoryId);
         }
+    };
+
+    const handleDragLeave = () => {
+        setHoveredCategoryId(null)
+    }
+
+    const handleDrop = (e: React.DragEvent, targetCategoryId:string) => {
+         e.preventDefault();
+
+         if(!isEditing || !draggableCategory){
+            return
+         }
+
+         setCategories((prevCategories) => {
+            const draggedIndex = prevCategories.findIndex((c) => c._id === draggableCategory._id);
+
+            const targetIndex = prevCategories.findIndex((c) => c._id === targetCategoryId);
+
+            if(draggedIndex === -1 || targetIndex === -1) return prevCategories;
+
+            const newCategories = [...prevCategories];
+
+            const draggedItem = newCategories[draggedIndex];
+            const targetItem = newCategories[targetIndex];
+
+            const draggedSizes = {
+                mobileCoSpan:draggedItem.mobileColSpan,
+                tabletColSpan:draggedItem.tabletColSpan,
+                colSpan:draggedItem.colSpan,
+            }
+            const targetSizes = {
+                mobileCoSpan:targetItem.mobileColSpan,
+                tabletColSpan:targetItem.tabletColSpan,
+                colSpan:targetItem.colSpan,
+            };
+
+            newCategories[draggedIndex] = {...targetItem, ...draggedSizes};
+            newCategories[targetIndex] = {...draggedItem, ...targetSizes};
+
+            return newCategories;
+         } );
+
+         setDraggableCategory(null);
+         setHoveredCategoryId(null);
     }
 
     return (
@@ -82,28 +130,10 @@ const fetchCategories = async () => {
                     {/* Edit / Update */}
                     <button
                         onClick={handleToggleEditing}
-                        className="
-        flex items-center justify-center
-        h-10
-        w-full sm:w-1/4
-
-        rounded-lg
-        px-4
-        font-medium
-
-        border border-(--color-primary)
-        text-(--color-primary)
-
-        transition-all duration-300
-        cursor-pointer select-none
-
-        hover:bg-orange-300
-        hover:text-white
-        hover:border-transparent
-
-        active:scale-95
-        active:shadow-(--shadow-button-active)
-      "
+                        className="  flex items-center justify-center h-10 w-full sm:w-1/4
+      
+        rounded-lg px-4  font-medium  border border-(--color-primary)  text-(--color-primary)
+       transition-all duration-300  cursor-pointer select-none    hover:bg-orange-300   hover:text-white  hover:border-transparent  active:scale-95 active:shadow-(--shadow-button-active)"
                     >
                         {isEditing ? 'Оновити' : 'Змінити'}
                     </button>
@@ -112,31 +142,9 @@ const fetchCategories = async () => {
                     {isEditing && (
                         <button
                             onClick={resetLayOut}
-                            className="
-          relative overflow-hidden
-          flex items-center justify-center
-
-          h-10
-          w-full sm:w-1/4
-          px-4
-
-          rounded-lg
-          font-semibold
-          text-white
-
-          bg-linear-to-r from-orange-400 via-orange-500 to-orange-600
-          shadow-md
-
-          transition-all duration-300
-          hover:shadow-lg
-          hover:brightness-110
-
-          active:scale-95
-          active:shadow-inner
-
-          focus:outline-none
-          focus:ring-2
-          focus:ring-orange-400
+                            className="relative overflow-hidden flex items-center justify-center
+           h-10  w-full sm:w-1/4  px-4 rounded-lg font-semibold text-white  bg-linear-to-r from-orange-400 via-orange-500 to-orange-600 shadow-md not-first:transition-all duration-300 hover:shadow-lg hover:brightness-110 active:scale-95 active:shadow-inner
+            focus:outline-none  focus:ring-2 focus:ring-orange-400  
         "
                         >
                             Скинути
@@ -156,9 +164,12 @@ const fetchCategories = async () => {
                     {categories.map((category) => (
                         <div
                             key={category._id}
-                            className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full   ${isEditing ? "border-3 border-dashed border-gray-300" : ""}`}
-                            onDragOver={(e) => handleDragOver(e , category._id)}
-                        >
+                            className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full   ${isEditing ? '  border-dashed border-gray-300' : ''}  ${
+                                hoveredCategoryId === category._id ? "bg-green-200" : ""}`}
+                            onDragOver={(e) => handleDragOver(e, category._id)}
+                            onDragLeave={handleDragLeave}
+                            onDrop={(e) => handleDrop(e , category._id)}
+                        > 
                             <div
                                 className={`h-full w-full  ${
                                     draggableCategory?._id === category._id
