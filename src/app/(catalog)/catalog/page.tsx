@@ -44,11 +44,7 @@ const CatalogPage = () => {
     }
 
     if (err) {
-        return (
-            <div className="text-center py-8 text-red-400">
-                Ошибка загрузки каталога {err}
-            </div>
-        );
+       throw err
     }
 
     if (!categories.length) {
