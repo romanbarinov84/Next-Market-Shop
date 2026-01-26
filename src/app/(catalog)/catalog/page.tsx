@@ -3,6 +3,7 @@
 import { CatalogProps } from '@/src/types/catalog';
 import { useEffect, useState } from 'react';
 import GridCategoryBlock from '../GridCategoryBlock';
+import CatalogLoading from '@/src/components/loading/CatalogLoader';
 
 const CatalogPage = () => {
     const [categories, setCategories] = useState<CatalogProps[]>([]);
@@ -10,7 +11,7 @@ const CatalogPage = () => {
     const [draggableCategory, setDraggableCategory] =
         useState<CatalogProps | null>(null);
     const [err, setErr] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
         null,
     );
@@ -39,7 +40,7 @@ const CatalogPage = () => {
     }, []);
 
     if (isLoading) {
-        return <div className="text-center py-8">Загрузка каталога...</div>;
+        return <CatalogLoading/>;
     }
 
     if (err) {
@@ -58,7 +59,50 @@ const CatalogPage = () => {
         );
     }
 
+    const updateOrderInDB = async () => {
+        try {
+             const response = await fetch("api/catalog", {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json",
+
+                },
+                body: JSON.stringify(
+                    categories.map((category , index) => ({
+                        _id:category._id,
+                        order:index + 1,
+                        title:category.title,
+                        img:category.img,
+                        colSpan:category.colSpan,
+                        tabletColSpan:category.tabletColSpan,
+                        mobileColSpan:category.mobileColSpan,
+                    }))
+                ),
+             });
+
+           if(!response.ok){
+            throw new Error("Ошибка при обновлении порядка");
+           }
+
+           const result = await response.json();
+
+           if(result.success){
+            console.log("Порядок успешно обновлен в базе данных");
+           }
+
+        } catch (error) {
+            console.error(error)
+            setErr("Ошибка при сохранении порядка");
+        }
+    }
+
     const handleToggleEditing = async () => {
+          
+        if(isEditing){
+            await updateOrderInDB();
+        }
+
+
         setIsEditing(!isEditing);
     };
 
