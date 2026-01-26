@@ -16,7 +16,7 @@ const AllActions = async ({
         <GenericProductListPage
             searchParams={searchParams}
             props={{
-                fetchData: () => fetchProductsByCategory('actions'),
+                fetchData: ({pagination:{startIdx , perPage}}) => fetchProductsByCategory('actions' , {pagination:{startIdx , perPage}}),
                 pageTitle: 'Усі акції',
                 basePath: '/actions',
                 errorMessage: 'Помилка невдалося завантажити акції',

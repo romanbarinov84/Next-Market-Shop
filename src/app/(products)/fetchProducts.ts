@@ -2,7 +2,7 @@
 
 const fetchProductsByCategory = async (
     category: string,
-    options?: { randomLimit?: number },
+    options?: { randomLimit?: number ; pagination?:{startIdx:number , perPage : number}},
 ) => {
     try {
         const url = new URL(
@@ -15,6 +15,9 @@ const fetchProductsByCategory = async (
                 'randomLimit',
                 options.randomLimit.toString(),
             );
+        }else if (options?.pagination){
+            url.searchParams.append("startIndex",options.pagination.startIdx.toString())
+            url.searchParams.append("perPage" , options.pagination.perPage.toString())
         }
         const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
 
@@ -23,7 +26,7 @@ const fetchProductsByCategory = async (
 
         const data = await res.json()
 
-        return data;
+        return {items:data.products || data , totalCount:data.totalCount || data.length};
     } catch (err) {
         console.error(`Ошибка в компоненте ${category}`, err);
         throw err;

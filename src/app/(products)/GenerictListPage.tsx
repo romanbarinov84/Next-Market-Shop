@@ -23,15 +23,13 @@ const GenericListPage = async ({
     const perPage = Number(itemsPerPage);
     const startIdx = (currentPage - 1) * perPage;
 
-    let items = [];
+   
 
-    try {
-        items = await props.fetchData();
-    } catch {
-        return <div className='text-red-500'>{props.errorMessage}</div>;
-    }
+   
+       const {items , totalCount} = await props.fetchData({pagination:{startIdx , perPage}});
+     
 
-    const paginatedItems = items.slice(startIdx, startIdx + perPage);
+    const totalPages = Math.ceil(totalCount / perPage)
 
     return (
         <div>
@@ -39,19 +37,19 @@ const GenericListPage = async ({
                  <ProductsSection
                 title={props.pageTitle}
                 viewAllButton={{ text: 'На головну', href: '/' }}
-                products={paginatedItems as ProductCardProps[]}
+                products={items as ProductCardProps[]}
             />
             ) :(
                  <ArticlesSection
                 title={props.pageTitle}
                 viewAllButton={{ text: 'На головну', href: '/' }}
-                articles={paginatedItems as ArticlesCardProps[]}
+                articles={items as ArticlesCardProps[]}
             />
             )}
            
            
 
-            {items.length > perPage && <PaginationWrapper totalItems={items.length} 
+            {totalPages > 1 && <PaginationWrapper totalItems={items.length} 
              currentPage={currentPage}
              basePath={props.basePath}
              contentType={props.contentType}
