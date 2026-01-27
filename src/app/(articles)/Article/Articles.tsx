@@ -1,35 +1,27 @@
 
-import { shuffleArray } from '@/UTILS/shuffleArray';
 import ArticlesSection from '../ArticlesSection';
-import { ArticlesCardProps } from '@/src/types/ArticlesListPageProps';
+import fetchArticles from '../fetchArticles';
+import { CONFIG } from '@/config/config';
 
-// если используешь отдельный компонент
+
 
 const Articles = async () => {
-    let articles: ArticlesCardProps[] = [];
-    let error: string | null = null;
+    let items = [];
 
-    try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/articles`
-        );
-        if (!res.ok) throw new Error(`Ошибка получения статей: ${res.status}`);
-        articles = await res.json();
-        articles = shuffleArray(articles);
-    } catch (err) {
-        console.error('Ошибка в компоненте Articles', err);
-        error = 'Ошибка получения статей';
-    }
-
-    if (error) {
-        return <div className="text-red-500">{error}</div>;
-    }
+  try {
+    const result = await fetchArticles({
+      articlesLimit: CONFIG.ITEMS_PER_PAGE_MAIN_ARTICLES,
+    });
+    items = result.items;
+  } catch (error) {
+    console.error('Ошибка загрузки покупок', error);
+  }
 
     return (
         <ArticlesSection
             title="Наші пости"
             viewAllButton={{ text: 'Усі пости', href: 'articles' }}
-            articles={articles.slice(0, 3)} // только первые 3
+            articles={items} 
             compact
         />
     );

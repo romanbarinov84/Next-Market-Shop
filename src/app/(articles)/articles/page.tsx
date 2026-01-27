@@ -15,7 +15,9 @@ const AllArticles = async ({
         <GenericProductListPage
             searchParams={searchParams}
             props={{
-                fetchData: () => fetchArticles(),
+                fetchData:({pagination:{startIdx , perPage}}) => fetchArticles({
+                    pagination:{startIdx , perPage}
+                    }),
                 pageTitle: 'Усі пости',
                 basePath: '/articles',
                 errorMessage: 'Помилка невдалося завантажити пости',
