@@ -49,7 +49,7 @@ const GenericListPage = async ({
            
            
 
-            {totalPages > 1 && <PaginationWrapper totalItems={items.length} 
+            {totalPages > 1 && <PaginationWrapper totalItems={totalCount} 
              currentPage={currentPage}
              basePath={props.basePath}
              contentType={props.contentType}

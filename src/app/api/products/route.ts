@@ -1,3 +1,4 @@
+import { CONFIG } from '@/config/config';
 import { getDB } from '@/UTILS/api-routes';
 import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
@@ -11,6 +12,8 @@ export async function GET(request: Request) {
 
         const category = url.searchParams.get('category');
         const randomLimit = url.searchParams.get('randomLimit');
+        const startIdx = parseInt(url.searchParams.get("startIdx") || "0");
+        const perPage = parseInt(url.searchParams.get("perPage") || CONFIG.ITEMS_PER_PAGE.toString());
 
         if (!category) {
             return NextResponse.json(
@@ -42,7 +45,10 @@ export async function GET(request: Request) {
 
         const products = await db
             .collection('products')
-            .find({ categories: category })
+            .find(query)
+            .sort({_id: 1})
+            .skip(startIdx)
+            .limit(perPage)
             .toArray();
 
         return NextResponse.json({products , totalCount});
