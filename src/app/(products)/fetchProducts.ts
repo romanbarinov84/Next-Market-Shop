@@ -16,7 +16,7 @@ const fetchProductsByCategory = async (
                 options.randomLimit.toString(),
             );
         }else if (options?.pagination){
-            url.searchParams.append("startIndex",options.pagination.startIdx.toString())
+            url.searchParams.append("startIdx",options.pagination.startIdx.toString())
             url.searchParams.append("perPage" , options.pagination.perPage.toString())
         }
         const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
