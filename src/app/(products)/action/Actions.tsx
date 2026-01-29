@@ -1,13 +1,13 @@
 
 
-import fetchProductsByCategory from '../fetchProducts';
+import fetchProductsByTag from '../fetchProducts';
 import ProductsSection from '../ProductsSection';
 import { CONFIG } from '@/config/config';
 
 const Actions = async () => {
 
     
-    const {items} = await fetchProductsByCategory('actions' , {randomLimit:CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS});
+    const {items} = await fetchProductsByTag('actions' , {randomLimit:CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS});
     
 
     if (!items || items.length === 0) {

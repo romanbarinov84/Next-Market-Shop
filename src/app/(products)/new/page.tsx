@@ -1,4 +1,4 @@
-import fetchProductsByCategory from '../fetchProducts';
+import fetchProductsByTag from '../fetchProducts';
 import GenericProductListPage from '../GenerictListPage';
 
 export const metaData = {
@@ -15,7 +15,7 @@ const AllNew = async ({
         <GenericProductListPage
             searchParams={searchParams}
             props={{
-                fetchData:({pagination:{startIdx , perPage}}) => fetchProductsByCategory("new" , {
+                fetchData:({pagination:{startIdx , perPage}}) => fetchProductsByTag("new" , {
                     pagination:{startIdx , perPage}
                 }),
                 pageTitle: 'Усі новинки',

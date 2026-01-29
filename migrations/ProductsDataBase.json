@@ -12,9 +12,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":2,
@@ -27,9 +28,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":3,
@@ -42,9 +44,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":4,
@@ -57,9 +60,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":5,
@@ -72,9 +76,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":6,
@@ -87,9 +92,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":7,
@@ -102,9 +108,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions", "Golubtsi"],
+             "categories": [ "Golubtsi"],
              "weight":"1100",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":8,
@@ -117,9 +124,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "Golubtsi"],
+             "categories": [ "Golubtsi"],
              "weight":"1100",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":9,
@@ -132,9 +140,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "varenyki"],
+             "categories": [ "varenyki"],
              "weight":"1100",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":10,
@@ -147,9 +156,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":11,
@@ -162,9 +172,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":12,
@@ -177,9 +188,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":13,
@@ -192,9 +204,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":14,
@@ -207,9 +220,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":15,
@@ -222,9 +236,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":16,
@@ -237,9 +252,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":17,
@@ -252,9 +268,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":18,
@@ -267,9 +284,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":19,
@@ -282,9 +300,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":20,
@@ -297,9 +316,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "pizza"],
+             "categories": [ "pizza"],
              "weight":"600",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         
         {
@@ -313,9 +333,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["vegan"],
+             "categories": ["golubzy"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":22,
@@ -330,7 +351,8 @@
              },
              "categories": ["vegan"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":23,
@@ -345,7 +367,8 @@
              },
              "categories": ["vegan"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":24,
@@ -360,7 +383,8 @@
              },
              "categories": ["vegan"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":25,
@@ -375,7 +399,8 @@
              },
              "categories": ["vegan"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":26,
@@ -390,7 +415,8 @@
              },
              "categories": ["vegan"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":27,
@@ -403,9 +429,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "golubzy"],
+             "categories": [ "golubzy"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":28,
@@ -418,9 +445,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions","golubzy"],
+             "categories": ["golubzy"],
              "weight":"1100",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":29,
@@ -433,9 +461,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["actions","golubzy"],
+             "categories": ["golubzy"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["actions"]
         },
         {
             "id":30,
@@ -448,9 +477,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "perez"],
+             "categories": [ "perez"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":31,
@@ -463,9 +493,10 @@
                 "rate": 3.9,
                 "count": 8
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":32,
@@ -478,9 +509,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":33,
@@ -493,9 +525,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "perez"],
+             "categories": [ "perez"],
              "weight":"1000",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":34,
@@ -508,9 +541,10 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":35,
@@ -523,9 +557,10 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":36,
@@ -538,9 +573,10 @@
                 "rate": 4.0,
                 "count": 14
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":37,
@@ -553,9 +589,10 @@
                 "rate": 4.9,
                 "count": 24
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":38,
@@ -568,9 +605,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":39,
@@ -583,9 +621,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"300",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":40,
@@ -598,9 +637,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"360",
-             "quantity": 34
+             "quantity":10 ,
+             "tags":["new"]
         },
         {
             "id":41,
@@ -613,9 +653,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":42,
@@ -628,9 +669,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood", "meat"],
+             "categories": [ "restoFood", "meat"],
              "weight":"800",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":43,
@@ -643,9 +685,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood", "meat"],
+             "categories": [ "restoFood", "meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":44,
@@ -658,9 +701,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood", "meat"],
+             "categories": [ "restoFood", "meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":45,
@@ -673,9 +717,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "restoFood"],
+             "categories": [ "restoFood"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":46,
@@ -688,9 +733,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff", "meat"],
+             "categories": [ "cheff", "meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":47,
@@ -703,9 +749,10 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": ["new", "cheff", "meat"],
+             "categories": [ "cheff", "meat"],
              "weight":"360",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":48,
@@ -718,9 +765,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff","fish"],
+             "categories": [ "cheff","fish"],
              "weight":"360",
-             "quantity": 24
+             "quantity": 24,
+             "tags":["new"]
         },
         {
             "id":49,
@@ -733,9 +781,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "chef", "meat"],
+             "categories": [ "chef", "meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":50,
@@ -748,9 +797,10 @@
                 "rate": 3.9,
                 "count": 4
              },
-             "categories": ["new", "cheff", "meat"],
+             "categories": [ "cheff", "meat"],
              "weight":"760",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":51,
@@ -763,9 +813,10 @@
                 "rate": 4.0,
                 "count": 4
              },
-             "categories": ["new", "cheff", "meat"],
+             "categories": [ "cheff", "meat"],
              "weight":"760",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":52,
@@ -778,9 +829,10 @@
                 "rate": 3.9,
                 "count": 4
              },
-             "categories": ["new", "cheff" , "meat"],
+             "categories": [ "cheff" , "meat"],
              "weight":"760",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":53,
@@ -793,9 +845,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff" , "meat"],
+             "categories": [ "cheff" , "meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":54,
@@ -808,9 +861,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff" ,"meat"],
+             "categories": [ "cheff" ,"meat"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":55,
@@ -823,9 +877,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "cheff","meat"],
+             "categories": [ "cheff","meat"],
              "weight":"760",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":56,
@@ -833,14 +888,15 @@
             "title":"Пательня з свининою",
             "description":"Пательня з свининою",
             "basePrice": 240.00 ,
-            "discountPercent":0,
+            "discountPercent":10,
              "rating": {
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "cheff"],
+             "categories": [ "cheff"],
              "weight":"760",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new","actions"]
         },
         {
             "id":57,
@@ -853,9 +909,10 @@
                 "rate": 4.7,
                 "count": 4
              },
-             "categories": ["new", "cheff","fish"],
+             "categories": [ "cheff","fish"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":58,
@@ -868,9 +925,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff"],
+             "categories": [ "cheff"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":59,
@@ -883,9 +941,10 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["new", "cheff","sweet"],
+             "categories": [ "cheff","sweet"],
              "weight":"560",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         {
             "id":60,
@@ -898,9 +957,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "cheff"],
+             "categories": [ "cheff"],
              "weight":"360",
-             "quantity": 34
+             "quantity": 34,
+             "tags":["new"]
         },
         
         {
@@ -914,9 +974,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["actions", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":62,
@@ -929,9 +990,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":63,
@@ -944,9 +1006,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":64,
@@ -959,9 +1022,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":65,
@@ -974,9 +1038,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["actions", "meat" , "golubzy"],
+             "categories": [ "meat" , "golubzy"],
              "weight":"1200",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":66,
@@ -989,9 +1054,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["actions", "meat" , "golubzy"],
+             "categories": [ "meat" , "golubzy"],
              "weight":"1200",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":67,
@@ -1004,9 +1070,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":68,
@@ -1019,9 +1086,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":69,
@@ -1034,9 +1102,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["actions", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":70,
@@ -1049,9 +1118,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":71,
@@ -1064,9 +1134,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":72,
@@ -1079,9 +1150,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"800",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":73,
@@ -1094,9 +1166,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":74,
@@ -1109,9 +1182,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["actions", "meat"],
+             "categories": [ "meat"],
              "weight":"1200",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":75,
@@ -1124,9 +1198,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["actions"]
         },
         {
             "id":76,
@@ -1139,9 +1214,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":77,
@@ -1154,9 +1230,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":78,
@@ -1169,9 +1246,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"800",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":79,
@@ -1184,9 +1262,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":80,
@@ -1199,9 +1278,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":81,
@@ -1214,9 +1294,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"800",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":82,
@@ -1229,9 +1310,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":83,
@@ -1244,9 +1326,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":84,
@@ -1259,9 +1342,10 @@
                 "rate": 4.8,
                 "count": 4
              },
-             "categories": ["new", "meat"],
+             "categories": [ "meat"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":85,
@@ -1274,9 +1358,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":86,
@@ -1289,9 +1374,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":87,
@@ -1304,9 +1390,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":88,
@@ -1319,9 +1406,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":89,
@@ -1334,9 +1422,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":90,
@@ -1349,9 +1438,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":91,
@@ -1364,9 +1454,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":91,
@@ -1379,9 +1470,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "meat","pelmeni"],
+             "categories": [ "meat","pelmeni"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":92,
@@ -1394,9 +1486,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"400",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":93,
@@ -1409,9 +1502,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"400",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":94,
@@ -1424,9 +1518,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"600",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":95,
@@ -1439,9 +1534,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":96,
@@ -1454,9 +1550,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":97,
@@ -1469,9 +1566,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":98,
@@ -1479,14 +1577,15 @@
             "title":"Морозиво снікерс",
             "description":"Морозиво снікерс",
             "basePrice": 180.00 ,
-            "discountPercent":0,
+            "discountPercent":10,
              "rating": {
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new","actions"]
         },
         {
             "id":99,
@@ -1499,9 +1598,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":100,
@@ -1514,9 +1614,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":101,
@@ -1529,9 +1630,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":102,
@@ -1544,9 +1646,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":103,
@@ -1559,9 +1662,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":104,
@@ -1574,9 +1678,11 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
              "quantity": 14
+             ,
+             "tags":["new"]
         },
         {
             "id":105,
@@ -1589,9 +1695,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":106,
@@ -1604,9 +1711,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":107,
@@ -1619,9 +1727,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":108,
@@ -1634,9 +1743,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":109,
@@ -1649,9 +1759,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":110,
@@ -1664,9 +1775,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":111,
@@ -1679,9 +1791,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":112,
@@ -1694,9 +1807,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":113,
@@ -1709,9 +1823,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":114,
@@ -1724,9 +1839,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":115,
@@ -1739,9 +1855,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":116,
@@ -1754,9 +1871,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":117,
@@ -1769,9 +1887,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":118,
@@ -1784,9 +1903,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         },
         {
             "id":119,
@@ -1799,9 +1919,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "vareniky"],
+             "categories": [ "vareniky"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags": ["actions" , "new"]
         },
         {
             "id":120,
@@ -1814,9 +1935,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"100",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new","actions"]
         },
         {
             "id":121,
@@ -1829,9 +1951,10 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": ["new", "sweet"],
+             "categories": [ "sweet"],
              "weight":"1000",
-             "quantity": 14
+             "quantity": 14,
+             "tags":["new"]
         }
         
     ]

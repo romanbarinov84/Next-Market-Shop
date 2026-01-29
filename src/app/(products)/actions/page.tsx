@@ -1,4 +1,4 @@
-import fetchProductsByCategory from '../fetchProducts';
+import fetchProductsByTag from '../fetchProducts';
 import GenericProductListPage from '../GenerictListPage';
 import type { Metadata } from 'next';
 
@@ -16,7 +16,7 @@ const AllActions = async ({
         <GenericProductListPage
             searchParams={searchParams}
             props={{
-                fetchData: ({pagination:{startIdx , perPage}}) => fetchProductsByCategory('actions' , {pagination:{startIdx , perPage}}),
+                fetchData: ({pagination:{startIdx , perPage}}) => fetchProductsByTag('actions' , {pagination:{startIdx , perPage}}),
                 pageTitle: 'Усі акції',
                 basePath: '/actions',
                 errorMessage: 'Помилка невдалося завантажити акції',
