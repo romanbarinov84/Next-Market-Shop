@@ -2,15 +2,24 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import GlobalLoader from '../loading/GlobalLoader';
 import { SearchProduct } from '@/src/types/searchProduct';
+import { PATH_TRANSLATIONS } from '@/UTILS/pathTranslations';
+import HighlightText from './HighlightText';
+
+
+
+
+
+
 
 const InputBlock = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [groupedProducts, setGroupedProducts] = useState<{category:string; products:SearchProduct[]}[]>([]);
+    const searchRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const fetchSearchData = async () => {
@@ -41,14 +50,27 @@ const InputBlock = () => {
         setIsOpen(false);
         setQuery("")
     }
+
+    useEffect(() => {
+        const handleClickOutSide = (e:MouseEvent) => {
+            if(searchRef.current && !searchRef.current.contains(e.target as Node)) {
+                setIsOpen(false)
+            }
+        };
+        document.addEventListener("mousedown" , handleClickOutSide);
+
+        return () => {
+            document.removeEventListener("mousedown" , handleClickOutSide);
+        }
+    },[])
     return (
-        <div className=" relative w-80">
+        <div className=" relative w-80" ref={searchRef}>
             <div className="relative  rounded-sm border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-2.5">
                 <input
                     type="text"
                     placeholder="Знайти товар"
                     className="w-full h-10 py-2 px-4  outline-none  text-[#8f8f8f] text-base"
-                    onClick={handleInputFocus}
+                    onFocus={handleInputFocus}
                     onChange={(e) => setQuery(e.target.value)}
                 />
 
@@ -70,17 +92,18 @@ const InputBlock = () => {
                                 {groupedProducts.map((group) => (
                                     <div key={group.category} className="flex flex-col gap-2.5 mt-0.5">
                                     <Link
-                                        href="#"
+                                        href={`/category/${encodeURIComponent(group.category)}`}
                                         className="flex items-center justify-between p-2 gap-x-2 hover:bg-gray-100 rounded wrap-break-word cursor-pointer"
                                         onClick={handleInputFocus}
                                     >
                                         <span className="text-gray-700 font-medium wrap-break-word cursor-pointer">
-                                            Категорія
+                                            <HighlightText text={PATH_TRANSLATIONS[group.category] || group.category} highLight={query}/>
+                                            
                                         </span>
                                         <div className="relative w-6 h-6">
                                             <Image
                                                 src="/icon-burger.png"
-                                                alt="категорія"
+                                                alt={PATH_TRANSLATIONS[group.category] || group.category}
                                                 fill
                                                 style={{ objectFit: 'contain' }}
                                             />
@@ -88,15 +111,18 @@ const InputBlock = () => {
                                     </Link>
 
                                     <ul className="flex flex-col ">
-                                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                        {group.products.map((product) => (
+                                            <li key={product.id} className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                                             <Link
-                                                href="#"
+                                                href={`/product/${product.id}`}
                                                 className="flex items-start gap-x-4 wrap-break-word cursor-pointer"
                                                 onClick={handleInputFocus}
                                             >
-                                                Товар 1
+                                                 <HighlightText text={product.title} highLight={query}/>
                                             </Link>
                                         </li>
+                                        ))}
+                                        
                                     </ul>
                                     <div>Товари по запиту...</div>
                                 </div> 

@@ -4,4 +4,11 @@
     purchases:"Покупки",
     articles:"Пости",
     catalog:"Каталог",
+    meat:"Мясні страви",
+    "golubzy":"Голубці",
+    "pelmeni":"Пельмені",
+    "sweet":"Десерти",
+    "vareniky":"Варенники",
+    "vegan":"Страви без мяса",
+    "pizza":"Піца"
 }
