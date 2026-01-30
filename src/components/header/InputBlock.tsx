@@ -4,12 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import GlobalLoader from '../loading/GlobalLoader';
+import { SearchProduct } from '@/src/types/searchProduct';
 
 const InputBlock = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [groupedProducts, setGroupedProducts] = useState([]);
+    const [groupedProducts, setGroupedProducts] = useState<{category:string; products:SearchProduct[]}[]>([]);
 
     useEffect(() => {
         const fetchSearchData = async () => {
@@ -64,8 +65,10 @@ const InputBlock = () => {
                         {isLoading ? (
                             <GlobalLoader />
                         ) : groupedProducts.length > 0 ? (
+                            
                             <div className="p-2 flex flex-col gap-2.5">
-                                <div className="flex flex-col gap-2.5 mt-0.5">
+                                {groupedProducts.map((group) => (
+                                    <div key={group.category} className="flex flex-col gap-2.5 mt-0.5">
                                     <Link
                                         href="#"
                                         className="flex items-center justify-between p-2 gap-x-2 hover:bg-gray-100 rounded wrap-break-word cursor-pointer"
@@ -96,7 +99,9 @@ const InputBlock = () => {
                                         </li>
                                     </ul>
                                     <div>Товари по запиту...</div>
-                                </div>
+                                </div> 
+                                ))}
+                               
                             </div>
                         ) : query.length > 1 ? (<div className='text-[#8f8f8f] py-2 px-4 wrap-break-word'>Нічого не знайденно</div>) : (<div className='text-[#f6345] py-2 px-4 wrap-break-word'>Введіть більше 2 символів</div>)}
                     </div>
