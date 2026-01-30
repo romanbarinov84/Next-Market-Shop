@@ -47,7 +47,7 @@ const InputBlock = () => {
                     type="text"
                     placeholder="Знайти товар"
                     className="w-full h-10 py-2 px-4  outline-none  text-[#8f8f8f] text-base"
-                    onClick={resetSearch}
+                    onClick={handleInputFocus}
                     onChange={(e) => setQuery(e.target.value)}
                 />
 
