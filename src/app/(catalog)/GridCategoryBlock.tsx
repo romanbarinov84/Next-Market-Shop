@@ -15,6 +15,8 @@ const GridCategoryBlock = ({id , title , img}:GridCategoryBlockProps) => {
                         src={img}
                         alt={title}
                         fill
+                        priority
+                        sizes="(max-width: 768px) 100vw, 33vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-103"
                     />
                     <div

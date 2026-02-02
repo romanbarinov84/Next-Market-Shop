@@ -31,8 +31,7 @@ const ProductCard = ({
         ? basePrice
         : calculatePriceByCard(finalPrice, cardDiscountPercent);
 
-
-        const ratingValue = rating?.rate || 0;
+    const ratingValue = rating?.rate || 0;
 
     return (
         <div
@@ -52,13 +51,13 @@ const ProductCard = ({
                     sizes="(max-width: 768) 160px, (max-width: 1200px) 224px , 272px"
                 />
                 <button className="w-8 h-8 justify-center items-center bg-[#f3f2f1] hover:bg-[#fcd5ba] p-1 absolute top-5 right-2 opacity-50 rounded cursor-pointer duration-300">
-                    <div className="w-6 h-6 shrink-0">
+                    <div className=" relative w-6 h-6 shrink-0">
                         <Image
                             src="/ProductCard/Shape (Stroke).svg"
-                            alt="Обранне"
-                            width={24}
-                            height={24}
-                            className="w-6 h-auto"
+                            alt="Обране"
+                            fill
+                            sizes="24px"
+                            className="object-contain"
                         />
                     </div>
                 </button>
