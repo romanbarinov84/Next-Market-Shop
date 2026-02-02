@@ -1193,7 +1193,7 @@
             "title":"Котлета соковита",
             "description":"Котлета соковита",
             "basePrice": 180.00 ,
-            "discountPercent":0,
+            "discountPercent":10,
              "rating": {
                 "rate": 4.5,
                 "count": 4
@@ -1577,7 +1577,7 @@
             "title":"Морозиво снікерс",
             "description":"Морозиво снікерс",
             "basePrice": 180.00 ,
-            "discountPercent":10,
+            "discountPercent":25,
              "rating": {
                 "rate": 4.5,
                 "count": 4
@@ -1585,7 +1585,7 @@
              "categories": [ "sweet"],
              "weight":"100",
              "quantity": 14,
-             "tags":["new","actions"]
+             "tags":["actions"]
         },
         {
             "id":99,
@@ -1914,7 +1914,7 @@
             "title":"Вареники з сіром та шпинатом",
             "description":"Вареники з сіром та шпинатом",
             "basePrice": 180.00 ,
-            "discountPercent":0,
+            "discountPercent":10,
              "rating": {
                 "rate": 4.5,
                 "count": 4

@@ -7,6 +7,7 @@ import GlobalLoader from '../loading/GlobalLoader';
 import { SearchProduct } from '@/src/types/searchProduct';
 import { PATH_TRANSLATIONS } from '@/UTILS/pathTranslations';
 import HighlightText from './HighlightText';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -20,6 +21,7 @@ const InputBlock = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [groupedProducts, setGroupedProducts] = useState<{category:string; products:SearchProduct[]}[]>([]);
     const searchRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchSearchData = async () => {
@@ -63,18 +65,34 @@ const InputBlock = () => {
             document.removeEventListener("mousedown" , handleClickOutSide);
         }
     },[])
+
+    const handleSearch = () => {
+        
+        if(query.trim()){
+            router.push(`/search?q=${encodeURIComponent(query)}`);
+            setIsOpen(false)
+        }
+    }
     return (
         <div className=" relative w-80" ref={searchRef}>
             <div className="relative  rounded-sm border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-2.5">
-                <input
+
+                <form action="" onSubmit={(e) =>  {
+                    e.preventDefault();
+                    handleSearch();
+                }}>
+
+                     <input
                     type="text"
                     placeholder="Знайти товар"
                     className="w-full h-10 py-2 px-4  outline-none  text-[#8f8f8f] text-base"
                     onFocus={handleInputFocus}
                     onChange={(e) => setQuery(e.target.value)}
+                    
                 />
-
-                <Image
+                   
+                   <button type='submit' className='absolute top-2 right-2 w-6 h-6 cursor-pointer'>
+                     <Image
                     className="absolute top-2 right-2 "
                     src="/лого хедера/searchBtn-headerInput.svg"
                     alt="Searching-Пошук"
@@ -82,6 +100,10 @@ const InputBlock = () => {
                     height={24}
                     onClick={resetSearch}
                 />
+                   </button>
+               
+                </form>
+               
                 {isOpen && (
                     <div className="absolute top-full left-0 w-full mt-1 max-h-63 overflow-y-auto bg-white -border-4 border-gray-300 border-t-0 rounded-b-sm  shadow-lg z-10">
                         {isLoading ? (
