@@ -70,7 +70,8 @@ const InputBlock = () => {
         
         if(query.trim()){
             router.push(`/search?q=${encodeURIComponent(query)}`);
-            setIsOpen(false)
+            
+            resetSearch();
         }
     }
     return (
@@ -84,6 +85,7 @@ const InputBlock = () => {
 
                      <input
                     type="text"
+                    value={query}
                     placeholder="Знайти товар"
                     className="w-full h-10 py-2 px-4  outline-none  text-[#8f8f8f] text-base"
                     onFocus={handleInputFocus}
@@ -91,7 +93,7 @@ const InputBlock = () => {
                     
                 />
                    
-                   <button type='submit' className='absolute top-2 right-2 w-6 h-6 cursor-pointer'>
+                   <button type="button" className='absolute top-2 right-2 w-6 h-6 cursor-pointer'>
                      <Image
                     className="absolute top-2 right-2 "
                     src="/лого хедера/searchBtn-headerInput.svg"
