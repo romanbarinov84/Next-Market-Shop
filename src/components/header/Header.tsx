@@ -34,15 +34,24 @@ function Header() {
 
     return (
         <header className="w-full bg-white md:shadow-(--shadow-default) items-center flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap-10 md:p-2 justify-center relative z-90">
-            <div className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-md md:shadow-none">
-                <LogoBlock />
+            <div
+                className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-md md:shadow-none"
+                onClick={() => setIsCatalogOpen(false)}
+            >
+                <div onMouseEnter={() => setIsCatalogOpen(false)}>
+                    <LogoBlock />
+                </div>
+
                 <div className="flex items-center" onMouseEnter={openMenu}>
                     <SearchBlock />
                 </div>
             </div>
 
             {isCatalogOpen && (
-                <div className="hidden md:block absolute top-full left-0 w-full bg-white shadow-(--shadow-catalog-menu) z-50">
+                <div className="hidden  md:block absolute top-full left-0 w-full bg-white shadow-(--shadow-catalog-menu) z-50">
+                    <button className="absolute top-3 right-4 text-red-400 hover:text-blue-200" onClick={() => setIsCatalogOpen(false)}>
+                        X
+                    </button>
                     <div className="mx-auto px-4 py-3">
                         {isLoading && <GlobalLoader />}
                         <div className="grid grid-cols-2 xl:grid-cols-4 gap-8">
@@ -51,6 +60,7 @@ function Header() {
                                     key={category.id}
                                     href={`/category/${category.id}`}
                                     className="block px-4 py-2 text-[#414141] hover:text-[#ff6633] font-bold duration-300"
+                                    onClick={() => setIsCatalogOpen(false)}
                                 >
                                     {category.title}
                                 </Link>
@@ -60,7 +70,10 @@ function Header() {
                 </div>
             )}
 
-            <nav aria-label="Загальне меню">
+            <nav
+                aria-label="Загальне меню"
+                onMouseEnter={() => setIsCatalogOpen(false)}
+            >
                 <HeaderUserBlock />
             </nav>
         </header>
