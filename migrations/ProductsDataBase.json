@@ -1930,7 +1930,7 @@
             "title":"Dubai chokolate",
             "description":"Dubai chokolate",
             "basePrice": 180.00 ,
-            "discountPercent":0,
+            "discountPercent":10,
              "rating": {
                 "rate": 4.5,
                 "count": 4
@@ -1938,7 +1938,7 @@
              "categories": [ "sweet"],
              "weight":"100",
              "quantity": 14,
-             "tags":["new","actions"]
+             "tags":["actions"]
         },
         {
             "id":121,
