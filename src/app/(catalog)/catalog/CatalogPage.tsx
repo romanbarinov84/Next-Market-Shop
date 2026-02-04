@@ -5,14 +5,12 @@ import { useEffect, useState } from 'react';
 import GridCategoryBlock from '../GridCategoryBlock';
 import CatalogLoading from '@/src/components/loading/CatalogLoader';
 
-
-
 const CatalogPage = () => {
     const [categories, setCategories] = useState<CatalogProps[]>([]);
     const [isEditing, setIsEditing] = useState(false);
     const [draggableCategory, setDraggableCategory] =
         useState<CatalogProps | null>(null);
-    const [err, setErr] = useState<string | null>(null);
+    const [err, setErr] = useState<{error:Error , userMessage:string } | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [hoveredCategoryId, setHoveredCategoryId] = useState<string | null>(
         null,
@@ -30,8 +28,11 @@ const CatalogPage = () => {
 
             setCategories(data.sort((a, b) => a.order - b.order));
         } catch (error) {
-            console.error(`Неудалось получить категории:`, error);
-            setErr('Неудалось загрузить категории');
+            
+            setErr({
+                error:error instanceof Error ? error  : new Error("Неизвестная ошибка"),
+                userMessage:"Неудалось загрузить каталог категорий",
+            });
         } finally {
             setIsLoading(false);
         }
@@ -42,11 +43,11 @@ const CatalogPage = () => {
     }, []);
 
     if (isLoading) {
-        return <CatalogLoading/>;
+        return <CatalogLoading />;
     }
 
     if (err) {
-       throw err
+        throw err;
     }
 
     if (!categories.length) {
@@ -59,47 +60,45 @@ const CatalogPage = () => {
 
     const updateOrderInDB = async () => {
         try {
-             const response = await fetch("api/catalog", {
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-
+            const response = await fetch('api/catalog', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(
-                    categories.map((category , index) => ({
-                        _id:category._id,
-                        order:index + 1,
-                        title:category.title,
-                        img:category.img,
-                        colSpan:category.colSpan,
-                        tabletColSpan:category.tabletColSpan,
-                        mobileColSpan:category.mobileColSpan,
-                    }))
+                    categories.map((category, index) => ({
+                        _id: category._id,
+                        order: index + 1,
+                        title: category.title,
+                        img: category.img,
+                        colSpan: category.colSpan,
+                        tabletColSpan: category.tabletColSpan,
+                        mobileColSpan: category.mobileColSpan,
+                    })),
                 ),
-             });
+            });
 
-           if(!response.ok){
-            throw new Error("Ошибка при обновлении порядка");
-           }
+            if (!response.ok) {
+                throw new Error('Ошибка при обновлении порядка');
+            }
 
-           const result = await response.json();
+            const result = await response.json();
 
-           if(result.success){
-            console.log("Порядок успешно обновлен в базе данных");
-           }
-
+            if (result.success) {
+                console.log('Порядок успешно обновлен в базе данных');
+            }
         } catch (error) {
-            console.error(error)
-            setErr("Ошибка при сохранении порядка");
+            setErr({
+                error:error instanceof Error ? error  : new Error("Неизвестная ошибка"),
+                userMessage:"Неудалось изменить порядок категорий",
+            });
         }
-    }
+    };
 
     const handleToggleEditing = async () => {
-          
-        if(isEditing){
+        if (isEditing) {
             await updateOrderInDB();
         }
-
 
         setIsEditing(!isEditing);
     };
@@ -122,22 +121,27 @@ const CatalogPage = () => {
     };
 
     const handleDragLeave = () => {
-        setHoveredCategoryId(null)
-    }
+        setHoveredCategoryId(null);
+    };
 
-    const handleDrop = (e: React.DragEvent, targetCategoryId:string) => {
-         e.preventDefault();
+    const handleDrop = (e: React.DragEvent, targetCategoryId: string) => {
+        e.preventDefault();
 
-         if(!isEditing || !draggableCategory){
-            return
-         }
+        if (!isEditing || !draggableCategory) {
+            return;
+        }
 
-         setCategories((prevCategories) => {
-            const draggedIndex = prevCategories.findIndex((c) => c._id === draggableCategory._id);
+        setCategories((prevCategories) => {
+            const draggedIndex = prevCategories.findIndex(
+                (c) => c._id === draggableCategory._id,
+            );
 
-            const targetIndex = prevCategories.findIndex((c) => c._id === targetCategoryId);
+            const targetIndex = prevCategories.findIndex(
+                (c) => c._id === targetCategoryId,
+            );
 
-            if(draggedIndex === -1 || targetIndex === -1) return prevCategories;
+            if (draggedIndex === -1 || targetIndex === -1)
+                return prevCategories;
 
             const newCategories = [...prevCategories];
 
@@ -145,25 +149,25 @@ const CatalogPage = () => {
             const targetItem = newCategories[targetIndex];
 
             const draggedSizes = {
-                mobileCoSpan:draggedItem.mobileColSpan,
-                tabletColSpan:draggedItem.tabletColSpan,
-                colSpan:draggedItem.colSpan,
-            }
+                mobileCoSpan: draggedItem.mobileColSpan,
+                tabletColSpan: draggedItem.tabletColSpan,
+                colSpan: draggedItem.colSpan,
+            };
             const targetSizes = {
-                mobileCoSpan:targetItem.mobileColSpan,
-                tabletColSpan:targetItem.tabletColSpan,
-                colSpan:targetItem.colSpan,
+                mobileCoSpan: targetItem.mobileColSpan,
+                tabletColSpan: targetItem.tabletColSpan,
+                colSpan: targetItem.colSpan,
             };
 
-            newCategories[draggedIndex] = {...targetItem, ...draggedSizes};
-            newCategories[targetIndex] = {...draggedItem, ...targetSizes};
+            newCategories[draggedIndex] = { ...targetItem, ...draggedSizes };
+            newCategories[targetIndex] = { ...draggedItem, ...targetSizes };
 
             return newCategories;
-         } );
+        });
 
-         setDraggableCategory(null);
-         setHoveredCategoryId(null);
-    }
+        setDraggableCategory(null);
+        setHoveredCategoryId(null);
+    };
 
     return (
         <section className="w-full px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))]  flex flex-col justify-center  py-10">
@@ -207,11 +211,14 @@ const CatalogPage = () => {
                         <div
                             key={category._id}
                             className={`${category.mobileColSpan} ${category.tabletColSpan} ${category.colSpan} bg-gray-200 rounded overflow-hidden min-h-50 h-full   ${isEditing ? '  border-dashed border-gray-300' : ''}  ${
-                                hoveredCategoryId === category._id ? "bg-green-200" : ""}`}
+                                hoveredCategoryId === category._id
+                                    ? 'bg-green-200'
+                                    : ''
+                            }`}
                             onDragOver={(e) => handleDragOver(e, category._id)}
                             onDragLeave={handleDragLeave}
-                            onDrop={(e) => handleDrop(e , category._id)}
-                        > 
+                            onDrop={(e) => handleDrop(e, category._id)}
+                        >
                             <div
                                 className={`h-full w-full  ${
                                     draggableCategory?._id === category._id

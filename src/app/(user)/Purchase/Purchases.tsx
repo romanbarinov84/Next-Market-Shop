@@ -1,6 +1,7 @@
 import fetchPurchases from '../fetchPurchases';
 import ProductsSection from '../../(products)/ProductsSection';
 import { CONFIG } from '@/config/config';
+import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 
 const Purchases = async () => {
   let items = [];
@@ -11,7 +12,7 @@ const Purchases = async () => {
     });
     items = result.items;
   } catch (error) {
-    console.error('Ошибка загрузки покупок', error);
+    return <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}  userMessage='Неудалось загрузить статьи' />
   }
 
   return (

@@ -1,11 +1,13 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 const TopMenu = () => {
   return (
     <div>
         <ul className='flex flex-row gap-x-6 items-end'>
-            <li className='flex flex-col md:hidden items-center gap-2  w-11 cursor-pointer'>
+            <Link href="/catalog">
+              <li className='flex flex-col md:hidden items-center gap-2  w-11 cursor-pointer'>
                 <Image 
                 src="/лого хедера/HeaderBtnCatalog.svg" 
                 alt='Каталог'
@@ -14,6 +16,8 @@ const TopMenu = () => {
                 className='object-contain w-6 h-6'/>
                 <span>Каталог</span>
             </li>
+            </Link>
+          
             <li className='flex flex-col items-center gap-2  w-11 cursor-pointer'>
                 <Image 
                 src="/лого хедера/HeaderUserBockHeart.svg" 

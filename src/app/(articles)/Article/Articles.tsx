@@ -1,4 +1,5 @@
 
+import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import ArticlesSection from '../ArticlesSection';
 import fetchArticles from '../fetchArticles';
 import { CONFIG } from '@/config/config';
@@ -14,7 +15,7 @@ const Articles = async () => {
     });
     items = result.items;
   } catch (error) {
-    console.error('Ошибка загрузки покупок', error);
+    return <ErrorComponent error={error instanceof Error ? error : new Error(String(error))}  userMessage='Неудалось загрузить статьи' />
   }
 
     return (

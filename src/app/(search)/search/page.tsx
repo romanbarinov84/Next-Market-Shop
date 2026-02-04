@@ -9,7 +9,7 @@ import ProductsSection from '../../(products)/ProductsSection';
 const SearchResult = () => {
     const searchParams = useSearchParams();
     const query = searchParams.get('q') || '';
-
+    const [err, setErr] = useState<{error:Error , userMessage:string } | null>(null);
     const [products, setProducts] = useState<ProductCardProps[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +26,10 @@ const SearchResult = () => {
                 const data: ProductCardProps[] = await response.json();
                 setProducts(data);
             } catch (error) {
-                console.error('Не удалось получить результаты поиска', error);
+                 setErr({
+                error:error instanceof Error ? error  : new Error("Неизвестная ошибка"),
+                userMessage:"Неудалось загрузить результаты поиска",
+            });
             } finally {
                 setIsLoading(false);
             }

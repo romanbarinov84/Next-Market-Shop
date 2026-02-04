@@ -28,7 +28,7 @@ const fetchProductsByTag = async (
 
         return {items:data.products || data , totalCount:data.totalCount || data.length};
     } catch (err) {
-        console.error(`Ошибка в компоненте ${tag}`, err);
+        
         throw err;
     }
 };
