@@ -1,15 +1,23 @@
 'use client';
 
+
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import GlobalLoader from '../loading/GlobalLoader';
-import { SearchProduct } from '@/src/types/searchProduct';
+import GlobalLoader from '../../loading/GlobalLoader';
 import { PATH_TRANSLATIONS } from '@/UTILS/pathTranslations';
-import HighlightText from './HighlightText';
-import { useRouter } from 'next/navigation';
+import HighlightText from '../HighlightText';
+import { SearchProduct } from '@/src/types/searchProduct';
 
-const InputBlock = ({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean) => void}) => {
+import { useRouter } from 'next/navigation';
+import SearchInput from './SearchInput';
+import SearchResults from './SearchResults';
+
+const InputBlock = ({
+    onFocusChangeAction,
+}: {
+    onFocusChangeAction: (focused: boolean) => void;
+}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +58,6 @@ const InputBlock = ({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean)
     const resetSearch = () => {
         setIsOpen(false);
         setQuery('');
-        
     };
 
     useEffect(() => {
@@ -78,42 +85,18 @@ const InputBlock = ({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean)
     };
 
     const handleInputBlur = () => {
-        onFocusChangeAction(false)
-    }
+        onFocusChangeAction(false);
+    };
     return (
         <div className=" relative w-80" ref={searchRef}>
             <div className="relative  rounded-sm border-2 border-(--color-primary) shadow-(--shadow-button-default) leading-2.5">
-                <form
-                    action=""
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        handleSearch();
-                    }}
-                >
-                    <input
-                        type="text"
-                        value={query}
-                        placeholder="Знайти товар"
-                        className="w-full h-10 py-2 px-4  outline-none  text-[#8f8f8f] text-base"
-                        onFocus={handleInputFocus}
-                        onChange={(e) => setQuery(e.target.value)}
-                        onBlur={handleInputBlur}
-                    />
-
-                    <button
-                        type="button"
-                        className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
-                    >
-                        <Image
-                            className="absolute top-2 right-2 "
-                            src="/лого хедера/searchBtn-headerInput.svg"
-                            alt="Searching-Пошук"
-                            width={24}
-                            height={24}
-                            onClick={resetSearch}
-                        />
-                    </button>
-                </form>
+                <SearchInput
+                    handleSearch={handleSearch}
+                    query={query}
+                    setQuery={setQuery}
+                    handleInputFocus={handleInputFocus}
+                    handleInputBlur={handleInputBlur}
+                />
 
                 {isOpen && (
                     <div className="absolute top-full left-0 w-full mt-1 max-h-63 overflow-y-auto bg-white -border-4 border-gray-300 border-t-0 rounded-b-sm  shadow-lg z-10">
@@ -207,6 +190,7 @@ const InputBlock = ({onFocusChangeAction}:{onFocusChangeAction:(focused:boolean)
             </div>
         </div>
     );
+
 };
 
 export default InputBlock;
