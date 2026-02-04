@@ -6,7 +6,7 @@ import { ErrorProps } from "@/src/types/errorProps"
 const ErrorComponent = ({ error, userMessage }: ErrorProps) => {
     
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-red-50">
+    <div className="flex flex-col items-center justify-center  p-6 bg-red-50">
         <div className="bg-white border border-red-300 rounded-xl shadow-md p-6 max-w-md w-full text-center">
             <p className="text-red-700 text-lg sm:text-xl mb-6">
                 {userMessage ||` Произошла ошибка ${error}. Пожалуйста, попробуйте позже.`}

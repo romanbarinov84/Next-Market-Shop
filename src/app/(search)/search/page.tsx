@@ -3,8 +3,15 @@
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import { ProductCardProps } from '@/src/types/product';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import ProductsSection from '../../(products)/ProductsSection';
+
+const SearchPage = () => {
+
+    return <Suspense fallback={<GlobalLoader/>}>
+    
+    </Suspense>
+}
 
 const SearchResult = () => {
     const searchParams = useSearchParams();
@@ -66,4 +73,4 @@ const SearchResult = () => {
     );
 };
 
-export default SearchResult;
+export default SearchPage;

@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import fetchProductsByTag from '../fetchProducts';
 import GenericProductListPage from '../GenerictListPage';
+import GlobalLoader from '@/src/components/loading/GlobalLoader';
 
 export const metaData = {
     title: 'Новинки магазина "Балувана Галя"',
@@ -12,7 +14,9 @@ const AllNew = async ({
     searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
 }) => {
     return (
-        <GenericProductListPage
+        <Suspense fallback={<GlobalLoader/>}>
+
+             <GenericProductListPage
             searchParams={searchParams}
             props={{
                 fetchData:({pagination:{startIdx , perPage}}) => fetchProductsByTag("new" , {
@@ -23,6 +27,8 @@ const AllNew = async ({
                 errorMessage: 'Помилка невдалося завантажити новинки',
             }}
         />
+        </Suspense>
+       
     );
 };
 

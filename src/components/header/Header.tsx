@@ -7,11 +7,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Category } from '@/src/types/categories';
 import GlobalLoader from '../loading/GlobalLoader';
+import ErrorComponent from '../errorComponent/ErrorComponent';
 
 function Header() {
     const [isCatalogOpen, setIsCatalogOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [err, setErr] = useState<{error:Error , userMessage:string } | null>(null);
+    const [isSearchFocused , setIsSearchFocused] = useState(false);
 
     const fetchCategories = async () => {
         if (categories.length > 0) return;
@@ -21,16 +24,30 @@ function Header() {
             const data = await response.json();
             setCategories(data);
         } catch (error) {
-            console.error('Ошибка загрузки категории', error);
-        } finally {
+            
+            setErr({
+                error:error instanceof Error ? error  : new Error("Неизвестная ошибка"),
+                userMessage:"Неудалось загрузить меню категорий",
+            })
+         } finally {
             setIsLoading(false);
         }
     };
 
     const openMenu = () => {
-        setIsCatalogOpen(true);
+        if(!isSearchFocused){
+            setIsCatalogOpen(true);
         fetchCategories();
+        }
+        
     };
+
+    const handleSearchFocusAction = (focused:boolean) => {
+       setIsSearchFocused(focused);
+       if(focused){
+        setIsCatalogOpen(false)
+       }
+    }
 
     return (
         <header className="w-full bg-white md:shadow-(--shadow-default) items-center flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap-10 md:p-2 justify-center relative z-90">
@@ -43,7 +60,7 @@ function Header() {
                 </div>
 
                 <div className="flex items-center w-full" onMouseEnter={openMenu}>
-                    <SearchBlock />
+                    <SearchBlock onFocusChangeAction={handleSearchFocusAction}/>
                 </div>
             </div>
 
@@ -53,6 +70,7 @@ function Header() {
                         X
                     </button>
                     <div className="mx-auto px-4 py-3">
+                        {err && <ErrorComponent error={err.error} userMessage={err.userMessage}/>}
                         {isLoading && <GlobalLoader />}
                         <div className="grid grid-cols-2 xl:grid-cols-4 gap-8">
                             {categories.map((category) => (

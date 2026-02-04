@@ -1,6 +1,8 @@
 
 
+import { Suspense } from 'react';
 import CatalogPage from './CatalogPage'
+import GlobalLoader from '@/src/components/loading/GlobalLoader';
 
 
 export const metadata = {
@@ -11,9 +13,11 @@ export const metadata = {
 const page = () => {
 
   return (
-    <div>
-        <CatalogPage/>
-    </div>
+    <Suspense fallback={<GlobalLoader/>}>
+      <CatalogPage/>
+    </Suspense>
+        
+    
   )
 }
 

@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import GenericProductListPage from '../../(products)/GenerictListPage';
 import fetchArticles from '../fetchArticles';
+import GlobalLoader from '@/src/components/loading/GlobalLoader';
 
 export const metaData = {
     title: 'Пости магазина "Балувана Галя"',
@@ -12,7 +14,9 @@ const AllArticles = async ({
     searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
 }) => {
     return (
-        <GenericProductListPage
+        <Suspense fallback={<GlobalLoader/>}>
+
+            <GenericProductListPage
             searchParams={searchParams}
             props={{
                 fetchData:({pagination:{startIdx , perPage}}) => fetchArticles({
@@ -24,6 +28,8 @@ const AllArticles = async ({
                 contentType:"articles"
             }}
         />
+        </Suspense>
+        
     );
 };
 export default AllArticles;
