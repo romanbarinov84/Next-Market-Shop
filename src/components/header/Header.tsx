@@ -42,7 +42,7 @@ function Header() {
                     <LogoBlock />
                 </div>
 
-                <div className="flex items-center" onMouseEnter={openMenu}>
+                <div className="flex items-center w-full" onMouseEnter={openMenu}>
                     <SearchBlock />
                 </div>
             </div>
