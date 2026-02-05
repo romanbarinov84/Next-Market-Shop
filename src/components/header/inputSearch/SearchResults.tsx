@@ -51,25 +51,26 @@ const SearchResults = ({
                                 </div>
                             </Link>
 
-                            <ul className="flex flex-col ">
-                                {group.products.map((product) => (
-                                    <li
-                                        key={product.id}
-                                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                    >
-                                        <Link
-                                            href={`/product/${product.id}`}
-                                            className="flex items-start gap-x-4 wrap-break-word cursor-pointer"
-                                            onClick={handleInputFocus}
-                                        >
-                                            <HighlightText
-                                                text={product.title}
-                                                highLight={query}
-                                            />
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                           <ul className="flex flex-col">
+  {group.products.map((product) => (
+    <li
+      key={`${group.category}-${product.id}`}
+      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+    >
+      <Link
+        href={`/product/${product.id}`}
+        className="flex items-start gap-x-4 wrap-break-word cursor-pointer"
+        onClick={handleInputFocus}
+      >
+        <HighlightText
+          text={product.title}
+          highLight={query}
+        />
+      </Link>
+    </li>
+  ))}
+</ul>
+
                             <div>Товари по запиту...</div>
                         </div>
                     ))}
