@@ -1,6 +1,5 @@
 'use client';
 
-
 import { useEffect, useRef, useState } from 'react';
 import { SearchProduct } from '@/src/types/searchProduct';
 import { useRouter } from 'next/navigation';
@@ -105,13 +104,17 @@ const InputBlock = ({
                                 {error}
                             </div>
                         )}
-                        <SearchResults handleInputFocus={handleInputFocus} query={query} isLoading={isLoading} groupedProducts={groupedProducts}/>
+                        <SearchResults
+                            handleInputFocus={handleInputFocus}
+                            query={query}
+                            isLoading={isLoading}
+                            groupedProducts={groupedProducts}
+                        />
                     </div>
                 )}
             </div>
         </div>
     );
-
 };
 
 export default InputBlock;
