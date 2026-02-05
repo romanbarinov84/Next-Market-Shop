@@ -1,101 +1,17 @@
-'use client';
+import CatalogMenuWrapper from "./CatalogDropMenu/CatalogMenuWrapper";
+import LogoBlock from "./LogoBlock";
+import UserBlock from "./UserBlock";
 
-import HeaderUserBlock from './UserBlock';
-import LogoBlock from './LogoBlock';
-import SearchBlock from './SearchBlock';
-import { useState } from 'react';
-import Link from 'next/link';
-import { Category } from '@/src/types/categories';
-import GlobalLoader from '../loading/GlobalLoader';
-import ErrorComponent from '../errorComponent/ErrorComponent';
-
-function Header() {
-    const [isCatalogOpen, setIsCatalogOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [err, setErr] = useState<{error:Error , userMessage:string } | null>(null);
-    const [isSearchFocused , setIsSearchFocused] = useState(false);
-
-    const fetchCategories = async () => {
-        if (categories.length > 0) return;
-
-        try {
-            const response = await fetch('/api/catalog/');
-            const data = await response.json();
-            setCategories(data);
-        } catch (error) {
-            
-            setErr({
-                error:error instanceof Error ? error  : new Error("Неизвестная ошибка"),
-                userMessage:"Неудалось загрузить меню категорий",
-            })
-         } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const openMenu = () => {
-        if(!isSearchFocused){
-            setIsCatalogOpen(true);
-        fetchCategories();
-        }
-        
-    };
-
-    const handleSearchFocusAction = (focused:boolean) => {
-       setIsSearchFocused(focused);
-       if(focused){
-        setIsCatalogOpen(false)
-       }
-    }
-
-    return (
-        <header className="w-full bg-white md:shadow-(--shadow-default) items-center flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap-10 md:p-2 justify-center relative z-90">
-            <div
-                className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-md md:shadow-none"
-                onClick={() => setIsCatalogOpen(false)}
-            >
-                <div onMouseEnter={() => setIsCatalogOpen(false)}>
-                    <LogoBlock />
-                </div>
-
-                <div className="flex items-center w-full" onMouseEnter={openMenu}>
-                    <SearchBlock onFocusChangeAction={handleSearchFocusAction}/>
-                </div>
-            </div>
-
-            {isCatalogOpen && (
-                <div className="hidden  md:block absolute top-full left-0 w-full bg-white shadow-(--shadow-catalog-menu) z-50">
-                    <button className="absolute top-3 right-4 text-red-400 hover:text-blue-200" onClick={() => setIsCatalogOpen(false)}>
-                        X
-                    </button>
-                    <div className="mx-auto px-4 py-3">
-                        {err && <ErrorComponent error={err.error} userMessage={err.userMessage}/>}
-                        {isLoading && <GlobalLoader />}
-                        <div className="grid grid-cols-2 xl:grid-cols-4 gap-8">
-                            {categories.map((category) => (
-                                <Link
-                                    key={category.id}
-                                    href={`/category/${category.id}`}
-                                    className="block px-4 py-2 text-[#414141] hover:text-[#ff6633] font-bold duration-300"
-                                    onClick={() => setIsCatalogOpen(false)}
-                                >
-                                    {category.title}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <nav
-                aria-label="Загальне меню"
-                onMouseEnter={() => setIsCatalogOpen(false)}
-            >
-                <HeaderUserBlock />
-            </nav>
-        </header>
-    );
-}
+const Header = () => {
+  return (
+    <header className="bg-white w-full md:shadow-(--shadow-default) relative z-50 flex flex-col md:flex-row md:gap-y-5 xl:gap-y-7 md:gap-10 md:p-2 justify-center">
+      <div className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-(--shadow-default) md:shadow-none">
+        <LogoBlock />
+        <CatalogMenuWrapper />
+      </div>
+      <UserBlock />
+    </header>
+  );
+};
 
 export default Header;
