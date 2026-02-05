@@ -3,7 +3,7 @@ import fetchProductsByTag from '../fetchProducts';
 import GenericProductListPage from '../GenerictListPage';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 
-export const metaData = {
+export const metadata = {
     title: 'Новинки магазина "Балувана Галя"',
     description: 'Нові товари магазина "Балувана Галя"',
 };

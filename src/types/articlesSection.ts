@@ -1,4 +1,5 @@
-import { Article } from './ArticlesListPageProps';
+import { ArticlesCardProps } from "./ArticlesListPageProps";
+
 
 export interface ArticlesSectionProps {
     title: string;
@@ -6,6 +7,6 @@ export interface ArticlesSectionProps {
         text: string;
         href: string;
     };
-    articles: Article[];
+    articles: ArticlesCardProps[];
     compact?: boolean;
 }
