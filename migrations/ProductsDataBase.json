@@ -12,7 +12,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -28,7 +28,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -44,7 +44,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -60,7 +60,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -76,7 +76,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -92,7 +92,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -108,7 +108,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "Golubzy"],
+             "categories": [ "Golubzy","frozen"],
              "weight":"1100",
              "quantity": 34,
              "tags":["actions"]
@@ -124,7 +124,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "Golubzy"],
+             "categories": [ "Golubzy","frozen"],
              "weight":"1100",
              "quantity": 34,
              "tags":["new"]
@@ -140,7 +140,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki"],
+             "categories": [ "varenyki","frozen"],
              "weight":"1100",
              "quantity": 34,
              "tags":["new"]
@@ -333,7 +333,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["golubzy"],
+             "categories": ["golubzy","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -349,7 +349,7 @@
                 "rate": 4.5,
                 "count": 8
              },
-             "categories": ["vegan"],
+             "categories": ["vegan","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -365,7 +365,7 @@
                 "rate": 4.4,
                 "count": 14
              },
-             "categories": ["vegan"],
+             "categories": ["vegan","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -381,7 +381,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["vegan"],
+             "categories": ["vegan","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -397,7 +397,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["vegan"],
+             "categories": ["vegan","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -413,7 +413,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["vegan"],
+             "categories": ["vegan","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -429,7 +429,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "golubzy"],
+             "categories": [ "golubzy","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -445,7 +445,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["golubzy"],
+             "categories": ["golubzy","frozen"],
              "weight":"1100",
              "quantity": 34,
              "tags":["actions"]
@@ -461,7 +461,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["golubzy"],
+             "categories": ["golubzy","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -477,7 +477,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "perez"],
+             "categories": [ "perez","frozen"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -1038,7 +1038,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "meat" , "golubzy"],
+             "categories": [ "meat" , "golubzy","frozen"],
              "weight":"1200",
              "quantity": 14,
              "tags":["actions"]
@@ -1054,7 +1054,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "meat" , "golubzy"],
+             "categories": [ "meat" , "golubzy","frozen"],
              "weight":"1200",
              "quantity": 14,
              "tags":["actions"]
@@ -1070,7 +1070,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "meat"],
+             "categories": [ "meat","frozen"],
              "weight":"1000",
              "quantity": 14,
              "tags":["new"]
@@ -1887,7 +1887,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "vareniky"],
+             "categories": [ "vareniky","frozen"],
              "weight":"1000",
              "quantity": 14,
              "tags":["new"]
@@ -1903,7 +1903,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "vareniky"],
+             "categories": [ "vareniky","frozen"],
              "weight":"1000",
              "quantity": 14,
              "tags":["new"]
@@ -1919,7 +1919,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "vareniky"],
+             "categories": [ "vareniky","frozen"],
              "weight":"1000",
              "quantity": 14,
              "tags": ["actions" , "new"]

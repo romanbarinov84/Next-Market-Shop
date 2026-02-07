@@ -7,10 +7,13 @@ const ProductsSection = ({
   viewAllButton,
   products,
   compact = false,
-}: ProductsSectionProps) => {
+  contentType,
+}: ProductsSectionProps & {contentType?:string}) => {
+
+  const gridClasses = contentType === "category" ? "grid-cols-2 md:grid-cols-3" :"grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
 
   const sectionClasses = !compact 
-    ? "flex justify-center mb-20 mt-10 px-4 md:px-8" 
+    ? "flex justify-center mb-20 mt-10 px-4 md:px-8 " 
     : "";
 
    const containerClasses = [
@@ -31,7 +34,7 @@ const ProductsSection = ({
           )}
         </div>
 
-        <ul className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+        <ul className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-8`}>
           { products.map((item, index) => (
             <li
               key={item._id}
