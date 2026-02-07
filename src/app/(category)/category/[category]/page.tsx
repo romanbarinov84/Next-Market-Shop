@@ -1,9 +1,21 @@
-import fetchProductsByTag from '@/src/app/(products)/fetchProducts';
+
 import GenericListPage from '@/src/app/(products)/GenerictListPage';
-import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import { PATH_TRANSLATIONS } from '@/UTILS/pathTranslations';
 import { Suspense } from 'react';
+
+export async function generateMetaData({
+  params,
+}:{
+  params:Promise<{category:string}>
+}) {
+  const { category} = await params;
+   
+  return {
+    title: PATH_TRANSLATIONS[category] || category,
+    description: `Описание категории товаров ${PATH_TRANSLATIONS[category] || category,}`
+  }
+}
 
 const CategoryPage = async ({
     searchParams,

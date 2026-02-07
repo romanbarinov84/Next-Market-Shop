@@ -16,6 +16,6 @@ export interface GenericListPageProps {
     pageTitle: string;
     basePath: string;
     errorMessage: string;
-    contentType?: 'articles';
+    contentType?: string;
     
 }
