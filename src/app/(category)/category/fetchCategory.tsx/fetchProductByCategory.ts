@@ -2,8 +2,11 @@ const fetchProductByCategory = async (
     category: string,
     options: {
         pagination: { startIdx: number; perPage: number };
+        filter?:string | string[];
     },
 ) => {
+
+    const {pagination , filter} = options;
     try {
         const url = new URL(
             `${process.env.NEXT_PUBLIC_BASE_URL!}/api/category`,
@@ -13,12 +16,20 @@ const fetchProductByCategory = async (
 
         url.searchParams.append(
             'startIdx',
-            options.pagination.startIdx.toString(),
+            pagination.startIdx.toString(),
         );
         url.searchParams.append(
             'perPage',
-            options.pagination.perPage.toString(),
+            pagination.perPage.toString(),
         );
+
+        if(filter){
+            if(Array.isArray(filter)){
+                filter.forEach(f => url.searchParams.append("filter" , f))
+            }else{
+                url.searchParams.append("filter" , filter)
+            }
+        }
 
         const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
 
