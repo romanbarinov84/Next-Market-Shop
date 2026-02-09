@@ -4,6 +4,7 @@ import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import { PATH_TRANSLATIONS } from '@/UTILS/pathTranslations';
 import { Suspense } from 'react';
 import fetchProductByCategory from '../fetchCategory.tsx/fetchProductByCategory';
+import FilterButtons from '../FilterButtons';
 
 export async function generateMetaData({
   params,
@@ -28,7 +29,10 @@ const CategoryPage = async ({
     const { category } = await params;
 
     return (
-        <Suspense fallback={<GlobalLoader />}>
+        <div className='px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))] '>
+      <h1 className='text-2xl xl:text-4xl text-left font-bold text-[#414141] mb-6'>{PATH_TRANSLATIONS[category] || category}</h1>
+       <FilterButtons/>
+            <Suspense fallback={<GlobalLoader />}>
             <GenericListPage
                 searchParams={searchParams}
                 props={{
@@ -36,13 +40,15 @@ const CategoryPage = async ({
                         fetchProductByCategory(category, {
                             pagination: { startIdx, perPage },
                         }),
-                    pageTitle: PATH_TRANSLATIONS[category] || category,
+                    pageTitle: "",
                     basePath: `/category/${category}`,
                     contentType:"category",
                     errorMessage: "Не удалось загрузить товары",
                 }}
             />
-        </Suspense>
+        </Suspense> 
+        </div>
+       
     );
 };
 
