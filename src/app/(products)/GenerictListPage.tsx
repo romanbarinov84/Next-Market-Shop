@@ -43,7 +43,7 @@ const GenericListPage = async ({
             />
             ) :(
                  <ArticlesSection
-                title={props.pageTitle}
+                title={props.pageTitle || ""}
                 viewAllButton={{ text: 'На головну', href: '/' }}
                 articles={items as ArticlesCardProps[]}
             />

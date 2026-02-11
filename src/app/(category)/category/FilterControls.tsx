@@ -24,7 +24,7 @@ const FilterControls = ({activeFilter,basePath,searchParams = {}}:FilterControls
 
 }
   return (
-     <div className="flex flex-row gap-x-6 mb-6">
+     <div className=" hidden xl:flex flex-row flex-wrap gap-y-3 gap-x-6 mb-6">
                 <div
                     className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${
                         !activeFilter || activeFilter.length === 0
