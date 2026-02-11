@@ -19,6 +19,10 @@ export async function GET(request: Request) {
         );
 
         const filters = searchParams.getAll('filter');
+        const priceFrom = searchParams.get('priceFrom');
+        const priceTo = searchParams.get('priceTo');
+        const getPriceRangeOnly =
+            searchParams.get('getPriceRangeOnly') === 'true';
 
         const query: Filter<ProductCardProps> = {};
 
@@ -28,6 +32,33 @@ export async function GET(request: Request) {
                 { status: 400 },
             );
         }
+
+        if (getPriceRangeOnly) {
+    const categoryOnlyQuery: Filter<ProductCardProps> = {
+        categories: { $in: [category] },
+    };
+
+    const priceRange = await db
+        .collection<ProductCardProps>('products')
+        .aggregate([
+            { $match: categoryOnlyQuery },
+            {
+                $group: {
+                    _id: null,
+                    min: { $min: '$basePrice' },
+                    max: { $max: '$basePrice' },
+                },
+            },
+        ])
+        .toArray();
+
+    return NextResponse.json({
+        priceRange: {
+            min: priceRange[0]?.min ?? CONFIG.FALLBACK_PRICE_RANGE.min,
+            max: priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE.max,
+        },
+    });
+}
 
         if (category) {
             query.categories = {
@@ -49,23 +80,23 @@ export async function GET(request: Request) {
             }
         }
 
-        const [totalCount , products] = await Promise.all([
-           db.collection<ProductCardProps>('products').countDocuments(query),
-           db.collection<ProductCardProps>('products').find(query).sort({ _id: 1 }).skip(startIdx).limit(perPage).toArray()
+        if(priceFrom || priceTo) {
+            query.basePrice = {};
+            if(priceFrom)query.basePrice.$gte = parseInt(priceFrom);
+            if(priceTo)query.basePrice.$lte = parseInt(priceTo);
 
-        ])
+        }
 
-       
-           
-            
-
-         
-            
-            
-            
-            
-            
-            
+        const [totalCount, products] = await Promise.all([
+            db.collection<ProductCardProps>('products').countDocuments(query),
+            db
+                .collection<ProductCardProps>('products')
+                .find(query)
+                .sort({ _id: 1 })
+                .skip(startIdx)
+                .limit(perPage)
+                .toArray(),
+        ]);
 
         return NextResponse.json({ products, totalCount });
     } catch (error) {

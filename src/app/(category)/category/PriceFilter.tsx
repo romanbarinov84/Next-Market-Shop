@@ -19,20 +19,20 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         CONFIG.FALLBACK_PRICE_RANGE,
     );
     const router = useRouter();
-    const [error , setError] = useState<{
-        error:Error;
-        userMessage:string;
+    const [error, setError] = useState<{
+        error: Error;
+        userMessage: string;
     } | null>(null);
 
-    const[isLoading , setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const fetchPriceData = useCallback(async () => {
         setIsLoading(true);
         setError(null);
         try {
-            const currentCategory = category || searchParams.get('category');
-            if (!category) return;
+            const currentCategory = category ?? searchParams.get('category');
 
+            if (!currentCategory) return;
             const params = new URLSearchParams();
             params.set('category', currentCategory!);
             params.set('getPriceRangeOnly', 'true');
@@ -47,30 +47,31 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
                 data.priceRange || CONFIG.FALLBACK_PRICE_RANGE;
 
             setPriceRange({
-                min:
-                    Math.floor(parseInt(receivedRange.min)) ,
-                max:
-                    Math.floor(parseInt(receivedRange.max)) ,
+                min: Math.floor(parseInt(receivedRange.min)),
+                max: Math.floor(parseInt(receivedRange.max)),
             });
 
             setInputValues({
-                from: urlPriceFrom || (receivedRange.min).toString(),
-                to: urlPriceTo || (receivedRange.max).toString(),
+                from: urlPriceFrom || receivedRange.min.toString(),
+                to: urlPriceTo || receivedRange.max.toString(),
             });
         } catch (error) {
             setError({
-                error:error instanceof Error ? error : new Error("Неизвестная ошибка"),
-                userMessage:"Не удалось загрузить категорию",
-            })
+                error:
+                    error instanceof Error
+                        ? error
+                        : new Error('Неизвестная ошибка'),
+                userMessage: 'Не удалось загрузить категорию',
+            });
             setPriceRange(CONFIG.FALLBACK_PRICE_RANGE);
             setInputValues({
                 from: CONFIG.FALLBACK_PRICE_RANGE.min.toString(),
                 to: CONFIG.FALLBACK_PRICE_RANGE.max.toString(),
             });
-        }finally{
+        } finally {
             setIsLoading(false);
         }
-    }, [category,searchParams,urlPriceFrom,urlPriceTo]);
+    }, [category, searchParams, urlPriceFrom, urlPriceTo]);
 
     useEffect(() => {
         fetchPriceData();
@@ -125,9 +126,15 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         router.push(`${basePath}?${params.toString()}`);
     };
 
-    if(isLoading) return (<GlobalLoader/>)
+    if (isLoading) return <GlobalLoader />;
 
-    if(error) return (<ErrorComponent error={error.error} userMessage={error.userMessage}/>)
+    if (error)
+        return (
+            <ErrorComponent
+                error={error.error}
+                userMessage={error.userMessage}
+            />
+        );
 
     return (
         <form
