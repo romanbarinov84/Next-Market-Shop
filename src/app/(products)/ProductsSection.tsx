@@ -33,8 +33,9 @@ const ProductsSection = ({
             />
           )}
         </div>
+        {products && products.length > 0  ?  (
 
-        <ul className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-8`}>
+           <ul className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-8`}>
           { products.map((item, index) => (
             <li
               key={item._id}
@@ -46,6 +47,8 @@ const ProductsSection = ({
             </li>
           ))}
         </ul>
+        ) : (<div>Товари не знайденні</div>)}
+       
       </div>
     </section>
   );
