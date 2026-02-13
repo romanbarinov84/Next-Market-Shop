@@ -24,6 +24,8 @@ export async function GET(request: Request) {
         const getPriceRangeOnly =
             searchParams.get('getPriceRangeOnly') === 'true';
 
+        const inStock = searchParams.get("inStock") === "true";
+
         const query: Filter<ProductCardProps> = {};
 
         if (!category) {
@@ -65,6 +67,10 @@ export async function GET(request: Request) {
                 $in: [category],
             };
         }
+
+         if (inStock) {
+      query.quantity = { $gt: 0 };
+    }
 
         if (filters.length > 0) {
             query.$and = query.$and || [];
