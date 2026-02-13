@@ -30,6 +30,7 @@ const CategoryPage = async ({
         filter?: string | string[];
         priceFrom?:string;
         priceTo?:string;
+        inStock?:string;
     }>;
     params: Promise<{ category: string }>;
 }) => {
@@ -38,6 +39,7 @@ const CategoryPage = async ({
     const activeFilter = resolvedSearchParams.filter;
     const priceFrom = resolvedSearchParams.priceFrom;
     const priceTo = resolvedSearchParams.priceTo;
+    const inStock = resolvedSearchParams.inStock === "true";
 
 
     return (
@@ -75,6 +77,7 @@ const CategoryPage = async ({
                                     filter: activeFilter,
                                     priceFrom,
                                     priceTo,
+                                    inStock,
                                 }),
 
                             basePath: `/category/${category}`,

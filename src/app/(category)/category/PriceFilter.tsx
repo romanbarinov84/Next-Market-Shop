@@ -1,7 +1,7 @@
 'use client';
 
 import Slider from 'rc-slider';
-import "rc-slider/assets/index.css"
+import 'rc-slider/assets/index.css';
 
 import { CONFIG } from '@/config/config';
 import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
@@ -18,6 +18,9 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         from: urlPriceFrom,
         to: urlPriceTo,
     });
+    const urlInStock = searchParams.get("inStock") === "true";
+    const [inStock, setInStock] = useState(urlInStock);
+
     const [priceRange, setPriceRange] = useState<PriceRange>(
         CONFIG.FALLBACK_PRICE_RANGE,
     );
@@ -93,6 +96,13 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         applyPriceFilter();
     };
 
+     const handleInStockChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInStock(e.target.checked);
+    },
+    []
+  );
+
     const applyPriceFilter = useCallback(() => {
         const params = new URLSearchParams(searchParams.toString());
 
@@ -105,30 +115,39 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
             parseInt(inputValues.to) || priceRange.max,
         );
 
-        if (fromValue > toValue) {
-            [fromValue, toValue] = [toValue, fromValue];
-        }
+        if (fromValue > toValue)  [fromValue, toValue] = [toValue, fromValue];
+           
+        
 
         params.set('priceFrom', fromValue.toString());
         params.set('priceTo', toValue.toString());
+        params.set("inStock", inStock.toString());
 
         router.push(`${basePath}?${params.toString()}`);
-    }, [inputValues, priceRange, searchParams, router, basePath]);
-
+    }, [
+    searchParams,
+    priceRange.min,
+    priceRange.max,
+    inputValues.from,
+    inputValues.to,
+    inStock,
+    router,
+    basePath,
+  ]);
 
     const sliderValues = [
         parseInt(inputValues.from) || priceRange.min,
-        parseInt(inputValues.to) || priceRange.max
-    ]
+        parseInt(inputValues.to) || priceRange.max,
+    ];
 
-    const handleSliderChange = useCallback((values:number | number[]) => {
-        if(Array.isArray(values)){
+    const handleSliderChange = useCallback((values: number | number[]) => {
+        if (Array.isArray(values)) {
             setInputValues({
-                from:values[0].toString(),
-                to:values[1].toString(),
-            })
+                from: values[0].toString(),
+                to: values[1].toString(),
+            });
         }
-    },[])
+    }, []);
 
     const resetPriceFilter = useCallback(() => {
         setInputValues({
@@ -142,7 +161,7 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         params.delete('page');
 
         router.push(`${basePath}?${params.toString()}`);
-    },[basePath, priceRange.max, priceRange.min, router, searchParams]);
+    }, [basePath, priceRange.max, priceRange.min, router, searchParams]);
 
     if (isLoading) return <GlobalLoader />;
 
@@ -193,19 +212,69 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
                     placeholder={`До ${priceRange.max}`}
                 />
             </div>
-            <div className='w-[320px] xl:w-68 px-2 mx-auto mt-7'>
-                <Slider 
-                min={priceRange.min}
-                max={priceRange.max}
-                value={sliderValues}
-                onChange={handleSliderChange}
-
+            <div className="w-[320px] xl:w-68 px-2 mx-auto mt-4">
+                <Slider
+                    range
+                    min={priceRange.min}
+                    max={priceRange.max}
+                    value={sliderValues}
+                    onChange={handleSliderChange}
+                    styles={{
+                        track: {
+                            backgroundColor: '#70c05b',
+                            height: 6,
+                        },
+                        rail: {
+                            backgroundColor: '#e5e5e5',
+                            height: 6,
+                        },
+                        handle: {
+                            width: 20,
+                            height: 20,
+                            border: '1px solid #fffff',
+                            borderColor: '#118845e',
+                            backgroundColor: '#70c05b',
+                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+                            marginTop: '-5',
+                            cursor: 'pointer',
+                            opacity: '1',
+                        },
+                    }}
                 />
-
             </div>
+             <div className="flex items-center gap-2 mt-5">
+        <label className="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            id="inStock"
+            checked={inStock}
+            onChange={handleInStockChange}
+            className="sr-only peer"
+          />
+          <div className="w-11.5 h-6 bg-gray-200 rounded-full peer peer-checked:bg-[#70c05b] transition-colors duration-200">
+            <div
+              className={`
+                absolute top-0.5 left-0
+                w-5 h-5
+                border-[0.5px] border-[rgba(0,0,0,0.04)]
+                rounded-full
+                shadow-[0px_1px_1px_rgba(0,0,0,0.08),0px_2px_6px_rgba(0,0,0,0.15)]
+                bg-white
+                transition-transform duration-300
+                ${
+                  inStock
+                    ? "transform translate-x-6"
+                    : "transform translate-x-0"
+                }
+              `}
+            ></div>
+          </div>
+          <span className="ml-2 text-sm text-[#414141]">В наявності</span>
+        </label>
+      </div>
             <button
                 type="submit"
-                className="px-4 py-2 mt-5 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
+                className="px-4 py-2 mt-5 bg-[#ff6633] text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-colors"
             >
                 Отримати
             </button>
