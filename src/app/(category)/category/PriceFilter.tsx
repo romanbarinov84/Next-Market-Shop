@@ -1,5 +1,8 @@
 'use client';
 
+import Slider from 'rc-slider';
+import "rc-slider/assets/index.css"
+
 import { CONFIG } from '@/config/config';
 import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
@@ -112,7 +115,22 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         router.push(`${basePath}?${params.toString()}`);
     }, [inputValues, priceRange, searchParams, router, basePath]);
 
-    const resetPriceFilter = () => {
+
+    const sliderValues = [
+        parseInt(inputValues.from) || priceRange.min,
+        parseInt(inputValues.to) || priceRange.max
+    ]
+
+    const handleSliderChange = useCallback((values:number | number[]) => {
+        if(Array.isArray(values)){
+            setInputValues({
+                from:values[0].toString(),
+                to:values[1].toString(),
+            })
+        }
+    },[])
+
+    const resetPriceFilter = useCallback(() => {
         setInputValues({
             from: String(priceRange.min),
             to: String(priceRange.max),
@@ -124,7 +142,7 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
         params.delete('page');
 
         router.push(`${basePath}?${params.toString()}`);
-    };
+    },[basePath, priceRange.max, priceRange.min, router, searchParams]);
 
     if (isLoading) return <GlobalLoader />;
 
@@ -174,6 +192,16 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
                     className="w-30 px-2 py-1 bg-[#fefefe] border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
                     placeholder={`До ${priceRange.max}`}
                 />
+            </div>
+            <div className='w-[320px] xl:w-68 px-2 mx-auto mt-7'>
+                <Slider 
+                min={priceRange.min}
+                max={priceRange.max}
+                value={sliderValues}
+                onChange={handleSliderChange}
+
+                />
+
             </div>
             <button
                 type="submit"

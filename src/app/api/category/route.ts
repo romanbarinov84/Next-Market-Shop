@@ -34,31 +34,31 @@ export async function GET(request: Request) {
         }
 
         if (getPriceRangeOnly) {
-    const categoryOnlyQuery: Filter<ProductCardProps> = {
-        categories: { $in: [category] },
-    };
+            const categoryOnlyQuery: Filter<ProductCardProps> = {
+                categories: { $in: [category] },
+            };
 
-    const priceRange = await db
-        .collection<ProductCardProps>('products')
-        .aggregate([
-            { $match: categoryOnlyQuery },
-            {
-                $group: {
-                    _id: null,
-                    min: { $min: '$basePrice' },
-                    max: { $max: '$basePrice' },
+            const priceRange = await db
+                .collection<ProductCardProps>('products')
+                .aggregate([
+                    { $match: categoryOnlyQuery },
+                    {
+                        $group: {
+                            _id: null,
+                            min: { $min: '$basePrice' },
+                            max: { $max: '$basePrice' },
+                        },
+                    },
+                ])
+                .toArray();
+
+            return NextResponse.json({
+                priceRange: {
+                    min: priceRange[0]?.min ?? CONFIG.FALLBACK_PRICE_RANGE.min,
+                    max: priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE.max,
                 },
-            },
-        ])
-        .toArray();
-
-    return NextResponse.json({
-        priceRange: {
-            min: priceRange[0]?.min ?? CONFIG.FALLBACK_PRICE_RANGE.min,
-            max: priceRange[0]?.max ?? CONFIG.FALLBACK_PRICE_RANGE.max,
-        },
-    });
-}
+            });
+        }
 
         if (category) {
             query.categories = {
@@ -80,11 +80,10 @@ export async function GET(request: Request) {
             }
         }
 
-        if(priceFrom || priceTo) {
+        if (priceFrom || priceTo) {
             query.basePrice = {};
-            if(priceFrom)query.basePrice.$gte = parseInt(priceFrom);
-            if(priceTo)query.basePrice.$lte = parseInt(priceTo);
-
+            if (priceFrom) query.basePrice.$gte = parseInt(priceFrom);
+            if (priceTo) query.basePrice.$lte = parseInt(priceTo);
         }
 
         const [totalCount, products] = await Promise.all([
@@ -98,7 +97,11 @@ export async function GET(request: Request) {
                 .toArray(),
         ]);
 
-        return NextResponse.json({ products, totalCount });
+        return NextResponse.json({
+            products,
+            totalCount,
+            priceRange: { min: 0, max: 0 },
+        });
     } catch (error) {
         console.error('Ошибка сервера', error);
         return NextResponse.json(

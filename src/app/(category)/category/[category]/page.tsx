@@ -28,12 +28,17 @@ const CategoryPage = async ({
         page?: string;
         itemsPerPage?: string;
         filter?: string | string[];
+        priceFrom?:string;
+        priceTo?:string;
     }>;
     params: Promise<{ category: string }>;
 }) => {
     const { category } = await params;
     const resolvedSearchParams = await searchParams;
     const activeFilter = resolvedSearchParams.filter;
+    const priceFrom = resolvedSearchParams.priceFrom;
+    const priceTo = resolvedSearchParams.priceTo;
+
 
     return (
         <div className="px-4 sm:px-6 lg:px-8 xl:px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto">
@@ -68,6 +73,8 @@ const CategoryPage = async ({
                                 fetchProductByCategory(category, {
                                     pagination: { startIdx, perPage },
                                     filter: activeFilter,
+                                    priceFrom,
+                                    priceTo,
                                 }),
 
                             basePath: `/category/${category}`,
