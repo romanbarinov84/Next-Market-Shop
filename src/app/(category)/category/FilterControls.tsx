@@ -9,38 +9,7 @@ const FilterControls = ({
     const minPrice = searchParams.priceFrom;
     const maxPrice = searchParams.priceTo;
 
-    function buildClearFiltersLink() {
-        const params = new URLSearchParams();
-
-        if (searchParams.page) {
-            params.set('page', searchParams.page);
-        }
-        if (searchParams.itemsPerPage) {
-            params.set('itemsPerPage', searchParams.itemsPerPage);
-        }
-
-        params.delete('filter');
-        params.delete('priceFrom');
-        params.delete('priceTo');
-
-        return `${basePath}?${params.toString()}`;
-    }
-
     const hasPriceFilter = minPrice || maxPrice;
-
-    const activeFilterCount =
-        (activeFilter
-            ? Array.isArray(activeFilter)
-                ? activeFilter.length
-                : 1
-            : 0) + (hasPriceFilter ? 1 : 0);
-
-    const filterButtonText =
-        activeFilterCount === 0
-            ? 'Фильтры'
-            : activeFilterCount === 1
-              ? 'Фильтр 1'
-              : `Фильтры ${activeFilterCount}`;
 
     const buildClearPriceFilterLink = () => {
         const params = new URLSearchParams(searchParams.toString());
@@ -51,7 +20,7 @@ const FilterControls = ({
     };
 
     return (
-        <div className=" hidden xl:flex flex-row flex-wrap gap-y-3 gap-x-6 mb-6">
+        <>
             <div
                 className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${
                     !activeFilter || activeFilter.length === 0
@@ -79,7 +48,7 @@ const FilterControls = ({
                         : 'bg-(--color-primary) text-white'
                 }`}
             >
-                <Link href={buildClearPriceFilterLink ()}>Очистити фільтри</Link>
+                <Link href={buildClearPriceFilterLink()}>Очистити фільтри</Link>
                 <button className="w-6 h-6 flex items-center justify-center bg-gray-200 text-black rounded hover:bg-gray-300 active:bg-gray-400  duration-200 shadow-sm hover:shadow-md active:shadow-inner">
                     X
                 </button>
@@ -99,7 +68,7 @@ const FilterControls = ({
             <div
                 className={`h-8 p-2 text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2`}
             ></div>
-        </div>
+        </>
     );
 };
 

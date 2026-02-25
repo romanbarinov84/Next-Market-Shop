@@ -52,14 +52,19 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
             const receivedRange =
                 data.priceRange || CONFIG.FALLBACK_PRICE_RANGE;
 
-            setPriceRange({
-                min: Math.floor(parseInt(receivedRange.min)),
-                max: Math.floor(parseInt(receivedRange.max)),
-            });
+
+                const roundedRange = {
+                     min: Math.floor(Number(receivedRange.min)),
+                max: Math.floor(Number(receivedRange.max)),
+                }
+
+            setPriceRange(
+               roundedRange
+            );
 
             setInputValues({
-                from: urlPriceFrom || receivedRange.min.toString(),
-                to: urlPriceTo || receivedRange.max.toString(),
+                from: urlPriceFrom || roundedRange.min.toString(),
+                to: urlPriceTo || roundedRange.max.toString(),
             });
         } catch (error) {
             setError({
