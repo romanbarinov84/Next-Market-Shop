@@ -8,8 +8,9 @@ const Header = () => {
       <div className="flex flex-row gap-4 xl:gap-10 py-2 px-4 items-center shadow-(--shadow-default) md:shadow-none">
         <LogoBlock />
         <CatalogMenuWrapper />
+        <UserBlock />
       </div>
-      <UserBlock />
+      
     </header>
   );
 };

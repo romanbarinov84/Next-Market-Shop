@@ -1,20 +1,25 @@
+"use client"
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 
 const TopMenu = () => {
+    const pathName = usePathname();
+    const isCatalogPage = pathName === "/catalog";
   return (
-    <div>
+    <>
         <ul className='flex flex-row gap-x-6 items-end'>
             <Link href="/catalog">
-              <li className='flex flex-col md:hidden items-center gap-2  w-11 cursor-pointer'>
+              <li className='flex flex-col  items-center gap-2  w-11 cursor-pointer'>
                 <Image 
                 src="/лого хедера/HeaderBtnCatalog.svg" 
                 alt='Каталог'
                 width={24}
                 height={24}
                 className='object-contain w-6 h-6'/>
-                <span>Каталог</span>
+                <span className={isCatalogPage ? "text-[#ff6633]" : "text-[#414141]"}>Каталог</span>
             </li>
             </Link>
           
@@ -47,7 +52,7 @@ const TopMenu = () => {
             </li>
           
         </ul>
-    </div>
+    </>
   )
 }
 
