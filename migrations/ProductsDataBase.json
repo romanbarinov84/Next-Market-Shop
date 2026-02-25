@@ -12,7 +12,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki","frozen"],
+             "categories": [ "varenyki","frozen","sweet"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -44,7 +44,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki","frozen"],
+             "categories": [ "varenyki","frozen","sweet"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -92,7 +92,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "varenyki","frozen"],
+             "categories": [ "varenyki","frozen","sweet"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -108,7 +108,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "Golubzy","frozen"],
+             "categories": [ "Golubzy","frozen","meat"],
              "weight":"1100",
              "quantity": 34,
              "tags":["actions"]
@@ -429,7 +429,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "golubzy","frozen"],
+             "categories": [ "golubzy","frozen","meat"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -445,7 +445,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["golubzy","frozen"],
+             "categories": ["golubzy","frozen","meat"],
              "weight":"1100",
              "quantity": 34,
              "tags":["actions"]
@@ -461,7 +461,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": ["golubzy","frozen"],
+             "categories": ["golubzy","frozen","meat"],
              "weight":"1000",
              "quantity": 34,
              "tags":["actions"]
@@ -477,7 +477,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "perez","frozen"],
+             "categories": [ "perez","frozen","meat"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -493,7 +493,7 @@
                 "rate": 3.9,
                 "count": 8
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 14,
              "tags":["new"]
@@ -509,7 +509,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 14,
              "tags":["new"]
@@ -525,7 +525,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "perez"],
+             "categories": [ "perez","meat"],
              "weight":"1000",
              "quantity": 34,
              "tags":["new"]
@@ -541,7 +541,7 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 14,
              "tags":["new"]
@@ -557,7 +557,7 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 14,
              "tags":["new"]
@@ -573,7 +573,7 @@
                 "rate": 4.0,
                 "count": 14
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 34,
              "tags":["new"]
@@ -589,7 +589,7 @@
                 "rate": 4.9,
                 "count": 24
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -605,7 +605,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -621,7 +621,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","cheffmenu"],
              "weight":"300",
              "quantity": 34,
              "tags":["new"]
@@ -637,7 +637,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","meat","cheffmenu"],
              "weight":"360",
              "quantity":10 ,
              "tags":["new"]
@@ -653,7 +653,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood"],
+             "categories": [ "restoFood","meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -669,7 +669,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "restoFood", "meat"],
+             "categories": [ "restoFood", "meat","cheffmenu"],
              "weight":"800",
              "quantity": 34,
              "tags":["new"]
@@ -733,7 +733,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "cheff", "meat"],
+             "categories": [ "cheff", "meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -749,7 +749,7 @@
                 "rate": 4.9,
                 "count": 14
              },
-             "categories": [ "cheff", "meat"],
+             "categories": [ "cheff", "meat","cheffmenu"],
              "weight":"360",
              "quantity": 14,
              "tags":["new"]
@@ -765,7 +765,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "cheff","fish"],
+             "categories": [ "cheff","fish","cheffmenu"],
              "weight":"360",
              "quantity": 24,
              "tags":["new"]
@@ -781,7 +781,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "chef", "meat"],
+             "categories": [ "chef", "meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -797,7 +797,7 @@
                 "rate": 3.9,
                 "count": 4
              },
-             "categories": [ "cheff", "meat"],
+             "categories": [ "cheff", "meat","cheffmenu"],
              "weight":"760",
              "quantity": 34,
              "tags":["new"]
@@ -813,7 +813,7 @@
                 "rate": 4.0,
                 "count": 4
              },
-             "categories": [ "cheff", "meat"],
+             "categories": [ "cheff", "meat","cheffmenu"],
              "weight":"760",
              "quantity": 34,
              "tags":["new"]
@@ -829,7 +829,7 @@
                 "rate": 3.9,
                 "count": 4
              },
-             "categories": [ "cheff" , "meat"],
+             "categories": [ "cheff" , "meat","cheffmenu"],
              "weight":"760",
              "quantity": 34,
              "tags":["new"]
@@ -845,7 +845,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "cheff" , "meat"],
+             "categories": [ "cheff" , "meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -861,7 +861,7 @@
                 "rate": 4.9,
                 "count": 4
              },
-             "categories": [ "cheff" ,"meat"],
+             "categories": [ "cheff" ,"meat","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
@@ -877,7 +877,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "cheff","meat"],
+             "categories": [ "cheff","meat","cheffmenu"],
              "weight":"760",
              "quantity": 34,
              "tags":["new"]
@@ -893,7 +893,7 @@
                 "rate": 4.5,
                 "count": 4
              },
-             "categories": [ "cheff"],
+             "categories": [ "cheff","cheffmenu"],
              "weight":"760",
              "quantity": 34,
              "tags":["new","actions"]
@@ -909,7 +909,7 @@
                 "rate": 4.7,
                 "count": 4
              },
-             "categories": [ "cheff","fish"],
+             "categories": [ "cheff","fish","cheffmenu"],
              "weight":"360",
              "quantity": 34,
              "tags":["new"]
