@@ -10,7 +10,7 @@ import { PriceFilterProps, PriceRange } from '@/src/types/priceTypes';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FormEvent, useCallback, useEffect, useState } from 'react';
 
-const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
+const PriceFilter = ({ basePath, category,setIsFilterOpenAction }: PriceFilterProps) => {
     const searchParams = useSearchParams();
     const urlPriceFrom = searchParams.get('priceFrom') || '';
     const urlPriceTo = searchParams.get('priceTo') || '';
@@ -99,6 +99,10 @@ const PriceFilter = ({ basePath, category }: PriceFilterProps) => {
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         applyPriceFilter();
+        if(setIsFilterOpenAction){
+            setIsFilterOpenAction(false);
+        }
+        
     };
 
      const handleInStockChange = useCallback(

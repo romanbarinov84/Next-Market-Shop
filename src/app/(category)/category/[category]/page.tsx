@@ -48,9 +48,9 @@ const CategoryPage = async ({
             <h1 className=" ml-3 xl:ml-0 text-4xl xl:text-6xl text-left font-bold text-[#414141] mb-6 md:mb-8 xl:mb-15 max-w-84 md:max-w-max leading-[150%] ">
                 {PATH_TRANSLATIONS[category] || category}
             </h1>
-            <DropFilter/>
+            <DropFilter basePath={`/category/${category}`} category={category}/>
             <div className=" hidden xl:flex flex-wrap gap-4 mb-6 items-center">
-                 <FilterButtons basePath={`/category/${category}`} />
+                 <FilterButtons basePath={`/category/${category}`}  />
             </div>
            
             <div className="flex flex-row gap-x-10 justify-between">
@@ -66,12 +66,7 @@ const CategoryPage = async ({
                         <FilterControls
                     activeFilter={resolvedSearchParams.filter}
                     basePath={`/category/${category}`}
-                    searchParams={{
-                        page: resolvedSearchParams.page,
-                        itemsPerPage: resolvedSearchParams.itemsPerPage,
-                        priceFrom,
-                        priceTo,
-                    }}
+                    
                 />
                     </div>
                                
