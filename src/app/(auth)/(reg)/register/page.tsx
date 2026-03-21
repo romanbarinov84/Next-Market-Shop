@@ -2,9 +2,10 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import PhoneInput from '../PhoneInput';
+import PersonInput from '../PersonInput';
 
 const initialFormData = {
-    phone: '+3',
+    phone: '+38',
     surname: '',
     firstName: '',
     password: '',
@@ -33,6 +34,8 @@ const RegisterPage = () => {
     };
 
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement >) => {
+        const {id,type} = e.target;
+        setFormData((prev) => ({...prev,[id]:value}));
         const value = e.target.value;
     }
 
@@ -41,51 +44,50 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#f0a675cc] min-h-screen text-[#333]">
-            <div className="bg-white rounded shadow-(--shadow-form) w-full max-w-160 max-h-25 overflow-y-auto">
-                <div className="flex justify-end">
-                    <button
-                        onClick={handleClose}
-                        className="p-2 border-none  text-red-300 cursor-pointer mb-8 duration-300 rounded bg-[#f3f2f1]"
-                        aria-label="close"
-                    >
-                        X
-                    </button>
-                </div>
-                <h1 className="text-2xl font-bold text-center mb-10">
-                    Регистрация
-                </h1>
-                <h2 className="text-lg font-bold text-center mb-6">
-                    Обязательные поля
-                </h2>
-                <form
-                    onSubmit={handleSubmit}
-                    autoComplete="off"
-                    className="w-full max-w-[552px] mx-auto max-h-100vh flex flex-col justify-center overflow-y-auto"
-                >
-                    <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
-                        <div className="flex flex-col gap-y-4 items-start">
-                            <PhoneInput
-                value={formData.phone}
-                onChangeAction={handleChange}
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-100/80 min-h-screen text-[#333]">
+  <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl overflow-y-auto">
+    <div className="flex justify-end p-4">
+      <button
+        onClick={handleClose}
+        className="p-2 text-red-400 rounded bg-gray-100 hover:bg-gray-200 transition"
+        aria-label="close"
+      >
+        X
+      </button>
+    </div>
+    <h1 className="text-2xl font-bold text-center mb-6">Регистрация</h1>
+    <h2 className="text-lg font-bold text-center mb-6">Обязательные поля</h2>
+    <form
+      onSubmit={handleSubmit}
+      autoComplete="off"
+      className="w-full px-6 pb-6 flex flex-col gap-4"
+    >
+      <div className="flex flex-wrap justify-center gap-8">
+        <div className="flex flex-col gap-4 items-start">
+          <PhoneInput value={formData.phone} onChangeAction={handleChange} />
+            <PersonInput
+                id="surname"
+                label="Фамилия"
+                value={formData.surname}
+                onChange={handleChange}
               />
-                            Имя
-                            Фамилия
-                            Пароль
-                            Повторить пароль
-                            
-                        </div>
-                         <div className="flex flex-col gap-y-4 items-start">
-                            Дата рождения 
-                        регион
-                        Населенный пункт
-                        Пол 
-                        </div>
-                       
-                    </div>
-                </form>
-            </div>
+          <input placeholder="Фамилия" className="border p-2 rounded w-72" />
+          <input placeholder="Пароль" type="password" className="border p-2 rounded w-72" />
+          <input placeholder="Повторить пароль" type="password" className="border p-2 rounded w-72" />
         </div>
+        <div className="flex flex-col gap-4 items-start">
+          <input placeholder="Дата рождения" className="border p-2 rounded w-72" />
+          <input placeholder="Регион" className="border p-2 rounded w-72" />
+          <input placeholder="Населённый пункт" className="border p-2 rounded w-72" />
+          <input placeholder="Пол" className="border p-2 rounded w-72" />
+        </div>
+      </div>
+      <button type="submit" className="bg-[#ff6633] text-white py-2 rounded hover:bg-blue-700 transition mt-4">
+        Зарегистрироваться
+      </button>
+    </form>
+  </div>
+</div>
     );
 };
 

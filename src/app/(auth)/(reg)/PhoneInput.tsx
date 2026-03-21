@@ -17,17 +17,17 @@ const PhoneInput = ({ value, onChangeAction }: PhoneInputProps) => {
         Телефон
       </label>
       <InputMask
-        mask="+8 (___) ___-__-__"
+        mask="+38 (___) ___-__-__"
         replacement={{ _: /\d/ }}
         id="phone"
         type="text"
         value={value}
-        placeholder="+8 (___) ___-__-__"
+        placeholder="+38 (___) ___-__-__"
         onChange={onChangeAction}
         className={formStyles.input}
         showMask={true}
         onFocus={(e) => {
-          if (e.target.value === "+7") {
+          if (e.target.value === "+8") {
             e.target.setSelectionRange(2, 2);
           }
         }}
