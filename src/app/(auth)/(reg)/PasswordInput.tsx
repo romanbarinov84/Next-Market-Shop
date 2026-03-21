@@ -45,7 +45,7 @@ const PasswordInput = ({
 
   const getTooltipText = () => {
     if (showRequirements) {
-      return "Пароль должен содержать: 6+ символов на латинице и цифры";
+      return "Пароль должен содержать: 6+ символов и 1+ заглавную на латинице и цифры";
     }
 
     return "Пароли пока не совпадают";

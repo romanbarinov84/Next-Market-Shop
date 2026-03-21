@@ -5,8 +5,8 @@ const Tooltip = ({text}: {text: string}) => {
     <div className="absolute left-0 top-full mt-1 w-full transition-all duration-300 ease-in-out">
       <div className="relative bg-[#d80000] text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn">
         <Image
-          src="/icons-auth/icon-attention.svg"
-          alt={text}
+          src="/ALERTiCON.png"
+          alt={""}
           width={21}
           height={21}
           className="mr-4"
