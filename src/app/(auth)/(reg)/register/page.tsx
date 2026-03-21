@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import PhoneInput from '../PhoneInput';
 import PersonInput from '../PersonInput';
+import PasswordInput from '../PasswordInput';
 
 const initialFormData = {
     phone: '+38',
@@ -26,6 +27,7 @@ const RegisterPage = () => {
         userMessage: string;
     } | null>(null);
     const [formData, setFormData] = useState(initialFormData);
+    const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
 
     const handleClose = () => {
@@ -71,9 +73,34 @@ const RegisterPage = () => {
                 value={formData.surname}
                 onChange={handleChange}
               />
-          <input placeholder="Фамилия" className="border p-2 rounded w-72" />
-          <input placeholder="Пароль" type="password" className="border p-2 rounded w-72" />
-          <input placeholder="Повторить пароль" type="password" className="border p-2 rounded w-72" />
+            <PersonInput
+                id="firstName"
+                label="Имя"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+         <PasswordInput
+                id="password"
+                label="Пароль"
+                value={formData.password}
+                onChangeAction={handleChange}
+                showPassword={showPassword}
+                togglePasswordVisibilityAction={() =>
+                  setShowPassword(!showPassword)
+                }
+                showRequirements={true}
+              />
+              <PasswordInput
+                id="confirmPassword"
+                label="Подтвердите пароль"
+                value={formData.confirmPassword}
+                onChangeAction={handleChange}
+                showPassword={showPassword}
+                togglePasswordVisibilityAction={() =>
+                  setShowPassword(!showPassword)
+                }
+                compareWith={formData.password}
+              />
         </div>
         <div className="flex flex-col gap-4 items-start">
           <input placeholder="Дата рождения" className="border p-2 rounded w-72" />
