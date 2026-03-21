@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import PhoneInput from '../PhoneInput';
 
 const initialFormData = {
     phone: '+3',
@@ -31,6 +32,10 @@ const RegisterPage = () => {
         router.back();
     };
 
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement >) => {
+        const value = e.target.value;
+    }
+
     const handleSubmit = () => {
         //
     };
@@ -60,7 +65,10 @@ const RegisterPage = () => {
                 >
                     <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
                         <div className="flex flex-col gap-y-4 items-start">
-                            Телефон
+                            <PhoneInput
+                value={formData.phone}
+                onChangeAction={handleChange}
+              />
                             Имя
                             Фамилия
                             Пароль

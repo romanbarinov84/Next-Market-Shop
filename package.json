@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
+    "@react-input/mask": "^2.0.4",
     "dotenv": "^17.2.3",
     "migrate-mongo": "^14.0.7",
     "mongodb": "^7.0.0",
