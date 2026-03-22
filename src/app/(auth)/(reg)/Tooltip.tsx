@@ -13,7 +13,7 @@ const Tooltip = ({text}: {text: string}) => {
         />
         <div
           className="absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0 
-                     border-l-[6px] border-r-[6px] border-b-[4px] 
+                     border-l-[6px] border-r-[6px] border-b-2 
                      border-l-transparent border-r-transparent border-b-[#d80000]"
         ></div>
         {text}

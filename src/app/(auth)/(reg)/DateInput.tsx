@@ -3,8 +3,8 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import { formStyles } from "../styles";
-import Tooltip from "./Tooltip";
 import { validateBirthDate } from "@/UTILS/validations/validateBirthDate";
+import Tooltip from "./Tooltip";
 
 
 interface DateInputProps {
