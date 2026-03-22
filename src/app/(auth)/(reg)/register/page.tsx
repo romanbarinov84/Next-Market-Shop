@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PhoneInput from '../PhoneInput';
 import PersonInput from '../PersonInput';
 import PasswordInput from '../PasswordInput';
+import DateInput from '../DateInput';
 
 const initialFormData = {
     phone: '+38',
@@ -103,7 +104,12 @@ const RegisterPage = () => {
               />
         </div>
         <div className="flex flex-col gap-4 items-start">
-          <input placeholder="Дата рождения" className="border p-2 rounded w-72" />
+            <DateInput
+                value={formData.birthdayDate}
+                onChangeAction={(value) =>
+                  setFormData((prev) => ({ ...prev, birthdayDate: value }))
+                }
+              />
           <input placeholder="Регион" className="border p-2 rounded w-72" />
           <input placeholder="Населённый пункт" className="border p-2 rounded w-72" />
           <input placeholder="Пол" className="border p-2 rounded w-72" />
