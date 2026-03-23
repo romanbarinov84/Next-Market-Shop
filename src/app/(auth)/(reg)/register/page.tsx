@@ -9,6 +9,7 @@ import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import { validateRegisterForm } from '@/UTILS/validations/form';
 import SelectRegion from '../SelectRegion';
+import SelectCity from '../SelectCity';
 
 const initialFormData = {
     phone: '+38',
@@ -157,7 +158,10 @@ const RegisterPage = () => {
                 value={formData.region}
                 onChangeAction={handleChange}
               />
-          <input placeholder="Населённый пункт" className="border p-2 rounded w-72" />
+          <SelectCity  
+          value={formData.region}
+                onChangeAction={handleChange}
+          />
           <input placeholder="Пол" className="border p-2 rounded w-72" />
         </div>
       </div>
