@@ -8,6 +8,7 @@ import DateInput from '../DateInput';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import { validateRegisterForm } from '@/UTILS/validations/form';
+import SelectRegion from '../SelectRegion';
 
 const initialFormData = {
     phone: '+38',
@@ -152,7 +153,10 @@ const RegisterPage = () => {
                   setFormData((prev) => ({ ...prev, birthdayDate: value }))
                 }
               />
-          <input placeholder="Регион" className="border p-2 rounded w-72" />
+          <SelectRegion
+                value={formData.region}
+                onChangeAction={handleChange}
+              />
           <input placeholder="Населённый пункт" className="border p-2 rounded w-72" />
           <input placeholder="Пол" className="border p-2 rounded w-72" />
         </div>
