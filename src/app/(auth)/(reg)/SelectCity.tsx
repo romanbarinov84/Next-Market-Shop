@@ -27,6 +27,8 @@ const SelectCity = ({ value, onChangeAction }: SelectCityProps) => {
           <option value="">Выберите город</option>
                     <option value="Киев">Киев</option>
                     <option value="Бровары">Бровары</option>
+                    <option value="Борисполь">Борисполь</option>
+                    <option value="Буча">Буча</option>
         </select>
        
       </div>

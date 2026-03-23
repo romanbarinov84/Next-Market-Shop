@@ -20,7 +20,7 @@ const SelectRegion = ({ value, onChangeAction }: selectRegionProps) => {
                 >
                     <option value="">Выберите регион</option>
                     <option value="Киев">Киев</option>
-                    <option value="Бровары">Бровары</option>
+                    <option value="Киевская область">Киевская область</option>
                 </select>
             </div>
         </div>
