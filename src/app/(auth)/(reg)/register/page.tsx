@@ -5,6 +5,9 @@ import PhoneInput from '../PhoneInput';
 import PersonInput from '../PersonInput';
 import PasswordInput from '../PasswordInput';
 import DateInput from '../DateInput';
+import GlobalLoader from '@/src/components/loading/GlobalLoader';
+import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
+import { validateRegisterForm } from '@/UTILS/validations/form';
 
 const initialFormData = {
     phone: '+38',
@@ -22,29 +25,68 @@ const initialFormData = {
 };
 
 const RegisterPage = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<{
-        error: Error;
-        userMessage: string;
-    } | null>(null);
-    const [formData, setFormData] = useState(initialFormData);
-    const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<{
+    error: Error;
+    userMessage: string;
+  } | null>(null);
+  const [formData, setFormData] = useState(initialFormData);
+  const [showPassword, setShowPassword] = useState(false);
+  const [invalidFormMessage, setInvalidFormMessage] = useState("");
+  const router = useRouter();
 
-    const handleClose = () => {
-        setFormData(initialFormData);
-        router.back();
-    };
+  const handleClose = () => {
+    setFormData(initialFormData);
+    router.back();
+  };
 
-    const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement >) => {
-        const {id,type} = e.target;
-        setFormData((prev) => ({...prev,[id]:value}));
-        const value = e.target.value;
+  console.log(formData);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { id, type } = e.target;
+    const value = type === "checkbox" ? e.target.checked : e.target.value;
+
+    if (invalidFormMessage) {
+      setInvalidFormMessage("");
     }
 
-    const handleSubmit = () => {
-        //
-    };
+    if (id === "hasCard" && value === true) {
+      setFormData((prev) => ({
+        ...prev,
+        hasCard: true,
+        card: "",
+      }));
+
+      return;
+    }
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setInvalidFormMessage("");
+
+    const validation = validateRegisterForm(formData);
+    if (!validation.isValid) {
+      setInvalidFormMessage(
+        validation.errorMessage || "Заполните поля корректно"
+      );
+      setIsLoading(false);
+      return;
+    }
+  };
+
+  const isFormValid = () => validateRegisterForm(formData).isValid;
+
+  if (isLoading) return <GlobalLoader />;
+  if (error)
+    return (
+      <ErrorComponent error={error.error} userMessage={error.userMessage} />
+    );
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-100/80 min-h-screen text-[#333]">
