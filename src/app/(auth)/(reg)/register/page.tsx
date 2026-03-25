@@ -41,6 +41,7 @@ const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [invalidFormMessage, setInvalidFormMessage] = useState('');
     const router = useRouter();
+    const [isSuccess , setIsSuccess] = useState(false);
 
     const handleClose = () => {
         setFormData(initialFormData);
@@ -85,7 +86,37 @@ const RegisterPage = () => {
             setIsLoading(false);
             return;
         }
-    };
+   
+
+    try {
+        const userData = {
+            ...formData,
+            phone: formData.phone.replace(/\D/g, ''),
+        };
+
+        const res = await fetch('api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+        });
+
+        if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.error || 'Ошибка регистрации');
+        }
+        setIsSuccess(true)
+        
+    } catch (error) {
+        setError({
+           error: error instanceof Error ? error : new Error('Неизвестная ошибка'),
+        userMessage: 'Ошибка регистрации попробуйте снова',  
+        })
+       
+    }
+    finally{
+        setIsLoading(false);
+    }
+     };
 
     const isFormValid = () => validateRegisterForm(formData).isValid;
 
@@ -206,15 +237,15 @@ const RegisterPage = () => {
                                 value={formData.email}
                                 onChangeAction={handleChange}
                             />
-                    
-                    {invalidFormMessage && (
-                        <div className="text-red-500 text-center my-4 p-4 bg-red-50 rounded">
-                            {invalidFormMessage}
+
+                            {invalidFormMessage && (
+                                <div className="text-red-500 text-center my-4 p-4 bg-red-50 rounded">
+                                    {invalidFormMessage}
+                                </div>
+                            )}
+
+                            <RegFormFooter isFormValid={isFormValid()} />
                         </div>
-                    )}
-                    
-                     <RegFormFooter isFormValid={isFormValid()} />  
-                       </div>
                     </div>
                 </form>
             </div>
