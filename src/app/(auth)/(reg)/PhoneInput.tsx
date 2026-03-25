@@ -17,12 +17,12 @@ const PhoneInput = ({ value, onChangeAction }: PhoneInputProps) => {
         Телефон
       </label>
       <InputMask
-        mask="+38 (___) ___-__-__"
+        mask="+38(___) ___-__-__"
         replacement={{ _: /\d/ }}
         id="phone"
         type="text"
         value={value}
-        placeholder="+38 (___) ___-__-__"
+        placeholder="+38(___) ___-__-__"
         onChange={onChangeAction}
         className={formStyles.input}
         showMask={true}

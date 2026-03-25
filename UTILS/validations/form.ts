@@ -16,10 +16,10 @@ export function validateRegisterForm(formData: {
 }): { isValid: boolean; errorMessage?: string } {
     
   // Проверка телефона
-  if (!formData.phone || formData.phone.replace(/\D/g, "").length !== 11) {
+  if (!formData.phone || formData.phone.replace(/\D/g, "").length !== 12) {
     return {
       isValid: false,
-      errorMessage: "Введите корректный номер телефона (11 цифр)",
+      errorMessage: "Введите корректный номер телефона (12 цифр)",
     };
   }
 

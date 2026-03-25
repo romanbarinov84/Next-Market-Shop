@@ -42,14 +42,14 @@ const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [invalidFormMessage, setInvalidFormMessage] = useState('');
     const router = useRouter();
-    const [isSuccess , setIsSuccess] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const handleClose = () => {
         setFormData(initialFormData);
         router.back();
     };
 
-    console.log(formData);
+    
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -73,51 +73,52 @@ const RegisterPage = () => {
         setFormData((prev) => ({ ...prev, [id]: value }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setError(null);
-        setInvalidFormMessage('');
+   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setInvalidFormMessage("");
 
-        const validation = validateRegisterForm(formData);
-        if (!validation.isValid) {
-            setInvalidFormMessage(
-                validation.errorMessage || 'Заполните поля корректно',
-            );
-            setIsLoading(false);
-            return;
-        }
-   
+    const validation = validateRegisterForm(formData);
+    if (!validation.isValid) {
+      setInvalidFormMessage(
+        validation.errorMessage || "Заполните поля корректно"
+      );
+      setIsLoading(false);
+      return;
+    }
 
     try {
-        const userData = {
-            ...formData,
-            phone: formData.phone.replace(/\D/g, ''),
-        };
+      const [day, month, year] = formData.birthdayDate.split(".");
+      const formattedBirthdayDate = new Date(`${year}-${month}-${day}`);
 
-        const res = await fetch('api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(userData),
-        });
-
-        if (!res.ok) {
-            const data = await res.json();
-            throw new Error(data.error || 'Ошибка регистрации');
-        }
-        setIsSuccess(true)
-        
-    } catch (error) {
-        setError({
-           error: error instanceof Error ? error : new Error('Неизвестная ошибка'),
-        userMessage: 'Ошибка регистрации попробуйте снова',  
-        })
+      const userData = {
+        ...formData,
+        phone: formData.phone.replace(/\D/g, ""),
+        birthdayDate: formattedBirthdayDate,
+      };
        
+      const res = await fetch("api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Ошибка регистрации");
+      }
+
+      setIsSuccess(true);
+    } catch (error) {
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Ошибка регистрации. Попробуйте снова.",
+      });
+    } finally {
+      setIsLoading(false);
     }
-    finally{
-        setIsLoading(false);
-    }
-     };
+  };
 
     const isFormValid = () => validateRegisterForm(formData).isValid;
 
@@ -129,6 +130,8 @@ const RegisterPage = () => {
                 userMessage={error.userMessage}
             />
         );
+
+         if (isSuccess) return <SuccessModal  />;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-100/80 min-h-screen text-[#333]">
@@ -209,7 +212,7 @@ const RegisterPage = () => {
                                 onChangeAction={handleChange}
                             />
                             <SelectCity
-                                value={formData.region}
+                                value={formData.location}
                                 onChangeAction={handleChange}
                             />
                             <GenderSelect
@@ -245,15 +248,12 @@ const RegisterPage = () => {
                                 </div>
                             )}
 
-                            <RegFormFooter isFormValid={isFormValid()} />
+                            <RegFormFooter isFormValid={isFormValid()} isLoading={isLoading} />
                         </div>
                     </div>
                 </form>
             </div>
-            {isSuccess && (
-             <SuccessModal onClose={() => setIsSuccess(false)} />   
-            )}
-             
+            
         </div>
     );
 };
