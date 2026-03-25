@@ -15,6 +15,7 @@ import CardInput from '../CardInput';
 import CheckboxCard from '../CheckboxCard';
 import EmailInput from '../EmailInput';
 import RegFormFooter from '../RegFormFooter';
+import SuccessModal from '../SuccessModal';
 
 const initialFormData = {
     phone: '+38',
@@ -249,6 +250,10 @@ const RegisterPage = () => {
                     </div>
                 </form>
             </div>
+            {isSuccess && (
+             <SuccessModal onClose={() => setIsSuccess(false)} />   
+            )}
+             
         </div>
     );
 };
