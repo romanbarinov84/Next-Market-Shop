@@ -80,7 +80,7 @@ const LoginPage = () => {
 
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
-      <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-[420px] max-h-[100vh] overflow-y-auto">
+      <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-105 max-h-screen overflow-y-auto">
         <div className="flex justify-end">
           <button
             onClick={handleClose}
