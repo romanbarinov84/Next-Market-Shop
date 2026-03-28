@@ -16,21 +16,9 @@ import GenderSelect from '../_components/GenderSelect';
 import CardInput from '../_components/CardInput';
 import EmailInput from '../_components/EmailInput';
 import RegFormFooter from '../_components/RegFormFooter';
+import { initialFormData } from '@/src/Constance/RegFormData';
 
-const initialFormData = {
-    phone: '+38',
-    surname: '',
-    firstName: '',
-    password: '',
-    confirmPassword: '',
-    birthdayDate: '',
-    region: '',
-    location: '',
-    gender: '',
-    card: '',
-    email: '',
-    hasCard: false,
-};
+
 
 const RegisterPage = () => {
     const [isLoading, setIsLoading] = useState(false);
