@@ -17,6 +17,9 @@ import CardInput from '../_components/CardInput';
 import EmailInput from '../_components/EmailInput';
 import RegFormFooter from '../_components/RegFormFooter';
 import { initialFormData } from '@/src/Constance/RegFormData';
+import { RegFormDataProps } from '@/src/types/regFormData';
+import { AuthFormLayout } from '../../_components/AuthFormLayout';
+
 
 
 
@@ -26,7 +29,7 @@ const RegisterPage = () => {
         error: Error;
         userMessage: string;
     } | null>(null);
-    const [formData, setFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState<RegFormDataProps>(initialFormData);
     const [showPassword, setShowPassword] = useState(false);
     const [invalidFormMessage, setInvalidFormMessage] = useState('');
     const router = useRouter();
@@ -122,17 +125,9 @@ const RegisterPage = () => {
          if (isSuccess) return <SuccessModal  />;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-sky-100/80 min-h-screen text-[#333]">
-            <div className="bg-white rounded-lg shadow-lg w-full max-w-2xl overflow-y-auto">
-                <div className="flex justify-end p-4">
-                    <button
-                        onClick={handleClose}
-                        className="p-2 text-red-400 rounded bg-gray-100 hover:bg-gray-200 transition"
-                        aria-label="close"
-                    >
-                        X
-                    </button>
-                </div>
+        <AuthFormLayout variant='register'>
+            
+                
                 <h1 className="text-2xl font-bold text-center mb-6">
                     Регистрация
                 </h1>
@@ -240,9 +235,9 @@ const RegisterPage = () => {
                         </div>
                     </div>
                 </form>
-            </div>
             
-        </div>
+            
+        </AuthFormLayout>
     );
 };
 

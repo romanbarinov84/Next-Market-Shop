@@ -8,6 +8,7 @@ import { buttonStyles, formStyles } from '../../(reg)/_components/styles';
 import Link from 'next/link';
 import PasswordInput from '../../(reg)/_components/PasswordInput';
 import PhoneInput from '../../(reg)/_components/PhoneInput';
+import { AuthFormLayout } from '../../_components/AuthFormLayout';
 
 
 const initialFormData = {
@@ -85,68 +86,64 @@ const LoginPage = () => {
         );
 
     return (
-        <div className="fixed inset-0 z-100 flex items-center justify-center bg-[#fcd5bacc] min-h-screen text-[#414141]">
-            <div className="bg-white rounded shadow-(--shadow-auth-form) w-full max-w-105 max-h-screen overflow-y-auto">
-                <div className="flex justify-end">
-                    <button
-                        onClick={handleClose}
-                        className="bg-[#f3f2f1] rounded duration-300 cursor-pointer mb-8"
-                        aria-label="Закрыть"
-                    >
-                        X
-                    </button>
-                </div>
-                <h1 className="text-2xl font-bold text-center mb-10">Вход</h1>
-                <form
-                    onSubmit={handleSubmit}
-                    autoComplete="off"
-                    className="w-full max-w-[552px] mx-auto max-h-100vh flex flex-col justify-center overflow-y-auto"
-                >
-                    <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4">
-                        <div className="flex flex-col gap-y-4 items-start">
-                            <PhoneInput
-                                value={formData.phone}
-                                onChangeAction={handleChange}
-                            />
-                            <PasswordInput
-                                id="password"
-                                label="Пароль"
-                                value={formData.password}
-                                onChangeAction={handleChange}
-                                showPassword={showPassword}
-                                togglePasswordVisibilityAction={() =>
-                                    setShowPassword(!showPassword)
-                                }
-                            />
-                        </div>
-                    </div>
-                    <button
-                        type="submit"
-                        disabled={
-                            !(formData.phone && formData.password) || isLoading
-                        }
-                        className={`${buttonStyles.base} ${
-                            formData.phone && formData.password
-                                ? buttonStyles.active
-                                : buttonStyles.inactive
-                        }`}
-                    >
-                        Вход
-                    </button>
-                    <div className="flex flex-row flex-wrap mb-10 mx-auto text-xs">
-                        <Link href="/register" className={formStyles.loginLink}>
-                            Регистрация
-                        </Link>
-                        <Link
-                            href="forgotPassword"
-                            className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300"
-                        >
-                            Забыли пароль?
-                        </Link>
-                    </div>
-                </form>
-            </div>
-        </div>
+       <AuthFormLayout variant="register">
+  <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-12">
+    Вход
+  </h1>
+  <form
+    onSubmit={handleSubmit}
+    autoComplete="off"
+    className="w-full max-w-[480px] mx-auto flex flex-col gap-6 overflow-y-auto pb-6"
+  >
+    <div className="w-full flex flex-wrap justify-center gap-6">
+      <div className="flex flex-col gap-5 w-full">
+        <PhoneInput
+          value={formData.phone}
+          onChangeAction={handleChange}
+        />
+        <PasswordInput
+          id="password"
+          label="Пароль"
+          value={formData.password}
+          onChangeAction={handleChange}
+          showPassword={showPassword}
+          togglePasswordVisibilityAction={() =>
+            setShowPassword(!showPassword)
+          }
+        />
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      disabled={
+        !(formData.phone && formData.password) || isLoading
+      }
+      className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 ${
+        formData.phone && formData.password
+          ? "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-lg"
+          : "bg-gray-300 cursor-not-allowed"
+      }`}
+    >
+      Вход
+    </button>
+
+    <div className="flex flex-row justify-between items-center mt-4 text-sm text-gray-600">
+      <Link
+        href="/register"
+        className="hover:text-indigo-600 transition-colors duration-300"
+      >
+        Регистрация
+      </Link>
+      <Link
+        href="/forgotPassword"
+        className="hover:text-indigo-600 transition-colors duration-300"
+      >
+        Забыли пароль?
+      </Link>
+    </div>
+  </form>
+</AuthFormLayout>
     );
 };
 

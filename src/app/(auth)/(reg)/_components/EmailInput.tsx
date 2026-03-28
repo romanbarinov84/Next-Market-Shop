@@ -5,7 +5,7 @@ import { formStyles } from "./styles";
 
 
 interface EmailInputProps {
-  value: string;
+  value?: string;
   onChangeAction: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

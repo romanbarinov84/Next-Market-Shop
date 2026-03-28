@@ -6,7 +6,7 @@ import { formStyles } from "./styles";
 
 
 interface CardInputProps {
-  value: string;
+  value?: string;
   onChangeAction: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled: boolean;
 }
