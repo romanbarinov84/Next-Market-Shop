@@ -1,21 +1,21 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import PhoneInput from '../PhoneInput';
-import PersonInput from '../PersonInput';
-import PasswordInput from '../PasswordInput';
-import DateInput from '../DateInput';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import { validateRegisterForm } from '@/UTILS/validations/form';
-import SelectRegion from '../SelectRegion';
-import SelectCity from '../SelectCity';
-import GenderSelect from '../GenderSelect';
-import CardInput from '../CardInput';
-import CheckboxCard from '../CheckboxCard';
-import EmailInput from '../EmailInput';
-import RegFormFooter from '../RegFormFooter';
-import SuccessModal from '../SuccessModal';
+import SelectCity from '../_components/SelectCity';
+import CheckboxCard from '../_components/CheckboxCard';
+import SuccessModal from '../_components/SuccessModal';
+import PersonInput from '../_components/PersonInput';
+import PhoneInput from '../_components/PhoneInput';
+import PasswordInput from '../_components/PasswordInput';
+import DateInput from '../_components/DateInput';
+import SelectRegion from '../_components/SelectRegion';
+import GenderSelect from '../_components/GenderSelect';
+import CardInput from '../_components/CardInput';
+import EmailInput from '../_components/EmailInput';
+import RegFormFooter from '../_components/RegFormFooter';
 
 const initialFormData = {
     phone: '+38',
