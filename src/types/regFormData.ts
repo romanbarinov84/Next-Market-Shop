@@ -11,7 +11,7 @@ export interface RegFormDataProps {
     gender:  string,
     card:  string,
     email:  string,
-    hasCard: false,
+    hasCard: boolean,
 }
 
 
