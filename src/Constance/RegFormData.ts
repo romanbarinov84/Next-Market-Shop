@@ -1,16 +1,16 @@
 
 
-export const initialFormData = {
-    phone: '+38',
-    surname: '',
-    firstName: '',
-    password: '',
-    confirmPassword: '',
-    birthdayDate: '',
-    region: '',
-    location: '',
-    gender: '',
-    card: '',
-    email: '',
-    hasCard: false,
+export const initialRegFormData = {
+  phoneNumber: "+38",
+  surname: "",
+  name: "",
+  password: "",
+  confirmPassword: "",
+  birthdayDate: "",
+  region: "",
+  location: "",
+  gender: "",
+  card: "",
+  email: "",
+  hasCard: false,
 };

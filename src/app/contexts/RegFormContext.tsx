@@ -1,27 +1,29 @@
 "use client";
 
-import { initialFormData } from "@/src/Constance/RegFormData";
-import { RegFormDataProps } from "@/src/types/regFormData";
+
+import { initialRegFormData } from "@/src/Constance/RegFormData";
+import { RegFormData } from "@/src/types/regFormData";
+
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type RegFormContextType = {
-  regFormData: RegFormDataProps;
-  setRegFormData: React.Dispatch<React.SetStateAction<RegFormDataProps>>;
+  regFormData: RegFormData;
+  setRegFormData: React.Dispatch<React.SetStateAction<RegFormData>>;
   resetRegForm: () => void;
 };
 
-export const RegFormContext = createContext<RegFormContextType>({
-  regFormData: initialFormData,
+const RegFormContext = createContext<RegFormContextType>({
+  regFormData: initialRegFormData,
   setRegFormData: () => {},
   resetRegForm: () => {},
 });
 
 export const RegFormProvider = ({ children }: { children: ReactNode }) => {
   const [regFormData, setRegFormData] =
-    useState<RegFormDataProps>(initialFormData);
+    useState<RegFormData>(initialRegFormData);
 
   const resetRegForm = () => {
-    setRegFormData(initialFormData);
+    setRegFormData(initialRegFormData);
   };
 
   return (
@@ -32,5 +34,4 @@ export const RegFormProvider = ({ children }: { children: ReactNode }) => {
     </RegFormContext.Provider>
   );
 };
-
 export const useRegFormContext = () => useContext(RegFormContext);

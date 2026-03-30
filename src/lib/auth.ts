@@ -2,6 +2,7 @@ import {betterAuth} from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 import { Resend } from "resend";
+import VerifyEmail from "../app/(auth)/(reg)/_components/VerifyEmail";
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
 const db = client.db("Delivery-Shop");
@@ -14,7 +15,7 @@ export const auth = betterAuth({
     requireEmailVerification: true, 
   },
   emailVerification: {
-    sendVerificationEmail: async ( { user, url, token }, request) => {
+    sendVerificationEmail: async ( { user, url}) => {
       void resend.emails.send({
         from: 'Galya Baluvanna <onboarding@resend.dev>',
     to: user.email,

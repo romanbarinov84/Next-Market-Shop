@@ -1,7 +1,7 @@
-
 "use client";
 
 import { ChangeEvent } from "react";
+
 import { InputMask } from "@react-input/mask";
 import { formStyles } from "./styles";
 
@@ -13,21 +13,21 @@ interface PhoneInputProps {
 const PhoneInput = ({ value, onChangeAction }: PhoneInputProps) => {
   return (
     <div>
-      <label htmlFor="phone" className={formStyles.label}>
+      <label htmlFor="phoneNumber" className={formStyles.label}>
         Телефон
       </label>
       <InputMask
-        mask="+38(___) ___-__-__"
+        mask="+38 (___) ___-__-__"
         replacement={{ _: /\d/ }}
-        id="phone"
+        id="phoneNumber"
         type="text"
         value={value}
-        placeholder="+38(___) ___-__-__"
+        placeholder="+38 (___) ___-__-__"
         onChange={onChangeAction}
         className={formStyles.input}
         showMask={true}
         onFocus={(e) => {
-          if (e.target.value === "+8") {
+          if (e.target.value === "+38") {
             e.target.setSelectionRange(2, 2);
           }
         }}
