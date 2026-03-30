@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const {
       phone,
       surname,
-      firstName,
+      name,
       password,
       birthdayDate,
       region,
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     const result = await db.collection("users").insertOne({
       phone,
       surname,
-      firstName,
+      name,
       password: hashedPassword,
       birthdayDate,
       region,
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         user: {
           phone,
           surname,
-          firstName,
+          name,
           email,
         },
       },

@@ -11,8 +11,9 @@ import PhoneInput from '../../(reg)/_components/PhoneInput';
 import { AuthFormLayout } from '../../_components/AuthFormLayout';
 
 
+
 const initialFormData = {
-    phone: '+38',
+    phoneNumber: '+38',
     password: '',
 };
 
@@ -49,7 +50,7 @@ const LoginPage = () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    phone: formData.phone.replace(/\D/g, ''),
+                    phoneNumber: formData.phoneNumber.replace(/\D/g, ''),
                     password: formData.password,
                 }),
             });
@@ -98,7 +99,7 @@ const LoginPage = () => {
     <div className="w-full flex flex-wrap justify-center gap-6">
       <div className="flex flex-col gap-5 w-full">
         <PhoneInput
-          value={formData.phone}
+          value={formData.phoneNumber}
           onChangeAction={handleChange}
         />
         <PasswordInput
@@ -117,10 +118,10 @@ const LoginPage = () => {
     <button
       type="submit"
       disabled={
-        !(formData.phone && formData.password) || isLoading
+        !(formData.phoneNumber && formData.password) || isLoading
       }
       className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 ${
-        formData.phone && formData.password
+        formData.phoneNumber && formData.password
           ? "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-lg"
           : "bg-gray-300 cursor-not-allowed"
       }`}
