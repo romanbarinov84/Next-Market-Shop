@@ -1,10 +1,11 @@
 import {betterAuth} from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
-import { phoneNumber } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
+import { Resend } from "resend";
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
 const db = client.db("Delivery-Shop");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
        database: mongodbAdapter(db),
@@ -14,10 +15,11 @@ export const auth = betterAuth({
   },
   emailVerification: {
     sendVerificationEmail: async ( { user, url, token }, request) => {
-      void sendEmail({
-        to: user.email,
-        subject: "Verify your email address",
-        text: `Click the link to verify your email: ${url}`,
+      void resend.emails.send({
+        from: 'Galya Baluvanna <onboarding@resend.dev>',
+    to: user.email,
+    subject: 'Подтвердите ваш email',
+    react: VerifyEmail({ username:user.name,verifyUrl:url}),//компонент тела письма
       });
     },
     expiresIn: 86400,
