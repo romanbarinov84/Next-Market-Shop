@@ -28,14 +28,49 @@ export const auth = betterAuth({
     autoSignInAfterVerification: false,
   },
    plugins: [ 
-        phoneNumber({  
-            sendOTP:async ({ phoneNumber, code }) => { 
-                try {
-                  
-                } catch (error) {
-                  
-                }
-            } 
+         phoneNumber({  
+          sendOTP: async ({ phoneNumber, code }) => {
+            console.log(`[DEBUG] Отправка OTP: ${code} для ${phoneNumber}`);
+            
+          },
+          //Чтобы пользоватся сервисо смс клаб раскоментируйте ниже ,а верхнее закоментируйте
+//            sendOTP: async ({ phoneNumber, code }) => {
+//   try {
+//     const res = await fetch('https://im.smsclub.mobi/sms/send', {
+//       method: 'POST',
+//       headers: {
+//         'Authorization': `Bearer ${process.env.SMS_API_ID}`,
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         phone: [phoneNumber],
+//         message: `Ваш код подтверждения в Галя Балуванна: ${code}`,
+//         src_addr: 'DeliveryShop'
+//       }),
+//     });
+
+//     const data = await res.json();
+//     if (data.status !== "ok"){
+//       throw new Error(data.status || "Ошибка отправки смс")
+//     }
+//     console.log('SMS sent:', data);
+//   } catch (error) {
+//     console.error('Failed to send SMS:', error);
+//   }
+// },
+  // signUpOnVerification: {
+  //               getTempEmail: (phoneNumber) => {
+  //                   return `${phoneNumber}@Delivery-Shop.ua`
+  //               },
+               
+  //               getTempName: (phoneNumber) => {
+  //                   return phoneNumber 
+  //               }
+  //           },
+            allowedAttempts: 3,
+            otpLength: 4,
+            expiresIn: 300,
+            requireVerification:true,
         }) 
     ] ,
   user:{additionalFields:{
