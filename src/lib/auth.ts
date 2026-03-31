@@ -3,6 +3,7 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 import { Resend } from "resend";
 import VerifyEmail from "../app/(auth)/(reg)/_components/VerifyEmail";
+import { phoneNumber } from "better-auth/plugins";
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
 const db = client.db("Delivery-Shop");
@@ -26,7 +27,17 @@ export const auth = betterAuth({
     expiresIn: 86400,
     autoSignInAfterVerification: false,
   },
-  
+   plugins: [ 
+        phoneNumber({  
+            sendOTP:async ({ phoneNumber, code }) => { 
+                try {
+                  
+                } catch (error) {
+                  
+                }
+            } 
+        }) 
+    ] ,
   user:{additionalFields:{
      phoneNumber: { type: "string", input: true, required: true },
       surname: { type: "string", input: true, required: true },
