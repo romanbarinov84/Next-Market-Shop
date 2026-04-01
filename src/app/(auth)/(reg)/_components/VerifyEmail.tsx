@@ -30,9 +30,9 @@ const VerifyEmail = (props: VerifyEmailProps) => {
 
                             <Text className="text-base text-gray-700 mb-4 mt-0 leading-5">
                                 Дякуємо, {username}, за реєстрацію! Щоб
-                                завершити процес та активувати Ваш акаунт,
-                                будь ласка, підтвердіть Ваш email, натиснувши
-                                кнопку нижче.
+                                завершити процес та активувати Ваш акаунт, будь
+                                ласка, підтвердіть Ваш email, натиснувши кнопку
+                                нижче.
                             </Text>
 
                             <Section className="text-center mb-6">
@@ -45,16 +45,16 @@ const VerifyEmail = (props: VerifyEmailProps) => {
                             </Section>
 
                             <Text className="text-sm text-gray-600 mb-4 mt-0 leading-5">
-                                Якщо кнопка не працює, скопіюйте та вставте
-                                це посилання в адресний рядок браузера:
+                                Якщо кнопка не працює, скопіюйте та вставте це
+                                посилання в адресний рядок браузера:
                                 <br />
                                 <span className="break-all">{verifyUrl}</span>
                             </Text>
 
                             <Text className="text-sm text-gray-600 mb-6 mt-0 leading-5">
-                                Посилання для підтвердження буде активне протягом
-                                24 годин. Якщо Ви не реєстрували акаунт,
-                                просто проігноруйте цей лист.
+                                Посилання для підтвердження буде активне
+                                протягом 24 годин. Якщо Ви не реєстрували
+                                акаунт, просто проігноруйте цей лист.
                             </Text>
 
                             <Hr className="border-gray-200 my-4" />

@@ -4,7 +4,6 @@ import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
 import GlobalLoader from '@/src/components/loading/GlobalLoader';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { buttonStyles, formStyles } from '../../(reg)/_components/styles';
 import Link from 'next/link';
 import PasswordInput from '../../(reg)/_components/PasswordInput';
 import PhoneInput from '../../(reg)/_components/PhoneInput';

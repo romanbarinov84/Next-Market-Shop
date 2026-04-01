@@ -1,16 +1,16 @@
 "use client";
 
 
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LoadingContent } from "../../_components/LoadingContent";
 import { PhoneOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ErrorContent } from "../../_components/ErrorContent";
-import { AuthFormLayout } from "../../../_components/AuthFormLayout";
 import { useRegFormContext } from "@/src/app/contexts/RegFormContext";
-import { authClient } from "@/src/lib/auth-client";
+import { AuthFormLayout } from "../../../_components/AuthFormLayout";
 import { EnterCode } from "../../../_components/EnterCode";
+import { authClient } from "@/src/lib/auth-client";
+
 
 export default function VerifyPhonePage() {
   const { regFormData } = useRegFormContext();
