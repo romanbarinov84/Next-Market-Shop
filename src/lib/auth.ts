@@ -17,10 +17,10 @@ export const auth = betterAuth({
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url }) => {
-            void resend.emails.send({
-                from: 'Galya Baluvanna <onboarding@resend.dev>',
+            await resend.emails.send({
+                from: 'Галя Балувана <onboarding@resend.dev>',
                 to: user.email,
-                subject: 'Подтвердите ваш email',
+                subject: 'Подтвердите email',
                 react: VerifyEmail({ username: user.name, verifyUrl: url }),
             });
         },
@@ -30,40 +30,66 @@ export const auth = betterAuth({
     plugins: [
         phoneNumber({
             sendOTP: async ({ phoneNumber, code }) => {
-                console.log(`[DEBUG] OTP для ${phoneNumber}: ${code}`);
+                console.log(`[DEBUG] Отправка OTP: ${code} for ${phoneNumber}`)
             },
             // sendOTP: async ({ phoneNumber, code }) => {
-            //   try {
-            //     const res = await fetch('https://im.smsclub.mobi/sms/send', {
-            //       method: 'POST',
-            //       headers: {
-            //         'Authorization': `Bearer ${process.env.SMS_API_ID}`,
-            //         'Content-Type': 'application/json',
-            //       },
-            //       body: JSON.stringify({
-            //         phone: [phoneNumber],
-            //         message: `Ваш код подтверждения в Галя Балуванна: ${code}`,
-            //         src_addr: 'Zamovlennia' // убедись, что альфа-имя корректное и есть в списке доступных
-            //       }),
-            //     });
+            //     try {
+            //         const response = await fetch(
+            //             'https://im.smsclub.mobi/sms/send',
+            //             {
+            //                 method: 'POST',
+            //                 headers: {
+            //                     Authorization: `Bearer ${process.env.SMS_API_ID}`,
+            //                     'Content-Type': 'application/json',
+            //                 },
+            //                 body: JSON.stringify({
+            //                     phone: [phoneNumber], // массив номеров
+            //                     message: `Ваш код подтверждения: ${code}`,
+            //                     src_addr: 'TAXI', // альфа-имя
+            //                 }),
+            //             },
+            //         );
 
-            //     const data = await res.json();
+            //         const result = await response.json();
+            //         console.log( "THIS IS THAT IS " , result);
+                    
 
-            //     // Проверяем, что SMS реально отправлено хотя бы на один номер
-            //     if (!data.success_request || Object.keys(data.success_request.info || {}).length === 0) {
-            //       throw new Error("Ошибка отправки смс: пустой ответ сервиса");
+            //         // Проверяем, что хотя бы один SMS был отправлен
+            //         if (
+            //             !result.success_request ||
+            //             Object.keys(result.success_request.info || {})
+            //                 .length === 0
+            //         ) {
+            //             throw new Error(
+            //                 'Ошибка отправки смс: пустой ответ сервиса',
+            //             );
+            //         }
+
+            //         console.log(
+            //             'SMS успешно отправлено:',
+            //             result.success_request.info,
+            //         );
+
+            //         // Можно дополнительно логировать неуспешные отправки
+            //         if (result.success_request.add_info) {
+            //             console.warn(
+            //                 'Не все SMS отправлены:',
+            //                 result.success_request.add_info,
+            //             );
+            //         }
+            //     } catch (error) {
+            //         console.error('Ошибка отправки смс:', error);
+            //         throw error; // важно кидать ошибку, чтобы better-auth понял, что OTP не отправился
             //     }
-
-            //     console.log('SMS sent successfully to', phoneNumber, data.success_request.info);
-            //   } catch (error) {
-            //     console.error('Failed to send SMS:', error);
-            //     throw error; // обязательно кидаем ошибку, чтобы better-auth понял что отправка не удалась
-            //   }
             // },
             signUpOnVerification: {
-                getTempEmail: (phoneNumber) =>
-                    `${phoneNumber}@delivery-shop.ua`,
-                getTempName: (phoneNumber) => phoneNumber,
+                getTempEmail: (phoneNumber) => {
+                    return `${phoneNumber}@delivery-shop.ua`;
+                },
+
+                getTempName: (phoneNumber) => {
+                    return phoneNumber;
+                },
             },
             allowedAttempts: 3,
             otpLength: 4,
