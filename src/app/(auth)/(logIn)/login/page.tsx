@@ -1,146 +1,132 @@
 'use client';
 
-import ErrorComponent from '@/src/components/errorComponent/ErrorComponent';
-import GlobalLoader from '@/src/components/loading/GlobalLoader';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import Link from 'next/link';
-import PasswordInput from '../../(reg)/_components/PasswordInput';
-import PhoneInput from '../../(reg)/_components/PhoneInput';
+import React, { useState } from 'react';
 import { AuthFormLayout } from '../../_components/AuthFormLayout';
-
-
-
-const initialFormData = {
-    phoneNumber: '+38',
-    password: '',
-};
+import { buttonStyles, formStyles } from '../../(reg)/_components/styles';
+import { InputMask } from '@react-input/mask';
+import Link from 'next/link';
 
 const LoginPage = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<{
-        error: Error;
-        userMessage: string;
-    } | null>(null);
-    const [formData, setFormData] = useState(initialFormData);
-    const [showPassword, setShowPassword] = useState(false);
-    const router = useRouter();
+    const [loginType, setLoginType] = useState<'email' | 'phone'>('email');
+    const [login, setLogin] = useState('');
+    const [error, setError] = useState<string | null>(null);
+     const [isLoading, setIsLoading] = useState(false);
 
-
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    ) => {
-        const { id, value } = e.target;
-
-        setFormData((prev) => ({ ...prev, [id]: value }));
+    const switchToEmail = () => {
+        setLogin('');
+        setLoginType('email');
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
+    const switchToPhone = () => {
+        setLogin('');
+        setLoginType('phone');
+    };
+
+    const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setLogin(value);
         setError(null);
-
-        try {
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    phoneNumber: formData.phoneNumber.replace(/\D/g, ''),
-                    password: formData.password,
-                }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.message || 'Ошибка авторизации');
-            }
-
-            router.replace('/');
-        } catch (error) {
-            setError({
-                error:
-                    error instanceof Error
-                        ? error
-                        : new Error('Неизвестная ошибка'),
-                userMessage:
-                    (error instanceof Error && error.message) ||
-                    'Ошибка авторизации. Попробуйте снова',
-            });
-        } finally {
-            setIsLoading(false);
-        }
     };
 
-    if (isLoading) return <GlobalLoader />;
-    if (error)
-        return (
-            <ErrorComponent
-                error={error.error}
-                userMessage={error.userMessage}
-            />
-        );
-
+    const handleSubmit = () => {};
     return (
-       <AuthFormLayout variant="register">
-  <h1 className="text-3xl font-extrabold text-center text-gray-800 mb-12">
-    Вход
-  </h1>
-  <form
-    onSubmit={handleSubmit}
-    autoComplete="off"
-    className="w-full max-w-[480px] mx-auto flex flex-col gap-6 overflow-y-auto pb-6"
-  >
-    <div className="w-full flex flex-wrap justify-center gap-6">
-      <div className="flex flex-col gap-5 w-full">
-        <PhoneInput
-          value={formData.phoneNumber}
-          onChangeAction={handleChange}
-        />
-        <PasswordInput
-          id="password"
-          label="Пароль"
-          value={formData.password}
-          onChangeAction={handleChange}
-          showPassword={showPassword}
-          togglePasswordVisibilityAction={() =>
-            setShowPassword(!showPassword)
+        <AuthFormLayout>
+            <h1 className="text-2xl font-bold text-[#414141] text-center mb-8">
+                Вход
+            </h1>
+            <form
+                onSubmit={handleSubmit}
+                className="w-65 mx-auto max-h-screen flex flex-col justify-center overflow-y-auto gap-y-8"
+                autoComplete="off"
+            >
+                <div className="w-full flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 relative">
+                    <div className="flex flex-col gap-y-4 items-start w-full">
+                        <div>
+                            <label
+                                htmlFor="login"
+                                className={formStyles.label}
+                            ></label>
+                            {loginType === 'email' ? 'E-mail' : 'Phone'}
+                            {loginType === 'phone' ? (
+                                <InputMask
+                                    mask="+38 (___) ___-__-__"
+                                    replacement={{ _: /\d/ }}
+                                    value={login}
+                                    placeholder="+38 (___) ___-__-__"
+                                    onChange={handleLoginChange}
+                                    className={formStyles.input}
+                                    required
+                                />
+                            ) : (
+                                <input
+                                    type="email"
+                                    value={login}
+                                    onChange={handleLoginChange}
+                                    className={formStyles.input}
+                                    placeholder="exampleMail@mail.com"
+                                    required
+                                ></input>
+                            )}
+                        </div>
+                        <div className="flex gap-4 justify-center mt-4">
+                            <button
+                                type="button"
+                                onClick={switchToEmail}
+                                className="px-4 py-2 bg-[#ff6633] text-white rounded hover:bg-[#ff8844] transition-colors"
+                            >
+                                По E-mail
+                            </button>
+                            <button
+                                type="button"
+                                onClick={switchToPhone}
+                                className="px-4 py-2 bg-(--color-primary) text-white rounded hover:bg-green-400  transition-colors"
+                            >
+                                По телефону
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button
+          type="submit"
+          disabled={
+            (loginType === "email" &&
+              (!login.includes("@") || !login.includes("."))) ||
+            (loginType === "phone" && login.replace(/\D/g, "").length < 12) ||
+            isLoading
           }
-        />
-      </div>
-    </div>
-
-    <button
-      type="submit"
-      disabled={
-        !(formData.phoneNumber && formData.password) || isLoading
-      }
-      className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 ${
-        formData.phoneNumber && formData.password
-          ? "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-lg"
-          : "bg-gray-300 cursor-not-allowed"
-      }`}
-    >
-      Вход
-    </button>
-
-    <div className="flex flex-row justify-between items-center mt-4 text-sm text-gray-600">
-      <Link
-        href="/register"
-        className="hover:text-indigo-600 transition-colors duration-300"
-      >
-        Регистрация
-      </Link>
-      <Link
-        href="/forgotPassword"
-        className="hover:text-indigo-600 transition-colors duration-300"
-      >
-        Забыли пароль?
-      </Link>
-    </div>
-  </form>
-</AuthFormLayout>
+          className={`
+            ${buttonStyles.base} [&&]:my-0
+           ${
+             (loginType === "email" &&
+               (!login.includes("@") || !login.includes("."))) ||
+             (loginType === "phone" && login.replace(/\D/g, "").length < 12) ||
+             isLoading
+               ? "cursor-not-allowed bg-[#fcd5ba] text-[#ff6633]"
+               : "bg-[#ff6633] text-white hover:shadow-(--shadow-article)"
+           }
+            active:shadow-(--shadow-button-active)
+           duration-300
+            
+          `}
+        >
+          Вход
+        </button>
+         <div className="flex flex-row flex-wrap mx-auto text-xs gap-4 justify-center">
+          <Link
+            href="/register"
+            className={`${formStyles.loginLink} w-auto px-2`}
+          >
+            Регистрация
+          </Link>
+          <Link
+            href="/forgot-password"
+            className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300"
+          >
+            Забыли пароль?
+          </Link>
+        </div>
+            </form>
+        </AuthFormLayout>
     );
 };
 
