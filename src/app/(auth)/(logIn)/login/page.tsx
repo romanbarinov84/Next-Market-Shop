@@ -28,7 +28,22 @@ const LoginPage = () => {
         setError(null);
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit =async(e:React.FormEvent) => {
+      e.preventDefault();
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch("api/auth/check-login",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({login,loginType}),
+
+        })
+      } catch (error) {
+        
+      }
+    };
     return (
         <AuthFormLayout>
             <h1 className="text-2xl font-bold text-[#414141] text-center mb-8">
