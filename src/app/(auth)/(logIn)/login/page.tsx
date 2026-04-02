@@ -26,10 +26,7 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
 
-    const handleClose = () => {
-        setFormData(initialFormData);
-        router.back();
-    };
+
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
