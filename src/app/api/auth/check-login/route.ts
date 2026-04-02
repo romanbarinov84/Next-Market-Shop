@@ -14,7 +14,7 @@ export async function POST (request:Request) {
             return NextResponse.json({exists:false,verified:false});
         }
 
-        const verified = loginType === "email" ? user.emailVerified : !!user.phoneNumberVerified;
+        const verified = loginType === "email" ? user.emailVerified : user.phoneNumberVerified;
         
         return NextResponse.json({exists:true , verified })
     } catch (error) {

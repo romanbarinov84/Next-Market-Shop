@@ -19,7 +19,7 @@ export function validateRegisterForm(formData: {
   if (!formData.phoneNumber || formData.phoneNumber.replace(/\D/g, "").length !== 12) {
     return {
       isValid: false,
-      errorMessage: "Введите корректный номер телефона (11 цифр)",
+      errorMessage: "Введите корректный номер телефона (12 цифр)",
     };
   }
 
