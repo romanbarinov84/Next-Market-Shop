@@ -23,7 +23,8 @@ export async function POST(request: NextRequest) {
         {
           $set: {
             password: await bcrypt.hash(password, 10),
-            phoneNumber: phoneNumber,
+            
+            
           },
         }
       );

@@ -1,22 +1,51 @@
+"use client";
+
 import Image from "next/image";
 
-const Tooltip = ({text,position = "bottom"}: {text: string;position?:"top" | "bottom"}) => {
+const Tooltip = ({
+  text,
+  position = "bottom",
+}: {
+  text: string;
+  position?: "top" | "bottom";
+}) => {
+  const isTop = position === "top";
+
   return (
-    <div className={`absolute left-0 top-full mt-1 w-full transition-all duration-300 ease-in-out ${position === "top" ? "-top-12" : ""}`}>
-      <div className="relative bg-[#d80000] text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn">
+    <div
+      className={`
+        absolute left-1/2 -translate-x-1/2 z-50
+        ${isTop ? "bottom-full mb-2" : "top-full mt-2"}
+      `}
+    >
+      <div
+        className="
+          relative bg-[#d80000] text-white text-sm px-3 py-2
+          rounded-lg shadow-lg flex items-center gap-2
+          animate-fadeIn
+        "
+      >
         <Image
           src="/ALERTiCON.png"
-          alt={""}
-          width={21}
-          height={21}
-          className="mr-4"
+          alt="alert"
+          width={18}
+          height={18}
         />
+
+        <span className="text-sm">{text}</span>
+
+        {/* стрелка */}
         <div
-          className="absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0 
-                     border-l-[6px] border-r-[6px] border-b-2 
-                     border-l-transparent border-r-transparent border-b-[#d80000]"
-        ></div>
-        {text}
+          className={`
+            absolute left-1/2 -translate-x-1/2 w-0 h-0
+            border-l-[6px] border-r-[6px] border-transparent
+            ${
+              isTop
+                ? "top-full border-t-[6px] border-t-[#d80000]"
+                : "bottom-full border-b-[6px] border-b-[#d80000]"
+            }
+          `}
+        />
       </div>
     </div>
   );

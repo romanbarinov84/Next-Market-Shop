@@ -1,5 +1,5 @@
 'use client';
-
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 import { AuthFormLayout } from '../../_components/AuthFormLayout';
@@ -9,6 +9,7 @@ import { buttonStyles } from '../../(reg)/_components/styles';
 import { authClient } from '@/src/lib/auth-client';
 import { LoadingContent } from '../../(reg)/_components/LoadingContent';
 import Tooltip from '../../(reg)/_components/Tooltip';
+import Link from 'next/link';
 
 const EnterPasswordPage = () => {
     return (
@@ -75,18 +76,21 @@ const EnterPasswordContent = () => {
                 }
                 router.replace('/');
             } else {
-                await authClient.signIn.email({
-                    email: loginParam,
-                    password,
-                    callbackURL: '/',
-                },
-               { onSuccess:(ctx) =>{
-                    router.replace("/")
-                },
-                onError:(ctx) => {
-                    setError(ctx.error?.message || "Ошибка при входе")
-                }}
-            );
+                await authClient.signIn.email(
+                    {
+                        email: loginParam,
+                        password,
+                        callbackURL: '/',
+                    },
+                    {
+                        onSuccess: (ctx) => {
+                            router.replace('/');
+                        },
+                        onError: (ctx) => {
+                            setError(ctx.error?.message || 'Ошибка при входе');
+                        },
+                    },
+                );
             }
         } catch (error) {
             const errorMessage = getErrorMessage(error);
@@ -97,61 +101,75 @@ const EnterPasswordContent = () => {
     };
 
     if (isLoading) {
-  return (
-    <AuthFormLayout>
-      <LoadingContent title='Подождите идет авторизация' />
-    </AuthFormLayout>
-  );
-}
+        return (
+            <AuthFormLayout>
+                <LoadingContent title="Подождите идет авторизация" />
+            </AuthFormLayout>
+        );
+    }
 
     return (
-        <AuthFormLayout>
-            <h1 className="text-2xl font-bold text-[#414141] text-center mb-8">
-                Вход
-            </h1>
+       <AuthFormLayout>
+  <h1 className="text-2xl font-bold text-[#414141] text-center mb-8">
+    Вход
+  </h1>
+  <form
+    onSubmit={handleSubmit}
+    autoComplete="off"
+    className="w-65 mx-auto flex flex-col gap-y-6"
+  >
+    <div className="flex flex-col gap-y-4 relative">
+      <PasswordInput
+        id="password"
+        label="Пароль"
+        value={password}
+        onChangeAction={handleChange}
+        showPassword={showPassword}
+        togglePasswordVisibilityAction={() =>
+          setShowPassword(!showPassword)
+        }
+        inputClass="h-15"
+      />
 
-            <form
-                onSubmit={handleSubmit}
-                autoComplete="off"
-                className="w-65 mx-auto flex flex-col gap-y-6"
-            >
-                <div className="flex flex-col gap-y-4">
-                    <PasswordInput
-                        id="password"
-                        label="Пароль"
-                        value={password}
-                        onChangeAction={handleChange}
-                        showPassword={showPassword}
-                        togglePasswordVisibilityAction={() =>
-                            setShowPassword(!showPassword)
-                        }
-                        inputClass="h-15"
-                    />
+      {error && <Tooltip text={error} position="top" />}
+    </div>
 
-                    {error && 
-                       <Tooltip text={error} position="top"/>
-                    }
-                </div>
+    <button
+      type="submit"
+      disabled={!password || isLoading}
+      className={`
+        ${buttonStyles.base}
+        ${
+          !password || isLoading
+            ? 'bg-[#fcd5ba] text-[#ff6633] cursor-not-allowed'
+            : 'bg-[#ff6633] text-white hover:shadow-(--shadow-article)'
+        }
+        active:shadow-(--shadow-button-active)
+        duration-300
+      `}
+    >
+      {isLoading ? 'Загрузка...' : 'Вход'}
+    </button>
+  </form>
 
-                <div className="flex gap-4 justify-center"></div>
+  {/* Ссылки вынесены наружу формы */}
+  <div className="flex flex-row flex-wrap justify-center gap-x-6 mt-4 text-xs">
+    <Link
+      href="/login"
+      className="h-8 text-[#414141] hover:text-black flex items-center justify-center gap-x-2 duration-300 cursor-pointer hover:-translate-x-1"
+    >
+      <ArrowLeft className="w-5 h-5" />
+      Вернуться
+    </Link>
 
-                <button
-                    type="submit"
-                    disabled={!password || isLoading}
-                    className={`
-            ${buttonStyles.base}
-            ${
-                !password || isLoading
-                    ? 'bg-[#fcd5ba] text-[#ff6633] cursor-not-allowed'
-                    : 'bg-[#ff6633] text-white hover:shadow-(--shadow-article)'
-            }
-            active:shadow-(--shadow-button-active)
-            duration-300
-          `}
-                >
-                    {isLoading ? 'Загрузка...' : 'Вход'}
-                </button>
-            </form>
-        </AuthFormLayout>
+    <Link
+      href="/forgot-password"
+      className="h-8 text-(--color-primary) hover:text-orange-400 flex items-center justify-center gap-x-2 duration-300 cursor-pointer hover:-translate-x-0.5"
+    >
+      Забыли пароль?
+      <ArrowRight className="w-4 h-4" />
+    </Link>
+  </div>
+</AuthFormLayout>
     );
 };
