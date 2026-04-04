@@ -21,7 +21,9 @@ export const auth = betterAuth({
                 from: 'Галя Балувана <onboarding@resend.dev>',
                 to: user.email,
                 subject: 'Подтвердите email',
-                react: VerifyEmail({ username: user.name, verifyUrl: url }),
+                html: `<h1>Привет, ${user.name}</h1>
+           <p>Подтвердите свой email, перейдя по ссылке:</p>
+           <a href="${url}">${url}</a>`,
             });
         },
         expiresIn: 86400,
@@ -30,7 +32,7 @@ export const auth = betterAuth({
     plugins: [
         phoneNumber({
             sendOTP: async ({ phoneNumber, code }) => {
-                console.log(`[DEBUG] Отправка OTP: ${code} for ${phoneNumber}`)
+                console.log(`[DEBUG] Отправка OTP: ${code} for ${phoneNumber}`);
             },
             // sendOTP: async ({ phoneNumber, code }) => {
             //     try {
@@ -52,7 +54,6 @@ export const auth = betterAuth({
 
             //         const result = await response.json();
             //         console.log( "THIS IS THAT IS " , result);
-                    
 
             //         // Проверяем, что хотя бы один SMS был отправлен
             //         if (

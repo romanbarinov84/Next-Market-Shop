@@ -76,7 +76,7 @@ const EnterLoginPage = () => {
             if(loginType === "phone"){
               setShowAuthMethodChoice(true)
             }else{
-              router.push(`/password?login=${encodeURIComponent(login)}&loginType=${loginType}`)
+              router.push(`/password-enter?login=${encodeURIComponent(login)}&loginType=${loginType}`)
             }
 
 

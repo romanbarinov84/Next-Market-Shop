@@ -1,11 +1,9 @@
 'use client';
 
-import Image from 'next/image';
-
+import { ArrowBigLeft } from "lucide-react";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
 import { buttonStyles } from '../../(reg)/_components/styles';
 import { useAuthStore } from '@/src/store/authStore';
 import { LoadingContent } from '../../(reg)/_components/LoadingContent';
@@ -165,12 +163,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
                     href="/register"
                     className="h-8 text-xs text-[#414141] hover:text-black w-30 flex items-center justify-center gap-x-2 mx-auto duration-300 cursor-pointer"
                 >
-                    <Image
-                        src="/icons-auth/icon-arrow-left.svg"
-                        width={24}
-                        height={24}
-                        alt="Вернуться"
-                    />
+                    <ArrowBigLeft className="w-6 h-6" />
                     Вернуться
                 </Link>
             </div>
