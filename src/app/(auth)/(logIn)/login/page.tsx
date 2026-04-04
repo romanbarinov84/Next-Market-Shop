@@ -12,7 +12,7 @@ import { MailWarning, PhoneOff } from "lucide-react";
 import { AuthMethodSelector } from '../../_components/AuthMethodSelector';
 import { UnverifiedEmail } from '../../_components/UnverifiedEmail';
 
-const LoginPage = () => {
+const EnterLoginPage = () => {
     const [loginType, setLoginType] = useState<'email' | 'phone'>('email');
     const [login, setLogin] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -256,4 +256,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default EnterLoginPage;
