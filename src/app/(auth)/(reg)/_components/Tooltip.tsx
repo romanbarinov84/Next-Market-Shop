@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-const Tooltip = ({text}: {text: string}) => {
+const Tooltip = ({text,position = "bottom"}: {text: string;position?:"top" | "bottom"}) => {
   return (
-    <div className="absolute left-0 top-full mt-1 w-full transition-all duration-300 ease-in-out">
+    <div className={`absolute left-0 top-full mt-1 w-full transition-all duration-300 ease-in-out ${position === "top" ? "-top-12" : ""}`}>
       <div className="relative bg-[#d80000] text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn">
         <Image
           src="/ALERTiCON.png"

@@ -3,14 +3,13 @@ import bcrypt from "bcryptjs";
 import { ObjectId } from "mongodb";
 import { getDB } from "@/UTILS/api-routes";
 
-
 export async function POST(request: NextRequest) {
   try {
-    const { userId, password } = await request.json();
+    const { userId, password, phoneNumber } = await request.json();
 
-    if (!userId || !password) {
+    if (!userId || !password || !phoneNumber) {
       return Response.json(
-        { error: "Требуется userId и password" },
+        { error: "Требуется userId, password и phoneNumber" },
         { status: 400 }
       );
     }
@@ -21,7 +20,12 @@ export async function POST(request: NextRequest) {
       .collection("user")
       .updateOne(
         { _id: ObjectId.createFromHexString(userId) },
-        { $set: { password: await bcrypt.hash(password, 10) } }
+        {
+          $set: {
+            password: await bcrypt.hash(password, 10),
+            phoneNumber: phoneNumber,
+          },
+        }
       );
 
     if (result.matchedCount === 0) {

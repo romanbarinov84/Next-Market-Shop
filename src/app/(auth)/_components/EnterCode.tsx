@@ -47,6 +47,7 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
                 body: JSON.stringify({
                     userId: verifyData.user.id,
                     password: regFormData.password,
+                    phoneNumber:regFormData.phoneNumber,
                 }),
             });
 
