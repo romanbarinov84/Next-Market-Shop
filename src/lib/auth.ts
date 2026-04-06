@@ -2,8 +2,8 @@ import { betterAuth } from 'better-auth';
 import { mongodbAdapter } from 'better-auth/adapters/mongodb';
 import { MongoClient } from 'mongodb';
 import { Resend } from 'resend';
-import VerifyEmail from '../app/(auth)/(reg)/_components/VerifyEmail';
 import { phoneNumber } from 'better-auth/plugins';
+import PasswordResetEmail from '../app/(auth)/(updatePass)/_components/PasswordResetEmail';
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
 const db = client.db('Delivery-Shop');
@@ -14,6 +14,19 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
         requireEmailVerification: true,
+        resetPasswordTokenExpiresIn:86400,
+        sendResetPassword: async ({ user, url }) => {
+			 await resend.emails.send({
+                from: 'Галя Балувана <onboarding@resend.dev>',
+                to: user.email,
+                subject: 'Подтвердите email',
+                react:PasswordResetEmail({userName:user.name,resetUrl:url}),
+                html: `<h1>Привет, ${user.name}</h1>
+           <p>Сброс пароля Галя Балуваеа</p>
+           <a href="${url}">${url}</a>`,
+            });
+		},
+
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url }) => {
