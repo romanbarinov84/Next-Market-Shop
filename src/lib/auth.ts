@@ -17,7 +17,7 @@ export const auth = betterAuth({
         resetPasswordTokenExpiresIn:86400,
         sendResetPassword: async ({ user, url }) => {
 			 await resend.emails.send({
-                from: 'Галя Балувана <onboarding@resend.dev>',
+                from: 'Delivery Shop <onboarding@delivery-shop.ua>',
                 to: user.email,
                 subject: 'Подтвердите email',
                 react:PasswordResetEmail({username:user.name,resetUrl:url}),
