@@ -59,6 +59,17 @@ const EnterPasswordContent = () => {
     setError(null);
   };
 
+   const handleForgotPassword = () => {
+        if(loginType === "phone"){
+            router.replace(
+                `/phone-pass-reset`
+            )
+        }else{
+            router.replace("/forgot-password");
+        }
+    }
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -167,14 +178,14 @@ const EnterPasswordContent = () => {
            <ArrowBigLeft/>
             Вернуться
           </button>
-          <Link
-            href="/forgot-password"
+          <button
+           onClick={handleForgotPassword}
             className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300 cursor-pointer"
           >
            
             Забыли пароль?
              <ArrowBigRight/>
-          </Link>
+          </button>
         </div>
       </form>
     </AuthFormLayout>
