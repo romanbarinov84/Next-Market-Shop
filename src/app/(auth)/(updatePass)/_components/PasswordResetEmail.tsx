@@ -64,21 +64,20 @@ const PasswordResetEmail = (props: ResetPasswordProps) => {
               <Text className="text-xs text-gray-500 m-0 leading-4">
                 С уважением,
                 <br />
-                Команда &quot;Северяночки&quot;
+                Команда &quot;Гфля Балувана&quot;
               </Text>
             </Section>
 
             <Section className="mt-6 pt-4 border-t border-gray-200">
               <Text className="text-xs text-gray-400 m-0 text-center leading-4">
-                Северяночка
-                <br />
-                Россия, Архангельск, ул. Ленина, д.1
+                Галя Балуванна
+                Украина ,киев область , город Бровары
                 <br />
                 ИНН 0291234567890
               </Text>
 
               <Text className="text-xs text-gray-400 m-0 text-center mt-2 leading-4">
-                © {new Date().getFullYear()} Северяночка. Все права защищены.
+                © {new Date().getFullYear()} Галя Балувана. Все права защищены.
               </Text>
             </Section>
           </Container>

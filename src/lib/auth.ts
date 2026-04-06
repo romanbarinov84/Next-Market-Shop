@@ -20,7 +20,7 @@ export const auth = betterAuth({
                 from: 'Галя Балувана <onboarding@resend.dev>',
                 to: user.email,
                 subject: 'Подтвердите email',
-                react:PasswordResetEmail({userName:user.name,resetUrl:url}),
+                react:PasswordResetEmail({username:user.name,resetUrl:url}),
                 html: `<h1>Привет, ${user.name}</h1>
            <p>Сброс пароля Галя Балуваеа</p>
            <a href="${url}">${url}</a>`,

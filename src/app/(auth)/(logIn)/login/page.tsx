@@ -39,6 +39,16 @@ const EnterLoginPage = () => {
 
     const handleToRegister = () => router.replace("/register");
 
+    const handleForgotPassword = () => {
+        if(loginType === "phone"){
+            router.replace(
+                `/phone-pass-reset`
+            )
+        }else{
+            router.replace("/forgot-password");
+        }
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
@@ -244,12 +254,12 @@ const EnterLoginPage = () => {
                     >
                         Регистрация
                     </Link>
-                    <Link
-                        href="/forgot-password"
+                    <button
+                        onClick={handleForgotPassword}
                         className="h-8 text-[#414141] hover:text-black w-30 flex items-center justify-center duration-300"
                     >
                         Забыли пароль?
-                    </Link>
+                    </button>
                 </div>
             </form>
         </AuthFormLayout>
