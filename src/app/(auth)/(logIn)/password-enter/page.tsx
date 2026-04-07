@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useState } from "react";
 
 import { AuthFormLayout } from "../../_components/AuthFormLayout";
 import { LoadingContent } from "../../(reg)/_components/LoadingContent";
 
-import Link from "next/link";
 
 
 
@@ -92,9 +91,9 @@ const EnterPasswordContent = () => {
           throw new Error(data.message || "Ошибка при входе");
         }
 
-        const userName = data.user?.name;
+       
 
-        login(userName);
+        login();
 
         router.replace("/");
       } else {
@@ -104,9 +103,9 @@ const EnterPasswordContent = () => {
             password,
           },
           {
-            onSuccess: (ctx) => {
-              const userName = ctx.data?.user.name || "Пользователь";
-              login(userName);
+            onSuccess: () => {
+              
+              login();
               router.replace("/");
             },
             onError: (ctx) => {

@@ -57,9 +57,9 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
                 throw new Error('Данные не получены');
             }
 
-            const userData = await response.json();
+             await response.json();
 
-            login(userData.userName);
+            login();
 
             router.replace('/');
         } catch (error) {
@@ -135,7 +135,7 @@ const LoginWithOTP = ({ phoneNumber }: { phoneNumber: string }) => {
                                 setCode(e.target.value);
                                 setError('');
                             }}
-                            className="flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-[#70c05b] focus:shadow-(--shadow-button-default) focus:bg-white focus:outline-none"
+                            className="flex justify-center w-27.5 h-15 text-center text-2xl px-4 py-3 border border-[#bfbfbf] rounded focus:border-primary focus:shadow-(--shadow-button-default) focus:bg-white focus:outline-none"
                             autoComplete="one-time-code"
                             required
                         />
