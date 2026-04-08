@@ -1,6 +1,6 @@
 export const getAvatarByGender = (gender?: string) => {
-  if (gender === "male") return "/images/graphics/defaultAvatars/male.png";
-  if (gender === "female") return "/images/graphics/defaultAvatars/female.png";
+  if (gender === "male") return "/iconUser.png";
+  if (gender === "female") return "/iconUser.png";
 
-  return "/images/graphics/defaultAvatars/male.png";
+  return "/iconUser.png";
 };
