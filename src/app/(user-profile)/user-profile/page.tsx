@@ -11,6 +11,7 @@ import { ErrorContent } from "../../(auth)/(reg)/_components/ErrorContent";
 import { useAuthStore } from "@/src/store/authStore";
 import ProfileHeader from "../_components/ProfileHeader";
 import SecuritySection from "../_components/SecuritySection";
+import ProfileAvatar from "../_components/ProfileAvatar";
 
 const ProfilePage = () => {
   const { user, isAuth, checkAuth } = useAuthStore();
@@ -85,6 +86,7 @@ const ProfilePage = () => {
                   )}
                 </div>
               </div>
+              <ProfileAvatar gender={user.gender}/>
               <SecuritySection />
             </div>
           </div>
