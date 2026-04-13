@@ -6,5 +6,6 @@ export const CONFIG = {
     CARD_DISCOUNT_PERCENT:6,
     ITEMS_PER_PAGE_CATEGORY:8,
     FALLBACK_PRICE_RANGE:{min:0 , max:3000},
+    SITE_URL: "https://delivery-shop.ua",
     TEMPORARY_EMAIL_DOMAIN: "@delivery-shop.ua",
 }
