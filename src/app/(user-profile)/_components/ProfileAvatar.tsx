@@ -218,7 +218,7 @@ const ProfileAvatar = ({ gender }: { gender: string }) => {
           title="Сделать фото"
         >
           <Image
-            src="/icons-auth/icon-camera.png"
+            src="/iconcamera-.png"
             alt="Фото"
             width={24}
             height={24}
