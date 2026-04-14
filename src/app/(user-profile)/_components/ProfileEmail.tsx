@@ -140,7 +140,19 @@ const ProfileEmail = () => {
         )}
       </div>
 
-      {hasNoEmail && !isEditing && (
+     
+
+      <div className={profileStyles.inputContainer}>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          onChange={handleEmailChange}
+          className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
+          placeholder="Введите ваш email"
+          disabled={!isEditing}
+        />
+         {hasNoEmail && !isEditing && (
         <div className="flex items-center bg-amber-50 text-amber-700 px-3 py-2 rounded-lg mb-3">
           <AlertCircle className="h-4 w-4 mr-2" />
           <span className="text-sm">
@@ -175,17 +187,6 @@ const ProfileEmail = () => {
           <span className="text-sm">{error}</span>
         </div>
       )}
-
-      <div className={profileStyles.inputContainer}>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          onChange={handleEmailChange}
-          className={`${formStyles.input} [&&]:w-full disabled:cursor-not-allowed [&&]:disabled:bg-[#f3f2f1]`}
-          placeholder="Введите ваш email"
-          disabled={!isEditing}
-        />
         <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
       </div>
     </div>
