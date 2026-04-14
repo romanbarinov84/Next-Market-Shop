@@ -42,7 +42,7 @@ const SelectCity = ({
         {!disabled && (
           <div className="absolute right-2 top-2 transform -transform-y-1/2 pointer-events-none">
             <Image
-              src="/icons-products/icon-arrow-right.svg"
+              src="/iconarrowright.png"
               alt="Выберите населенный пункт"
               width={24}
               height={24}
