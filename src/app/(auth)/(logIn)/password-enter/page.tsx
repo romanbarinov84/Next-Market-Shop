@@ -109,12 +109,17 @@ const EnterPasswordContent = () => {
               router.replace("/");
             },
             onError: (ctx) => {
-              setError(ctx.error?.message || "Ошибка при входе");
+              if(ctx.error?.message.includes("Invalid email or password")){
+                setError("Ошибка при входе")
+              }else{
+                setError(ctx.error?.massage || "Ошибка при входе")
+              }
+             
             },
           }
         );
 
-        router.replace("/");
+        
       }
     } catch (error) {
       const errorMessage = getErrorMessage(error);
