@@ -6,6 +6,8 @@ import { phoneNumber } from 'better-auth/plugins';
 import PasswordResetEmail from '../app/(auth)/(updatePass)/_components/PasswordResetEmail';
 import { CONFIG } from '@/config/config';
 import EmailChangeVerification from '../app/(user-profile)/_components/EmailChangeVerification';
+import DeleteVerify from '../app/(user-profile)/_components/DeleteVerify';
+import { deleteUserAvatarFromGridFS } from '@/UTILS/deleteUserAvatar';
 
 const client = new MongoClient(process.env.DELIVERY_SHOP_DB_URL!);
 const db = client.db('Delivery-Shop');
@@ -13,26 +15,28 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const auth = betterAuth({
     database: mongodbAdapter(db),
-    session:{
-        expiresIn:60*60*24*30,
-        updateAge:60*60*24,
+    session: {
+        expiresIn: 60 * 60 * 24 * 30,
+        updateAge: 60 * 60 * 24,
     },
     emailAndPassword: {
         enabled: true,
         requireEmailVerification: true,
-        resetPasswordTokenExpiresIn:86400,
+        resetPasswordTokenExpiresIn: 86400,
         sendResetPassword: async ({ user, url }) => {
-			 await resend.emails.send({
+            await resend.emails.send({
                 from: 'Delivery Shop <onboarding@delivery-shop.ua>',
                 to: user.email,
                 subject: 'Подтвердите email',
-                react:PasswordResetEmail({username:user.name,resetUrl:url}),
+                react: PasswordResetEmail({
+                    username: user.name,
+                    resetUrl: url,
+                }),
                 html: `<h1>Привет, ${user.name}</h1>
            <p>Сброс пароля Галя Балуваеа</p>
            <a href="${url}">${url}</a>`,
             });
-		},
-
+        },
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url }) => {
@@ -117,44 +121,43 @@ export const auth = betterAuth({
             requireVerification: true,
         }),
     ],
-   user: {
-    changeEmail: {
-      enabled: true,
-      sendChangeEmailVerification: async ({
-        user,
-        newEmail,
-        url,
-      }: {
-        user: { email: string; name: string };
-        newEmail: string;
-        url: string;
-      }) => {
-        await resend.emails.send({
-          from: "Galya Baluvana Shop <onboarding@resend.dev>",
-          to: user.email,
-          subject: "Подтверждение смены email в Galya Baluvana",
-          react: EmailChangeVerification({
-            username: user.name,
-            currentEmail: user.email,
-            newEmail,
-            verificationUrl: url,
-          }),
-        });
-      },
+    user: {
+        changeEmail: {
+            enabled: true,
+            sendChangeEmailVerification: async ({
+                user,
+                url,
+            }: {
+                user: { email: string; name: string };
+                newEmail: string;
+                url: string;
+            }) => {
+                await resend.emails.send({
+                    from: 'Galya Baluvana Shop <onboarding@resend.dev>',
+                    to: user.email,
+                    subject: 'Подтверждение смены email в Galya Baluvana',
+                    react: DeleteVerify({
+                        username: user.name,
+                        verifyUrl: url,
+                    }),
+                });
+            },
+        },
+        afterDelete:async (user: { id: string })=>{
+            await deleteUserAvatarFromGridFS(user.id)
+        }
     },
-  },
-  additionalFields: {
-      phoneNumber: { type: "string", input: true, required: true },
-      surname: { type: "string", input: true, required: true },
-      birthdayDate: { type: "date", input: true, required: true },
-      region: { type: "string", input: true, required: true },
-      location: { type: "string", input: true, required: true },
-      gender: { type: "string", input: true, required: true },
-      card: { type: "string", input: true, required: false },
-      hasCard: { type: "boolean", input: true, required: false },
+    additionalFields: {
+        phoneNumber: { type: 'string', input: true, required: true },
+        surname: { type: 'string', input: true, required: true },
+        birthdayDate: { type: 'date', input: true, required: true },
+        region: { type: 'string', input: true, required: true },
+        location: { type: 'string', input: true, required: true },
+        gender: { type: 'string', input: true, required: true },
+        card: { type: 'string', input: true, required: false },
+        hasCard: { type: 'boolean', input: true, required: false },
     },
 });
-
 
 // import { CONFIG } from "../../config/config";
 // import { betterAuth } from "better-auth";
@@ -197,7 +200,7 @@ export const auth = betterAuth({
 //     `,
 //     text: `Подтвердите Ваш email\n\nСпасибо, ${user.name}, за регистрацию!\n\nДля подтверждения перейдите по ссылке: ${url}`,
 //   });
-  
+
 //   console.log("Email отправлен через MailDev. Preview: http://localhost:1080");
 // }
 
@@ -223,7 +226,7 @@ export const auth = betterAuth({
 //     `,
 //     text: `Сброс пароля\n\nЗдравствуйте, ${user.name}!\n\nДля сброса пароля перейдите по ссылке: ${url}`,
 //   });
-  
+
 //   console.log("Email сброса пароля отправлен через MailDev. Preview: http://localhost:1080");
 // }
 
@@ -250,7 +253,7 @@ export const auth = betterAuth({
 //     `,
 //     text: `Подтверждение смены email\n\nЗдравствуйте, ${user.name}!\n\nВы запросили смену email с ${user.email} на ${newEmail}.\n\nДля подтверждения перейдите по ссылке: ${url}`,
 //   });
-  
+
 //   console.log("Email смены email отправлен через MailDev. Preview: http://localhost:1080");
 // }
 
