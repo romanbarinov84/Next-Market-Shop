@@ -14,6 +14,8 @@ type UserData = {
   birthdayDate?: string;
   location?: string;
   region?: string;
+  card?:string;
+  hasCard:string;
 } | null;
 
 type AuthState = {

@@ -6,7 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getAvatarByGender } from "@/UTILS/getAvatarByGender";
 import { useAuthStore } from "@/src/store/authStore";
-
+import { checkAvatarExist } from "@/UTILS/avatarUtil";
+;
 
 const Profile = () => {
   const { isAuth, user, logout, checkAuth, isLoading } = useAuthStore();
@@ -23,11 +24,25 @@ const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    if (user?.id) {
-      setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`);
-    } else if (user?.gender) {
-      setAvatarSrc(getAvatarByGender(user.gender));
-    }
+    const checkAvatar = async () => {
+      if (user?.id) {
+        try {
+          const exists = await checkAvatarExist(user.id);
+
+          if (exists) {
+            setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`);
+          } else {
+            setAvatarSrc(getAvatarByGender(user.gender));
+          }
+        } catch {
+          setAvatarSrc(getAvatarByGender(user.gender));
+        }
+      } else if (user?.gender) {
+        setAvatarSrc(getAvatarByGender(user.gender));
+      }
+    };
+
+    checkAvatar();
   }, [user, lastUpdate]);
 
   useEffect(() => {
@@ -83,13 +98,13 @@ const Profile = () => {
     return (
       <Link
         href="/login"
-        className="ml-6 w-10 xl:w-[157px] flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer"
+        className="ml-6 w-10 xl:w-39.25 flex justify-between items-center gap-x-2 p-2 rounded text-white text-base bg-[#ff6633] hover:shadow-(--shadow-article) active:shadow-(--shadow-button-active) duration-300 cursor-pointer"
       >
-        <div className="w-[109px] justify-center hidden xl:flex">
+        <div className="w-27.25 justify-center hidden xl:flex">
           <p>Войти</p>
         </div>
         <Image
-          src="/icons-header/icon-entry.svg"
+          src="/вход-в-систему.png"
           alt="Войти"
           width={24}
           height={24}
@@ -135,7 +150,7 @@ const Profile = () => {
           isMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-2 pointer-events-none"
-        } transition-all duration-300 min-w-[200px] ${
+        } transition-all duration-300 min-w-50 ${
           isMobile ? "bottom-full top-auto mb-6" : "top-full mt-6"
         }`}
       >

@@ -15,6 +15,8 @@ import ProfileAvatar from "../_components/ProfileAvatar";
 import LocationSection from "../_components/LocationSection";
 import ProfileEmail from "../_components/ProfileEmail";
 import ProfilePhoneSettings from "../_components/ProfilePhone/ProfilePhoneSettings";
+import ProfilePassword from "../_components/ProfilePassword";
+import ProfileCard from "../_components/ProfileCard";
 
 const ProfilePage = () => {
   const { user, isAuth, checkAuth } = useAuthStore();
@@ -95,7 +97,8 @@ const ProfilePage = () => {
                  <ProfileEmail/>
               <ProfilePhoneSettings/>
               </div>
-             
+             <ProfilePassword/>
+             <ProfileCard/>
               <SecuritySection />
             </div>
           </div>
