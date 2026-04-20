@@ -2,7 +2,7 @@ import { betterAuth } from 'better-auth';
 import { mongodbAdapter } from 'better-auth/adapters/mongodb';
 import { MongoClient } from 'mongodb';
 import { Resend } from 'resend';
-import { phoneNumber } from 'better-auth/plugins';
+import { admin, phoneNumber } from 'better-auth/plugins';
 import PasswordResetEmail from '../app/(auth)/(updatePass)/_components/PasswordResetEmail';
 import { CONFIG } from '@/config/config';
 import EmailChangeVerification from '../app/(user-profile)/_components/EmailChangeVerification';
@@ -120,6 +120,7 @@ export const auth = betterAuth({
             expiresIn: 300,
             requireVerification: true,
         }),
+        admin(),
     ],
     user: {
         changeEmail: {
@@ -156,6 +157,12 @@ export const auth = betterAuth({
         gender: { type: 'string', input: true, required: true },
         card: { type: 'string', input: true, required: false },
         hasCard: { type: 'boolean', input: true, required: false },
+        role:{
+            type:"string",
+            input:false,
+            required:false,
+            default:"user",
+        }
     },
 });
 
