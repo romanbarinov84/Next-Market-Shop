@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { getAvatarByGender } from "@/UTILS/getAvatarByGender";
 import { useAuthStore } from "@/src/store/authStore";
 import { checkAvatarExist } from "@/UTILS/avatarUtil";
+import GlobalLoader from "../loading/GlobalLoader";
 ;
 
 const Profile = () => {
@@ -22,6 +23,23 @@ const Profile = () => {
   useEffect(() => {
     setLastUpdate(Date.now());
   }, [user]);
+
+  const getDisplayName = () => {
+    if (!user?.name) return <GlobalLoader/>;
+
+    if (user.role === "manager") {
+      return "Менеджер";
+    } else if (user.role === "admin") {
+      return "Администратор";
+    }
+
+    return user.name;
+  };
+
+   const isManagerOrAdmin = () => {
+    return user?.role === "manager" || user?.role === "admin";
+  };
+
 
   useEffect(() => {
     const checkAvatar = async () => {
@@ -128,7 +146,7 @@ const Profile = () => {
           className="min-w-10 min-h-10 md:block xl:block rounded-full object-cover"
         />
         <p className="hidden xl:block cursor-pointer p-2.5">
-          {isLoading ? "Загрузка..." : user?.name}
+          {getDisplayName()}
         </p>
         <div className="hidden xl:block">
           <Image
@@ -168,6 +186,15 @@ const Profile = () => {
         >
           Главная
         </Link>
+         {isManagerOrAdmin() && (
+          <Link
+            href="/administrator"
+            className="block px-4 py-3 text-[#414141] hover:text-[#ff6633] duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Панель управления
+          </Link>
+        )}
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}

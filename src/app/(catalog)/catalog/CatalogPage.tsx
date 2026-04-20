@@ -6,6 +6,7 @@ import { CatalogProps } from "@/src/types/catalog";
 import { useEffect, useState } from "react";
 import CatalogAdminControls from "../CatalogAdminControls";
 import CatalogGrid from "../CatalogGrid";
+import { useAuthStore } from "@/src/store/authStore";
 
 
 export const metadata = {
@@ -27,7 +28,9 @@ const CatalogPage = () => {
     userMessage: string;
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const isAdmin = true;
+  const {user} = useAuthStore();
+
+  const isAdmin = user?.role === "admin";
 
   const fetchCategories = async () => {
     try {
