@@ -57,10 +57,13 @@ export const EnterCode = ({ phoneNumber }: { phoneNumber: string }) => {
                 throw new Error(errorData.error || 'Ошибка установки пароля');
             }
 
-            const { error: updateError } =
-                await authClient.updateUser(regFormData);
+            let userDataToUpdate = {...regFormData};
 
-            if (updateError) throw updateError;
+            if(verifyData.user.phoneNumberVerified){
+                //eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const{email, ...rest} = userDataToUpdate;
+                userDataToUpdate = rest as typeof regFormData;
+            }
 
             router.replace('/login');
         } catch (error) {
