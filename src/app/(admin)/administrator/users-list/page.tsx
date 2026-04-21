@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import NavAndInfo from "./_components/NavAndInfo";
-import { UserData } from "@/types/userData";
-import ErrorComponent from "@/components/ErrorComponent";
-import { useAuthStore } from "@/store/authStore";
 import { CONFIG } from "../../../../../config/config";
+import { UserData } from "@/src/types/userData";
+import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
+import { Loader } from "lucide-react";
+import { useAuthStore } from "@/src/store/authStore";
 import UsersTable from "./_components/UsersTable";
-import { Loader } from "@/components/Loader";
+import NavAndInfo from "./_components/NavAndInfo";
+
 
 const PAGE_SIZE_OPTIONS = [1, 5, 10, 20, 50, 100];
 

@@ -18,9 +18,6 @@ interface UsersTableProps {
 
 const UsersTable = ({
   users,
-  currentPage,
-  totalPages,
-  onPageChange,
   sortBy,
   sortDirection,
   onSort,

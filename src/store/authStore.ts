@@ -1,27 +1,12 @@
 
 import { create } from "zustand";
+import { UserData } from "../types/userData";
 import { authClient } from "../lib/auth-client";
 
-type UserData = {
-  id: string;
-  name: string;
-  surname: string;
-  email: string;
-  phoneNumber: string;
-  emailVerified: boolean;
-  phoneNumberVerified: boolean;
-  gender: string;
-  birthdayDate?: string;
-  location?: string;
-  region?: string;
-  card?:string;
-  hasCard:string;
-  role:string;
-} | null;
 
 type AuthState = {
   isAuth: boolean;
-  user: UserData;
+  user: UserData | null;
   isLoading: boolean;
   login: () => void;
   logout: () => Promise<void>;
@@ -68,7 +53,9 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   fetchUserData: async () => {
     try {
       set({ isLoading: true });
-      const response = await fetch("/api/auth/user");
+      const response = await fetch("/api/auth/user", {
+  credentials: "include",
+});
 
       if (response.status === 401 || response.status === 403) {
         throw new Error("Unauthorized");
@@ -79,7 +66,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       }
 
       const userData = await response.json();
-      
+
       set({ user: userData, isLoading: false });
     } catch (error) {
       console.error("Ошибка загрузки данных пользователя:", error);

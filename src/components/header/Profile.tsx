@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import { getAvatarByGender } from "@/UTILS/getAvatarByGender";
 import { useAuthStore } from "@/src/store/authStore";
 import { checkAvatarExist } from "@/UTILS/avatarUtil";
-import GlobalLoader from "../loading/GlobalLoader";
+import MiniLoader from "../MiniLoader";
+
 ;
 
 const Profile = () => {
@@ -25,7 +26,7 @@ const Profile = () => {
   }, [user]);
 
   const getDisplayName = () => {
-    if (!user?.name) return <GlobalLoader/>;
+    if (!user?.name) return null;
 
     if (user.role === "manager") {
       return "Менеджер";
