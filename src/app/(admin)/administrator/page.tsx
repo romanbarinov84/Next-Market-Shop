@@ -1,6 +1,8 @@
 
 import Link from "next/link";
-import { buttonStyles } from "../../(auth)/styles";
+import { buttonStyles } from "../../(auth)/(reg)/_components/styles";
+
+
 
 const AdminPanel = () => {
   return (
