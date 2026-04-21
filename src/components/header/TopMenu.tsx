@@ -18,6 +18,7 @@ const TopMenu = () => {
   return (
     <>
         <ul className='flex flex-row gap-x-6 items-end'>
+            {!isManagerOrAdmin && (
             <Link href="/catalog">
               <li className='flex flex-col  items-center gap-2  w-11 cursor-pointer'>
                 <Image 
@@ -29,7 +30,7 @@ const TopMenu = () => {
                 <span className={isCatalogPage ? "text-[#ff6633]" : "text-[#414141]"}>Каталог</span>
             </li>
             </Link>
-
+            )}
              {!isManagerOrAdmin && (
         <li className='flex flex-col items-center gap-2  w-11 cursor-pointer'>
                 <Image 
@@ -40,13 +41,14 @@ const TopMenu = () => {
                 className='object-contain w-6 h-6'/>
                 <span>Обранне</span>
             </li>
-      )}
+       )}
           
-            
+           
             <li className='flex flex-col items-center   w-11 cursor-pointer'>
                <IconBox/>
                 <span className={isManagerOrAdmin ? "text-[#ff6633]" : ""}>Замовлення</span>
-            </li>
+            </li> 
+            {!isManagerOrAdmin && (
             <li className='flex flex-col items-center gap-2  w-11 cursor-pointer'>
                 <Image 
                 src="/лого хедера/HeaderUserBlockCartBox.svg" 
@@ -56,7 +58,7 @@ const TopMenu = () => {
                 className='object-contain w-6 h-6'/>
                 <span>Кошик</span>
             </li>
-          
+            )}
         </ul>
     </>
   )
