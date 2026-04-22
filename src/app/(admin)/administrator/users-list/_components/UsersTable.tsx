@@ -1,10 +1,10 @@
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
-
 import { UserData } from "@/src/types/userData";
-import { calculateAge } from "@/UTILS/admin/calculateAge";
 import { getShortDecimalId } from "@/UTILS/admin/shortDecimalId";
+import { calculateAge } from "@/UTILS/admin/calculateAge";
+
 
 interface UsersTableProps {
   users: UserData[];
@@ -18,6 +18,9 @@ interface UsersTableProps {
 
 const UsersTable = ({
   users,
+  currentPage,
+  totalPages,
+  onPageChange,
   sortBy,
   sortDirection,
   onSort,

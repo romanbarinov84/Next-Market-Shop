@@ -1,7 +1,6 @@
 "use client";
 
 
-import UserId from "./UserId";
 import Person from "./Person";
 import Age from "./Age";
 import Email from "./Email";
@@ -9,6 +8,7 @@ import Phone from "./Phone";
 import Role from "./Role";
 import Register from "./Register";
 import { UserData } from "@/src/types/userData";
+import UserId from "./UserId";
 
 interface TableRowProps {
   user: UserData;

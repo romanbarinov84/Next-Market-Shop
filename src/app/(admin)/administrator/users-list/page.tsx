@@ -2,13 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { CONFIG } from "../../../../../config/config";
-import { UserData } from "@/src/types/userData";
-import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
-import { Loader } from "lucide-react";
 import { useAuthStore } from "@/src/store/authStore";
+import { UserData } from "@/src/types/userData";
+import MiniLoader from "@/src/components/MiniLoader";
+import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
 import UsersTable from "./_components/UsersTable";
 import NavAndInfo from "./_components/NavAndInfo";
-
 
 const PAGE_SIZE_OPTIONS = [1, 5, 10, 20, 50, 100];
 
@@ -100,7 +99,7 @@ const UsersList = () => {
     loadUsers(currentPage, sortBy, sortDirection, pageSize);
   }, [loadUsers, currentPage, pageSize, sortBy, sortDirection]);
 
-  if (loading) return <Loader />;
+  if (loading) return <MiniLoader />;
 
   if (error) {
     return (
