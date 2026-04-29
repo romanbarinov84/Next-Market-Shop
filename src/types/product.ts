@@ -1,17 +1,31 @@
+export interface ProductRating {
+  average: number;
+  count: number;
+  rate: number;
+  distribution: {
+    "1": number;
+    "2": number;
+    "3": number;
+    "4": number;
+    "5": number;
+  };
+}
+
 export interface ProductCardProps {
-    _id:number;
-    id: number;
-    img: string;
-    title: string;
-    description: string;
-    basePrice: number;
-    discountPercent?: number;
-    rating: {
-        rate:number;
-        count:number;
-    };
-    weight?: string;
-    volume?: string;
-    tags:string[];
-    quantity:number;
+  _id: string;
+  id: number;
+  img: string;
+  title: string;
+  description: string;
+  basePrice: number;
+  discountPercent: number;
+  rating: ProductRating;
+  tags: string[];
+  weight: number;
+  quantity: number;
+  categories: string[];
+  article: string;
+  brand: string;
+  manufacturer: string;
+  isHealthyFood: boolean;
 }

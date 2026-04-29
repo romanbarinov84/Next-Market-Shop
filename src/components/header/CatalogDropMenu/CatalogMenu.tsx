@@ -44,7 +44,7 @@ const CatalogMenu = (
                 {categories.map((category) => (
                   <Link
                     key={category.slug}
-                    href={`/category/${category.slug}`}
+                    href={`/catalog/${category.slug}`}
                     className="block px-4 py-2 text-[#414141] hover:text-[#ff6633] font-bold duration-300"
                     onClick={() => setIsCatalogOpen(false)}
                   >

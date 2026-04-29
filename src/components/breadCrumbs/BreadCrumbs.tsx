@@ -1,59 +1,84 @@
 "use client";
 
-import { PATH_TRANSLATIONS } from "@/UTILS/pathTranslations";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { PATH_TRANSLATIONS } from "@/UTILS/pathTranslations";
 
 
+const Breadcrumbs = () => {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
+  if (pathname === "/" || pathname === "/search") return null;
 
-const BreadCrumbs = () => {
-    const pathname = usePathname();
+  const pathSegments = pathname.split("/").filter((segment) => segment !== "");
+  const productDesc = searchParams.get("desc");
 
-    if (pathname === "/") return null;
+  const breadcrumbs = pathSegments.map((segment, index) => {
+    const href = "/" + pathSegments.slice(0, index + 1).join("/");
 
-    const segments = pathname.split("/").filter(Boolean);
+    let label = PATH_TRANSLATIONS[segment] || segment;
 
-    const breadcrumbs = segments.map((segment, index) => {
-        const href = "/" + segments.slice(0, index + 1).join("/");
-        return {
-            label: PATH_TRANSLATIONS[segment] || segment,
-            href,
-            isLast: index === segments.length - 1,
-        };
-    });
+    if (
+      index === pathSegments.length - 1 &&
+      productDesc &&
+      pathSegments.includes("catalog") &&
+      pathSegments.length >= 3
+    ) {
+      label = productDesc;
+    }
 
-    breadcrumbs.unshift({
-        label:"Головна",
-        href:"/",
-        isLast:false,
-    })
+    return {
+      label,
+      href:
+        index === pathSegments.length - 1
+          ? `${href}?desc=${productDesc}`
+          : href,
+      isLast: index === pathSegments.length - 1,
+    };
+  });
 
-    return (
-        <nav aria-label="Breadcrumb" className="w-full overflow-x-auto">
-            <ol className="flex items-center m-5 gap-2 text-sm text-gray-500 whitespace-nowrap">
-                {breadcrumbs.map((item, index) => (
-                    <li key={item.href} className="flex items-center gap-2">
-                        {!item.isLast ? (
-                            <>
-                                <Link
-                                    href={item.href}
-                                    className="hover:text-orange-400 transition-colors duration-200"
-                                >
-                                    {item.label}
-                                </Link>
-                                <span className="text-gray-400">/</span>
-                            </>
-                        ) : (
-                            <span className="font-medium text-gray-900 truncate max-w-[140px] sm:max-w-none">
-                                {item.label}
-                            </span>
-                        )}
-                    </li>
-                ))}
-            </ol>
-        </nav>
-    );
+  breadcrumbs.unshift({
+    label: "Главная",
+    href: "/",
+    isLast: false,
+  });
+
+  return (
+    <nav className="px-[max(12px,calc((100%-1208px)/2))] my-6">
+      <ol className="flex items-center gap-4 text-[8px] md:text-xs">
+        {breadcrumbs.map((item, index) => (
+          <li key={index} className="flex items-center gap-4">
+            <div
+              className={
+                item.isLast
+                  ? "text-[#8f8f8f]"
+                  : "text-main-text hover:underline cursor-pointer"
+              }
+            >
+              {item.isLast ? (
+                item.label
+              ) : (
+                <Link href={item.href}>{item.label}</Link>
+              )}
+            </div>
+            {!item.isLast && (
+              <Image
+                src="/iconarrowright.png"
+                alt={`Переход от ${item.label} к ${
+                  breadcrumbs[breadcrumbs.length - 1].label
+                }`}
+                width={24}
+                height={24}
+                sizes="24px"
+              />
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
 };
 
-export default BreadCrumbs;
+export default Breadcrumbs;

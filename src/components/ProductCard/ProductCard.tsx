@@ -8,13 +8,14 @@ import { CONFIG } from '@/config/config';
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
 const ProductCard = ({
-  _id,
+   id,
   img,
   description,
   basePrice,
   discountPercent = 0,
   rating,
   tags,
+  categories,
 }: ProductCardProps) => {
   const calculateFinalPrice = (price: number, discount: number) =>
     discount > 0 ? price * (1 - discount / 100) : price;
@@ -26,7 +27,13 @@ const ProductCard = ({
   const priceByCard = isNewProducts
     ? basePrice
     : calculateFinalPrice(finalPrice, cardDiscountPercent);
-  const ratingValue = rating?.rate || 0;
+  const ratingValue = rating?.average ?? 0;
+
+
+ const productId = id;
+  const mainCategory = categories?.[0];
+
+  const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
 
   return (
    <div className="relative flex flex-col w-full sm:w-56 md:w-60 lg:w-64 rounded overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
@@ -44,8 +51,8 @@ const ProductCard = ({
     </div>
   </button>
 
-  {/* Ссылка на продукт */}
-  <Link href={`/product/${_id}`} className="relative flex-1">
+ 
+  <Link href={productUrl} className="relative flex-1">
     <div className="relative w-full h-40 sm:h-44 md:h-48 lg:h-52 overflow-hidden rounded-sm">
       <Image
         src={img}

@@ -23,7 +23,7 @@ const SearchResults = ({
                             className="flex flex-col gap-2.5 mt-0.5"
                         >
                             <Link
-                                href={`/category/${encodeURIComponent(group.category)}`}
+                                href={`/catalog/${encodeURIComponent(group.category)}`}
                                 className="flex items-center justify-between p-2 gap-x-2 hover:bg-gray-100 rounded wrap-break-word cursor-pointer"
                                 onClick={handleInputFocus}
                             >
@@ -58,7 +58,7 @@ const SearchResults = ({
       className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
     >
       <Link
-        href={`/product/${product.id}`}
+        href={`/catalog/${encodeURIComponent(group.category)}/${product.id}?desc=${encodeURIComponent(product.title.substring(0,50))}`}
         className="flex items-start gap-x-4 wrap-break-word cursor-pointer"
         onClick={handleInputFocus}
       >
