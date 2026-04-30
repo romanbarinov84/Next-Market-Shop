@@ -4,12 +4,12 @@ import Image from "next/image";
 
 const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
   return (
-    <div className="flex flex-row gap-x-4 h-[248px] xl:h-[496px]">
+    <div className="flex flex-row gap-x-4 h-62 xl:h-124">
       <div className="flex flex-col justify-between h-full shrink-0">
         {[...Array(5)].map((_, index) => (
           <div
             key={index}
-            className="relative bg-white w-16 h-[37px] xl:h-[86px] flex items-center justify-center overflow-hidden shrink-0"
+            className="relative bg-white w-16 h-9.25 xl:h-21.5 flex items-center justify-center overflow-hidden shrink-0"
           >
             <Image
               src={product.img}
@@ -25,8 +25,8 @@ const ImagesBlock = ({ product }: { product: ProductCardProps }) => {
 
       <div
         className="relative flex justify-center items-center shadow-image-block bg-white 
-                     h-[248px] xl:h-[496px] 
-                     w-[248px] md:w-[272px] xl:w-[504px] 
+                     h-62 xl:h-124 
+                     w-62 md:w-68 xl:w-126 
                      p-2.5 shrink-0"
       >
         <Image

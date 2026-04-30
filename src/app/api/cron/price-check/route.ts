@@ -1,5 +1,6 @@
+import { checkPriceAlerts } from '@/src/scripts/checkPriceAlerts';
 import { NextRequest, NextResponse } from 'next/server';
-import { checkPriceAlerts } from '@/scripts/checkPriceAlerts';
+
 
 export async function GET(request: NextRequest) {
   try {
