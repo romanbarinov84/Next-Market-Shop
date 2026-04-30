@@ -8,6 +8,7 @@ import ImagesBlock from "./_components/ImagesBlock";
 import ShareButton from "./_components/ShareButton";
 import StarRating from "@/src/components/RATING/StarRating";
 import { ProductCardProps } from "@/src/types/product";
+import DiscountMessage from "./_components/DiscountMessage";
 
 interface ProductPageContentProps {
   product: ProductCardProps;
@@ -16,7 +17,7 @@ interface ProductPageContentProps {
 
 const ProductPageContent = ({
   product,
- 
+  productId
 }: ProductPageContentProps) => {
   const discountedPrice = product.discountPercent
     ? product.basePrice * (1 - product.discountPercent / 100)
@@ -59,6 +60,11 @@ const ProductPageContent = ({
             />
             <CartButton />
             <Bonuses bonus={bonusesAmount} />
+            <DiscountMessage
+              productId={productId.toString()}
+              productTitle={product.title}
+              currentPrice={discountedPrice.toString()}
+            />
           </div>
         </div>
         <div>
