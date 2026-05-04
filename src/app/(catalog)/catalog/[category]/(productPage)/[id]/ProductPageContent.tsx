@@ -10,6 +10,8 @@ import StarRating from "@/src/components/RATING/StarRating";
 import { ProductCardProps } from "@/src/types/product";
 import DiscountMessage from "./_components/DiscountMessage";
 import { AdditionalInfo } from "../../_components/AdditionalInfo";
+import SimilarProducts from "../../_components/SimilarProducts";
+import SameBrandProducts from "../../_components/SameBrandProducts";
 
 
 interface ProductPageContentProps {
@@ -73,7 +75,9 @@ const ProductPageContent = ({
               weight={product.weight}
             />
           </div>
+          <SimilarProducts currentProduct={product} />
         </div>
+         <SameBrandProducts currentProduct={product} />
         <div>
           <h2 className="text-2xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10">
             Отзывы
