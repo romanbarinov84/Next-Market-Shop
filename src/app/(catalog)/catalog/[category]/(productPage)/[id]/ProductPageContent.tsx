@@ -13,6 +13,7 @@ import { AdditionalInfo } from "../../_components/AdditionalInfo";
 import SimilarProducts from "../../_components/SimilarProducts";
 import SameBrandProducts from "../../_components/SameBrandProducts";
 import RatingDistribution from "../../_components/RatingDistribution";
+import ReviewsWrapper from "../../_components/ReviewsWrapper";
 
 
 interface ProductPageContentProps {
@@ -88,6 +89,7 @@ const ProductPageContent = ({
               averageRating={product.rating.rate}
               distribution={product.rating.distribution}
             />
+             <ReviewsWrapper productId={productId} />
         </div>
       </div>
     </div>
