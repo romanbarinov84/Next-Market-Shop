@@ -9,6 +9,8 @@ import ShareButton from "./_components/ShareButton";
 import StarRating from "@/src/components/RATING/StarRating";
 import { ProductCardProps } from "@/src/types/product";
 import DiscountMessage from "./_components/DiscountMessage";
+import { AdditionalInfo } from "../../_components/AdditionalInfo";
+
 
 interface ProductPageContentProps {
   product: ProductCardProps;
@@ -64,6 +66,11 @@ const ProductPageContent = ({
               productId={productId.toString()}
               productTitle={product.title}
               currentPrice={discountedPrice.toString()}
+            />
+             <AdditionalInfo
+              brand={product.brand}
+              manufacturer={product.manufacturer}
+              weight={product.weight}
             />
           </div>
         </div>
