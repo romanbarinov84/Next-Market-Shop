@@ -12,6 +12,7 @@ import DiscountMessage from "./_components/DiscountMessage";
 import { AdditionalInfo } from "../../_components/AdditionalInfo";
 import SimilarProducts from "../../_components/SimilarProducts";
 import SameBrandProducts from "../../_components/SameBrandProducts";
+import RatingDistribution from "../../_components/RatingDistribution";
 
 
 interface ProductPageContentProps {
@@ -83,6 +84,10 @@ const ProductPageContent = ({
             Отзывы
           </h2>
           <div className="flex flex-col md:flex-row flex-wrap gap-4 md:gap-x-8 xl:gap-x-36"></div>
+          <RatingDistribution
+              averageRating={product.rating.rate}
+              distribution={product.rating.distribution}
+            />
         </div>
       </div>
     </div>
