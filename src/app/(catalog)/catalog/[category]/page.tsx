@@ -50,11 +50,11 @@ const CategoryPage = async ({
                 {PATH_TRANSLATIONS[category] || category}
             </h1>
             <DropFilter
-                basePath={`/category/${category}`}
+                basePath={`/catalog/${category}`}
                 category={category}
             />
             <div className=" hidden xl:flex flex-wrap gap-4 mb-6 items-center">
-                <FilterButtons basePath={`/category/${category}`} />
+                <FilterButtons basePath={`/catalog/${category}`} />
             </div>
 
             <div className="flex flex-row gap-x-10 justify-between">
@@ -63,7 +63,7 @@ const CategoryPage = async ({
                         Фільтр
                     </div>
                     <PriceFilter
-                        basePath={`/category/${category}`}
+                        basePath={`/catalog/${category}`}
                         category={category}
                     />
                 </div>
