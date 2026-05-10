@@ -1,0 +1,16 @@
+
+export const initialProductData = {
+  title:"",
+  description:"",
+  basePrice:"",
+  discountPercent:"",
+  weight:"",
+  quantity:"",
+  article:"",
+  brand:"",
+  manufacturer:"",
+  isHealthyFood:false,
+  isNonGMO:false,
+  categories:[],
+  tags:[],
+}
