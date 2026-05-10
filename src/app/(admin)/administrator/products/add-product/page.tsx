@@ -3,7 +3,8 @@ import { initialProductData } from '@/src/constance/AddProductFormData';
 import { AddProductFormData } from '@/src/types/addProductTypes'
 import { ArrowRightLeft } from 'lucide-react';
 import Link from 'next/link';
-import React, { useCallback, useState } from 'react'
+import React, { ChangeEvent, useCallback, useState } from 'react'
+import Title from './_components/Title';
 
 
 const AddProductPage = () => {
@@ -22,6 +23,17 @@ const AddProductPage = () => {
 
   }
 
+   const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]:
+        type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }));
+  };
+
 
   return (
     <div className='container flex flex-col items-center px-4 py-8 text-main-text mx-auto'>
@@ -30,7 +42,9 @@ const AddProductPage = () => {
       </Link>
       <h1 className='text-3xl font-bold mb-8'>Додати товар</h1>
       <form onSubmit={handleSubmit} className='max-w-2xl space-y-6 w-full'>
-
+       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+         <Title onChangeAction={handleInputChange} title={formData.title} />
+       </div>
       </form>
     </div>
   )
