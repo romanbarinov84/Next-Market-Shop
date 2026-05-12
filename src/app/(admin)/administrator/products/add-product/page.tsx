@@ -6,6 +6,16 @@ import Link from 'next/link';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import Title from './_components/Title';
 import Article from './_components/Article';
+import Description from './_components/Description';
+import BasePrice from './_components/Baseprice';
+import Quantity from './_components/Quantity';
+import Discount from './_components/Discount';
+import Brand from './_components/Brand';
+import Manufacturer from './_components/Manufacturer';
+import Weight from './_components/Weight';
+import Categories from './_components/Categories';
+import Tags from './_components/Tags';
+import CheckboxGroup from './_components/CheckboxGroup';
 
 const AddProductPage = () => {
     const [formData, setFormData] =
@@ -36,6 +46,12 @@ const AddProductPage = () => {
         }));
     };
 
+    const hasActionsTag = formData.tags.includes("actions");
+
+    const handleTagsChange = (tags: string[]) => {
+    setFormData((prev) => ({ ...prev, tags }));
+  };
+
     return (
         <div className="container flex flex-col items-center px-4 py-8 text-main-text mx-auto">
             <Link
@@ -59,6 +75,55 @@ const AddProductPage = () => {
             article={formData.article}
           />
                 </div>
+                <Description
+          onChangeAction={handleInputChange}
+          description={formData.description}
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+           <BasePrice
+            onChangeAction={handleInputChange}
+            basePrice={formData.basePrice}
+          />
+           <Discount
+            onChangeAction={handleInputChange}
+            discount={formData.discountPercent}
+            required={hasActionsTag}
+          />
+          <Quantity
+            onChangeAction={handleInputChange}
+            quantity={formData.quantity}
+          />
+        </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Weight onChangeAction={handleInputChange} weight={formData.weight} />
+          <Brand onChangeAction={handleInputChange} brand={formData.brand} />
+          <Manufacturer
+            onChangeAction={handleInputChange}
+            manufacturer={formData.manufacturer}
+          />
+        </div>
+           <Categories
+          selectedCategories={formData.categories}
+          onCategoriesChange={(categories) =>
+            setFormData((prev) => ({ ...prev, categories }))
+          }
+        />
+        <Tags
+          selectedTags={formData.tags}
+          onTagsChange={handleTagsChange}
+          hasActionsTag={hasActionsTag}
+        />
+        <CheckboxGroup
+          items={[
+            {
+              name: "isHealthyFood",
+              label: "Здоровая еда",
+              checked: formData.isHealthyFood,
+            },
+            { name: "isNonGMO", label: "Без ГМО", checked: formData.isNonGMO },
+          ]}
+          onChange={handleInputChange}
+        />
             </form>
         </div>
     );
