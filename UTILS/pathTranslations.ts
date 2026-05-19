@@ -25,5 +25,5 @@
     "products":"Продукти",
     "add-product":"Додати продукт",
     "products-list":"Список товаров",
-    "edit-products":"Редактировать товар",
+    "edit-product":"Редактировать товар",
 }
