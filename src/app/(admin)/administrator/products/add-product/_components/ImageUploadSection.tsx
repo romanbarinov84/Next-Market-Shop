@@ -1,39 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import ImageUploader from "./ImageUploader";
-
 
 interface ImageUploadSectionProps {
   onImageChange: (file: File | null) => void;
   uploading: boolean;
   loading: boolean;
+  existingImage?: string;
 }
 
 const ImageUploadSection = ({
   onImageChange,
   uploading,
   loading,
+  existingImage,
 }: ImageUploadSectionProps) => {
   const [image, setImage] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+const [uploadedPreviewUrl, setUploadedPreviewUrl] = useState<string | null>(null);
+
+const previewUrl = image ? uploadedPreviewUrl : existingImage || null;
+
+useEffect(() => {
+  return () => {
+    if (uploadedPreviewUrl && uploadedPreviewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(uploadedPreviewUrl);
+    }
+  };
+}, [uploadedPreviewUrl]);
 
   const handleImageUpload = (file: File) => {
     setImage(file);
     onImageChange(file);
 
+    if (uploadedPreviewUrl && uploadedPreviewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(uploadedPreviewUrl);
+    }
+
     const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
+    setUploadedPreviewUrl(url);
   };
 
   const handleRemoveImage = () => {
     setImage(null);
     onImageChange(null);
 
-    if (previewUrl) {
-      URL.revokeObjectURL(previewUrl);
+    if (uploadedPreviewUrl && uploadedPreviewUrl.startsWith("blob:")) {
+      URL.revokeObjectURL(uploadedPreviewUrl);
     }
-    setPreviewUrl(null);
+    setUploadedPreviewUrl(null);
   };
 
   return (
@@ -61,8 +76,14 @@ const ImageUploadSection = ({
             </button>
           </div>
           <p className="mt-2 text-sm text-primary">
-            Выбрано: {image?.name} (
-            {(image ? image.size / 1024 / 1024 : 0).toFixed(2)} MB)
+            {image ? (
+              <>
+                Выбрано: {image?.name} (
+                {(image ? image.size / 1024 / 1024 : 0).toFixed(2)} MB)
+              </>
+            ) : (
+              "Существующее изображение"
+            )}
           </p>
         </div>
       ) : (
