@@ -24,4 +24,5 @@
     "puncakes":"млинці",
     "products":"Продукти",
     "add-product":"Додати продукт",
+    "products-list":"Список товаров",
 }
