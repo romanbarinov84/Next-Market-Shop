@@ -10,7 +10,7 @@ import FilterControls from './_components/FilterControls';
 
 
 
-export async function generateMetaData({
+export async function generateMetadata({
     params,
 }: {
     params: Promise<{ category: string }>;

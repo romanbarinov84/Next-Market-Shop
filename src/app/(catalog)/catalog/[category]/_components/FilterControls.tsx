@@ -1,12 +1,13 @@
+
 "use client";
 
 import Link from "next/link";
-
-
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { FilterControlsProps } from "@/src/types/FilterControls";
 
-const FilterControls = ({ basePath }: FilterControlsProps) => {
+function FilterControlsContent({ basePath }: FilterControlsProps) {
   const searchParams = useSearchParams();
 
   const minPrice = searchParams.get("priceFrom");
@@ -52,46 +53,70 @@ const FilterControls = ({ basePath }: FilterControlsProps) => {
     activeFilterCount === 0
       ? "Фильтры"
       : activeFilterCount === 1
-      ? "Фильтр 1"
-      : `Фильтры ${activeFilterCount}`;
+        ? "Фильтр 1"
+        : `Фильтры ${activeFilterCount}`;
 
   return (
     <div className="flex flex-wrap flex-row gap-4">
       <div
         className={`h-8 p-2 rounded text-xs flex justify-center items-center duration-300 cursor-not-allowed gap-x-2 ${
           (activeFilter && activeFilter.length > 0) || hasPriceFilter
-            ? "bg-(--color-primary) text-white"
+            ? "bg-primary text-white"
             : "bg-[#f3f2f1] text-[#606060]"
         }`}
       >
         {filterButtonText}
       </div>
       {hasPriceFilter && (
-        <div className="h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-(--color-primary) text-white">
+        <div className="h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-primary text-white">
           <Link
             href={buildClearPriceFilterLink()}
             className="flex items-center gap-x-2"
           >
             Цена {minPrice !== undefined ? `от ${minPrice}` : ""}{" "}
             {maxPrice !== undefined ? `до ${maxPrice}` : ""}
-           <span className="text-red-300 m-2">X</span>
+            <Image
+              src="/icons-products/icon-closer.svg"
+              alt="Очистить фильтр по цене"
+              width={24}
+              height={24}
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
           </Link>
         </div>
       )}
       {activeFilterCount > 0 && (
-        <div
-          className="h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-(--color-primary) text-white"
-        >
+        <div className="h-8 p-2 rounded text-xs flex justify-center items-center duration-300 gap-x-2 bg-primary text-white">
           <Link
             href={buildClearFiltersLink()}
             className="flex items-center gap-x-2"
           >
             Очистить фильтры
-           <span className="text-red-300 m-2">X</span>
+            <Image
+              src="/icons-products/icon-closer.svg"
+              alt="Очистить фильтры"
+              width={24}
+              height={24}
+              style={{ filter: "brightness(0) invert(1)" }}
+            />
           </Link>
         </div>
       )}
     </div>
+  );
+}
+
+const FilterControls = ({ basePath }: FilterControlsProps) => {
+  return (
+    <Suspense fallback={
+      <div className="flex flex-wrap flex-row gap-4">
+        <div className="h-8 p-2 rounded text-xs bg-[#f3f2f1] text-[#606060] animate-pulse">
+          Фильтры
+        </div>
+      </div>
+    }>
+      <FilterControlsContent basePath={basePath} />
+    </Suspense>
   );
 };
 
