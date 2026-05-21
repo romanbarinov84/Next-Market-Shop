@@ -14,6 +14,7 @@ import SimilarProducts from "../../_components/SimilarProducts";
 import SameBrandProducts from "../../_components/SameBrandProducts";
 import RatingDistribution from "../../_components/RatingDistribution";
 import ReviewsWrapper from "../../_components/ReviewsWrapper";
+import Link from "next/link";
 
 
 interface ProductPageContentProps {
@@ -46,7 +47,7 @@ const ProductPageContent = ({
             </p>
           </div>
           <ShareButton title={product.title} />
-          <button className="flex flex-row flex-wrap gap-2 items-center cursor-pointer">
+          <Link href="/favorite" className="flex flex-row  flex-wrap gap-2 items-center cursor-pointer">
             <Image
               src="/favoriteIcon.png"
               alt="Избранное"
@@ -55,7 +56,7 @@ const ProductPageContent = ({
               className="select-none"
             />
             <p className="text-sm">В избранное</p>
-          </button>
+          </Link>
         </div>
         <div className="flex flex-col md:flex-row md:flex-wrap gap-10 w-full justify-center">
           <ImagesBlock product={product} />

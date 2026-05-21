@@ -26,4 +26,6 @@
     "add-product":"Додати продукт",
     "products-list":"Список товаров",
     "edit-product":"Редактировать товар",
+    "favorites":"Обранне",
+    "favorite":"Обранне",
 }

@@ -1,12 +1,15 @@
+"use client";
+
 import { useAuthStore } from '@/src/store/authStore';
 import IconHeart from '../svg/iconHeart';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useFavorites } from '@/src/hooks/useFavorite';
 
 const FavoriteButton = ({ productId }: { productId: string }) => {
     const { isAuth } = useAuthStore();
     const [isProcessing, setIsProcessing] = useState(false);
-    const {toggleFavorite , isFavorite , isLoading} = useFavorite();
+    const {toggleFavorite , isFavorite , isLoading} = useFavorites();
     const router = useRouter();
 
     const handleClick = async () => {

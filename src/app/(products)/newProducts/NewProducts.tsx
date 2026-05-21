@@ -20,7 +20,7 @@ const NewProducts = async () => {
             title="Новинки"
             viewAllButton={{ text: 'Усі новинки', href: 'new' }}
             products={items}
-            compact
+            
         />
     );
 };

@@ -22,7 +22,7 @@ const AllPurchases = async ({
                 }),
                 pageTitle: 'Усі покупки',
                 basePath: '/purchases',
-                errorMessage: 'Помилка невдалося завантажити покупки',
+                
             }}
         />
         </Suspense>

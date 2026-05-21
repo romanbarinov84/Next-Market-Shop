@@ -1,26 +1,30 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-const ViewAllButton = ({ text , href}: { text: string, href:string }) => {
-    return (
-        <div>
-            <Link
-                href={href}
-                className="inline-flex items-center gap-2 cursor-pointer"
-            >
-                <span className="text-base text-center text-[#606060] hover:text-[#bfbfbf] duration-300">
-                    {text}
-                </span>
-                <Image
-                    src="/ProductCard/arrow-Right.svg"
-                    alt={text}
-                    width={24}
-                    height={24}
-                    className="w-auto h-auto"
-                />
-            </Link>
-        </div>
-    );
+const ViewAllButton = ({
+  btnText,
+  href,
+}: {
+  btnText: string;
+  href: string;
+}) => {
+  return (
+    <Link
+      href={href}
+      className="flex flex-row items-center gap-x-2 cursor-pointer"
+    >
+      <p className="text-base text-center text-[#606060] hover:text-[#bfbfbf] duration-300">
+        {btnText}
+      </p>
+      <Image
+        src="/iconarrowright.png"
+        alt={btnText}
+        width={24}
+        height={24}
+        sizes="24px"
+      />
+    </Link>
+  );
 };
 
 export default ViewAllButton;

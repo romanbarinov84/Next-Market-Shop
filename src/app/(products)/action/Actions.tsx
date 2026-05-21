@@ -23,7 +23,7 @@ const Actions = async () => {
             title="Акції"
             viewAllButton={{ text: 'Усі акції', href: 'actions' }}
             products={items}
-            compact
+            
         />
     );
 };

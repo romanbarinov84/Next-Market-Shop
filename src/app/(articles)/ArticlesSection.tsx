@@ -1,50 +1,39 @@
-import ViewAllButton from '@/src/components/allButton/ViewAllButton';
-import ArticleCard from './Article/ArticleCard';
-import { ArticlesSectionProps } from '@/src/types/articlesSection';
+import ViewAllButton from "@/src/components/allButton/ViewAllButton";
+import { ArticlesSectionProps } from "@/src/types/articlesSection";
+import ArticleCard from "./Article/ArticleCard";
 
-const ArticlesSection = ({
-    title,
-    viewAllButton,
-    articles = [],
-    compact = false,
+
+
+const ArticleSection = ({
+  title,
+  viewAllButton,
+  articles,
 }: ArticlesSectionProps) => {
-    const sectionClasses = !compact
-        ? 'flex justify-center mb-20 mt-10 px-4 md:px-8'
-        : '';
-
-    return (
-        <section className={sectionClasses}>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between cursor-pointer">
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-zinc-900 mb-8">
-                        {title}
-                    </h2>
-                    <ViewAllButton
-                        text={viewAllButton.text}
-                        href={viewAllButton.href}
-                    />
-                </div>
-
-                {/* Сетка карточек */}
-                <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                    {articles.map((article, index) => {
-                        const liClass = compact
-                            ? [
-                                  index >= 4 ? 'hidden xl:hidden' : '',
-                                  index >= 3 ? 'md:hidden xl:block' : '',
-                              ].join(' ')
-                            : 'flex'; // добавляем flex, чтобы ArticleCard растягивался
-
-                        return (
-                            <li key={article._id} className={liClass}>
-                                <ArticleCard {...article} />
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-        </section>
-    );
+  return (
+    <section>
+      <div className="flex flex-col px-[max(12px,calc((100%-1208px)/2))]">
+        <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
+          <h2 className="text-2xl xl:text-4xl text-left font-bold">{title}</h2>
+          {viewAllButton && (
+            <ViewAllButton
+              btnText={viewAllButton.text}
+              href={viewAllButton.href}
+            />
+          )}
+        </div>
+        <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <li
+              key={article._id}
+              className="h-75 md:h-105"
+            >
+              <ArticleCard {...article} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
 };
 
-export default ArticlesSection;
+export default ArticleSection;

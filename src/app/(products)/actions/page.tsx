@@ -23,7 +23,7 @@ const AllActions = async ({
                 fetchData: ({pagination:{startIdx , perPage}}) => fetchProductsByTag('actions' , {pagination:{startIdx , perPage}}),
                 pageTitle: 'Усі акції',
                 basePath: '/actions',
-                errorMessage: 'Помилка невдалося завантажити акції',
+                
             }}
         />
         </Suspense>

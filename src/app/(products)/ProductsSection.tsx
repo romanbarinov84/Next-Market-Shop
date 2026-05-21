@@ -1,54 +1,60 @@
-import ViewAllButton from '@/src/components/allButton/ViewAllButton';
-import ProductCard from '@/src/components/ProductCard/ProductCard';
-import { ProductsSectionProps } from '@/src/types/productsSection';
+import ViewAllButton from "@/src/components/allButton/ViewAllButton";
+import ProductCard from "@/src/components/ProductCard/ProductCard";
+import { ProductsSectionProps } from "@/src/types/productsSection";
+
 
 const ProductsSection = ({
   title,
   viewAllButton,
   products,
-  compact = false,
+  applyIndexStyles = true,
   contentType,
-}: ProductsSectionProps & {contentType?:string}) => {
-
-  const gridClasses = contentType === "category" ? "grid-cols-2 md:grid-cols-3" :"grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
-
-  const sectionClasses = !compact 
-    ? "flex justify-center mb-20 mt-10 px-4 md:px-8 " 
-    : "";
-
-   const containerClasses = [
-    "flex flex-col justify-center xl:max-w-302",
-    !compact && "w-full max-w-[1200px] bg-white/70 backdrop-blur-md rounded-2xl shadow-lg shadow-black/10 p-4 md:p-6 xl:p-8"
-  ].filter(Boolean).join(" ");
+  mobileItemsLimit = 4,
+}: ProductsSectionProps & {
+  applyIndexStyles?: boolean;
+  contentType?: string;
+}) => {
+  const gridClasses =
+    contentType === "category"
+      ? "grid-cols-2 md:grid-cols-3"
+      : "grid-cols-2 md:grid-cols-3 xl:grid-cols-4";
 
   return (
-    <section className={sectionClasses}>
-      <div className={containerClasses}>
-        <div className="mb-4 md:mb-8 xl:mb-10 flex justify-between items-center">
-          <h2 className="text-2xl xl:text-4xl font-bold">{title}</h2>
+    <section>
+      <div className="flex flex-col px-[max(12px,calc((100%-1208px)/2))]">
+        <div className="mb-4 md:mb-8 xl:mb-10 flex flex-row justify-between">
+          <h2 className="text-2xl xl:text-4xl text-left font-bold text-main-text">
+            {title}
+          </h2>
           {viewAllButton && (
             <ViewAllButton
-              text={viewAllButton.text}
+              btnText={viewAllButton.text}
               href={viewAllButton.href}
             />
           )}
         </div>
-        {products && products.length > 0  ?  (
-
-           <ul className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-8`}>
-          { products.map((item, index) => (
-            <li
-              key={item._id}
-              className={compact ? `${index >= 4 ? "hidden" : ""}
-                 ${index >= 3 ? "md:hidden xl:block" : ""}
-                 ${index >= 4 ? "xl:hidden" : ""}` : ""}
-            >
-              <ProductCard {...item} />
-            </li>
-          ))}
-        </ul>
-        ) : (<div>Товари не знайденні</div>)}
-       
+        {products && products.length > 0 ? (
+          <ul
+            className={`grid ${gridClasses} gap-4 md:gap-6 xl:gap-10 justify-items-center`}
+          >
+            {products.map((item, index) => (
+              <li
+                key={item._id}
+                className={
+                  applyIndexStyles
+                    ? `${index >= mobileItemsLimit ? "hidden md:block" : ""}
+                    ${index >= 3 ? "md:hidden xl:block" : ""}
+                    ${index >= 4 ? "xl:hidden" : ""}`
+                    : ""
+                }
+              >
+                <ProductCard {...item} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>Товары не найдены</div>
+        )}
       </div>
     </section>
   );
