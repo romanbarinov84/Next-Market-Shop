@@ -40,11 +40,9 @@ const ProductCard = ({
    <div className="relative flex flex-col w-full sm:w-56 md:w-60 lg:w-64 rounded overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
   
 
-  <button className="absolute top-2 right-2 z-10 w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] opacity-50 rounded cursor-pointer transition-all duration-300">
-   <FavoriteButton productId={productId.toString()}/>
-  </button>
+  
 
- 
+  <FavoriteButton productId={productId.toString()}/>
   <Link href={productUrl} className="relative flex-1">
     <div className="relative w-full h-40 sm:h-44 md:h-48 lg:h-52 overflow-hidden rounded-sm">
       <Image
