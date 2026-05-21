@@ -4,6 +4,7 @@ import Image from 'next/image';
 import StarRating from '../RATING/StarRating';
 import Link from 'next/link';
 import { CONFIG } from '@/config/config';
+import FavoriteButton from './FavoriteButton';
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
@@ -40,15 +41,7 @@ const ProductCard = ({
   
 
   <button className="absolute top-2 right-2 z-10 w-8 h-8 p-2 bg-[#f3f2f1] hover:bg-[#fcd5ba] opacity-50 rounded cursor-pointer transition-all duration-300">
-    <div className="relative w-5 h-5">
-      <Image
-        src="/ProductCard/Shape (Stroke).svg"
-        alt="Обране"
-        fill
-        className="object-contain"
-        sizes="24px"
-      />
-    </div>
+   <FavoriteButton productId={productId.toString()}/>
   </button>
 
  
