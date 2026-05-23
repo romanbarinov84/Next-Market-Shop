@@ -28,4 +28,5 @@
     "edit-product":"Редактировать товар",
     "favorites":"Обранне",
     "favorite":"Обранне",
+    "Dubai chokolate":"Дубайский шоколад",
 }

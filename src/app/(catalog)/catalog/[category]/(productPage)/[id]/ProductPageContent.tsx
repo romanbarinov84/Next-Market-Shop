@@ -15,6 +15,7 @@ import SameBrandProducts from "../../_components/SameBrandProducts";
 import RatingDistribution from "../../_components/RatingDistribution";
 import ReviewsWrapper from "../../_components/ReviewsWrapper";
 import Link from "next/link";
+import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
 
 
 interface ProductPageContentProps {
@@ -26,18 +27,18 @@ const ProductPageContent = ({
   product,
   productId
 }: ProductPageContentProps) => {
-  const discountedPrice = product.discountPercent
-    ? product.basePrice * (1 - product.discountPercent / 100)
-    : product.basePrice;
 
-  const cardPrice = discountedPrice * (1 - CONFIG.CARD_DISCOUNT_PERCENT / 100);
-  const bonusesAmount = cardPrice * 0.05;
+  const priceWithDiscount = calculateFinalPrice(product.basePrice , product.discountPercent)
+  const cardPrice = calculatePriceByCard(priceWithDiscount , CONFIG.BONUSES_PERCENT);
+
+  const bonusesAmount = Math.round((priceWithDiscount * CONFIG.BONUSES_PERCENT) / 100 )
 
   return (
-    <div className="px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text">
-      <h1 className="text-xl md:text-2xl font-bold mb-4">{product.description}</h1>
+    <div className="px-[max(12px,calc((100%-1408px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text ">
+      <div className="bg-white/40 border border-gray-100 rounded-3xl shadow-lg mb-8 p-4 md:p-6 xl:p-8">
+         <h1 className="text-xl md:text-2xl font-bold mb-4">{product.description}</h1>
       <div className="flex flex-col gap-y-25 md:gap-y-20 xl:gap-y-30">
-        <div className="flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6">
+        <div className="flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6 bg-amber-50 p-5 rounded-full">
           <div className="text-xs">арт. {product.article}</div>
           <div className="flex flex-row flex-wrap gap-2 items-center">
             <StarRating rating={product.rating.average || 5} />
@@ -58,11 +59,11 @@ const ProductPageContent = ({
             <p className="text-sm">В избранное</p>
           </Link>
         </div>
-        <div className="flex flex-col md:flex-row md:flex-wrap gap-10 w-full justify-center">
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-10 w-full justify-center bg-amber-50 p-5">
           <ImagesBlock product={product} />
           <div className="md:w-86 lg:w-94 flex flex-col">
             <ProductOffer
-              discountedPrice={discountedPrice}
+              discountedPrice={priceWithDiscount}
               cardPrice={cardPrice}
             />
             <CartButton />
@@ -70,7 +71,7 @@ const ProductPageContent = ({
             <DiscountMessage
               productId={productId.toString()}
               productTitle={product.title}
-              currentPrice={discountedPrice.toString()}
+              currentPrice={priceWithDiscount.toString()}
             />
              <AdditionalInfo
               brand={product.brand}
@@ -81,7 +82,7 @@ const ProductPageContent = ({
           <SimilarProducts currentProduct={product} />
         </div>
          <SameBrandProducts currentProduct={product} />
-        <div>
+        <div className="bg-amber-50 p-5 rounded-sm">
           <h2 className="text-2xl xl:text-4xl text-left font-bold text-main-text mb-4 md:mb-8 xl:mb-10">
             Отзывы
           </h2>
@@ -94,6 +95,8 @@ const ProductPageContent = ({
         </div>
       </div>
     </div>
+      </div>
+     
   );
 };
 

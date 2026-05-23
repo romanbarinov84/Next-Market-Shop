@@ -49,11 +49,11 @@ const SimilarProducts = async ({ currentProduct }: SimilarProductsProps) => {
       <div className="mx-auto flex flex-col items-center">
         <div className="w-full max-w-85 md:max-w-172 xl:max-w-40">
           <h3 className="text-sm md:text-lg font-semibold mb-2 text-[#606060] text-left">
-            Похожие
+            Также покупают
           </h3>
         </div>
 
-        <div className="flex flex-row xl:flex-col gap-2 md:gap-4 justify-center xl:justify-start">
+        <div className="flex flex-row xl:flex-row  md:gap-4 justify-center xl:justify-start bg-amber-100 p-5">
           {similarProducts.map((product) => (
            <Link
   key={product.id}
