@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import IconBox from '../svg/IconBox';
 import IconHeart from '../svg/iconHeart';
+import IconCart from '../svg/IconCart';
 
 const TopMenu = () => {
     const pathName = usePathname();
@@ -13,6 +14,7 @@ const TopMenu = () => {
     const { user } = useAuthStore();
     const isFavoritePage = pathName === '/favorite';
     const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin';
+    const isCartPage = pathName === '/cart';
 
     return (
         <>
@@ -68,14 +70,11 @@ const TopMenu = () => {
                 </li>
                 {!isManagerOrAdmin && (
                     <li className="flex flex-col items-center gap-2  w-11 cursor-pointer">
-                        <Image
-                            src="/лого хедера/HeaderUserBlockCartBox.svg"
-                            alt="Кошик"
-                            width={24}
-                            height={24}
-                            className="object-contain w-6 h-6"
-                        />
-                        <span>Кошик</span>
+                        <Link href="/cart" className='flex flex-col items-center gap-2 w-11 cursor-pointer'>
+                            {' '}
+                            <IconCart isActive={isCartPage} />
+                            <span className={isCartPage ? "text-[#ff6633]" :"text-[#555]"}>Кошик</span>
+                        </Link>
                     </li>
                 )}
             </ul>

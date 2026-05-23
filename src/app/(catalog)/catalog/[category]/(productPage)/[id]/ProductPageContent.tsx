@@ -66,7 +66,7 @@ const ProductPageContent = ({
               discountedPrice={priceWithDiscount}
               cardPrice={cardPrice}
             />
-            <CartButton />
+            <CartButton productId={productId}/>
             <Bonuses bonus={bonusesAmount} />
             <DiscountMessage
               productId={productId.toString()}

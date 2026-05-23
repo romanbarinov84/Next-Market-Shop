@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { CONFIG } from '@/config/config';
 import FavoriteButton from './FavoriteButton';
 import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
+import AddToCartButton from '../AddToCartButton';
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
@@ -90,9 +91,7 @@ const ProductCard = ({
   </Link>
 
   {/* Кнопка "До кошика" */}
-  <button className="w-full py-2 text-sm sm:text-base text-orange-500 border border-orange-500 rounded hover:bg-orange-500 hover:text-white transition-colors duration-300 mt-auto">
-    До кошика
-  </button>
+  <AddToCartButton productId={productId.toString()}/>
 </div>
 
     );

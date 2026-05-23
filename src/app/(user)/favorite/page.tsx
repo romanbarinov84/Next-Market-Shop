@@ -13,20 +13,10 @@ import GenericListPage from "../../(products)/GenerictListPage";
 import { Loader } from "lucide-react";
 import fetchFavorites from "./fetchFavorites";
 import PriceFilter from "../../(catalog)/catalog/[category]/_components/PriceFilter";
+import { getServerUserId } from "@/UTILS/getServerUserId";
 
 
-async function getServerUserId() {
-  try {
-    const headersList = await headers();
-    const cookies = headersList.get("cookie");
-    const sessionToken = getCustomSessionToken(cookies);
-    if (!sessionToken) return null;
-    const session = await getValidCustomSession(sessionToken);
-    return session?.userId || null;
-  } catch {
-    return null;
-  }
-}
+
 
 const FavoritesPage = async ({
   searchParams,
