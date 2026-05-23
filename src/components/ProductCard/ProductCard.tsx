@@ -5,6 +5,7 @@ import StarRating from '../RATING/StarRating';
 import Link from 'next/link';
 import { CONFIG } from '@/config/config';
 import FavoriteButton from './FavoriteButton';
+import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
@@ -18,8 +19,7 @@ const ProductCard = ({
   tags,
   categories,
 }: ProductCardProps) => {
-  const calculateFinalPrice = (price: number, discount: number) =>
-    discount > 0 ? price * (1 - discount / 100) : price;
+  
 
   const isNewProducts = tags?.includes('new');
   const finalPrice = isNewProducts
@@ -27,7 +27,7 @@ const ProductCard = ({
     : calculateFinalPrice(basePrice, discountPercent);
   const priceByCard = isNewProducts
     ? basePrice
-    : calculateFinalPrice(finalPrice, cardDiscountPercent);
+    : calculatePriceByCard(finalPrice, cardDiscountPercent);
   const ratingValue = rating?.average ?? 0;
 
 

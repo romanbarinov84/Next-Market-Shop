@@ -49,7 +49,7 @@ const ProductPageContent = ({
           <ShareButton title={product.title} />
           <Link href="/favorite" className="flex flex-row  flex-wrap gap-2 items-center cursor-pointer">
             <Image
-              src="/favoriteIcon.png"
+              src="/ProductCard/Shape (Stroke).svg"
               alt="Избранное"
               width={24}
               height={24}
