@@ -35,7 +35,7 @@ const ProductPageContent = ({
 
   return (
     <div className="px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text">
-      <h1 className="text-2xl font-bold mb-4">{product.description}</h1>
+      <h1 className="text-xl md:text-2xl font-bold mb-4">{product.description}</h1>
       <div className="flex flex-col gap-y-25 md:gap-y-20 xl:gap-y-30">
         <div className="flex flex-row flex-wrap items-center gap-6 mb-4 md:mb-6">
           <div className="text-xs">арт. {product.article}</div>
