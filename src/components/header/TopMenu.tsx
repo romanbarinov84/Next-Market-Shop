@@ -20,11 +20,11 @@ const TopMenu = () => {
 
     const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin';
 
-    useEffect(() => {
-        if (user && !isManagerOrAdmin) {
-            fetchCart();
-        }
-    });
+ useEffect(() => {
+    if (user && !isManagerOrAdmin) {
+        fetchCart();
+    }
+}, [user, isManagerOrAdmin, fetchCart]);
 
     return (
         <>

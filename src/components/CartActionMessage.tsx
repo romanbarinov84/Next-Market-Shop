@@ -21,7 +21,7 @@ const CartActionMessage = ({ message, onClose }: CartActionMessageProps) => {
         <p className="flex-1 leading-4 pr-2">{message.message}</p>
         <button
           onClick={onClose}
-          className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-main-text hover:bg-gray-200 duration-300 text-base font-bold cursor-pointer"
+          className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-main-text hover:bg-gray-200 duration-300 text-base font-bold cursor-pointer"
           aria-label="Закрыть"
         >
           ×
