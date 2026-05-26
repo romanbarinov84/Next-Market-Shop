@@ -26,7 +26,7 @@ const AddToCartButton = ({ productId }: { productId: string }) => {
             if (result.success) {
         await fetchCart();
       }
-        } catch (error) {
+        } catch  {
             setMessage({
                 success:false,
                 message:"Ошибка при добавлении в корзину",
