@@ -14,129 +14,128 @@ import BonusesSection from "./_components/BonusesSection";
 import { ProductCardProps } from "@/src/types/product";
 
 const CartPage = () => {
-  // Состояние для отслеживания выбранных товаров (массив ID товаров)
+
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  // Состояние для хранения данных о товарах (объект, где ключи - ID товаров, значения - данные товаров)
+
   const [productsData, setProductsData] = useState<{
     [key: string]: ProductCardProps;
   }>({});
-  // Состояние для количества доступных бонусов пользователя
+  
   const [bonusesCount, setBonusesCount] = useState<number>(0);
-  // Состояние, указывающее есть ли у пользователя карта лояльности
+  
   const [hasLoyaltyCard, setHasLoyaltyCard] = useState<boolean>(false);
-  // Состояние для отслеживания удаленных товаров (чтобы скрыть их из интерфейса без немедленного удаления из store)
+
   const [removedItems, setRemovedItems] = useState<string[]>([]);
-  // Состояние загрузки данных корзины (показывает индикатор загрузки)
+  
   const [isCartLoading, setIsCartLoading] = useState(true);
-  // Флаг использования бонусов для оплаты заказа
+ 
   const [useBonuses, setUseBonuses] = useState<boolean>(false);
-  // Получение данных корзины и функции обновления из глобального состояния (Zustand store)
+  
   const { cartItems, updateCart } = useCartStore();
-  // Фильтруем удаленные товары - показываем только те, что не в списке удаленных
-  // Это оптимистичное обновление UI до подтверждения удаления с сервера
+  
   const visibleCartItems = cartItems.filter(
     (item) => !removedItems.includes(item.productId)
   );
 
-  // Добавил уже после урока. Фильтруем товары в наличии для расчетов цен Добавлена переменная availableCartItems, которая фильтрует visibleCartItems, оставляя только товары в наличии. Все расчеты цен (totalPrice, totalMaxPrice, totalDiscount, totalBonuses) теперь используют availableCartItems вместо visibleCartItems
+ 
   const availableCartItems = visibleCartItems.filter((item) => {
     const product = productsData[item.productId];
     return product && product.quantity > 0;
   });
 
-  // Асинхронная функция загрузки данных корзины и товаров
-  const fetchCartAndProducts = async () => {
-    setIsCartLoading(true); // Включаем индикатор загрузки
-    try {
-      // Получаем данные пользователя (бонусы и карту лояльности)
-      const userData = await getUserBonusesAction();
-      setBonusesCount(userData.bonusesCount); // Устанавливаем количество бонусов
-      setHasLoyaltyCard(userData.hasLoyaltyCard); // Устанавливаем статус карты лояльности
 
-      // Загружаем актуальные данные корзины с сервера
+  const fetchCartAndProducts = async () => {
+    setIsCartLoading(true);
+    try {
+      
+      const userData = await getUserBonusesAction();
+      setBonusesCount(userData.bonusesCount); 
+      setHasLoyaltyCard(userData.hasLoyaltyCard);
+
+      
       const cartItems = await getOrderCartAction();
 
-      // ОБНОВЛЯЕМ STORE данными из сервера (синхронизируем локальное состояние с сервером)
+     
       updateCart(cartItems);
 
-      // Создаем массив промисов для параллельной загрузки данных о каждом товаре
+      
       const productPromises = cartItems.map(async (item) => {
         try {
-          // Запрашиваем данные товара по API
+        
           const response = await fetch(`/api/products/${item.productId}`);
           const product = await response.json();
-          return { productId: item.productId, product }; // Возвращаем ID и данные товара
+          return { productId: item.productId, product }; 
         } catch (error) {
           console.error(`Ошибка получения продукта ${item.productId}:`, error);
-          return null; // В случае ошибки возвращаем null
+          return null; 
         }
       });
 
-      // Ожидаем завершения всех запросов к API товаров
+    
       const productsResults = await Promise.all(productPromises);
       const productsMap: { [key: string]: ProductCardProps } = {};
 
-      // Преобразуем массив результатов в объект для быстрого доступа по ID товара
+     
       productsResults.forEach((result) => {
         if (result && result.product) {
-          productsMap[result.productId] = result.product; // Сохраняем товар по его ID
+          productsMap[result.productId] = result.product; 
         }
       });
 
-      setProductsData(productsMap); // Устанавливаем данные товаров в состояние
+      setProductsData(productsMap); 
     } catch (error) {
       console.error("Ошибка получения данных корзины:", error);
     } finally {
-      setIsCartLoading(false); // Выключаем индикатор загрузки в любом случае
+      setIsCartLoading(false); 
     }
   };
 
   useEffect(() => {
     fetchCartAndProducts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, []);
 
-  // Функция обновления количества товара (мемоизирована для оптимизации перерендеров)
+  
   const handleQuantityUpdate = useCallback(
     async (productId: string, newQuantity: number) => {
-      // Оптимистичное обновление store - сразу меняем UI до ответа сервера
+    
       const updatedCartItems = cartItems.map((item) =>
         item.productId === productId ? { ...item, quantity: newQuantity } : item
       );
-      updateCart(updatedCartItems); // Обновляем глобальное состояние
+      updateCart(updatedCartItems); 
 
       try {
-        // Синхронизируем изменение с сервером
+      
         await updateOrderItemQuantityAction(productId, newQuantity);
       } catch (error) {
         console.error("Ошибка обновления количества:", error);
-        // Откат к предыдущему состоянию при ошибке (пессимистичное обновление)
+        
         updateCart(cartItems);
       }
     },
-    [cartItems, updateCart] // Зависимости для useCallback
+    [cartItems, updateCart]
   );
 
-  // Функция удаления выбранных товаров
+ 
   const handleRemoveSelected = async () => {
-    if (selectedItems.length === 0) return; // Выходим если нечего удалять
+    if (selectedItems.length === 0) return;
 
-    // СРАЗУ убираем товары из рендеринга (оптимистичное обновление UI)
+    
     setRemovedItems((prev) => [...prev, ...selectedItems]);
 
-    // Фильтруем товары в store, удаляя выбранные
+   
     const updatedCartItems = cartItems.filter(
       (item) => !selectedItems.includes(item.productId)
     );
     updateCart(updatedCartItems); // Обновляем глобальное состояние
 
     try {
-      // Удаляем в фоне - НЕ ЖДЕМ ОТВЕТА (неблокирующий запрос)
+     
       removeMultipleOrderItemsAction(selectedItems);
       setSelectedItems([]); // Очищаем выбранные товары
     } catch (error) {
       console.error("Ошибка удаления товаров:", error);
-      // Откат изменений при ошибке - возвращаем товары в видимые
+      
       setRemovedItems((prev) =>
         prev.filter((id) => !selectedItems.includes(id))
       );
