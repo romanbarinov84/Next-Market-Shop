@@ -1,14 +1,15 @@
 "use client";
 
 
+import { useEffect, useState } from "react";
+
+import { Loader } from "lucide-react";
 import { useAuthStore } from "@/src/store/authStore";
 import { ProductCardProps } from "@/src/types/product";
-import { Loader } from "lucide-react";
-import { useEffect, useState } from "react";
 import fetchPurchases from "../fetchPurchases";
 import { CONFIG } from "@/config/config";
-import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
 import ProductsSection from "../../(products)/ProductsSection";
+import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
 
 const Purchases = () => {
   const [shouldShow, setShouldShow] = useState(false);
