@@ -29,4 +29,7 @@
     "favorites":"Обранне",
     "favorite":"Обранне",
     "cart":"Корзина",
+    "adminPanel":"Админ панель",
+    "delivery-times":"График доставки",
+
 }

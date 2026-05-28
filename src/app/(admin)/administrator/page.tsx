@@ -34,6 +34,12 @@ const AdminPanel = () => {
         >
           Редактирование товара
         </Link>
+        <Link
+          href="/administrator/adminPanel/delivery-times"
+          className={`${buttonStyles.active} [&&]:justify-start px-4 py-2 w-full md:w-1/2`}
+        >
+          График доставки
+        </Link>
       </div>
     </div>
   );
