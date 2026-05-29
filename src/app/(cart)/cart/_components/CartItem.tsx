@@ -9,9 +9,10 @@ import ProductImage from "./ProductImage";
 import PriceDisplay from "./PriceDisplay";
 import QuantitySelector from "./QuantitySelector";
 import DiscountBadge from "./DiscountBadge";
-import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
 import { formatPrice } from "@/UTILS/formatPrice";
 import Tooltip from "@/src/app/(auth)/(reg)/_components/Tooltip";
+import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
+import { useCartStore } from "@/src/store/cartStore";
 import { CartItemProps } from "@/src/types/cart";
 
 
@@ -21,12 +22,12 @@ const CartItem = memo(function CartItem({
   isSelected,
   onSelectionChange,
   onQuantityUpdate,
-  hasLoyaltyCard,
 }: CartItemProps) {
-    // Убрал из state quantity альтернативу в виде || 1
+  
   const [quantity, setQuantity] = useState(item.quantity);
   const [isUpdating, setIsUpdating] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const { hasLoyaltyCard } = useCartStore();
 
   const handleQuantityChange = async (newQuantity: number) => {
     if (newQuantity < 0) return;
@@ -89,7 +90,7 @@ const CartItem = memo(function CartItem({
         <div className="flex flex-row flex-wrap md:flex-nowrap">
           <ProductImage productId={item.productId} title={productData.title} />
 
-          <div className="flex-1 flex min-w-[224px] md:flex-initial flex-col gap-y-2.5 p-2.5">
+          <div className="flex-1 flex min-w-56 md:flex-initial flex-col gap-y-2.5 p-2.5">
             <Link
               className="text-base hover:text-[#ff6633] cursor-pointer"
               href={`/catalog/${productData.categories[0]}/${item.productId}`}
@@ -116,7 +117,7 @@ const CartItem = memo(function CartItem({
         </div>
 
         {showTooltip && <Tooltip text="Количество ограничено" position="top" />}
-        <div className="flex flex-wrap justify-between items-center gap-2 w-full md:w-30 xl:w-[236px] p-2 md:flex-nowrap md:flex-col md:justify-normal md:items-end xl:flex-row xl:items-start xl:justify-end">
+        <div className="flex flex-wrap justify-between items-center gap-2 w-full md:w-30 xl:w-59 p-2 md:flex-nowrap md:flex-col md:justify-normal md:items-end xl:flex-row xl:items-start xl:justify-end">
           {!isOutOfStock && (
             <QuantitySelector
               quantity={quantity}
