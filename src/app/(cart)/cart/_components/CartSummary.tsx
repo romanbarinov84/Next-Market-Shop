@@ -4,21 +4,19 @@ import { CONFIG } from "../../../../../config/config";
 import { useState } from "react";
 import { useCartStore } from "@/src/store/cartStore";
 import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
-import { formatPrice } from "@/UTILS/formatPrice";
-import { getFullEnding } from "@/UTILS/getWordEnding";
-import Bonuses from "@/src/app/(catalog)/catalog/[category]/(productPage)/[id]/_components/Bonuses";
 import { buttonStyles } from "@/src/app/(auth)/styles";
 import OrderSuccessMessage from "./OrderSuccessMessage";
 import { CartItemWithPrice } from "@/src/types/order";
 import { createOrderAction } from "@/src/actions/orderDelivery";
+import PriceSummary from "./PriceSummary";
 
 
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
-  const [paymentType , setPaymentType] = useState<"cash" | "online" | null>(null);
-  const [showPaymentModal , setShowPaymentModal] = useState(false);
-  const [showSuccessModal , setShowSuccessModal] = useState(false);
+  const [paymentType , setPaymentType] = useState<"cash" | "online" | null>(null);//тип платежа
+  const [showPaymentModal , setShowPaymentModal] = useState(false);//модальное окно для данных
+  const [showSuccessModal , setShowSuccessModal] = useState(false);// модальное окно для результата
   const {
     pricing,
     cartItems,
@@ -153,31 +151,9 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
 
   return (
     <>
-      <div className="flex flex-col gap-y-2.5 pb-6 border-b-2 border-[#f3f2f1]">
-        <div className="flex flex-row justify-between">
-          <p className="text-[#8f8f8f]">
-            {visibleCartItems.length}{" "}
-            {`товар${getFullEnding(visibleCartItems.length)}`}
-          </p>
-          <p className="">{formatPrice(totalMaxPrice)} ₽</p>
-        </div>
-
-        <div className="flex flex-row justify-between">
-          <p className="text-[#8f8f8f]">Скидка</p>
-          <p className="text-[#ff6633] font-bold">
-            -{formatPrice(totalDiscount)} ₽
-          </p>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-end justify-between gap-y-6">
-        <div className="text-base text-[#8f8f8f] flex flex-row justify-between items-center w-full">
-          <span>Итог:</span>
-          <span className="font-bold text-2xl text-main-text">
-            {formatPrice(finalPrice)} ₽
-          </span>
-        </div>
-        <Bonuses bonus={totalBonuses} />
+    <PriceSummary visibleCartItems={visibleCartItems}  totalMaxPrice={totalMaxPrice} totalDiscount={totalDiscount} finalPrice={finalPrice} totalBonuses={totalBonuses}/>
+      
+        
         <div className="w-full">
           {!isMinimumReached && (
             <div className="bg-[#d80000] rounded text-white text-xs text-center mx-auto py-0.75 px-1.5 mb-4 w-full">
@@ -230,7 +206,7 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
             </div>
           )}
         </div>
-      </div>
+      
     </>
   );
 };
