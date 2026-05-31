@@ -16,6 +16,9 @@ import { createOrderAction } from "@/src/actions/orderDelivery";
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
+  const [paymentType , setPaymentType] = useState<"cash" | "online" | null>(null);
+  const [showPaymentModal , setShowPaymentModal] = useState(false);
+  const [showSuccessModal , setShowSuccessModal] = useState(false);
   const {
     pricing,
     cartItems,
