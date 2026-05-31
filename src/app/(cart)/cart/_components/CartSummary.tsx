@@ -3,13 +3,13 @@ import { CONFIG } from '../../../../../config/config';
 import { useState } from 'react';
 import { useCartStore } from '@/src/store/cartStore';
 import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
-import { buttonStyles } from '@/src/app/(auth)/styles';
-import OrderSuccessMessage from './OrderSuccessMessage';
 import { CartItemWithPrice } from '@/src/types/order';
 import { createOrderAction } from '@/src/actions/orderDelivery';
 import PriceSummary from './PriceSummary';
 import MinimumOrderWarning from './MinimumOrderWarning';
 import CheckOutButton from './CheckOutButton';
+import PaymentButtons from './PaymentButtons';
+import { FakePaymentData } from '@/src/types/payment';
 
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
     const [isProcessing, setIsProcessing] = useState(false);
@@ -27,9 +27,13 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
         setIsCheckout,
         isOrdered,
         setIsOrdered,
+        useBonuses
     } = useCartStore();
 
+  
+
     const visibleCartItems = cartItems.filter((item) => item.quantity > 0);
+    
 
     const {
         totalPrice,
@@ -45,6 +49,12 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
         maxBonusUse,
         Math.floor((totalPrice * CONFIG.MAX_BONUSES_PERCENT) / 100),
     );
+
+    const actualUsedBonuses = useBonuses ? usedBonuses : 0;
+
+    const handleOrderCreation = async(paymentMethod : "cash_on_delivery" | "online",paymentData?:FakePaymentData) => {
+
+    }
 
     const handleCashPayment = async () => {
         if (!deliveryData) {
@@ -175,41 +185,15 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
                         onCheckout={() => setIsCheckout(true)}
                     />
                 ) : (
-                    <div className="flex flex-col gap-3">
-                        {!isOrdered ? (
-                            <>
-                                <button
-                                    disabled={!canProceedWithPayment()}
-                                    onClick={handleOnlinePayment}
-                                    className={`rounded w-full text-xl h-15 items-center justify-center ${
-                                        canProceedWithPayment()
-                                            ? buttonStyles.active
-                                            : buttonStyles.inactive
-                                    }`}
-                                >
-                                    {isProcessing
-                                        ? 'Обработка...'
-                                        : 'Оплатить на сайте'}
-                                </button>
-
-                                <button
-                                    disabled={!canProceedWithPayment()}
-                                    onClick={handleCashPayment}
-                                    className={`h-10 rounded w-full text-base items-center justify-center duration-300 ${
-                                        canProceedWithPayment()
-                                            ? 'bg-primary hover:shadow-button-default active:shadow-button-active text-white cursor-pointer'
-                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                                    }`}
-                                >
-                                    {isProcessing
-                                        ? 'Оформление...'
-                                        : 'Оплатить при получении'}
-                                </button>
-                            </>
-                        ) : (
-                            <OrderSuccessMessage orderNumber={orderNumber} />
-                        )}
-                    </div>
+                    <PaymentButtons
+                        isOrdered={isOrdered}
+                        paymentType={paymentType}
+                        orderNumber={orderNumber}
+                        isProcessing={isProcessing}
+                        canProceedWidthPayment={canProceedWithPayment()}
+                        onOnlinePayment={handleOnlinePayment}
+                        onCashPayment={handleCashPayment}
+                    />
                 )}
             </div>
         </>
