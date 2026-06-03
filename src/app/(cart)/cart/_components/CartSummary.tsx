@@ -4,12 +4,28 @@ import { useState } from 'react';
 import { useCartStore } from '@/src/store/cartStore';
 import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
 import { CartItemWithPrice } from '@/src/types/order';
-import { createOrderAction } from '@/src/actions/orderDelivery';
 import PriceSummary from './PriceSummary';
 import MinimumOrderWarning from './MinimumOrderWarning';
 import CheckOutButton from './CheckOutButton';
 import PaymentButtons from './PaymentButtons';
 import { FakePaymentData } from '@/src/types/payment';
+import { prepareCartItemsWithPrices } from '@/UTILS/orderHelpers/orderHelpers';
+
+// Helper functions for creating orders (replace endpoints as needed)
+async function createOrderRequest(orderData: any) {
+    const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(orderData),
+    });
+    if (!res.ok) throw new Error('Failed to create order');
+    return res.json();
+}
+
+async function createOrderAction(orderData: any) {
+    // alias for createOrderRequest; kept separate for clarity
+    return createOrderRequest(orderData);
+}
 
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
     const [isProcessing, setIsProcessing] = useState(false);
@@ -27,13 +43,10 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
         setIsCheckout,
         isOrdered,
         setIsOrdered,
-        useBonuses
+        useBonuses,
     } = useCartStore();
 
-  
-
     const visibleCartItems = cartItems.filter((item) => item.quantity > 0);
-    
 
     const {
         totalPrice,
@@ -52,17 +65,54 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
 
     const actualUsedBonuses = useBonuses ? usedBonuses : 0;
 
-    const handleOrderCreation = async(paymentMethod : "cash_on_delivery" | "online",paymentData?:FakePaymentData) => {
+    const createOrder = async (
+        paymentMethod: 'cash_on_delivery' | 'online',
+        paymentId?: string,
+    ) => {
+        if (!deliveryData) {
+            throw new Error('Данные доставки не заполнены');
+        }
+        const cartItemsWithPrices = prepareCartItemsWithPrices(
+            visibleCartItems,
+            productsData,
+            hasLoyaltyCard,
+        );
 
-    }
+        const orderData = {
+          finalPrice,
+          totalBonuses,
+          usedBonuses:actualUsedBonuses,
+          totalDiscount,
+          deliveryAddress:deliveryData.address,
+          deliveryTime:deliveryData.time,
+          cartItems:cartItemsWithPrices,
+          totalPrice:totalMaxPrice,
+          paymentMethod,
+          paymentId,
 
-    const handleCashPayment = async () => {
+        };
+        return await createOrderRequest(orderData);
+    };
+
+    const handleOrderCreation = async (
+        paymentMethod: 'cash_on_delivery' | 'online',
+        paymentData?: FakePaymentData,
+    ) => {
         if (!deliveryData) {
             console.error('Данные доставки не заполнены');
             return;
         }
-
         setIsProcessing(true);
+        setPaymentType(paymentMethod === 'online' ? 'online' : 'cash');
+
+        try {
+            const result = await createOrder(paymentMethod, paymentData?.id);
+            //после подтверждения платежа
+        } catch (error) {}
+    };
+
+    const handleCashPayment = async () => {
+        await handleOrderCreation('cash_on_delivery');
 
         try {
             const cartItemsWithPrices: CartItemWithPrice[] =
