@@ -1,253 +1,251 @@
-import { CartSummaryProps } from '../../../../types/cart';
-import { CONFIG } from '../../../../../config/config';
-import { useState } from 'react';
-import { useCartStore } from '@/src/store/cartStore';
-import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
-import { CartItemWithPrice } from '@/src/types/order';
-import PriceSummary from './PriceSummary';
-import MinimumOrderWarning from './MinimumOrderWarning';
-import CheckOutButton from './CheckOutButton';
-import PaymentButtons from './PaymentButtons';
-import { FakePaymentData } from '@/src/types/payment';
-import { prepareCartItemsWithPrices } from '@/UTILS/orderHelpers/orderHelpers';
-
-// Helper functions for creating orders (replace endpoints as needed)
-async function createOrderRequest(orderData: any) {
-    const res = await fetch('/api/orders', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(orderData),
-    });
-    if (!res.ok) throw new Error('Failed to create order');
-    return res.json();
-}
-
-async function createOrderAction(orderData: any) {
-    // alias for createOrderRequest; kept separate for clarity
-    return createOrderRequest(orderData);
-}
+import { CartSummaryProps } from "../../../../types/cart";
+import { CONFIG } from "../../../../../config/config";
+import { useState } from "react";
+import PriceSummary from "./PriceSummary";
+import MinimumOrderWarning from "./MinimumOrderWarning";
+import PaymentButtons from "./PaymentButtons";
+import {
+  createOrderRequest,
+  prepareCartItemsWithPrices,
+  updateUserAfterPayment,
+} from "../utils/orderHelpers";
+import { useRouter } from "next/navigation";
+import CheckOutButton from "./CheckOutButton";
+import FakePaymentModal from "@/src/app/(payment)/FakePaymentModal";
+import { useCartStore } from "@/src/store/cartStore";
+import PaymentSuccessModal from "@/src/app/(payment)/PaymentSuccessModal";
+import { FakePaymentData, PaymentSuccessData } from "@/src/types/payment";
 
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [orderNumber, setOrderNumber] = useState<string | null>(null);
-    const [paymentType, setPaymentType] = useState<'cash' | 'online' | null>(
-        null,
-    ); //тип платежа
-    const [showPaymentModal, setShowPaymentModal] = useState(false); //модальное окно для данных
-    const [showSuccessModal, setShowSuccessModal] = useState(false); // модальное окно для результата
-    const {
-        pricing,
-        cartItems,
-        hasLoyaltyCard,
-        isCheckout,
-        setIsCheckout,
-        isOrdered,
-        setIsOrdered,
-        useBonuses,
-    } = useCartStore();
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [orderNumber, setOrderNumber] = useState<string | null>(null);
+  const [paymentType, setPaymentType] = useState<"cash" | "online" | null>(
+    null
+  );
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [successData, setSuccessData] = useState<PaymentSuccessData | null>(
+    null
+  );
+  const router = useRouter();
 
-    const visibleCartItems = cartItems.filter((item) => item.quantity > 0);
+  const {
+    pricing,
+    cartItems,
+    hasLoyaltyCard,
+    isCheckout,
+    setIsCheckout,
+    isOrdered,
+    setIsOrdered,
+    useBonuses,
+    resetAfterOrder
+  } = useCartStore();
 
-    const {
-        totalPrice,
-        totalMaxPrice,
-        totalDiscount,
-        finalPrice,
-        totalBonuses,
-        maxBonusUse,
-        isMinimumReached,
-    } = pricing;
+  const visibleCartItems = cartItems.filter((item) => item.quantity > 0);
 
-    const usedBonuses = Math.min(
-        maxBonusUse,
-        Math.floor((totalPrice * CONFIG.MAX_BONUSES_PERCENT) / 100),
+  const {
+    totalPrice,
+    totalMaxPrice,
+    totalDiscount,
+    finalPrice,
+    totalBonuses,
+    maxBonusUse,
+    isMinimumReached,
+  } = pricing;
+
+  const usedBonuses = Math.min(
+    maxBonusUse,
+    Math.floor((totalPrice * CONFIG.MAX_BONUSES_PERCENT) / 100)
+  );
+
+  const actualUsedBonuses = useBonuses ? usedBonuses : 0;
+
+  const createOrder = async (
+    paymentMethod: "cash_on_delivery" | "online",
+    paymentId?: string
+  ) => {
+    if (!deliveryData) {
+      throw new Error("Данные доставки не заполнены");
+    }
+
+    const cartItemsWithPrices = prepareCartItemsWithPrices(
+      visibleCartItems,
+      productsData,
+      hasLoyaltyCard
     );
 
-    const actualUsedBonuses = useBonuses ? usedBonuses : 0;
+    const orderData = {
+      finalPrice,
+      totalBonuses,
+      usedBonuses: actualUsedBonuses,
+      totalDiscount,
+      deliveryAddress: deliveryData.address,
+      deliveryTime: deliveryData.time,
+      cartItems: cartItemsWithPrices,
+      totalPrice: totalMaxPrice,
+      paymentMethod,
+      paymentId,
+    };
 
-    const createOrder = async (
-        paymentMethod: 'cash_on_delivery' | 'online',
-        paymentId?: string,
-    ) => {
-        if (!deliveryData) {
-            throw new Error('Данные доставки не заполнены');
+    return await createOrderRequest(orderData);
+  };
+
+  const handleOrderCreation = async (
+    paymentMethod: "cash_on_delivery" | "online",
+    paymentData?: FakePaymentData
+  ) => {
+    if (!deliveryData) {
+      console.error("Данные доставки не заполнены");
+      return;
+    }
+
+    setIsProcessing(true);
+    setPaymentType(paymentMethod === "online" ? "online" : "cash");
+
+    try {
+      const result = await createOrder(paymentMethod, paymentData?.id);
+
+      if (paymentMethod === "online") {
+        try {
+          await updateUserAfterPayment({
+            usedBonuses: actualUsedBonuses,
+            earnedBonuses: totalBonuses,
+            purchasedProductIds: visibleCartItems.map((item) => item.productId),
+          });
+        } catch (updateError) {
+          console.warn(
+            "Заказ создан, но возникла проблема с обновлением бонусов",
+            updateError
+          );
         }
-        const cartItemsWithPrices = prepareCartItemsWithPrices(
-            visibleCartItems,
-            productsData,
-            hasLoyaltyCard,
-        );
 
-        const orderData = {
-          finalPrice,
-          totalBonuses,
-          usedBonuses:actualUsedBonuses,
-          totalDiscount,
-          deliveryAddress:deliveryData.address,
-          deliveryTime:deliveryData.time,
-          cartItems:cartItemsWithPrices,
-          totalPrice:totalMaxPrice,
-          paymentMethod,
-          paymentId,
-
+        const successModalData: PaymentSuccessData = {
+          orderNumber: result.orderNumber,
+          paymentId: paymentData!.id,
+          amount: finalPrice,
+          cardLast4: paymentData!.cardLast4,
         };
-        return await createOrderRequest(orderData);
-    };
 
-    const handleOrderCreation = async (
-        paymentMethod: 'cash_on_delivery' | 'online',
-        paymentData?: FakePaymentData,
-    ) => {
-        if (!deliveryData) {
-            console.error('Данные доставки не заполнены');
-            return;
-        }
-        setIsProcessing(true);
-        setPaymentType(paymentMethod === 'online' ? 'online' : 'cash');
+        setSuccessData(successModalData);
+        setShowSuccessModal(true);
+      }
 
-        try {
-            const result = await createOrder(paymentMethod, paymentData?.id);
-            //после подтверждения платежа
-        } catch (error) {}
-    };
+      setOrderNumber(result.orderNumber);
+      setIsOrdered(true);
+    } catch (error: unknown) {
+      console.error(`Ошибка при создании ${paymentMethod} заказа:`, error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Произошла неизвестная ошибка";
+      alert(`Ошибка при оформлении заказа: ${errorMessage}`);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
-    const handleCashPayment = async () => {
-        await handleOrderCreation('cash_on_delivery');
+  const handleCashPayment = async () => {
+    await handleOrderCreation("cash_on_delivery");
+  };
 
-        try {
-            const cartItemsWithPrices: CartItemWithPrice[] =
-                visibleCartItems.map((item) => {
-                    const product = productsData[item.productId];
+  const handleOnlinePayment = () => {
+    if (!deliveryData) {
+      console.error("Данные доставки не заполнены");
+      return;
+    }
+    setShowPaymentModal(true);
+  };
 
-                    if (!product) {
-                        return {
-                            productId: item.productId,
-                            quantity: item.quantity,
-                            price: 0,
-                        };
-                    }
+  const handleClosePaymentModal = () => {
+    setShowPaymentModal(false);
+  };
 
-                    const priceWithDiscount = calculateFinalPrice(
-                        product.basePrice,
-                        product.discountPercent || 0,
-                    );
+  const handlePaymentSuccess = async (paymentData: FakePaymentData) => {
+    await handleOrderCreation("online", paymentData);
+  };
 
-                    const finalPrice = hasLoyaltyCard
-                        ? calculatePriceByCard(
-                              priceWithDiscount,
-                              CONFIG.CARD_DISCOUNT_PERCENT,
-                          )
-                        : priceWithDiscount;
+  const handlePaymentError = (error: string) => {
+    setShowPaymentModal(false);
+    alert(`Ошибка оплаты: ${error}`);
+  };
 
-                    return {
-                        productId: item.productId,
-                        quantity: item.quantity,
-                        price: finalPrice,
-                        basePrice: product.basePrice,
-                        discountPercent: product.discountPercent || 0,
-                        hasLoyaltyDiscount: hasLoyaltyCard,
-                    };
-                });
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+    setIsOrdered(true);
+    resetAfterOrder();
+    router.push("/orders");
+  };
 
-            const result = await createOrderAction({
-                finalPrice,
-                totalBonuses,
-                usedBonuses,
-                totalDiscount,
-                deliveryAddress: deliveryData.address,
-                deliveryTime: deliveryData.time,
-                cartItems: cartItemsWithPrices,
-                totalPrice: totalMaxPrice,
-                paymentMethod: 'cash_on_delivery',
-            });
+  const isFormValid = (): boolean => {
+    if (!deliveryData) {
+      return false;
+    }
 
-            setOrderNumber(result.orderNumber);
-            setIsOrdered(true);
-        } catch (error: unknown) {
-            console.error('Ошибка при создании заказа:', error);
-            const errorMessage =
-                error instanceof Error
-                    ? error.message
-                    : 'Произошла неизвестная ошибка';
-            alert(`Ошибка при оформлении заказа: ${errorMessage}`);
-        } finally {
-            setIsProcessing(false);
-        }
-    };
+    const { address, time } = deliveryData;
 
-    const handleOnlinePayment = () => {
-        if (!deliveryData) {
-            console.error('Данные доставки не заполнены');
-            return;
-        }
-        console.log('Оплата на сайте');
-    };
-
-    const isFormValid = (): boolean => {
-        if (!deliveryData) {
-            return false;
-        }
-
-        const { address, time } = deliveryData;
-
-        // Проверяем обязательные поля адреса
-        const isAddressValid = Boolean(
-            address.city?.trim() &&
-            address.street?.trim() &&
-            address.house?.trim(),
-        );
-
-        // Проверяем время доставки
-        const isTimeValid = Boolean(time.date?.trim() && time.timeSlot?.trim());
-
-        // Используем отфильтрованные товары
-        const isValidForm =
-            isAddressValid &&
-            isTimeValid &&
-            isMinimumReached &&
-            visibleCartItems.length > 0;
-
-        return isValidForm;
-    };
-
-    const canProceedWithPayment = (): boolean => {
-        return isFormValid() && !isProcessing;
-    };
-
-    return (
-        <>
-            <PriceSummary
-                visibleCartItems={visibleCartItems}
-                totalMaxPrice={totalMaxPrice}
-                totalDiscount={totalDiscount}
-                finalPrice={finalPrice}
-                totalBonuses={totalBonuses}
-            />
-
-            <div className="w-full">
-                <MinimumOrderWarning isMinimumReached={isMinimumReached} />
-
-                {!isCheckout ? (
-                    <CheckOutButton
-                        isCheckout={isCheckout}
-                        isMinimumReached={isMinimumReached}
-                        visibleCartItemsCount={visibleCartItems.length}
-                        onCheckout={() => setIsCheckout(true)}
-                    />
-                ) : (
-                    <PaymentButtons
-                        isOrdered={isOrdered}
-                        paymentType={paymentType}
-                        orderNumber={orderNumber}
-                        isProcessing={isProcessing}
-                        canProceedWidthPayment={canProceedWithPayment()}
-                        onOnlinePayment={handleOnlinePayment}
-                        onCashPayment={handleCashPayment}
-                    />
-                )}
-            </div>
-        </>
+    const isAddressValid = Boolean(
+      address.city?.trim() && address.street?.trim() && address.house?.trim()
     );
+
+    const isTimeValid = Boolean(time.date?.trim() && time.timeSlot?.trim());
+
+    const isValidForm =
+      isAddressValid &&
+      isTimeValid &&
+      isMinimumReached &&
+      visibleCartItems.length > 0;
+
+    return isValidForm;
+  };
+
+  const canProceedWithPayment = (): boolean => {
+    return isFormValid() && !isProcessing;
+  };
+
+  return (
+    <>
+      <PriceSummary
+        visibleCartItems={visibleCartItems}
+        totalMaxPrice={totalMaxPrice}
+        totalDiscount={totalDiscount}
+        finalPrice={finalPrice}
+        totalBonuses={totalBonuses}
+      />
+
+      <div className="w-full">
+        <MinimumOrderWarning isMinimumReached={isMinimumReached} />
+        {!isCheckout ? (
+          <CheckOutButton
+            isCheckout={isCheckout}
+            isMinimumReached={isMinimumReached}
+            visibleCartItemsCount={visibleCartItems.length}
+            onCheckout={() => setIsCheckout(true)}
+          />
+        ) : (
+          <PaymentButtons
+            isOrdered={isOrdered}
+            paymentType={paymentType}
+            orderNumber={orderNumber}
+            isProcessing={isProcessing}
+            canProceedWithPayment={canProceedWithPayment()}
+            onOnlinePayment={handleOnlinePayment}
+            onCashPayment={handleCashPayment}
+          />
+        )}
+      </div>
+      <FakePaymentModal
+        amount={finalPrice}
+        isOpen={showPaymentModal}
+        onClose={handleClosePaymentModal}
+        onSuccess={handlePaymentSuccess}
+        onError={handlePaymentError}
+      />
+
+      <PaymentSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseSuccessModal}
+        successData={successData}
+      />
+    </>
+  );
 };
 
 export default CartSummary;

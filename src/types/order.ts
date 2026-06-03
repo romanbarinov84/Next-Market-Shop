@@ -38,3 +38,9 @@ export interface UpdateUserData {
   earnedBonuses: number;
   purchasedProductIds: string[];
 }
+
+export interface UpdateUserData {
+  usedBonuses: number;
+  earnedBonuses: number;
+  purchasedProductIds: string[];
+}
