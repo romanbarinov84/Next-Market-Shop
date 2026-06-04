@@ -86,7 +86,7 @@ const ProductCard = ({
         {description}
       </div>
 
-      {ratingValue > 0 && <StarRating rating={ratingValue} />}
+      {ratingValue > 0 && <StarRating rating={rating?.rate || 5.0} />}
     </div>
   </Link>
 
