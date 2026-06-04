@@ -2,28 +2,27 @@
 
 import Image from "next/image";
 
+type TooltipProps = {
+  text: string;
+  position?: "top" | "bottom";
+  cardPosition?: boolean;
+};
+
 const Tooltip = ({
   text,
   position = "bottom",
-}: {
-  text: string;
-  position?: "top" | "bottom";
-}) => {
-  const isTop = position === "top";
-
+  cardPosition = false,
+}: TooltipProps) => {
   return (
     <div
-      className={`
-        absolute left-1/2 -translate-x-1/2 z-50
-        ${isTop ? "bottom-full mb-2" : "top-full mt-2"}
-      `}
+      className={`absolute left-0 mt-2 w-full transition-all duration-300 ease-in-out ${
+        position === "top" ? (cardPosition ? "-top-30" : "-top-13") : ""
+      }`}
     >
       <div
-        className="
-          relative bg-[#d80000] text-white text-sm px-3 py-2
-          rounded-lg shadow-lg flex items-center gap-2
-          animate-fadeIn
-        "
+        className={`relative bg-[#d80000] text-white text-sm p-2 rounded max-w-65 mx-auto flex items-center z-50 opacity-0 animate-fadeIn ${
+          position === "bottom" ? "mb-2" : "mt-1"
+        }`}
       >
         <Image
           src="/ALERTiCON.png"
@@ -32,20 +31,20 @@ const Tooltip = ({
           height={18}
         />
 
-        <span className="text-sm">{text}</span>
-
-        {/* стрелка */}
-        <div
-          className={`
-            absolute left-1/2 -translate-x-1/2 w-0 h-0
-            border-l-[6px] border-r-[6px] border-transparent
-            ${
-              isTop
-                ? "top-full border-t-[6px] border-t-[#d80000]"
-                : "bottom-full border-b-[6px] border-b-[#d80000]"
-            }
-          `}
-        />
+       {position === "top" ? (
+          <div
+            className="absolute left-1/2 -bottom-0.75 transform -translate-x-1/2 w-0 h-0 
+                     border-l-[6px] border-r-[6px] border-t-[4px] 
+                     border-l-transparent border-r-transparent border-t-[#d80000]"
+          ></div>
+        ) : (
+          <div
+            className="absolute left-1/2 -top-0.75 transform -translate-x-1/2 w-0 h-0 
+                     border-l-[6px] border-r-[6px] border-b-[4px] 
+                     border-l-transparent border-r-transparent border-b-[#d80000]"
+          ></div>
+        )}
+        {text}
       </div>
     </div>
   );
