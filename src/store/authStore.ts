@@ -1,12 +1,12 @@
 
-import { create } from "zustand";
-import { UserData } from "../types/userData";
 import { authClient } from "../lib/auth-client";
+import { UserDataOrNull } from "../types/userData";
+import { create } from "zustand";
 
 
 type AuthState = {
   isAuth: boolean;
-  user: UserData | null;
+  user: UserDataOrNull;
   isLoading: boolean;
   login: () => void;
   logout: () => Promise<void>;
@@ -53,9 +53,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   fetchUserData: async () => {
     try {
       set({ isLoading: true });
-      const response = await fetch("/api/auth/user", {
-  credentials: "include",
-});
+      const response = await fetch("/api/auth/user");
 
       if (response.status === 401 || response.status === 403) {
         throw new Error("Unauthorized");

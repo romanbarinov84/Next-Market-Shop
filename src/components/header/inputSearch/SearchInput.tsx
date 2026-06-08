@@ -30,7 +30,7 @@ const SearchInput = ({
 
                 <button
                     type="button"
-                    className="absolute top-2 right-2 w-6 h-6 cursor-pointer"
+                    className="absolute  right-2 w-6 h-6 cursor-pointer"
                     
                 >
                     <Image
