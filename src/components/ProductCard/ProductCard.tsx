@@ -1,17 +1,19 @@
-import { ProductCardProps } from '@/src/types/product';
-import { formatPrice } from '@/UTILS/formatPrice';
-import Image from 'next/image';
-import StarRating from '../RATING/StarRating';
-import Link from 'next/link';
-import { CONFIG } from '@/config/config';
-import FavoriteButton from './FavoriteButton';
-import { calculateFinalPrice, calculatePriceByCard } from '@/UTILS/calcPrices';
-import AddToCartButton from '../AddToCartButton';
+import Image from "next/image";
+import Link from "next/link";
+import FavoriteButton from "./FavoriteButton";
+import { CONFIG } from "@/config/config";
+import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
+import { ProductCardProps } from "@/src/types/product";
+import { formatPrice } from "@/UTILS/formatPrice";
+import StarRating from "../RATING/StarRating";
+import AddToCartButton from "../AddToCartButton";
+
+
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
 
 const ProductCard = ({
-   id,
+  id,
   img,
   description,
   basePrice,
@@ -19,82 +21,78 @@ const ProductCard = ({
   rating,
   tags,
   categories,
+  quantity
 }: ProductCardProps) => {
-  
+  const isNewProduct = tags?.includes("new");
 
-  const isNewProducts = tags?.includes('new');
-  const finalPrice = isNewProducts
+  const finalPrice = isNewProduct
     ? basePrice
     : calculateFinalPrice(basePrice, discountPercent);
-  const priceByCard = isNewProducts
+
+  const priceByCard = isNewProduct
     ? basePrice
     : calculatePriceByCard(finalPrice, cardDiscountPercent);
-  const ratingValue = rating?.average ?? 0;
 
-
- const productId = id;
+  const productId = id;
   const mainCategory = categories?.[0];
 
   const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
 
   return (
-   <div className="relative flex flex-col w-full sm:w-56 md:w-60 lg:w-64 rounded overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
-  
-
-  
-
-  <FavoriteButton productId={productId.toString()}/>
-  <Link href={productUrl} className="relative flex-1">
-    <div className="relative w-full h-40 sm:h-44 md:h-48 lg:h-52 overflow-hidden rounded-sm">
-      <Image
-        src={img}
-        alt={description}
-        fill
-        className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
-        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 224px"
-      />
-      {discountPercent > 0 && (
-        <div className="absolute bottom-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs sm:text-sm">
-          -{discountPercent}%
-        </div>
-      )}
-    </div>
-
-    {/* Контент карточки */}
-    <div className="flex flex-col p-3 gap-2 flex-1">
-      <div className="flex justify-between items-end">
-        {finalPrice !== basePrice && (
-          <div className="flex flex-col">
-            <div className="text-orange-500 font-bold text-sm sm:text-base">
-              {formatPrice(priceByCard)} грн
+    <div className="relative flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-56 xl:w-68 h-88 align-top p-0 hover:shadow-(--shadow-article) duration-300">
+      <FavoriteButton productId={productId.toString()} />
+      <Link href={productUrl}>
+        <div className="relative aspect-square w-40 h-40 md:w-56 xl:w-68">
+          <Image
+            src={img}
+            alt="Товар"
+            fill
+            className="object-contain"
+            priority={false}
+            sizes="(max-width: 768px) 160px, (max-width: 1280px) 224px, 272px"
+          />
+          {discountPercent > 0 && (
+            <div className="absolute bg-[#ff6633] py-1 px-2 rounded text-white bottom-2.5 left-2.5">
+              -{discountPercent}%
             </div>
-            {cardDiscountPercent > 0 && (
-              <p className="text-red-500 text-xs sm:text-sm">З карткою</p>
+          )}
+        </div>
+
+        <div className="flex flex-col p-2 h-48">
+          <div className="flex flex-row justify-between items-start h-12">
+            <div className="flex flex-col gap-x-1">
+              <div className="flex flex-row gap-x-1 text-sm md:text-lg font-bold text-main-text">
+                <span>{formatPrice(priceByCard)}</span>
+                <span>₽</span>
+              </div>
+              {discountPercent > 0 && (
+                <p className="text-[#bfbfbf] text-[8px] md:text-xs">С картой</p>
+              )}
+            </div>
+            {finalPrice !== basePrice && cardDiscountPercent > 0 && (
+              <div className="flex flex-col gap-x-1">
+                <div className="flex flex-row gap-x-1 text-xs md:text-base text-[#606060]">
+                  <span>{formatPrice(finalPrice)}</span>
+                  <span>₽</span>
+                </div>
+                <p className="text-[#bfbfbf] text-[8px] md:text-xs text-right">
+                  Обычная
+                </p>
+              </div>
             )}
           </div>
-        )}
-
-        <div className="flex flex-col items-end">
-          <div className="text-gray-700 font-semibold text-sm sm:text-base">
-            {basePrice.toFixed(2)} грн
+          <div className="h-13.5 text-xs md:text-base text-main-text line-clamp-3 md:line-clamp-2 leading-norman">
+            {description}
           </div>
-          <p className="text-gray-400 text-xs sm:text-sm">звичайна</p>
+          {<StarRating rating={rating?.rate || 5.0} />}
         </div>
-      </div>
-
-      <div className="text-gray-800 text-xs sm:text-sm font-medium line-clamp-3">
-        {description}
-      </div>
-
-      {ratingValue > 0 && <StarRating rating={rating?.rate || 5.0} />}
+      </Link>
+      <AddToCartButton
+        productId={productId.toString()}
+        availableQuantity={quantity}
+      />
     </div>
-  </Link>
-
-  {/* Кнопка "До кошика" */}
-  <AddToCartButton productId={productId.toString()}/>
-</div>
-
-    );
+  );
 };
 
 export default ProductCard;

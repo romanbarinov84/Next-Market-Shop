@@ -3,10 +3,10 @@
 
 import { useState } from "react";
 import { useCartStore } from "../store/cartStore";
-import { addToCartAction } from "../actions/AddToCartActions";
 import { removeMultipleOrderItemsAction, updateOrderItemQuantityAction } from "../actions/orderActions";
 import QuantitySelector from "../app/(cart)/cart/_components/QuantitySelector";
 import Tooltip from "../app/(auth)/(reg)/_components/Tooltip";
+import { addToCartAction } from "../actions/AddToCartActions";
 
 
 interface AddToCartButtonProps {
