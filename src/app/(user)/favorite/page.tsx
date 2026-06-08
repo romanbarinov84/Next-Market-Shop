@@ -1,22 +1,29 @@
 
-
-
-
 import { Suspense } from "react";
+import fetchFavorites from "./fetchFavorites";
 import { headers } from "next/headers";
 import { getCustomSessionToken, getValidCustomSession } from "@/UTILS/auth-helpers";
-import FilterButtons from "../../(catalog)/catalog/[category]/_components/FilterButtons";
-import DropFilter from "../../(catalog)/catalog/[category]/_components/DropFilter";
 import { PATH_TRANSLATIONS } from "@/UTILS/pathTranslations";
-import FilterControls from "../../(catalog)/catalog/[category]/_components/FilterControls";
-import GenericListPage from "../../(products)/GenerictListPage";
-import { Loader } from "lucide-react";
-import fetchFavorites from "./fetchFavorites";
+import DropFilter from "../../(catalog)/catalog/[category]/_components/DropFilter";
+import FilterButtons from "../../(catalog)/catalog/[category]/_components/FilterButtons";
 import PriceFilter from "../../(catalog)/catalog/[category]/_components/PriceFilter";
-import { getServerUserId } from "@/UTILS/getServerUserId";
+import FilterControls from "../../(catalog)/catalog/[category]/_components/FilterControls";
+import { Loader } from "lucide-react";
+import GenericListPage from "../../(products)/GenerictListPage";
+ // Укажите правильный путь
 
-
-
+async function getServerUserId() {
+  try {
+    const headersList = await headers();
+    const cookies = headersList.get("cookie");
+    const sessionToken = getCustomSessionToken(cookies);
+    if (!sessionToken) return null;
+    const session = await getValidCustomSession(sessionToken);
+    return session?.userId || null;
+  } catch {
+    return null;
+  }
+}
 
 const FavoritesPage = async ({
   searchParams,
@@ -42,28 +49,23 @@ const FavoritesPage = async ({
 
   return (
     <div className="px-[max(12px,calc((100%-1208px)/2))] flex flex-col mx-auto">
-      <h1 className="ml-3 xl:ml-0 text-4xl md:text-5xl text-left font-bold text-main-text mb-8 md:mb-10 xl:mb-15 max-w-[336px] md:max-w-max leading-[150%]">
+      <h1 className="ml-3 xl:ml-0 text-4xl md:text-5xl xl:text-[64px] text-left font-bold text-main-text mb-8 md:mb-10 xl:mb-15 max-w-84 md:max-w-max leading-[150%]">
         {PATH_TRANSLATIONS[category] || category}
       </h1>
-      <DropFilter
-        basePath={`/${category}`}
-        category={category}
-        userId={userId}
-        apiEndpoint="users/favorites/products"
-      />
+      <DropFilter basePath={`/${category}`} category={category} />
       <div className="hidden xl:flex">
         <FilterButtons basePath={`/${category}`} />
       </div>
       <div className="flex flex-row gap-x-10 justify-between">
-        <div className="hidden xl:flex flex-col w-[272px] gap-y-10">
+        <div className="hidden xl:flex flex-col w-68 gap-y-10">
           <div className="h-11 bg-[#f3f2f1] rounded text-base font-bold text-main-text flex items-center p-2.5">
             Фильтр
           </div>
           <PriceFilter
             basePath={`/${category}`}
             category={category}
-            userId={userId}
             apiEndpoint="users/favorites/products"
+            userId={userId}
           />
         </div>
         <div className="flex flex-col">
@@ -82,7 +84,7 @@ const FavoritesPage = async ({
                     priceFrom,
                     priceTo,
                     inStock,
-                    userId,
+                    userId, 
                   }),
                 basePath: `/${category}`,
                 contentType: "category",
