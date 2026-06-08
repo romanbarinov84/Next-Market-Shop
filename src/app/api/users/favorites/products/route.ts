@@ -1,8 +1,9 @@
 
+import { CONFIG } from "../../../../../../config/config";
 import { NextResponse } from "next/server";
-import { Filter, ObjectId } from "mongodb";
+import { Filter } from "mongodb";
+import { ObjectId } from "mongodb";
 import { getDB } from "@/UTILS/api-routes";
-import { CONFIG } from "@/config/config";
 import { ProductCardProps } from "@/src/types/product";
 
 export const dynamic = "force-dynamic";
@@ -24,6 +25,11 @@ export async function GET(request: Request) {
     const userId = searchParams.get("userId");
 
     if (!userId) {
+      if (getPriceRangeOnly) {
+        return NextResponse.json({
+          priceRange: CONFIG.FALLBACK_PRICE_RANGE
+        });
+      }
       return NextResponse.json({ products: [], totalCount: 0 });
     }
 
@@ -32,20 +38,26 @@ export async function GET(request: Request) {
         .collection("user")
         .findOne({ _id: new ObjectId(userId) });
 
-      const favoriteProductsIds = user?.favorites || [];
+      if (!user) {
+        return NextResponse.json({
+          priceRange: CONFIG.FALLBACK_PRICE_RANGE
+        });
+      }
 
-      const numericFavoriteIds = favoriteProductsIds.map((id: string) =>
-        parseInt(id)
-      );
-
+      const favoriteProductIds = user.favorites || [];
+      
+      const numericFavoriteIds = favoriteProductIds
+        .map((id: string) => parseInt(id))
+        .filter((id: number) => !isNaN(id));
+      
       if (numericFavoriteIds.length === 0) {
         return NextResponse.json({
-          priceRange: CONFIG.FALLBACK_PRICE_RANGE,
+          priceRange: CONFIG.FALLBACK_PRICE_RANGE
         });
       }
 
       const query: Filter<ProductCardProps> = {
-        id: { $in: numericFavoriteIds },
+        id: { $in: numericFavoriteIds } 
       };
 
       const priceRange = await db
@@ -74,20 +86,28 @@ export async function GET(request: Request) {
       .collection("user")
       .findOne({ _id: new ObjectId(userId) });
 
-    const favoriteProductsIds = user?.favorites || [];
-
-    const numericFavoriteIds = favoriteProductsIds.map((id: string) =>
-      parseInt(id)
-    );
-
-    if (numericFavoriteIds.length === 0) {
-      return NextResponse.json({
-        priceRange: CONFIG.FALLBACK_PRICE_RANGE,
-      });
+    if (!user) {
+      return NextResponse.json({ products: [], totalCount: 0 });
     }
 
+    const favoriteProductIds = user.favorites || [];
+    
+    console.log("⭐ Favorite IDs (strings):", favoriteProductIds);
+    
+    const numericFavoriteIds = favoriteProductIds
+      .map((id: string) => parseInt(id))
+      .filter((id: number) => !isNaN(id));
+    
+    if (numericFavoriteIds.length === 0) {
+      return NextResponse.json({ 
+        products: [], 
+        totalCount: 0,
+        priceRange: CONFIG.FALLBACK_PRICE_RANGE
+      });
+    }    
+
     const query: Filter<ProductCardProps> = {
-      id: { $in: numericFavoriteIds },
+      id: { $in: numericFavoriteIds } 
     };
 
     if (inStock) {
@@ -96,7 +116,6 @@ export async function GET(request: Request) {
 
     if (filters.length > 0) {
       query.$and = query.$and || [];
-
       if (filters.includes("our-production")) {
         query.$and.push({ manufacturer: "Россия" });
       }
@@ -110,8 +129,12 @@ export async function GET(request: Request) {
 
     if (priceFrom || priceTo) {
       query.basePrice = {};
-      if (priceFrom) query.basePrice.$gte = parseInt(priceFrom);
-      if (priceTo) query.basePrice.$lte = parseInt(priceTo);
+      if (priceFrom) {
+        query.basePrice.$gte = parseInt(priceFrom);
+      }
+      if (priceTo) {
+        query.basePrice.$lte = parseInt(priceTo);
+      }
     }
 
     const [totalCount, products] = await Promise.all([
@@ -125,13 +148,10 @@ export async function GET(request: Request) {
         .toArray(),
     ]);
 
-    const actualPriceRange =
-      products.length > 0
-        ? {
-            min: Math.min(...products.map((p) => p.basePrice)),
-            max: Math.max(...products.map((p) => p.basePrice)),
-          }
-        : CONFIG.FALLBACK_PRICE_RANGE;
+    const actualPriceRange = products.length > 0 ? {
+      min: Math.min(...products.map((p) => p.basePrice)),
+      max: Math.max(...products.map((p) => p.basePrice))
+    } : CONFIG.FALLBACK_PRICE_RANGE;
 
     return NextResponse.json({
       products,
@@ -139,9 +159,8 @@ export async function GET(request: Request) {
       priceRange: actualPriceRange,
     });
   } catch (error) {
-    console.error("Ошибка сервера:", error);
     return NextResponse.json(
-      { message: "Ошибка при загрузке продуктов" },
+      { message: "Ошибка при загрузке избранных товаров", error },
       { status: 500 }
     );
   }
