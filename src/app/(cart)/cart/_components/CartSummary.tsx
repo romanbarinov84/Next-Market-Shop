@@ -4,27 +4,24 @@ import { useState } from "react";
 import PriceSummary from "./PriceSummary";
 import MinimumOrderWarning from "./MinimumOrderWarning";
 import PaymentButtons from "./PaymentButtons";
-import {
-  createOrderRequest,
-  prepareCartItemsWithPrices,
-  updateUserAfterPayment,
-} from "../utils/orderHelpers";
 import { useRouter } from "next/navigation";
-import CheckOutButton from "./CheckOutButton";
-import FakePaymentModal from "@/src/app/(payment)/FakePaymentModal";
-import { useCartStore } from "@/src/store/cartStore";
-import PaymentSuccessModal from "@/src/app/(payment)/PaymentSuccessModal";
 import { FakePaymentData, PaymentSuccessData } from "@/src/types/payment";
+import { useCartStore } from "@/src/store/cartStore";
+import { confirmOrderPayment, createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
+import CheckOutButton from "./CheckOutButton";
+import PaymentSuccessModal from "@/src/app/(payment)/PaymentSuccessModal";
+import FakePaymentModal from "@/src/app/(payment)/FakePaymentModal";
 
 const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderNumber, setOrderNumber] = useState<string | null>(null);
-  const [paymentType, setPaymentType] = useState<"cash" | "online" | null>(
-    null
-  );
+  const [currentOrderId, setCurrentOrderId] = useState<string | null>(null);
+  const [paymentType, setPaymentType] = useState<
+    "cash_on_delivery" | "online" | null
+  >(null);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [successData, setSuccessData] = useState<PaymentSuccessData | null>(
+  const [successData, setSuccessData] = useState<PaymentSuccessData| null>(
     null
   );
   const router = useRouter();
@@ -38,7 +35,7 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
     isOrdered,
     setIsOrdered,
     useBonuses,
-    resetAfterOrder
+    resetAfterOrder,
   } = useCartStore();
 
   const visibleCartItems = cartItems.filter((item) => item.quantity > 0);
@@ -90,7 +87,7 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
     return await createOrderRequest(orderData);
   };
 
-  const handleOrderCreation = async (
+  const handlePaymentResult = async (
     paymentMethod: "cash_on_delivery" | "online",
     paymentData?: FakePaymentData
   ) => {
@@ -100,27 +97,21 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
     }
 
     setIsProcessing(true);
-    setPaymentType(paymentMethod === "online" ? "online" : "cash");
+    setPaymentType(paymentMethod === "online" ? "online" : "cash_on_delivery");
 
     try {
-      const result = await createOrder(paymentMethod, paymentData?.id);
-
       if (paymentMethod === "online") {
-        try {
+        if (paymentData?.status === "succeeded") {
+          await confirmOrderPayment(currentOrderId!);
           await updateUserAfterPayment({
             usedBonuses: actualUsedBonuses,
             earnedBonuses: totalBonuses,
             purchasedProductIds: visibleCartItems.map((item) => item.productId),
           });
-        } catch (updateError) {
-          console.warn(
-            "Заказ создан, но возникла проблема с обновлением бонусов",
-            updateError
-          );
         }
 
         const successModalData: PaymentSuccessData = {
-          orderNumber: result.orderNumber,
+          orderNumber: orderNumber!,
           paymentId: paymentData!.id,
           amount: finalPrice,
           cardLast4: paymentData!.cardLast4,
@@ -128,30 +119,47 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
 
         setSuccessData(successModalData);
         setShowSuccessModal(true);
+      } else {
+        const result = await createOrder(paymentMethod, paymentData?.id);
+        setOrderNumber(result.orderNumber);
       }
 
-      setOrderNumber(result.orderNumber);
       setIsOrdered(true);
-    } catch (error: unknown) {
-      console.error(`Ошибка при создании ${paymentMethod} заказа:`, error);
-      const errorMessage =
-        error instanceof Error ? error.message : "Произошла неизвестная ошибка";
-      alert(`Ошибка при оформлении заказа: ${errorMessage}`);
+    } catch (error) {
+      console.error(`Ошибка:`, error);
+      alert(`Ошибка при обработке заказаы`);
     } finally {
       setIsProcessing(false);
     }
   };
 
   const handleCashPayment = async () => {
-    await handleOrderCreation("cash_on_delivery");
+    await handlePaymentResult("cash_on_delivery");
   };
 
-  const handleOnlinePayment = () => {
+  const handleOnlinePayment = async () => {
     if (!deliveryData) {
       console.error("Данные доставки не заполнены");
       return;
     }
-    setShowPaymentModal(true);
+
+    setIsProcessing(true);
+
+    try {
+      if (currentOrderId && orderNumber) {
+        setShowPaymentModal(true);
+      } else {
+        const result = await createOrder("online");
+        setOrderNumber(result.orderNumber);
+        setCurrentOrderId(result.order._id);
+        setShowPaymentModal(true);
+      }
+    } catch (error) {
+      console.error("Ошибка при создании заказа:", error);
+      alert("Ошибка при создании заказа");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleClosePaymentModal = () => {
@@ -159,7 +167,11 @@ const CartSummary = ({ deliveryData, productsData = {} }: CartSummaryProps) => {
   };
 
   const handlePaymentSuccess = async (paymentData: FakePaymentData) => {
-    await handleOrderCreation("online", paymentData);
+    try {
+      await handlePaymentResult("online", paymentData);
+    } catch (error) {
+      console.error("Ошибка обработки заказа:", error);
+    }
   };
 
   const handlePaymentError = (error: string) => {

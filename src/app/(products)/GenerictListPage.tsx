@@ -1,55 +1,54 @@
-
-import { CONFIG } from "../../../config/config";
-import ArticleSection from "../(articles)/ArticlesSection";
-import { GenericListPageProps } from "@/src/types/GenerictListPage";
-import ProductsSection from "./ProductsSection";
 import PaginationWrapper from "@/src/components/PaginationWrapper";
-import { ArticlesCardProps } from "@/src/types/ArticlesListPageProps";
+import { ArticleCardProps } from "@/src/types/articles";
+import ArticleSection from "../(articles)/ArticlesSection";
 import { ProductCardProps } from "@/src/types/product";
+import ProductsSection from "./ProductsSection";
 import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
-
-
+import { GenericListPageProps } from "@/src/types/GenerictListPage";
+import { CONFIG } from "@/config/config";
 
 const GenericListPage = async ({
   searchParams,
   props,
 }: {
-  searchParams: Promise<{ page?: string; itemsPerPage?: string }>;
+  searchParams: { page?: string; itemsPerPage?: string };
   props: GenericListPageProps;
 }) => {
-  const params = await searchParams;
-  const page = params?.page;
+  const page = searchParams?.page;
 
   const defaultItemsPerPage =
     props.contentType === "category"
       ? CONFIG.ITEMS_PER_PAGE_CATEGORY
       : CONFIG.ITEMS_PER_PAGE;
 
-  const itemsPerPage = params?.itemsPerPage || defaultItemsPerPage;
+  const itemsPerPage =
+    Number(searchParams?.itemsPerPage) || defaultItemsPerPage;
 
   const currentPage = Number(page) || 1;
-  const perPage = Number(itemsPerPage);
+  const perPage = itemsPerPage;
+
   const startIdx = (currentPage - 1) * perPage;
 
-  let items: any[] = [];
+  let items = [];
   let totalCount = 0;
-  let totalPages = 0;
 
   try {
     const result = await props.fetchData({
       pagination: { startIdx, perPage },
     });
+
     items = result.items;
     totalCount = result.totalCount;
-    totalPages = Math.ceil(totalCount / perPage);
   } catch (error) {
     return (
       <ErrorComponent
         error={error instanceof Error ? error : new Error(String(error))}
-        userMessage="Не удалось получить элементы пагинации"
+        userMessage="Не удалось получить элементы"
       />
     );
   }
+
+  const totalPages = perPage ? Math.ceil(totalCount / perPage) : 0;
 
   return (
     <>
@@ -57,13 +56,13 @@ const GenericListPage = async ({
         <ProductsSection
           title={props.pageTitle}
           products={items as ProductCardProps[]}
+          applyIndexStyles={props.contentType !== "category"}
           contentType={props.contentType}
         />
       ) : (
         <ArticleSection
           title={props.pageTitle || ""}
-          articles={items as ArticlesCardProps[]}
-          viewAllButton={props.viewAllButton}
+          articles={items as ArticleCardProps[]}
         />
       )}
 

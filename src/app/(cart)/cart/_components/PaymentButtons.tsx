@@ -4,7 +4,7 @@ import OrderSuccessMessage from "./OrderSuccessMessage";
 
 interface PaymentButtonsProps {
   isOrdered: boolean;
-   paymentType: "cash_on_delivery" | "online" | null;
+  paymentType: "cash_on_delivery" | "online" | null;
   orderNumber: string | null;
   isProcessing: boolean;
   canProceedWithPayment: boolean;

@@ -1,9 +1,10 @@
 
-import { CONFIG } from "../../../../../config/config";
-import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
-import { ProductCardProps } from "@/src/types/product";
+
 import { CartItemWithPrice, CreateOrderRequest, UpdateUserData } from "@/src/types/order";
+import { CONFIG } from "../../../../../config/config";
+import { ProductCardProps } from "@/src/types/product";
 import { CartItem } from "@/src/types/cart";
+import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
 
 export const prepareCartItemsWithPrices = (
   cartItems: CartItem[],
@@ -74,6 +75,28 @@ export const updateUserAfterPayment = async (data: UpdateUserData) => {
     return await response.json();
   } catch (error) {
     console.error("Ошибка обновления пользователя:", error);
+    throw error;
+  }
+};
+
+export const confirmOrderPayment = async (orderId: string) => {
+  try {
+    const response = await fetch("/api/orders/confirm-payment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ orderId }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Ошибка при подтверждении оплаты");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Ошибка при подтверждении оплаты:", error);
     throw error;
   }
 };

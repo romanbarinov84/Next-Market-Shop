@@ -1,64 +1,38 @@
-"use client";
-
-
-import { useEffect, useState } from "react";
-
 import { Loader } from "lucide-react";
-import { useAuthStore } from "@/src/store/authStore";
-import { ProductCardProps } from "@/src/types/product";
 import fetchPurchases from "../fetchPurchases";
-import { CONFIG } from "@/config/config";
-import ProductsSection from "../../(products)/ProductsSection";
-import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
+import { Suspense } from "react";
+import { getServerUserId } from "@/UTILS/getServerUserId";
+import GenericListPage from "../../(products)/GenerictListPage";
 
-const Purchases = () => {
-  const [shouldShow, setShouldShow] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [items, setItems] = useState<ProductCardProps[]>([]);
-  const { user, isAuth } = useAuthStore();
+const Purchases = async ({
+  searchParams,
+}: {
+  searchParams: {
+    page?: string;
+    itemsPerPage?: string;
+  };
+}) => {
+  const userId = await getServerUserId();
 
-  useEffect(() => {
-    const checkAccessAndFetchData = async () => {
-      try {
-        const hasAccess = isAuth && user?.role === "user";
-        setShouldShow(hasAccess);
-
-        if (hasAccess) {
-          const { items: purchases } = await fetchPurchases({
-            userPurchasesLimit: CONFIG.ITEMS_PER_PAGE_MAIN_PRODUCTS,
-          });
-          setItems(purchases);
-        }
-      } catch (error) {
-        setError(error instanceof Error ? error : new Error(String(error)));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAccessAndFetchData();
-  }, [isAuth, user]);
-
-  if (!shouldShow) return null;
-
-  if (loading) return <Loader />;
-
-  if (error) {
-    return (
-      <ErrorComponent
-        error={error instanceof Error ? error : new Error(String(error))}
-        userMessage="Не удалось загрузить Ваши покупки"
-      />
-    );
+  if (!userId) {
+    return <div className="text-xxl text-red-300"> Чтобы увидеть ваши покупки пожалуйста, авторизуйтесь</div>;
   }
 
   return (
-    <ProductsSection
-      title="Покупали раньше"
-      viewAllButton={{ text: "Все покупки", href: "purchases" }}
-      products={items}
-    />
+    <Suspense fallback={<Loader />}>
+      <GenericListPage
+        searchParams={searchParams}
+        props={{
+          fetchData: ({ pagination: { startIdx, perPage } }) =>
+            fetchPurchases({
+              pagination: { startIdx, perPage },
+
+            }),
+          pageTitle: "Все покупки",
+          basePath: "/purchases",
+        }}
+      />
+    </Suspense>
   );
 };
 
