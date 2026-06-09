@@ -16,6 +16,7 @@ const TopMenu = () => {
     const { user } = useAuthStore();
     const isFavoritePage = pathName === '/favorite';
     const isCartPage = pathName === '/cart';
+    const isUserOrdersPage = pathName === "/user-orders";
     const { totalItems, fetchCart } = useCartStore();
 
     const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin';
