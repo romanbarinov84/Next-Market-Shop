@@ -17,9 +17,12 @@ const TopMenu = () => {
     const isFavoritePage = pathName === '/favorite';
     const isCartPage = pathName === '/cart';
     const isUserOrdersPage = pathName === "/user-orders";
+    const isAdminOrdersPage = pathName === "/admin-orders";
     const { totalItems, fetchCart } = useCartStore();
 
     const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin';
+    const ordersLink = isManagerOrAdmin ? "/admin-orders" : "user-orders";
+    const isOrdersPage = isUserOrdersPage || isAdminOrdersPage;
 
  useEffect(() => {
     if (user && !isManagerOrAdmin) {
@@ -75,12 +78,15 @@ const TopMenu = () => {
                         </Link>
                     </li>
                 )}
-
+    
                 <li className="flex flex-col items-center   w-11 cursor-pointer">
-                    <IconBox />
+                    <Link href={ordersLink} className='flex flex-col items-center  w-11 cursor-pointer'>
+                     <IconBox isActive={isOrdersPage}/>
                     <span className={isManagerOrAdmin ? 'text-[#ff6633]' : ''}>
                         Замовлення
                     </span>
+                    </Link>
+                   
                 </li>
                 {!isManagerOrAdmin && (
                     <li className="relative flex-col items-center gap-2  w-11 cursor-pointer">
