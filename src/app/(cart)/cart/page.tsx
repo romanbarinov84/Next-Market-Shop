@@ -1,20 +1,18 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-
-
-
 import CartHeader from "./_components/CartHeader";
 import CartControls from "./_components/CartControls";
-import { DeliveryAddress, DeliveryTime } from "../../../types/order";
+import CartItem from "./_components/CartItem";
+import CartSidebar from "./_components/CartSidebar";
+import CheckoutForm from "./_components/CheckoutForm";
+import { ProductCardProps } from "@/src/types/product";
+import { DeliveryAddress, DeliveryTime } from "@/src/types/order";
 import { useCartStore } from "@/src/store/cartStore";
 import { getOrderCartAction, getUserBonusesAction, removeMultipleOrderItemsAction, updateOrderItemQuantityAction } from "@/src/actions/orderActions";
-import { Loader } from "lucide-react";
-import { ProductCardProps } from "@/src/types/product";
 import { usePricing } from "@/src/hooks/usePricing";
-import CartItem from "./_components/CartItem";
-import CheckoutForm from "./_components/CheckoutForm";
-import CartSidebar from "./_components/CartSidebar";
+import MiniLoader from "@/src/components/MiniLoader";
+
 
 const CartPage = () => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -185,7 +183,7 @@ const CartPage = () => {
     selectedItems.length === visibleCartItems.length;
 
   if (isCartLoading) {
-    return <Loader />;
+    return <MiniLoader />;
   }
 
   if (visibleCartItems.length === 0 && removedItems.length === 0) {
@@ -200,10 +198,10 @@ const CartPage = () => {
   }
 
   return (
-    <div className="px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text mx-auto">
+    <div className="px-[max(12px,calc((100%-1208px)/2))] md:px-[max(16px,calc((100%-1208px)/2))] text-main-text mx-auto mb-20 shadow-2xl p-5">
       <CartHeader itemCount={visibleCartItems.length} title={title} />
 
-      <div className="flex flex-col md:flex-row gap-8 xl:gap-x-15">
+      <div className="flex flex-col md:flex-row gap-8 xl:gap-x-15 bg-[#fefefe] p-20 rounded-sm">
         <div
           className={`flex-1 ${isOrdered ? "pointer-events-none opacity-50" : ""}`}
         >

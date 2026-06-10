@@ -26,7 +26,7 @@ const CartControls = ({
           {isAllSelected ? (
             <div className="w-[15px] h-[1px] bg-white"></div>
           ) : (
-            <div className="relative w-[15px] h-[15px]">
+            <div className="relative w-4 h-4">
               <div className="absolute top-1/2 left-0 w-full h-[1px] bg-white transform -translate-y-1/2"></div>
               <div className="absolute left-1/2 top-0 w-[1px] h-full bg-white transform -translate-x-1/2"></div>
             </div>
