@@ -1,5 +1,4 @@
-
-import { auth } from "@/src/lib/auth";
+import { auth } from "../src/lib/auth";
 import { getDB } from "./api-routes";
 import { ObjectId } from "mongodb";
 
@@ -49,8 +48,8 @@ export async function getUserById(userId: string) {
     birthdayDate: user.birthdayDate,
     location: user.location,
     region: user.region,
-    card:user.card,
-    role:user.role,
+    card: user.card,
+    role: user.role,
   };
 }
 

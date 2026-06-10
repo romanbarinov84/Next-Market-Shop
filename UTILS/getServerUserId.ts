@@ -1,21 +1,17 @@
 import { headers } from "next/headers";
-import { getCustomSessionToken, getValidCustomSession } from "./auth-helpers";
+import { auth } from "@/src/lib/auth";
 
 export async function getServerUserId() {
   try {
-    const headersList = await headers();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-    const cookies = headersList.get("cookie") ?? "";
+    console.log("SESSION:", session);
 
-    const sessionToken = getCustomSessionToken(cookies);
-    if (!sessionToken) return null;
-
-    const session = await getValidCustomSession(sessionToken);
-
-    if (!session?.userId) return null;
-
-    return session.userId;
-  } catch {
+    return session?.user?.id ?? null;
+  } catch (error) {
+    console.error("Get user session error:", error);
     return null;
   }
 }
