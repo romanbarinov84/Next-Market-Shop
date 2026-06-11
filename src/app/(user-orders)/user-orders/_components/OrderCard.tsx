@@ -9,10 +9,12 @@ import { useState } from "react";
 import OrderActions from "./OrderActions";
 import MiniLoader from "@/src/components/MiniLoader";
 import OrderDetails from "./OrderDetails";
+import { useOrderProductsData } from "@/src/hooks/useOrderProductsData";
 
 
 const OrderCard = ({ order }: { order: Order }) => {
   const [showOrderDetails , setShowOrderDetails] = useState(false);
+  const {productsData , loading:productsDataLoading} = useOrderProductsData(order);
   const {
     showDatePicker,
     showDeliveryButton,
