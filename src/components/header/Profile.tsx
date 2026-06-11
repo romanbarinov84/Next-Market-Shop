@@ -151,13 +151,13 @@ const Profile = () => {
         </p>
         <div className="hidden xl:block">
           <Image
-            src="/iconArrow.png"
+            src="/iconarrowright.png"
             alt="Меню профиля"
-            width={24}
-            height={24}
-            sizes="24px"
+            width={64}
+            height={64}
+            sizes="64px"
             className={`transform transition-transform duration-300 ${
-              isMenuOpen ? "rotate-180" : "rotate-0"
+              isMenuOpen ? "rotate-90" : "rotate-0"
             }`}
           />
         </div>

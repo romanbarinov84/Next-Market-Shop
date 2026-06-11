@@ -11,7 +11,6 @@ import FilterControls from "../../(catalog)/catalog/[category]/_components/Filte
 import { Loader } from "lucide-react";
 import GenericListPage from "../../(products)/GenerictListPage";
  // Укажите правильный путь
-
 async function getServerUserId() {
   try {
     const headersList = await headers();
@@ -75,7 +74,7 @@ const FavoritesPage = async ({
 
           <Suspense fallback={<Loader />}>
             <GenericListPage
-              searchParams={Promise.resolve(resolvedSearchParams)}
+              searchParams={resolvedSearchParams}
               props={{
                 fetchData: ({ pagination: { startIdx, perPage } }) =>
                   fetchFavorites({

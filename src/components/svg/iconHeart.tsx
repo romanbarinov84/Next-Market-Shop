@@ -9,7 +9,7 @@ interface HeartIconProps {
 const IconHeart = ({ isActive, variant }: HeartIconProps) => {
   const getIconColor = () => {
     if (isActive) {
-      return variant === "orange" ? "#ff6633" : "#ff3b30";
+      return variant === "orange" ? "#e40505" : "#ff3b30";
     }
     return "#606060";
   };

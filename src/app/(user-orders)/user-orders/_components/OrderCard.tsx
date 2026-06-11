@@ -6,6 +6,9 @@ import OrderHeader from "./OrderHeader";
 import DeliveryDatePicker from "./DeliveryDatePicker";
 import ProductsSection from "@/src/app/(products)/ProductsSection";
 import { useState } from "react";
+import OrderActions from "./OrderActions";
+import MiniLoader from "@/src/components/MiniLoader";
+import OrderDetails from "./OrderDetails";
 
 
 const OrderCard = ({ order }: { order: Order }) => {
@@ -26,6 +29,17 @@ const OrderCard = ({ order }: { order: Order }) => {
 
   const { deliverySchedule } = useDeliveryData();
 
+
+  const onToggleDetails = () => {
+    setShowOrderDetails(!showOrderDetails)
+  }
+
+  const applyIndexStyles = !showOrderDetails;
+
+  if(productsLoading){
+    return <MiniLoader/>
+  }
+
   return (
     <div className="text-main-text">
       <OrderHeader
@@ -34,8 +48,10 @@ const OrderCard = ({ order }: { order: Order }) => {
         onOrderClick={handleOrderClick}
         onDeliveryClick={handleDeliveryClick}
       />
-
-      <ProductsSection products={orderProducts}/>
+      
+      <ProductsSection products={orderProducts} applyIndexStyles={applyIndexStyles}/>
+      <OrderActions showOrderDetails={showOrderDetails} onToggleDetails={onToggleDetails}/>
+      {showOrderDetails && <OrderDetails order={order}/>}
       {showDatePicker && (
         <DeliveryDatePicker
           schedule={deliverySchedule}
