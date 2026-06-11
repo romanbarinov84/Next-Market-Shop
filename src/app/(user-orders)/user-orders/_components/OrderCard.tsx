@@ -4,9 +4,12 @@ import useRepeatOrder from "@/src/hooks/useRepeatOrder";
 import { Order } from "@/src/types/order";
 import OrderHeader from "./OrderHeader";
 import DeliveryDatePicker from "./DeliveryDatePicker";
+import ProductsSection from "@/src/app/(products)/ProductsSection";
+import { useState } from "react";
 
 
 const OrderCard = ({ order }: { order: Order }) => {
+  const [showOrderDetails , setShowOrderDetails] = useState(false);
   const {
     showDatePicker,
     showDeliveryButton,
@@ -31,6 +34,8 @@ const OrderCard = ({ order }: { order: Order }) => {
         onOrderClick={handleOrderClick}
         onDeliveryClick={handleDeliveryClick}
       />
+
+      <ProductsSection products={orderProducts}/>
       {showDatePicker && (
         <DeliveryDatePicker
           schedule={deliverySchedule}
