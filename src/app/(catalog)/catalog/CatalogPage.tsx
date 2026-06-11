@@ -10,8 +10,8 @@ import { useAuthStore } from "@/src/store/authStore";
 
 
 export const metadata = {
-  title: 'Каталог товаров магазина "Северяночка"',
-  description: 'Каталог всех товаров магазина "Северяночка"',
+  title: 'Каталог товаров магазина "Галя балуванна"',
+  description: 'Каталог всех товаров магазина "Галя балуванна"',
 };
 
 const CatalogPage = () => {

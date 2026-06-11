@@ -36,7 +36,7 @@ export const PaymentButtons = ({
           canProceedWithPayment ? buttonStyles.active : buttonStyles.inactive
         }`}
       >
-        {isProcessing ? "Обработка..." : "Оплатить на сайте"}
+       {isProcessing ? "Обработка..." : "uah"}
       </button>
 
       <button

@@ -31,7 +31,7 @@ const DeleteVerify = (props: DeleteVerifyProps) => {
 
               <Text className="text-base text-gray-700 mb-4 mt-0 leading-5">
                 Здравствуйте, {username}! Мы получили запрос на удаление Вашего
-                аккаунта в &quot;Северяночке&quot;.
+                аккаунта в &quot;Галя балуванна&quot;.
               </Text>
 
               <Section className="bg-red-50 border border-red-200 rounded-md p-4 mb-6">
@@ -78,21 +78,21 @@ const DeleteVerify = (props: DeleteVerifyProps) => {
               <Text className="text-xs text-gray-500 m-0 leading-4">
                 С уважением,
                 <br />
-                Команда &quot;Северяночки&quot;
+                Команда &quot;GB&quot;
               </Text>
             </Section>
 
             <Section className="mt-6 pt-4 border-t border-gray-200">
               <Text className="text-xs text-gray-400 m-0 text-center leading-4">
-                Северяночка
+                Galya Baluvana
                 <br />
-                Россия, Архангельск, ул. Ленина, д.1
+                Ukraine .Brovary
                 <br />
                 ИНН 0291234567890
               </Text>
 
               <Text className="text-xs text-gray-400 m-0 text-center mt-2 leading-4">
-                © {new Date().getFullYear()} Северяночка. Все права защищены.
+                © {new Date().getFullYear()}  Все права защищены.
               </Text>
             </Section>
           </Container>

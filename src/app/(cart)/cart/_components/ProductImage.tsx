@@ -13,7 +13,7 @@ const ProductImage = memo(function ProductImage({
   return (
     <div className=" shrink w-20 h-15 min-w-20 min-h-15 bg-gray-100 rounded flex items-center justify-center shadow-cart-item relative">
       <Image
-        src={`/ProductsCategory-Img/products/img-${productId}.jpeg`}
+         src={`/images/products/img-${productId}.jpeg`}
         alt={title}
         width={80}
         height={60}

@@ -117,7 +117,7 @@ export async function GET(request: Request) {
     if (filters.length > 0) {
       query.$and = query.$and || [];
       if (filters.includes("our-production")) {
-        query.$and.push({ manufacturer: "Россия" });
+        query.$and.push({ manufacturer: "Украина" });
       }
       if (filters.includes("healthy-food")) {
         query.$and.push({ isHealthyFood: true });
