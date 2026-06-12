@@ -2,7 +2,7 @@ import OrderHeader from './OrderHeader';
 
 import DeliveryDatePicker from './DeliveryDatePicker';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import OrderDetails from './OrderDetails';
 
@@ -12,11 +12,9 @@ import ProductsSection from '@/src/app/(products)/ProductsSection';
 import MiniLoader from '@/src/components/MiniLoader';
 import { useDeliveryData } from '@/src/hooks/useDeliveryData';
 import useRepeatOrder from '@/src/hooks/useRepeatOrder';
-import { useOrderPricing } from '@/src/hooks/useOrderPricing';
 import { useOrderProducts } from '@/src/hooks/useOrderProducts';
 import { useOrderProductsData } from '@/src/hooks/useOrderProductsData';
 import { Order } from '@/src/types/order';
-import { usePriceComparison } from '@/src/hooks/usePriceComparison';
 
 const OrderCard = ({ order }: { order: Order }) => {
     const [showOrderDetails, setShowOrderDetails] = useState(false);
@@ -28,14 +26,6 @@ const OrderCard = ({ order }: { order: Order }) => {
         order,
         fetchedProductsData,
     );
-
-    const { currentProducts, priceComparison } = usePriceComparison(
-        order,
-        fetchedProductsData,
-    );
-
-    const { cartItemsForSummary, productsData, customPricing } =
-        useOrderPricing(order, currentProducts);
 
     const {
         showDatePicker,
@@ -52,11 +42,7 @@ const OrderCard = ({ order }: { order: Order }) => {
         (product) => product.isLowStock || product.insufficientStock,
     );
 
-    const canCreateRepeatOrder = !hasStockIssues;
     const applyIndexStyles = !showOrderDetails;
-
-   
-    const showPriceWarning = !!priceComparison?.hasChanges;
 
     if (productsDataLoading) {
         return <MiniLoader />;
