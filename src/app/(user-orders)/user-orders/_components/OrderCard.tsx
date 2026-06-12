@@ -1,71 +1,102 @@
-import { useDeliveryData } from "@/src/hooks/useDeliveryData";
-import { useOrderProducts } from "@/src/hooks/useOrderProducts";
-import useRepeatOrder from "@/src/hooks/useRepeatOrder";
-import { Order } from "@/src/types/order";
-import OrderHeader from "./OrderHeader";
-import DeliveryDatePicker from "./DeliveryDatePicker";
-import ProductsSection from "@/src/app/(products)/ProductsSection";
-import { useState } from "react";
-import OrderActions from "./OrderActions";
-import MiniLoader from "@/src/components/MiniLoader";
-import OrderDetails from "./OrderDetails";
-import { useOrderProductsData } from "@/src/hooks/useOrderProductsData";
+import OrderHeader from './OrderHeader';
 
+import DeliveryDatePicker from './DeliveryDatePicker';
+
+import { useEffect, useState } from 'react';
+
+import OrderDetails from './OrderDetails';
+
+import { StockWarningsAlert } from './StockWarningsAlert';
+import OrderActions from './OrderActions';
+import ProductsSection from '@/src/app/(products)/ProductsSection';
+import MiniLoader from '@/src/components/MiniLoader';
+import { useDeliveryData } from '@/src/hooks/useDeliveryData';
+import useRepeatOrder from '@/src/hooks/useRepeatOrder';
+import { useOrderPricing } from '@/src/hooks/useOrderPricing';
+import { useOrderProducts } from '@/src/hooks/useOrderProducts';
+import { useOrderProductsData } from '@/src/hooks/useOrderProductsData';
+import { Order } from '@/src/types/order';
+import { usePriceComparison } from '@/src/hooks/usePriceComparison';
 
 const OrderCard = ({ order }: { order: Order }) => {
-  const [showOrderDetails , setShowOrderDetails] = useState(false);
-  const {productsData , loading:productsDataLoading} = useOrderProductsData(order);
-  const {
-    showDatePicker,
-    showDeliveryButton,
-    handleOrderClick,
-    handleDeliveryClick,
-    handleDateSelect,
-    handleCancelDelivery
-  } = useRepeatOrder();
-  const {
-    orderProducts,
-    loading: productsLoading,
-    stockWarnings,
-  } = useOrderProducts(order);
+    const [showOrderDetails, setShowOrderDetails] = useState(false);
 
-  const { deliverySchedule } = useDeliveryData();
+    const { productsData: fetchedProductsData, loading: productsDataLoading } =
+        useOrderProductsData(order);
 
+    const { orderProducts, stockWarnings } = useOrderProducts(
+        order,
+        fetchedProductsData,
+    );
 
-  const onToggleDetails = () => {
-    setShowOrderDetails(!showOrderDetails)
-  }
+    const { currentProducts, priceComparison } = usePriceComparison(
+        order,
+        fetchedProductsData,
+    );
 
-  const applyIndexStyles = !showOrderDetails;
+    const { cartItemsForSummary, productsData, customPricing } =
+        useOrderPricing(order, currentProducts);
 
-  if(productsLoading){
-    return <MiniLoader/>
-  }
+    const {
+        showDatePicker,
+        showDeliveryButton,
+        handleOrderClick,
+        handleDeliveryClick,
+        handleDateSelect,
+        handleCancelDelivery,
+    } = useRepeatOrder();
 
-  return (
-    <div className="text-main-text">
-      <OrderHeader
-        order={order}
-        showDeliveryButton={showDeliveryButton}
-        onOrderClick={handleOrderClick}
-        onDeliveryClick={handleDeliveryClick}
-      />
-      
-      <ProductsSection products={orderProducts} applyIndexStyles={applyIndexStyles}/>
-      <OrderActions showOrderDetails={showOrderDetails} onToggleDetails={onToggleDetails}/>
-      {showOrderDetails && <OrderDetails order={order}/>}
-      {showDatePicker && (
-        <DeliveryDatePicker
-          schedule={deliverySchedule}
-          isCreatingOrder={false}
-          onDateSelect={(date, timeSlot) =>
-            handleDateSelect(date, timeSlot, order.deliveryAddress)
-          }
-          onCancel={handleCancelDelivery}
-        />
-      )}
-    </div>
-  );
+    const { deliverySchedule } = useDeliveryData();
+
+    const hasStockIssues = orderProducts.some(
+        (product) => product.isLowStock || product.insufficientStock,
+    );
+
+    const canCreateRepeatOrder = !hasStockIssues;
+    const applyIndexStyles = !showOrderDetails;
+
+   
+    const showPriceWarning = !!priceComparison?.hasChanges;
+
+    if (productsDataLoading) {
+        return <MiniLoader />;
+    }
+
+    return (
+        <div className="text-main-text">
+            <OrderHeader
+                order={order}
+                showDeliveryButton={showDeliveryButton}
+                onOrderClick={handleOrderClick}
+                onDeliveryClick={handleDeliveryClick}
+                disabled={hasStockIssues}
+            />
+            <ProductsSection
+                products={orderProducts}
+                applyIndexStyles={applyIndexStyles}
+                isOrderPage={true}
+            />
+            <StockWarningsAlert
+                warnings={stockWarnings}
+                hasStockIssues={hasStockIssues}
+            />
+            <OrderActions
+                showOrderDetails={showOrderDetails}
+                onToggleDetails={() => setShowOrderDetails(!showOrderDetails)}
+            />
+            {showOrderDetails && <OrderDetails order={order} />}
+            {showDatePicker && (
+                <DeliveryDatePicker
+                    schedule={deliverySchedule}
+                    isCreatingOrder={false}
+                    onDateSelect={(date, timeSlot) =>
+                        handleDateSelect(date, timeSlot, order.deliveryAddress)
+                    }
+                    onCancel={handleCancelDelivery}
+                />
+            )}
+        </div>
+    );
 };
 
 export default OrderCard;
