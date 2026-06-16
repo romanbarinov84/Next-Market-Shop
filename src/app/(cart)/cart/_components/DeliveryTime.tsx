@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { Clock } from "lucide-react";
-import { getThreeDaysDates } from "@/src/app/(admin)/administrator/adminPanel/delivery-times/utils/getThreeDaysDates";
-import { Schedule } from "@/src/types/deliverySchedule";
-import { formStyles } from "@/src/app/(auth)/styles";
-import DeliveryTimeSkeletons from "./DeliveryTimeSkeletons";
 import { additionalStyles, labelStyles, selectStyles } from "./styles";
+import DeliveryTimeSkeletons from "./DeliveryTimeSkeletons";
 import { formatTimeSlot } from "../utils/formatTimeSlot";
 import { isTimeSlotPassed } from "../utils/isTimeSlotPassed";
-
-
+import { Schedule } from "@/src/types/deliverySchedule";
+import { getThreeDaysDates } from "@/src/app/(admin)/administrator/adminPanel/delivery-times/utils/getThreeDaysDates";
+import { formStyles } from "@/src/app/(auth)/styles";
 
 interface DeliveryTimeProps {
   selectedDate: string;
@@ -123,7 +121,7 @@ const DeliveryTime = ({
           <select
             value={selectedDate}
             onChange={(e) => onDateChange(e.target.value)}
-            className={`${formStyles.input} ${additionalStyles} ${selectStyles} [&&]:md:w-[155px] [&&]:text-base`}
+            className={`${formStyles.input} ${additionalStyles} ${selectStyles} [&&]:md:w-39 [&&]:text-base`}
           >
             {availableDates.map((date) => (
               <option key={date.value} value={date.value}>

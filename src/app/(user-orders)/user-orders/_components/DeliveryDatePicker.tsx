@@ -1,15 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-
+import {  useMemo, useState } from "react";
 import { getAvailableDates } from "./utils/getAvailableDates";
 import { getAvailableTimeSlots } from "./utils/getAvailableTimeSlots";
 import { formatDisplayDate } from "./utils/formatDisplayDate";
-
 import { Schedule } from "@/src/types/deliverySchedule";
 import { formatDateFull, formatDateNumeric } from "./utils/dateFormatters";
 import { formatTimeSlot } from "@/src/app/(cart)/cart/utils/formatTimeSlot";
-
 import MiniLoader from "@/src/components/MiniLoader";
 
 interface DeliveryDatePickerProps {
@@ -31,18 +28,17 @@ const DeliveryDatePicker: React.FC<DeliveryDatePickerProps> = ({
     return getAvailableDates(schedule);
   }, [schedule]);
 
-  useEffect(() => {
-    if (
-      availableDates.length > 0 &&
-      (!selectedDate ||
-        !availableDates.some(
-          (item) =>
-            item.date.toDateString() === selectedDate.toDateString()
-        ))
-    ) {
-      setSelectedDate(availableDates[0].date);
-    }
-  }, [availableDates, selectedDate]);
+  const firstAvailableDate = availableDates[0]?.date ?? null;
+
+   useMemo(() => {
+    if (!selectedDate) return firstAvailableDate;
+
+    const isSelectedValid = availableDates.some(
+      (item) => item.date.toDateString() === selectedDate.toDateString()
+    );
+
+    return isSelectedValid ? selectedDate : firstAvailableDate;
+  }, [availableDates, selectedDate, firstAvailableDate]);
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);

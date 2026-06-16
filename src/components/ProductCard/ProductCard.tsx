@@ -85,8 +85,8 @@ const ProductCard = ({
           )}
         </div>
 
-        <div className="flex flex-col p-2 h-47">
-          <div className="flex flex-row justify-between items-start h-60">
+        <div className="flex flex-col p-2 h-48">
+          <div className="flex flex-row justify-between items-start h-12">
             <div className="flex flex-col gap-x-1">
               <div className="flex flex-row gap-x-1 text-sm md:text-lg font-bold text-main-text">
                 <span>{formatPrice(displayPrice)}</span>
