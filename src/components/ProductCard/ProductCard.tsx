@@ -1,16 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import FavoriteButton from "./FavoriteButton";
-import { CONFIG } from "@/config/config";
-import { ProductCardProps } from "@/src/types/product";
 import { calculateFinalPrice, calculatePriceByCard } from "@/UTILS/calcPrices";
 import IconCart from "../svg/IconCart";
+import { CONFIG } from "@/config/config";
+import { ProductCardProps } from "@/src/types/product";
 import { formatPrice } from "@/UTILS/formatPrice";
 import AddToCartButton from "../AddToCartButton";
 import StarRating from "../RATING/StarRating";
 
 
 const cardDiscountPercent = CONFIG.CARD_DISCOUNT_PERCENT;
+
+interface ExtendedProductCardProps extends ProductCardProps {
+  index?: number;
+}
 
 const ProductCard = ({
   id,
@@ -25,7 +29,8 @@ const ProductCard = ({
   isLowStock,
   insufficientStock,
   isOrderPage = false,
-}: ProductCardProps) => {
+  index = 0,
+}: ExtendedProductCardProps) => {
   const finalPrice = calculateFinalPrice(basePrice, discountPercent);
 
   const priceByCard = calculatePriceByCard(finalPrice, cardDiscountPercent);
@@ -40,8 +45,10 @@ const ProductCard = ({
 
   const productUrl = `/catalog/${encodeURIComponent(mainCategory)}/${productId}?desc=${encodeURIComponent(description.substring(0, 50))}`;
 
+  const isPriorityImage = index < 4;
+
   return (
-    <div className="relative flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-60 xl:w-68 h-88 align-top p-0 hover:shadow-article duration-300">
+    <div className="relative flex flex-col justify-between w-40 rounded overflow-hidden bg-white md:w-56 xl:w-68 h-88 align-top p-0 hover:shadow-article duration-300">
       {orderQuantity && (
         <div className="absolute top-2 left-2 text-main-text flex items-center p-1 bg-white bg-opacity-80 rounded justify-center gap-1 text-lg font-bold z-10">
           <IconCart />
@@ -62,13 +69,13 @@ const ProductCard = ({
       )}
       <FavoriteButton productId={productId.toString()} />
       <Link href={productUrl}>
-        <div className="relative aspect-square w-40 h-40 md:w-60 xl:w-66">
+        <div className="relative aspect-square w-40 h-40 md:w-56 xl:w-68">
           <Image
             src={img}
             alt="Товар"
             fill
             className="object-contain"
-            priority={false}
+            priority={isPriorityImage}
             sizes="(max-width: 768px) 160px, (max-width: 1280px) 224px, 272px"
           />
           {!isOrderPage && discountPercent > 0 && (
@@ -78,8 +85,8 @@ const ProductCard = ({
           )}
         </div>
 
-        <div className="flex flex-col p-2 h-48">
-          <div className="flex flex-row justify-between items-start h-24">
+        <div className="flex flex-col p-2 h-47">
+          <div className="flex flex-row justify-between items-start h-60">
             <div className="flex flex-col gap-x-1">
               <div className="flex flex-row gap-x-1 text-sm md:text-lg font-bold text-main-text">
                 <span>{formatPrice(displayPrice)}</span>
