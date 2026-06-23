@@ -6,7 +6,7 @@ import { FakePaymentData, PaymentSuccessData } from "@/src/types/payment";
 import { useAuthStore } from "@/src/store/authStore";
 import { useCartStore } from "@/src/store/cartStore";
 import { CONFIG } from "@/config/config";
-import { clearUserCart, confirmOrderPayment, createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
+import { clearUserCart,  createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
 import { ProductCardProps } from "@/src/types/product";
 import PriceSummary from "./PriceSummary";
 import MinimumOrderWarning from "./MinimumOrderWarning";

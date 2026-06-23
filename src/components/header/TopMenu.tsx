@@ -17,11 +17,11 @@ const TopMenu = () => {
     const isFavoritePage = pathName === '/favorite';
     const isCartPage = pathName === '/cart';
     const isUserOrdersPage = pathName === "/user-orders";
-    const isAdminOrdersPage = pathName === "/admin-orders";
+    const isAdminOrdersPage = pathName === "/administrator/admin-orders";
     const { totalItems, fetchCart } = useCartStore();
 
     const isManagerOrAdmin = user?.role === 'manager' || user?.role === 'admin';
-    const ordersLink = isManagerOrAdmin ? "/admin-orders" : "user-orders";
+    const ordersLink = isManagerOrAdmin ? "/administrator/admin-orders" : "user-orders";
     const isOrdersPage = isUserOrdersPage || isAdminOrdersPage;
 
  useEffect(() => {
