@@ -6,7 +6,7 @@ import { FakePaymentData, PaymentSuccessData } from "@/src/types/payment";
 import { useAuthStore } from "@/src/store/authStore";
 import { useCartStore } from "@/src/store/cartStore";
 import { CONFIG } from "@/config/config";
-import { confirmOrderPayment, createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
+import { clearUserCart, confirmOrderPayment, createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
 import { ProductCardProps } from "@/src/types/product";
 import PriceSummary from "./PriceSummary";
 import MinimumOrderWarning from "./MinimumOrderWarning";
@@ -134,8 +134,8 @@ const CartSummary = ({
     try {
       if (paymentMethod === "online") {
         if (paymentData?.status === "succeeded") {
-          await confirmOrderPayment(currentOrderId!);
           await updateUserAfterPayment({
+            orderId: currentOrderId!,
             usedBonuses: actualUsedBonuses,
             earnedBonuses: totalBonuses,
             purchasedProductIds: visibleCartItems.map((item) => item.productId),
@@ -151,9 +151,14 @@ const CartSummary = ({
 
         setSuccessData(successModalData);
         setShowSuccessModal(true);
+        setIsOrdered(true);
+
+        await clearUserCart();
       } else {
         const result = await createOrder(paymentMethod, paymentData?.id);
+        await clearUserCart();
         setOrderNumber(result.orderNumber);
+        setIsOrdered(true);
       }
 
       setIsOrdered(true);
@@ -203,9 +208,12 @@ const CartSummary = ({
     }
   };
 
-  const handlePaymentError = (error: string) => {
+  const handlePaymentError = async (error: string) => {
     setShowPaymentModal(false);
     alert(`Ошибка оплаты: ${error}`);
+    resetAfterOrder();
+    await clearUserCart();
+    router.push("/user-orders");
   };
 
   const handleCloseSuccessModal = () => {
