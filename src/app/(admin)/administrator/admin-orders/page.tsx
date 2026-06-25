@@ -1,10 +1,102 @@
 
-import React from 'react'
+"use client";
 
-const AdminOrderPage = () => {
-  return (
-    <div>AdminOrders</div>
-  )
+import { useEffect, useState } from "react";
+import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
+import { Order } from "@/src/types/order";
+import { getThreeDaysDates } from "../adminPanel/delivery-times/utils/getThreeDaysDates";
+import { Loader } from "lucide-react";
+import AdminOrdersHeader from "./_components/AdminOrdersHeader";
+import DateSelector from "./_components/DateSelector";
+import TimeSlotSection from "./_components/TimeSlotSection";
+
+interface OrderStats {
+  nextThreeDaysOrders: number;
 }
 
-export default AdminOrderPage
+const AdminOrderPage = () => {
+  const [orders, setOrders] = useState<Order[]>([]);
+  const [stats, setStats] = useState<OrderStats | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
+  const [customDate, setCustomDate] = useState<Date | undefined>(new Date());
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<{
+    error: Error;
+    userMessage: string;
+  } | null>(null);
+
+  const fetchOrders = async () => {
+    try {
+      const response = await fetch("/api/admin/users/orders");
+      if (!response.ok) {
+        throw new Error("Ошибка при загрузке заказов");
+      }
+      const data = await response.json();
+      setOrders(data.orders);
+      setStats(data.stats);
+
+      const threeDaysDates = getThreeDaysDates();
+      const today = threeDaysDates[0];
+      setSelectedDate(today);
+
+      const todayOrders = data.orders.filter(
+        (order: Order) => order.deliveryDate === today
+      );
+      setFilteredOrders(todayOrders);
+    } catch (error) {
+      setError({
+        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
+        userMessage: "Не удалось получить заказы пользователя",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setCustomDate(date);
+    if (date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const dateString = `${year}-${month}-${day}`; // YYYY-MM-DD
+
+      setSelectedDate(dateString);
+      const filtered = orders.filter(
+        (order) => order.deliveryDate === dateString
+      );
+      setFilteredOrders(filtered);
+    }
+  };
+
+  const threeDaysDates = getThreeDaysDates();
+
+  if (loading) return <Loader />;
+
+  if (error) {
+    return (
+      <ErrorComponent error={error.error} userMessage={error.userMessage} />
+    );
+  }
+
+  return (
+    <div className="px-[max(12px,calc((100%-1208px)/2))] mx-auto mb-8 py-8">
+      <AdminOrdersHeader stats={stats} />
+      <DateSelector
+        orders={orders}
+        dates={threeDaysDates}
+        selectedDate={selectedDate}
+        onDateSelect={handleDateSelect}
+        customDate={customDate}
+      />
+      <TimeSlotSection filteredOrders={filteredOrders} />
+    </div>
+  );
+};
+
+export default AdminOrderPage;
