@@ -1,14 +1,13 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
-import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
-import { Order } from "@/src/types/order";
-import { getThreeDaysDates } from "../adminPanel/delivery-times/utils/getThreeDaysDates";
-import { Loader } from "lucide-react";
 import AdminOrdersHeader from "./_components/AdminOrdersHeader";
 import DateSelector from "./_components/DateSelector";
 import TimeSlotSection from "./_components/TimeSlotSection";
+import { getThreeDaysDates } from "../adminPanel/delivery-times/utils/getThreeDaysDates";
+import { Order } from "@/src/types/order";
+import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
+import { Loader } from "lucide-react";
 
 interface OrderStats {
   nextThreeDaysOrders: number;
@@ -20,6 +19,7 @@ const AdminOrderPage = () => {
   const [selectedDate, setSelectedDate] = useState<string>("");
   const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
   const [customDate, setCustomDate] = useState<Date | undefined>(new Date());
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<{
     error: Error;
@@ -64,14 +64,27 @@ const AdminOrderPage = () => {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
-      const dateString = `${year}-${month}-${day}`; // YYYY-MM-DD
+      const dateString = `${year}-${month}-${day}`;
 
       setSelectedDate(dateString);
       const filtered = orders.filter(
         (order) => order.deliveryDate === dateString
       );
       setFilteredOrders(filtered);
+      setIsCalendarOpen(false);
     }
+  };
+
+  const toggleCalendar = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
+  const filterOrdersByDate = (date: string) => {
+    setSelectedDate(date);
+    setCustomDate(undefined);
+    setIsCalendarOpen(false);
+    const filtered = orders.filter((order) => order.deliveryDate === date);
+    setFilteredOrders(filtered);
   };
 
   const threeDaysDates = getThreeDaysDates();
@@ -91,8 +104,11 @@ const AdminOrderPage = () => {
         orders={orders}
         dates={threeDaysDates}
         selectedDate={selectedDate}
-        onDateSelect={handleDateSelect}
         customDate={customDate}
+        isCalendarOpen={isCalendarOpen}
+        toggleCalendar={toggleCalendar}
+        onCalendarDateSelect={handleDateSelect}
+        onDateSelect={filterOrdersByDate}
       />
       <TimeSlotSection filteredOrders={filteredOrders} />
     </div>
