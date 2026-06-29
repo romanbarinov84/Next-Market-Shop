@@ -1,5 +1,8 @@
 import { Order } from "@/src/types/order";
 import Image from "next/image";
+import { useState } from "react";
+import { getUniqueCities } from "../utils/getUniqueCities";
+
 
 
 interface TimeSlotGroupProps {
@@ -8,6 +11,10 @@ interface TimeSlotGroupProps {
 }
 
 const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
+  const [selectedCity , setSelectedCity] = useState<string>("Все города");
+
+ const cities =  getUniqueCities(slotOrders);
+
   const startTime = timeSlot.split("-")[0];
 
   return (
