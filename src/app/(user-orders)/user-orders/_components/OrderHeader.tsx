@@ -21,7 +21,7 @@ const OrderHeader = ({
         <span
           className={`px-2 py-1 rounded text-xs md:text-base shrink-0 ${getStatusColor(order.status)}`}
         >
-          {getStatusText(order.status)}
+          {getStatusText(order)}
         </span>
       </div>
       <div className="flex flex-col md:flex-row gap-2 xl:gap-6 items-center">

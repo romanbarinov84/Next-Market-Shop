@@ -80,7 +80,7 @@ const AdminOrderCard = ({ order, onStatusUpdate }: AdminOrderCardProps) => {
           <div className="flex items-center gap-2">
             <Image
               alt="Телефон"
-              src="/icons-orders/icon-phone.svg"
+              src="/IconPhone.png"
               width={24}
               height={24}
             />

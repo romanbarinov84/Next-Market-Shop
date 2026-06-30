@@ -6,7 +6,7 @@ import { FakePaymentData, PaymentSuccessData } from "@/src/types/payment";
 import { useAuthStore } from "@/src/store/authStore";
 import { useCartStore } from "@/src/store/cartStore";
 import { CONFIG } from "@/config/config";
-import { clearUserCart,  createOrderRequest, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
+import { clearUserCart,  createOrderRequest, markPaymentAsFailed, prepareCartItemsWithPrices, updateUserAfterPayment } from "../utils/orderHelpers";
 import { ProductCardProps } from "@/src/types/product";
 import PriceSummary from "./PriceSummary";
 import MinimumOrderWarning from "./MinimumOrderWarning";
@@ -210,6 +210,11 @@ const CartSummary = ({
 
   const handlePaymentError = async (error: string) => {
     setShowPaymentModal(false);
+    if(currentOrderId){
+      await markPaymentAsFailed(currentOrderId)
+    }else{
+      console.error("Order id не найден для отметки платежа как неудачного")
+    }
     alert(`Ошибка оплаты: ${error}`);
     resetAfterOrder();
     await clearUserCart();
