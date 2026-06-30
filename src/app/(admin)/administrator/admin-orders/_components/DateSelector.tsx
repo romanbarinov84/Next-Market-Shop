@@ -32,7 +32,7 @@ const DateSelector = ({
         className="relative hover:opacity-70 transition-opacity rounded w-15 h-15 bg-[#f3f2f1] flex justify-center items-center cursor-pointer"
       >
         <Image
-          src="/icons-auth/icon-date.svg"
+          src="/calendar.png"
           alt="Календарь"
           width={24}
           height={24}

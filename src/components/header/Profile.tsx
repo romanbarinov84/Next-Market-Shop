@@ -6,8 +6,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { getAvatarByGender } from "@/UTILS/getAvatarByGender";
 import { useAuthStore } from "@/src/store/authStore";
-import { checkAvatarExist } from "@/UTILS/avatarUtil";
-import MiniLoader from "../MiniLoader";
+import { checkAvatarExists } from "@/UTILS/avatarUtil";
+
+
 
 ;
 
@@ -46,7 +47,7 @@ const Profile = () => {
     const checkAvatar = async () => {
       if (user?.id) {
         try {
-          const exists = await checkAvatarExist(user.id);
+          const exists = await checkAvatarExists(user.id);
 
           if (exists) {
             setAvatarSrc(`/api/auth/avatar/${user.id}?t=${lastUpdate}`);

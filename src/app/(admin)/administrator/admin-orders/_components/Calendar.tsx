@@ -46,7 +46,7 @@ const Calendar = ({ customDate, onDateSelect, onMonthChange }: CalendarProps) =>
             className="p-2 bg-[#f3f2f1] hover:bg-primary rounded duration-300 cursor-pointer"
           >
             <Image
-              src="/icons-header/icon-arrow-right.svg"
+              src="/iconarrowright.png"
               width={24}
               height={24}
               alt="Предыдущий месяц"
@@ -59,7 +59,7 @@ const Calendar = ({ customDate, onDateSelect, onMonthChange }: CalendarProps) =>
             className="p-2 bg-[#f3f2f1] hover:bg-primary rounded duration-300 cursor-pointer"
           >
             <Image
-              src="/icons-header/icon-arrow-right.svg"
+              src="/iconarrowright.png"
               width={24}
               height={24}
               alt="Следующий месяц"
