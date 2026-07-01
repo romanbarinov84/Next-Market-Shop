@@ -1,4 +1,3 @@
-
 import type { Metadata } from 'next';
 import { Rubik } from 'next/font/google';
 import './globals.css';
@@ -7,6 +6,7 @@ import Footer from '../components/footer/Footer';
 import BreadCrumbs from '../components/breadCrumbs/BreadCrumbs';
 import { RegFormProvider } from './contexts/RegFormContext';
 import StatesProvider from '../store/StatesProvider';
+import StoreProvider from './providers';
 
 const rubik = Rubik({
     variable: '--font-rubik',
@@ -26,17 +26,17 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${rubik.variable} font-sans`}>
-                <StatesProvider>
+                <StoreProvider>
+                    <StatesProvider>
+                        <RegFormProvider>
+                            <Header />
+                            <BreadCrumbs />
+                            {children}
 
-                      <RegFormProvider>
-                    <Header />
-                    <BreadCrumbs />
-                    {children}
-
-                    <Footer />
-                </RegFormProvider>
-                </StatesProvider>
-              
+                            <Footer />
+                        </RegFormProvider>
+                    </StatesProvider>
+                </StoreProvider>
             </body>
         </html>
     );

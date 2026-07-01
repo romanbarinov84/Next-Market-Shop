@@ -1,60 +1,59 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getUniqueCities } from "../utils/getUniqueCities";
-import CityFilterButtons from "./CityFilterButtons";
-import { Order } from "@/src/types/order";
 import AdminOrderCard from "./AdminOrderCard";
-
+import { useState, useMemo } from "react";
+import CityFilterButtons from "./CityFilterButtons";
+import { getUniqueCities } from "../utils/getUniqueCities";
+import { useGetAdminOrdersQuery } from "@/src/store/redux/api/ordersApi";
+import { Order } from "@/src/types/order";
 
 interface TimeSlotGroupProps {
   timeSlot: string;
-  slotOrders: Order[];
+  orderIds: string[];
 }
 
-const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
-  const [selectedCity, setSelectedCity] = useState<string>("Все города");
-  const [localOrders, setLocalOrders] = useState<Order[]>(slotOrders);
+const TimeSlotGroup = ({ timeSlot, orderIds }: TimeSlotGroupProps) => {
+  const { data } = useGetAdminOrdersQuery();
 
-  useEffect(() => {
-    setLocalOrders(slotOrders);
-  }, [slotOrders]);
+  const [selectedCity, setSelectedCity] = useState("Все города");
 
-  const cities = getUniqueCities(slotOrders);
+  
+const orders = data?.orders ?? [];
+  // 1. фильтруем заказы по ID
+const localOrders = useMemo(() => {
+  return orders.filter((order) =>
+    orderIds.includes(order._id)
+  );
+}, [orders, orderIds]);
 
-  const filteredSlotOrders =
-    selectedCity === "Все города"
-      ? localOrders
-      : localOrders.filter(
-          (order) => order.deliveryAddress?.city === selectedCity
-        );
+  // 2. список городов
+  const cities = useMemo(() => {
+    return getUniqueCities(localOrders);
+  }, [localOrders]);
 
-  const completedOrdersCount = filteredSlotOrders.filter(
-    (order) => order.status === "confirmed"
-  ).length;
+  // 3. фильтр по городу
+  const filteredSlotOrders = useMemo(() => {
+    if (selectedCity === "Все города") return localOrders;
 
-  const startTime = timeSlot.split("-")[0];
-
-  const handleCitySelect = (city: string) => {
-    setSelectedCity(city);
-  };
-
-  const handleOrderStatusUpdate = (orderId: string, newStatus: string) => {
-    setLocalOrders((prev) =>
-      prev.map((order) => {
-        if (order._id === orderId) {
-          const updatedOrder: Order = {
-            ...order,
-            status: newStatus as Order["status"],
-          };
-          return updatedOrder;
-        }
-        return order;
-      })
+    return localOrders.filter(
+      (order) => order.deliveryAddress?.city === selectedCity
     );
-  };
+  }, [localOrders, selectedCity]);
+
+  // 4. время слота
+  const startTime = useMemo(() => {
+    return timeSlot.split("-")[0];
+  }, [timeSlot]);
+
+  // 5. количество завершённых
+  const completedOrdersCount = useMemo(() => {
+    return filteredSlotOrders.filter(
+      (order) => order.status === "confirmed"
+    ).length;
+  }, [filteredSlotOrders]);
 
   return (
-    <div key={timeSlot}>
+    <div>
+      {/* HEADER */}
       <div className="flex justify-between text-xl md:text-2xl xl:text-4xl text-main-text">
         <div className="flex gap-x-4 mb-4">
           <Image
@@ -65,38 +64,40 @@ const TimeSlotGroup = ({ timeSlot, slotOrders }: TimeSlotGroupProps) => {
           />
           <span className="font-bold">{startTime}</span>
         </div>
+
         <div className="flex gap-x-2.5 items-center">
           <Image
             alt={timeSlot}
-            src="/checkCheck.png"
+            src="/icons-orders/icon-check.svg"
             width={24}
             height={24}
           />
           <div>
             <span className="text-2xl">{completedOrdersCount}</span>
-            <span className="text-xl">{" / "}</span>
+            <span className="text-xl"> / </span>
             <span className="text-2xl">{filteredSlotOrders.length}</span>
           </div>
         </div>
       </div>
+
+      {/* CITY FILTER */}
       {cities.length > 1 && (
         <CityFilterButtons
           cities={cities}
-          slotOrders={slotOrders}
+          slotOrders={localOrders}
           selectedCity={selectedCity}
-          onCitySelect={handleCitySelect}
+          onCitySelect={setSelectedCity}
         />
       )}
+
+      {/* ORDERS */}
       <div className="flex flex-col gap-y-15">
-        {filteredSlotOrders.map((order) => {
-          return (
-            <AdminOrderCard
-              key={order._id}
-              order={order}
-              onStatusUpdate={handleOrderStatusUpdate}
-            />
-          );
-        })}
+        {filteredSlotOrders.map((order) => (
+          <AdminOrderCard
+            key={order._id}
+            orderId={order._id}
+          />
+        ))}
       </div>
     </div>
   );

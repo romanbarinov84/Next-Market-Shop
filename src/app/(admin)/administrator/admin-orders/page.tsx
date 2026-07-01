@@ -1,63 +1,52 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {   useMemo, useState } from "react";
 import AdminOrdersHeader from "./_components/AdminOrdersHeader";
 import DateSelector from "./_components/DateSelector";
 import TimeSlotSection from "./_components/TimeSlotSection";
 import { getThreeDaysDates } from "../adminPanel/delivery-times/utils/getThreeDaysDates";
-import { Order } from "@/src/types/order";
 import ErrorComponent from "@/src/components/errorComponent/ErrorComponent";
 import { Loader } from "lucide-react";
+import { useGetAdminOrdersQuery } from "@/src/store/redux/api/ordersApi";
 
-interface OrderStats {
-  nextThreeDaysOrders: number;
-}
+
 
 const AdminOrderPage = () => {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [stats, setStats] = useState<OrderStats | null>(null);
-  const [selectedDate, setSelectedDate] = useState<string>("");
-  const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
+
+  const [selectedDate, setSelectedDate] = useState(() => {
+  const threeDaysDates = getThreeDaysDates();
+  return threeDaysDates[0];
+});
+
   const [customDate, setCustomDate] = useState<Date | undefined>(new Date());
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<{
-    error: Error;
-    userMessage: string;
-  } | null>(null);
 
-  const fetchOrders = async () => {
-    try {
-      const response = await fetch("/api/admin/users/orders");
-      if (!response.ok) {
-        throw new Error("Ошибка при загрузке заказов");
-      }
-      const data = await response.json();
-      setOrders(data.orders);
-      setStats(data.stats);
 
-      const threeDaysDates = getThreeDaysDates();
-      const today = threeDaysDates[0];
-      setSelectedDate(today);
+    const {
+    data,
+    isLoading,
+    error: queryError,
+  } = useGetAdminOrdersQuery(undefined, {
+    pollingInterval: 5000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
 
-      const todayOrders = data.orders.filter(
-        (order: Order) => order.deliveryDate === today
-      );
-      setFilteredOrders(todayOrders);
-    } catch (error) {
-      setError({
-        error: error instanceof Error ? error : new Error("Неизвестная ошибка"),
-        userMessage: "Не удалось получить заказы пользователя",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+  const orders = useMemo(() => data?.orders || [],[data?.orders]);
+  const stats = useMemo(() => data?.stats || null , [data?.stats]);
+  
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+const filteredOrdersIds = useMemo(() => {
+  if (orders.length === 0) return [];
 
+  const targetDate = selectedDate || getThreeDaysDates()[0];
+
+  return orders.filter(
+    (order) => order.deliveryDate === targetDate
+  ).map((order) => order._id);
+}, [orders, selectedDate]);
+  
+ 
   const handleDateSelect = (date: Date | undefined) => {
     setCustomDate(date);
     if (date) {
@@ -70,7 +59,7 @@ const AdminOrderPage = () => {
       const filtered = orders.filter(
         (order) => order.deliveryDate === dateString
       );
-      setFilteredOrders(filtered);
+     
       setIsCalendarOpen(false);
     }
   };
@@ -84,19 +73,25 @@ const AdminOrderPage = () => {
     setCustomDate(undefined);
     setIsCalendarOpen(false);
     const filtered = orders.filter((order) => order.deliveryDate === date);
-    setFilteredOrders(filtered);
+    
   };
 
   const threeDaysDates = getThreeDaysDates();
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
 
-  if (error) {
+   if (queryError) {
     return (
-      <ErrorComponent error={error.error} userMessage={error.userMessage} />
+      <ErrorComponent
+        error={
+          queryError instanceof Error
+            ? queryError
+            : new Error("Неизвестная ошибка")
+        }
+        userMessage="Не удалось получить заказы пользователя"
+      />
     );
   }
-
   return (
     <div className="px-[max(12px,calc((100%-1208px)/2))] mx-auto mb-8 py-8">
       <AdminOrdersHeader stats={stats} />
@@ -110,7 +105,7 @@ const AdminOrderPage = () => {
         onCalendarDateSelect={handleDateSelect}
         onDateSelect={filterOrdersByDate}
       />
-      <TimeSlotSection filteredOrders={filteredOrders} />
+      <TimeSlotSection orderIds={filteredOrdersIds} />
     </div>
   );
 };
