@@ -154,8 +154,8 @@ const Profile = () => {
           <Image
             src="/iconarrowright.png"
             alt="Меню профиля"
-            width={64}
-            height={64}
+            width={24}
+            height={24}
             sizes="64px"
             className={`transform transition-transform duration-300 ${
               isMenuOpen ? "rotate-90" : "rotate-0"
